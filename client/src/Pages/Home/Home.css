@@ -1,0 +1,67 @@
+/* "General Styles" for the Home Page */
+
+section.home-section {
+   display: flex;
+   flex-direction: column;
+}
+
+a.light-theme-font:visited, .light-theme-font {
+    color: var(--second-auxiliar-color);
+}
+
+/* End of the "General Styles" for the Home Page */
+/* Styles for the "TopBar" */
+
+nav.home-top-bar {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 30px;
+}
+
+nav.light-top-bar {
+    background-color: var(--primary-dark-color);
+}
+
+nav.dark-top-bar {
+    background-color: var(--primary-color);
+}
+
+div.top-bar-company {
+    align-items: center;
+    font-weight: bold;
+    font-size: 20px;
+    display: flex;
+}
+
+div.top-bar-company > img.hostease-logo {
+    margin-right: 20px;
+}
+
+div.top-bar-button-panel {
+    display: flex;
+    flex-direction: row;
+}
+
+div.top-bar-button-panel > a {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+/* End of the styles of the "TopBar" */
+/* Styles for the "Home Body" */
+
+div.home-body {
+    padding: 10px;
+}
+
+div.dark-home-body {
+    background-color: var(--primary-dark-color);
+}
+
+div.light-home-body {
+    background-color: var(--primary-color);
+}
+
+/* End of the styles of the "Home Body" */
