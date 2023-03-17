@@ -2,7 +2,7 @@ package com.hostease.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import antlr.debug.Event;
+import com.hostease.entity.Event;
 
 public interface EventRepository extends JpaRepository<Event, Long> {
 
