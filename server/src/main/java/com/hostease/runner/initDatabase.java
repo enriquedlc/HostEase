@@ -1,5 +1,9 @@
 package com.hostease.runner;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
@@ -51,6 +55,27 @@ public class initDatabase implements CommandLineRunner {
         eventRepository.save(event2);
         eventRepository.save(event3);
         eventRepository.save(event4);
+
+        // SET THE TAGS FOR THE EVENTS
+        Set<Event> eventsToAsignTag1 = new HashSet<Event>(
+                Arrays.asList(event1, event2));
+        tag1.setEvents(eventsToAsignTag1);
+        tagRepository.save(tag1);
+
+        Set<Event> eventsToAsignTag2 = new HashSet<Event>(
+                Arrays.asList(event1, event3));
+        tag2.setEvents(eventsToAsignTag2);
+        tagRepository.save(tag2);
+
+        Set<Event> eventsToAsignTag3 = new HashSet<Event>(
+                Arrays.asList(event2, event4));
+        tag3.setEvents(eventsToAsignTag3);
+        tagRepository.save(tag3);
+
+        Set<Event> eventsToAsignTag4 = new HashSet<Event>(
+                Arrays.asList(event3, event4));
+        tag4.setEvents(eventsToAsignTag4);
+        tagRepository.save(tag4);
 
         System.out.println("Database initialized");
     }
