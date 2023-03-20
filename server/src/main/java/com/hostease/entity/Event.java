@@ -10,8 +10,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -25,6 +30,11 @@ public class Event {
             CascadeType.MERGE
     })
     private Set<Tag> tags = new HashSet<>();
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "categoryId", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Category category;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -76,6 +86,22 @@ public class Event {
         this.locationLng = locationLng;
         this.maxCapacity = maxCapacity;
         this.photo = photo;
+    }
+
+    public Event(Long id, String title, String description, String startDate, String endDate, String startTime,
+            String endTime, Double locationLat, Double locationLng, Long maxCapacity, Double photo, Category category) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.locationLat = locationLat;
+        this.locationLng = locationLng;
+        this.maxCapacity = maxCapacity;
+        this.photo = photo;
+        this.category = category;
     }
 
     public Long getId() {
@@ -172,6 +198,14 @@ public class Event {
 
     public void setTags(Set<Tag> tags) {
         this.tags = tags;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @Override
