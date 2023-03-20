@@ -32,7 +32,7 @@ public class Event {
     private Set<Tag> tags = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "categoryId", nullable = true)
+    @JoinColumn(name = "categoryId", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Category category;
 
