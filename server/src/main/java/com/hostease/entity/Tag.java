@@ -61,6 +61,14 @@ public class Tag {
         this.tag = tag;
     }
 
+    public Set<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(Set<Event> events) {
+        this.events = events;
+    }
+
     @Override
     public String toString() {
         return "Tag [id=" + id + ", tag=" + tag + "]";

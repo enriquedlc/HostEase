@@ -166,6 +166,14 @@ public class Event {
         this.photo = photo;
     }
 
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
+    }
+
     @Override
     public String toString() {
         return "Event [id=" + id + ", title=" + title + ", description=" + description + ", startDate=" + startDate
