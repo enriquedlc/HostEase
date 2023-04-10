@@ -1,6 +1,7 @@
 package com.hostease.runner;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,9 +13,11 @@ import org.springframework.stereotype.Component;
 import com.hostease.entity.Category;
 import com.hostease.entity.Event;
 import com.hostease.entity.Tag;
+import com.hostease.entity.User;
 import com.hostease.repository.CategoryRepository;
 import com.hostease.repository.EventRepository;
 import com.hostease.repository.TagRepository;
+import com.hostease.repository.UserRepository;
 
 @Component
 @Order(value = 1)
@@ -28,6 +31,9 @@ public class initDatabase implements CommandLineRunner {
 
         @Autowired
         private CategoryRepository categoryRepository;
+
+        @Autowired
+        private UserRepository userRepository;
 
         @Override
         public void run(String... args) throws Exception {
@@ -59,6 +65,29 @@ public class initDatabase implements CommandLineRunner {
                 Event event4 = new Event(4L, "Event 4", "Description 4", "2020-01-01", "2020-01-01", "12:00", "13:00",
                                 1.0, 1.0,
                                 10L, 0D, category1);
+
+                // USERS
+                User user1 = new User("nickNameUser1", "user1email@gmail.com", "sha256...", "NameUser1", "SurnameUser1",
+                                0L, new Date());
+
+                User user2 = new User("nickNameUser2", "user2email@gmail.com", "sha256...", "NameUser2", "SurnameUser2",
+                                100L, new Date());
+
+                User user3 = new User("nickNameUser3", "user3email@gmail.com", "sha256...", "NameUser3", "SurnameUser3",
+                                100L, new Date());
+
+                User user4 = new User("nickNameUser4", "user4email@gmail.com", "sha256...", "NameUser4", "SurnameUser4",
+                                100L, new Date());
+
+                User user5 = new User("nickNameUser5", "user5email@gmail.com", "sha256...", "NameUser5", "SurnameUser5",
+                                100L, new Date());
+
+                // SAVE USERS
+                userRepository.save(user1);
+                userRepository.save(user2);
+                userRepository.save(user3);
+                userRepository.save(user4);
+                userRepository.save(user5);
 
                 // SAVE CATEGORIES
                 categoryRepository.save(category1);
@@ -99,6 +128,32 @@ public class initDatabase implements CommandLineRunner {
                                 Arrays.asList(event3, event4));
                 tag4.setEvents(eventsToAsignTag4);
                 tagRepository.save(tag4);
+
+                // SET THE USERS INTO THE EVENTS
+                Set<Event> eventsToAsignUser1 = new HashSet<Event>(
+                                Arrays.asList(event1, event2));
+                user1.setEvents(eventsToAsignUser1);
+                userRepository.save(user1);
+
+                Set<Event> eventsToAsignUser2 = new HashSet<Event>(
+                                Arrays.asList(event1, event3));
+                user2.setEvents(eventsToAsignUser2);
+                userRepository.save(user2);
+
+                Set<Event> eventsToAsignUser3 = new HashSet<Event>(
+                                Arrays.asList(event2, event4));
+                user3.setEvents(eventsToAsignUser3);
+                userRepository.save(user3);
+
+                Set<Event> eventsToAsignUser4 = new HashSet<Event>(
+                                Arrays.asList(event3, event4));
+                user4.setEvents(eventsToAsignUser4);
+                userRepository.save(user4);
+
+                Set<Event> eventsToAsignUser5 = new HashSet<Event>(
+                                Arrays.asList(event3, event4));
+                user5.setEvents(eventsToAsignUser5);
+                userRepository.save(user5);
 
                 System.out.println("Database initialized");
         }
