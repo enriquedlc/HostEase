@@ -31,6 +31,20 @@ public class Event {
     })
     private Set<Tag> tags = new HashSet<>();
 
+    @ManyToMany(mappedBy = "events", fetch = FetchType.LAZY, cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    private Set<User> users = new HashSet<>();
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "categoryId", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
