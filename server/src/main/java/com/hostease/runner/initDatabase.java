@@ -18,6 +18,7 @@ import com.hostease.entity.User;
 import com.hostease.repository.AchievementRepository;
 import com.hostease.repository.CategoryRepository;
 import com.hostease.repository.EventRepository;
+import com.hostease.repository.MessageRepository;
 import com.hostease.repository.TagRepository;
 import com.hostease.repository.UserRepository;
 
@@ -39,6 +40,9 @@ public class initDatabase implements CommandLineRunner {
 
         @Autowired
         private AchievementRepository achievementRepository;
+
+        @Autowired
+        private MessageRepository messageRepository;
 
         @Override
         public void run(String... args) throws Exception {

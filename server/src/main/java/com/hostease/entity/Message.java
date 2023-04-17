@@ -21,6 +21,9 @@ public class Message {
     @Column(name = "message", nullable = false)
     private String message;
 
+    @Column(name = "published_at", nullable = false, columnDefinition = "DATETIME default CURRENT_TIMESTAMP")
+    private String publishedAt;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_event_id", nullable = false)
     private Event event;
@@ -30,6 +33,11 @@ public class Message {
     private User user;
 
     public Message() {
+    }
+
+    public Message(String message, String publishedAt) {
+        this.message = message;
+        this.publishedAt = publishedAt;
     }
 
     public Long getId() {
