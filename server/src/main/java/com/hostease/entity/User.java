@@ -31,6 +31,14 @@ public class User {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Event> events = new HashSet<>();
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+
+    @JoinTable(name = "user_achievement_table", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "achievement_id"))
+    private Set<Achievement> achievements = new HashSet<>();
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -146,4 +154,13 @@ public class User {
     public void setJoinedAt(Date joinedAt) {
         this.joinedAt = joinedAt;
     }
+
+    public Set<Achievement> getAchievements() {
+        return achievements;
+    }
+
+    public void setAchievements(Set<Achievement> achievements) {
+        this.achievements = achievements;
+    }
+
 }
