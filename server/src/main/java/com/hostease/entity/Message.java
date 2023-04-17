@@ -1,5 +1,7 @@
 package com.hostease.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,7 +24,7 @@ public class Message {
     private String message;
 
     @Column(name = "published_at", nullable = false, columnDefinition = "DATETIME default CURRENT_TIMESTAMP")
-    private String publishedAt;
+    private Date publishedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_event_id", nullable = false)
@@ -35,7 +37,7 @@ public class Message {
     public Message() {
     }
 
-    public Message(String message, String publishedAt) {
+    public Message(String message, Date publishedAt) {
         this.message = message;
         this.publishedAt = publishedAt;
     }

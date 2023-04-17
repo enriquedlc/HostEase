@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import com.hostease.entity.Achievement;
 import com.hostease.entity.Category;
 import com.hostease.entity.Event;
+import com.hostease.entity.Message;
 import com.hostease.entity.Tag;
 import com.hostease.entity.User;
 import com.hostease.repository.AchievementRepository;
@@ -95,6 +96,9 @@ public class initDatabase implements CommandLineRunner {
                 Achievement achievement1 = new Achievement(1L, "Achievement description 1", 100L, 1D);
                 Achievement achievement2 = new Achievement(2L, "Achievement description 2", 200L, 2D);
                 Achievement achievement3 = new Achievement(3L, "Achievement description 3", 300L, 3D);
+
+                // MESSAGES
+                Message message1 = new Message("Message body example 1", new Date());
 
                 // SAVE USERS
                 userRepository.save(user1);
