@@ -1,4 +1,4 @@
-package com.hostease.entity.userAchievement;
+package com.hostease.entity;
 
 import java.util.Date;
 
@@ -12,8 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.hostease.entity.Achievement;
-import com.hostease.entity.User;
 
 @Entity
 @Table(name = "user_achievement_table")
