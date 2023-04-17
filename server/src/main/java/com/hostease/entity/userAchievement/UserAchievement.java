@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hostease.entity.Achievement;
 import com.hostease.entity.User;
 
@@ -18,8 +19,12 @@ import com.hostease.entity.User;
 @Table(name = "user_achievement_table")
 public class UserAchievement {
 
+    // TODO: Caused by: java.sql.SQLException:
+    // Field 'id' doesn't have a default value
+    @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false, columnDefinition = "BIGINT default 0")
     private Long id;
 
     @ManyToOne
@@ -30,7 +35,7 @@ public class UserAchievement {
     @JoinColumn(name = "achievement_id")
     private Achievement achievement;
 
-    @Column(name = "obtained_at", nullable = false)
+    @Column(name = "obtained_at", nullable = false, columnDefinition = "DATETIME default CURRENT_TIMESTAMP")
     private Date obtainedAt;
 
     public UserAchievement() {
@@ -38,6 +43,12 @@ public class UserAchievement {
 
     public UserAchievement(Long id, User user, Achievement achievement, Date obtainedAt) {
         this.id = id;
+        this.user = user;
+        this.achievement = achievement;
+        this.obtainedAt = obtainedAt;
+    }
+
+    public UserAchievement(User user, Achievement achievement, Date obtainedAt) {
         this.user = user;
         this.achievement = achievement;
         this.obtainedAt = obtainedAt;

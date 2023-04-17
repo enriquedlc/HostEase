@@ -44,6 +44,12 @@ public class Achievement {
         this.photo = photo;
     }
 
+    public Achievement(String achievement, Long xpPoints, Double photo) {
+        this.achievement = achievement;
+        this.xpPoints = xpPoints;
+        this.photo = photo;
+    }
+
     public Long getId() {
         return id;
     }

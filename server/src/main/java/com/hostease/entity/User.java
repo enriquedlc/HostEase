@@ -14,13 +14,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-
-import com.hostease.entity.userAchievement.UserAchievement;
 
 @Entity
 @Table(name = "user_table")
@@ -157,4 +154,13 @@ public class User {
     public void setJoinedAt(Date joinedAt) {
         this.joinedAt = joinedAt;
     }
+
+    public Set<Achievement> getAchievements() {
+        return achievements;
+    }
+
+    public void setAchievements(Set<Achievement> achievements) {
+        this.achievements = achievements;
+    }
+
 }

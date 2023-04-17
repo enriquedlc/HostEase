@@ -10,10 +10,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import com.hostease.entity.Achievement;
 import com.hostease.entity.Category;
 import com.hostease.entity.Event;
 import com.hostease.entity.Tag;
 import com.hostease.entity.User;
+import com.hostease.repository.AchievementRepository;
 import com.hostease.repository.CategoryRepository;
 import com.hostease.repository.EventRepository;
 import com.hostease.repository.TagRepository;
@@ -34,6 +36,9 @@ public class initDatabase implements CommandLineRunner {
 
         @Autowired
         private UserRepository userRepository;
+
+        @Autowired
+        private AchievementRepository achievementRepository;
 
         @Override
         public void run(String... args) throws Exception {
@@ -82,6 +87,11 @@ public class initDatabase implements CommandLineRunner {
                 User user5 = new User("nickNameUser5", "user5email@gmail.com", "sha256...", "NameUser5", "SurnameUser5",
                                 100L, new Date());
 
+                // ACHIEVEMENTS
+                Achievement achievement1 = new Achievement(1L, "Achievement description 1", 100L, 1D);
+                Achievement achievement2 = new Achievement(2L, "Achievement description 2", 200L, 2D);
+                Achievement achievement3 = new Achievement(3L, "Achievement description 3", 300L, 3D);
+
                 // SAVE USERS
                 userRepository.save(user1);
                 userRepository.save(user2);
@@ -107,6 +117,11 @@ public class initDatabase implements CommandLineRunner {
                 eventRepository.save(event2);
                 eventRepository.save(event3);
                 eventRepository.save(event4);
+
+                // SAVE ACHIEVEMENTS
+                achievementRepository.save(achievement1);
+                achievementRepository.save(achievement2);
+                achievementRepository.save(achievement3);
 
                 // SET THE TAGS FOR THE EVENTS
                 Set<Event> eventsToAsignTag1 = new HashSet<Event>(
@@ -155,7 +170,29 @@ public class initDatabase implements CommandLineRunner {
                 user5.setEvents(eventsToAsignUser5);
                 userRepository.save(user5);
 
+                // SET THE ACHIEVEMENTS INTO THE USERS
+                Set<Achievement> achievementsToAsignUser1 = new HashSet<Achievement>(
+                                Arrays.asList(achievement1, achievement2, achievement3));
+                user1.setAchievements(achievementsToAsignUser1);
+                userRepository.save(user1);
+
+                Set<Achievement> achievementsToAsignUser2 = new HashSet<Achievement>(
+                                Arrays.asList(achievement1, achievement2));
+                user2.setAchievements(achievementsToAsignUser2);
+                userRepository.save(user2);
+
+                Set<Achievement> achievementsToAsignUser3 = new HashSet<Achievement>(
+                                Arrays.asList(achievement1, achievement3));
+                user3.setAchievements(achievementsToAsignUser3);
+                userRepository.save(user3);
+
+                Set<Achievement> achievementsToAsignUser4 = new HashSet<Achievement>(
+                                Arrays.asList(achievement2, achievement3));
+                user4.setAchievements(achievementsToAsignUser4);
+                userRepository.save(user4);
+
                 System.out.println("Database initialized");
+
         }
 
 }
