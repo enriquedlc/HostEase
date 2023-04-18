@@ -219,10 +219,17 @@ public class initDatabase implements CommandLineRunner {
                  * 
                  * 1. One way to save a message properly is to construct the message
                  * with the user and the event as parameters and then save the message.
+                 * 
+                 * Next we need to set the message into the user and the event, finally
+                 * we save the message again with the messageRepository.
                  * (example: First example)
                  * 
-                 * 2. In order to save a message we need to set the user
-                 * and the event to the message and then save the message.
+                 * 2. The second way is to construct the message with only the body and
+                 * the date as parameters and not saving it yet.
+                 * 
+                 * Next we need to set the message into the user and the event, then
+                 * we set the user and the event to the message and finally we save the
+                 * message with the messageRepository.
                  * (example: Second example)
                  * 
                  */
