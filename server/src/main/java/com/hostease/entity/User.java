@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.OnDelete;
@@ -38,6 +39,9 @@ public class User {
 
     @JoinTable(name = "user_achievement_table", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "achievement_id"))
     private Set<Achievement> achievements = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Message> messages = new HashSet<Message>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -161,6 +165,14 @@ public class User {
 
     public void setAchievements(Set<Achievement> achievements) {
         this.achievements = achievements;
+    }
+
+    public Set<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(Set<Message> messages) {
+        this.messages = messages;
     }
 
 }

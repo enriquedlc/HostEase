@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.OnDelete;
@@ -49,6 +50,9 @@ public class Event {
     @JoinColumn(name = "categoryId", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Category category;
+
+    @OneToMany(mappedBy = "event", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Message> messages = new HashSet<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -220,6 +224,14 @@ public class Event {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public Set<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(HashSet<Message> hashSet) {
+        this.messages = hashSet;
     }
 
     @Override
