@@ -41,7 +41,7 @@ public class User {
     private Set<Achievement> achievements = new HashSet<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Message> messages = new HashSet<>();
+    private Set<Message> messages = new HashSet<Message>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -165,6 +165,14 @@ public class User {
 
     public void setAchievements(Set<Achievement> achievements) {
         this.achievements = achievements;
+    }
+
+    public Set<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(Set<Message> messages) {
+        this.messages = messages;
     }
 
 }

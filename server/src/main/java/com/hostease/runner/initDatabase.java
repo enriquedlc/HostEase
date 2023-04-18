@@ -98,7 +98,13 @@ public class initDatabase implements CommandLineRunner {
                 Achievement achievement3 = new Achievement(3L, "Achievement description 3", 300L, 3D);
 
                 // MESSAGES
-                Message message1 = new Message("Message body example 1", new Date());
+                Message message1 = new Message("Message body example 1", new Date(), event1, user1);
+                Message message2 = new Message("Message body example 2", new Date());
+                Message message3 = new Message("Message body example 3", new Date());
+                Message message4 = new Message("Message body example 4", new Date(), event2, user3);
+                Message message5 = new Message("Message body example 5", new Date(), event3, user4);
+                Message message6 = new Message("Message body example 6", new Date());
+                Message message7 = new Message("Message body example 6", new Date(), event4, user4);
 
                 // SAVE USERS
                 userRepository.save(user1);
@@ -130,6 +136,13 @@ public class initDatabase implements CommandLineRunner {
                 achievementRepository.save(achievement1);
                 achievementRepository.save(achievement2);
                 achievementRepository.save(achievement3);
+
+                // SAVE MESSAGES
+                messageRepository.save(message1);
+                messageRepository.save(message4);
+                messageRepository.save(message5);
+                messageRepository.save(message7);
+                // messageRepository.save(message2);
 
                 // SET THE TAGS FOR THE EVENTS
                 Set<Event> eventsToAsignTag1 = new HashSet<Event>(
@@ -198,6 +211,63 @@ public class initDatabase implements CommandLineRunner {
                                 Arrays.asList(achievement2, achievement3));
                 user4.setAchievements(achievementsToAsignUser4);
                 userRepository.save(user4);
+
+                /*
+                 * MESSAGES
+                 * 
+                 * - The messages are not saved up like the rest of the entities.
+                 * 
+                 * 1. One way to save a message properly is to construct the message
+                 * with the user and the event as parameters and then save the message.
+                 * (example: First example)
+                 * 
+                 * 2. In order to save a message we need to set the user
+                 * and the event to the message and then save the message.
+                 * (example: Second example)
+                 * 
+                 */
+
+                // SET THE MESSAGES INTO THE USERS AND EVENTS
+                // First example
+                user1.setMessages(new HashSet<Message>(Arrays.asList(message1)));
+                event1.setMessages(new HashSet<Message>(Arrays.asList(message1)));
+                messageRepository.save(message1);
+
+                user3.setMessages(new HashSet<Message>(Arrays.asList(message4)));
+                event3.setMessages(new HashSet<Message>(Arrays.asList(message4)));
+                messageRepository.save(message4);
+
+                user4.setMessages(new HashSet<Message>(Arrays.asList(message5)));
+                event4.setMessages(new HashSet<Message>(Arrays.asList(message5)));
+                messageRepository.save(message5);
+
+                user4.setMessages(new HashSet<Message>(Arrays.asList(message7)));
+                event4.setMessages(new HashSet<Message>(Arrays.asList(message7)));
+                messageRepository.save(message7);
+
+                // Second example
+                user2.setMessages(new HashSet<Message>(Arrays.asList(message2)));
+                event2.setMessages(new HashSet<Message>(Arrays.asList(message2)));
+
+                message2.setUser(user2);
+                message2.setEvent(event2);
+                messageRepository.save(message2);
+
+                // Second example
+                user5.setMessages(new HashSet<Message>(Arrays.asList(message3)));
+                event4.setMessages(new HashSet<Message>(Arrays.asList(message3)));
+
+                message3.setUser(user5);
+                message3.setEvent(event4);
+                messageRepository.save(message3);
+
+                // Second example
+                user5.setMessages(new HashSet<Message>(Arrays.asList(message6)));
+                event4.setMessages(new HashSet<Message>(Arrays.asList(message6)));
+
+                message6.setUser(user5);
+                message6.setEvent(event4);
+                messageRepository.save(message6);
 
                 System.out.println("Database initialized");
 

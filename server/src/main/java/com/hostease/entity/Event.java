@@ -226,6 +226,14 @@ public class Event {
         this.category = category;
     }
 
+    public Set<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(HashSet<Message> hashSet) {
+        this.messages = hashSet;
+    }
+
     @Override
     public String toString() {
         return "Event [id=" + id + ", title=" + title + ", description=" + description + ", startDate=" + startDate

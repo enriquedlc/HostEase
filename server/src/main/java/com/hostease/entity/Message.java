@@ -37,9 +37,24 @@ public class Message {
     public Message() {
     }
 
+    public Message(Long id, String message, Date publishedAt, Event event, User user) {
+        this.id = id;
+        this.message = message;
+        this.publishedAt = publishedAt;
+        this.event = event;
+        this.user = user;
+    }
+
     public Message(String message, Date publishedAt) {
         this.message = message;
         this.publishedAt = publishedAt;
+    }
+
+    public Message(String string, Date date, Event event1, User user1) {
+        this.message = string;
+        this.publishedAt = date;
+        this.event = event1;
+        this.user = user1;
     }
 
     public Long getId() {
@@ -76,7 +91,7 @@ public class Message {
 
     @Override
     public String toString() {
-        return "Message [id=" + id + ", message=" + message + ", event=" + event + ", user=" + user + "]";
+        return "Message [id=" + id + ", message=" + message + "]\n";
     }
 
 }
