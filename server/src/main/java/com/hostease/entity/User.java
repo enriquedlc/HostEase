@@ -198,4 +198,9 @@ public class User {
         this.following = following;
     }
 
+    @Override
+    public String toString() {
+        return "User" + this.name;
+    }
+
 }

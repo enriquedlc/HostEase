@@ -276,6 +276,42 @@ public class initDatabase implements CommandLineRunner {
                 message6.setEvent(event4);
                 messageRepository.save(message6);
 
+                // FOLLOWERS
+                user1.setFollowers(new HashSet<>(Arrays.asList(user2)));
+
+                user1.getFollowing().add(user2);
+                userRepository.save(user1);
+
+                user2.setFollowers(new HashSet<>(Arrays.asList(user1, user3, user5)));
+
+                user2.getFollowing().add(user1);
+                user2.getFollowing().add(user3);
+                user2.getFollowing().add(user5);
+                userRepository.save(user2);
+
+                user3.setFollowers(new HashSet<>(Arrays.asList(user2, user4, user5)));
+
+                user3.getFollowing().add(user2);
+                user3.getFollowing().add(user4);
+                user3.getFollowing().add(user5);
+                userRepository.save(user3);
+
+                user4.setFollowers(new HashSet<>(Arrays.asList(user1, user2, user3, user5)));
+
+                user4.getFollowing().add(user1);
+                user4.getFollowing().add(user2);
+                user4.getFollowing().add(user3);
+                user4.getFollowing().add(user4);
+                userRepository.save(user4);
+
+                user5.setFollowers(new HashSet<>(Arrays.asList(user2, user4)));
+
+                System.out.println(user1.getFollowers());
+                System.out.println("user2 => " + user2.getFollowers());
+                System.out.println(user3.getFollowers());
+                System.out.println(user4.getFollowers());
+                System.out.println(user5.getFollowers());
+
                 System.out.println("Database initialized");
 
         }
