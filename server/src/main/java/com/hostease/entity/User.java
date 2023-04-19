@@ -43,6 +43,13 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Message> messages = new HashSet<Message>();
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_followers", joinColumns = @JoinColumn(name = "following_user_id"), inverseJoinColumns = @JoinColumn(name = "followed_user_id"))
+    private Set<User> followers = new HashSet<>();
+
+    @ManyToMany(mappedBy = "followers", fetch = FetchType.LAZY)
+    private Set<User> following = new HashSet<>();
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -173,6 +180,22 @@ public class User {
 
     public void setMessages(Set<Message> messages) {
         this.messages = messages;
+    }
+
+    public Set<User> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(Set<User> followers) {
+        this.followers = followers;
+    }
+
+    public Set<User> getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(Set<User> following) {
+        this.following = following;
     }
 
 }
