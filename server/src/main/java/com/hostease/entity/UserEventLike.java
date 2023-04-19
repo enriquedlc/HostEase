@@ -21,16 +21,28 @@ public class UserEventLike implements Serializable {
     @Column
     private Long eventId;
 
+    @Column(name = "liked", nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
+    private Boolean liked;
+
     @Column(name = "liked_at", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private String likedAt;
 
     public UserEventLike() {
     }
 
-    public UserEventLike(Long userId, Long eventId, String likedAt) {
+    public UserEventLike(Long userId, Long eventId, Boolean liked, String likedAt) {
         this.userId = userId;
         this.eventId = eventId;
+        this.liked = liked;
         this.likedAt = likedAt;
+    }
+
+    public Boolean getLiked() {
+        return liked;
+    }
+
+    public void setLiked(Boolean liked) {
+        this.liked = liked;
     }
 
     public Long getUserId() {
