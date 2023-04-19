@@ -1,87 +1,60 @@
 package com.hostease.entity;
 
-import java.util.Date;
+import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "user_achievement_table")
-public class UserAchievement {
+@IdClass(UserAchievementId.class)
+public class UserAchievement implements Serializable {
 
-    // TODO: Caused by: java.sql.SQLException:
-    // Field 'id' doesn't have a default value
-    @JsonIgnore
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, columnDefinition = "BIGINT default 0")
-    private Long id;
+    @Column(name = "user_id")
+    private Long userId;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Id
+    @Column(name = "achievement_id")
+    private Long achievementId;
 
-    @ManyToOne
-    @JoinColumn(name = "achievement_id")
-    private Achievement achievement;
-
-    @Column(name = "obtained_at", nullable = false, columnDefinition = "DATETIME default CURRENT_TIMESTAMP")
-    private Date obtainedAt;
+    @Column(name = "obteined_at", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private String obteinedAt;
 
     public UserAchievement() {
     }
 
-    public UserAchievement(Long id, User user, Achievement achievement, Date obtainedAt) {
-        this.id = id;
-        this.user = user;
-        this.achievement = achievement;
-        this.obtainedAt = obtainedAt;
+    public UserAchievement(Long userId, Long achievementId, String obteinedAt) {
+        this.userId = userId;
+        this.achievementId = achievementId;
+        this.obteinedAt = obteinedAt;
     }
 
-    public UserAchievement(User user, Achievement achievement, Date obtainedAt) {
-        this.user = user;
-        this.achievement = achievement;
-        this.obtainedAt = obtainedAt;
+    public Long getUserId() {
+        return userId;
     }
 
-    public Long getId() {
-        return id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getAchievementId() {
+        return achievementId;
     }
 
-    public User getUser() {
-        return user;
+    public void setAchievementId(Long achievementId) {
+        this.achievementId = achievementId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public String getObteinedAt() {
+        return obteinedAt;
     }
 
-    public Achievement getAchievement() {
-        return achievement;
-    }
-
-    public void setAchievement(Achievement achievement) {
-        this.achievement = achievement;
-    }
-
-    public Date getObtainedAt() {
-        return obtainedAt;
-    }
-
-    public void setObtainedAt(Date obtainedAt) {
-        this.obtainedAt = obtainedAt;
+    public void setObteinedAt(String obteinedAt) {
+        this.obteinedAt = obteinedAt;
     }
 
 }
