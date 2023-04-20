@@ -108,8 +108,7 @@ public class initDatabase implements CommandLineRunner {
                 Message message3 = new Message("Message body example 3", new Date());
                 Message message4 = new Message("Message body example 4", new Date(), event2, user3);
                 Message message5 = new Message("Message body example 5", new Date(), event3, user4);
-                Message message6 = new Message("Message body example 6", new Date());
-                Message message7 = new Message("Message body example 6", new Date(), event4, user4);
+                Message message6 = new Message("Message body example 7", new Date(), event4, user4);
 
                 // LIKES
                 // Like like1 = new Like(event1, user1, true, "2023-04-19 23:51:30");
@@ -163,7 +162,7 @@ public class initDatabase implements CommandLineRunner {
                 messageRepository.save(message1);
                 messageRepository.save(message4);
                 messageRepository.save(message5);
-                messageRepository.save(message7);
+                messageRepository.save(message6);
 
                 // SET THE TAGS FOR THE EVENTS
                 Set<Event> eventsToAsignTag1 = new HashSet<Event>(
@@ -257,45 +256,37 @@ public class initDatabase implements CommandLineRunner {
 
                 // SET THE MESSAGES INTO THE USERS AND EVENTS
                 // First example
-                user1.setMessages(new HashSet<Message>(Arrays.asList(message1)));
-                event1.setMessages(new HashSet<Message>(Arrays.asList(message1)));
+                user1.getMessages().add(message1);
+                event1.getMessages().add(message1);
                 messageRepository.save(message1);
 
-                user3.setMessages(new HashSet<Message>(Arrays.asList(message4)));
-                event3.setMessages(new HashSet<Message>(Arrays.asList(message4)));
+                user3.getMessages().add(message4);
+                event2.getMessages().add(message4);
                 messageRepository.save(message4);
 
-                user4.setMessages(new HashSet<Message>(Arrays.asList(message5)));
-                event4.setMessages(new HashSet<Message>(Arrays.asList(message5)));
+                user4.getMessages().add(message5);
+                event3.getMessages().add(message5);
                 messageRepository.save(message5);
 
-                user4.setMessages(new HashSet<Message>(Arrays.asList(message7)));
-                event4.setMessages(new HashSet<Message>(Arrays.asList(message7)));
-                messageRepository.save(message7);
+                user4.getMessages().add(message6);
+                event4.getMessages().add(message6);
+                messageRepository.save(message6);
 
                 // Second example
-                user2.setMessages(new HashSet<Message>(Arrays.asList(message2)));
-                event2.setMessages(new HashSet<Message>(Arrays.asList(message2)));
+                user2.getMessages().add(message2);
+                event2.getMessages().add(message2);
 
                 message2.setUser(user2);
                 message2.setEvent(event2);
                 messageRepository.save(message2);
 
                 // Second example
-                user5.setMessages(new HashSet<Message>(Arrays.asList(message3)));
-                event4.setMessages(new HashSet<Message>(Arrays.asList(message3)));
+                user5.getMessages().add(message3);
+                event4.getMessages().add(message3);
 
                 message3.setUser(user5);
                 message3.setEvent(event4);
                 messageRepository.save(message3);
-
-                // Second example
-                user5.setMessages(new HashSet<Message>(Arrays.asList(message6)));
-                event4.setMessages(new HashSet<Message>(Arrays.asList(message6)));
-
-                message6.setUser(user5);
-                message6.setEvent(event4);
-                messageRepository.save(message6);
 
                 // FOLLOWERS
                 user1.setFollowers(new HashSet<>(Arrays.asList(user2)));
