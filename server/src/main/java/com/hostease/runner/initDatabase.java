@@ -168,21 +168,29 @@ public class initDatabase implements CommandLineRunner {
                 Set<Event> eventsToAsignTag1 = new HashSet<Event>(
                                 Arrays.asList(event1, event2));
                 tag1.setEvents(eventsToAsignTag1);
+                event1.getTags().add(tag1);
+                event2.getTags().add(tag1);
                 tagRepository.save(tag1);
 
                 Set<Event> eventsToAsignTag2 = new HashSet<Event>(
                                 Arrays.asList(event1, event3));
                 tag2.setEvents(eventsToAsignTag2);
+                event1.getTags().add(tag2);
+                event3.getTags().add(tag2);
                 tagRepository.save(tag2);
 
                 Set<Event> eventsToAsignTag3 = new HashSet<Event>(
                                 Arrays.asList(event2, event4));
                 tag3.setEvents(eventsToAsignTag3);
+                event2.getTags().add(tag3);
+                event4.getTags().add(tag3);
                 tagRepository.save(tag3);
 
                 Set<Event> eventsToAsignTag4 = new HashSet<Event>(
                                 Arrays.asList(event3, event4));
                 tag4.setEvents(eventsToAsignTag4);
+                event3.getTags().add(tag4);
+                event4.getTags().add(tag4);
                 tagRepository.save(tag4);
 
                 // SET THE USERS INTO THE EVENTS
