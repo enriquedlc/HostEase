@@ -13,12 +13,14 @@ import org.springframework.stereotype.Component;
 import com.hostease.entity.Achievement;
 import com.hostease.entity.Category;
 import com.hostease.entity.Event;
+import com.hostease.entity.Like;
 import com.hostease.entity.Message;
 import com.hostease.entity.Tag;
 import com.hostease.entity.User;
 import com.hostease.repository.AchievementRepository;
 import com.hostease.repository.CategoryRepository;
 import com.hostease.repository.EventRepository;
+import com.hostease.repository.LikeRepository;
 import com.hostease.repository.MessageRepository;
 import com.hostease.repository.TagRepository;
 import com.hostease.repository.UserRepository;
@@ -44,6 +46,9 @@ public class initDatabase implements CommandLineRunner {
 
         @Autowired
         private MessageRepository messageRepository;
+
+        // @Autowired
+        // private LikeRepository likeRepository;
 
         @Override
         public void run(String... args) throws Exception {
@@ -106,6 +111,13 @@ public class initDatabase implements CommandLineRunner {
                 Message message6 = new Message("Message body example 6", new Date());
                 Message message7 = new Message("Message body example 6", new Date(), event4, user4);
 
+                // LIKES
+                // Like like1 = new Like();
+                // Like like1 = new Like(event1, user1, false, "2023-04-19 23:51:30");
+                // Like like2 = new Like(event1, user2, true, "2023-04-19 23:51:30");
+                // Like like3 = new Like(event1, user3, true, "2023-04-19 23:51:30");
+                // Like like4 = new Like();
+
                 // SAVE USERS
                 userRepository.save(user1);
                 userRepository.save(user2);
@@ -142,7 +154,6 @@ public class initDatabase implements CommandLineRunner {
                 messageRepository.save(message4);
                 messageRepository.save(message5);
                 messageRepository.save(message7);
-                // messageRepository.save(message2);
 
                 // SET THE TAGS FOR THE EVENTS
                 Set<Event> eventsToAsignTag1 = new HashSet<Event>(
@@ -305,12 +316,6 @@ public class initDatabase implements CommandLineRunner {
                 userRepository.save(user4);
 
                 user5.setFollowers(new HashSet<>(Arrays.asList(user2, user4)));
-
-                System.out.println(user1.getFollowers());
-                System.out.println("user2 => " + user2.getFollowers());
-                System.out.println(user3.getFollowers());
-                System.out.println(user4.getFollowers());
-                System.out.println(user5.getFollowers());
 
                 System.out.println("Database initialized");
 
