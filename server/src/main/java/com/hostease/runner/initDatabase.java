@@ -189,26 +189,36 @@ public class initDatabase implements CommandLineRunner {
                 Set<Event> eventsToAsignUser1 = new HashSet<Event>(
                                 Arrays.asList(event1, event2));
                 user1.setEvents(eventsToAsignUser1);
+                event1.getUsers().add(user1);
+                event2.getUsers().add(user1);
                 userRepository.save(user1);
 
                 Set<Event> eventsToAsignUser2 = new HashSet<Event>(
                                 Arrays.asList(event1, event3));
                 user2.setEvents(eventsToAsignUser2);
+                event1.getUsers().add(user2);
+                event3.getUsers().add(user2);
                 userRepository.save(user2);
 
                 Set<Event> eventsToAsignUser3 = new HashSet<Event>(
                                 Arrays.asList(event2, event4));
                 user3.setEvents(eventsToAsignUser3);
+                event2.getUsers().add(user3);
+                event4.getUsers().add(user3);
                 userRepository.save(user3);
 
                 Set<Event> eventsToAsignUser4 = new HashSet<Event>(
                                 Arrays.asList(event3, event4));
                 user4.setEvents(eventsToAsignUser4);
+                event3.getUsers().add(user4);
+                event4.getUsers().add(user4);
                 userRepository.save(user4);
 
                 Set<Event> eventsToAsignUser5 = new HashSet<Event>(
                                 Arrays.asList(event3, event4));
                 user5.setEvents(eventsToAsignUser5);
+                event3.getUsers().add(user5);
+                event4.getUsers().add(user5);
                 userRepository.save(user5);
 
                 // SET THE ACHIEVEMENTS INTO THE USERS
