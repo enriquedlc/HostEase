@@ -233,21 +233,30 @@ public class initDatabase implements CommandLineRunner {
                 Set<Achievement> achievementsToAsignUser1 = new HashSet<Achievement>(
                                 Arrays.asList(achievement1, achievement2, achievement3));
                 user1.setAchievements(achievementsToAsignUser1);
+                achievement1.getUsers().add(user1);
+                achievement2.getUsers().add(user1);
+                achievement3.getUsers().add(user1);
                 userRepository.save(user1);
 
                 Set<Achievement> achievementsToAsignUser2 = new HashSet<Achievement>(
                                 Arrays.asList(achievement1, achievement2));
                 user2.setAchievements(achievementsToAsignUser2);
+                achievement1.getUsers().add(user2);
+                achievement2.getUsers().add(user2);
                 userRepository.save(user2);
 
                 Set<Achievement> achievementsToAsignUser3 = new HashSet<Achievement>(
                                 Arrays.asList(achievement1, achievement3));
                 user3.setAchievements(achievementsToAsignUser3);
+                achievement1.getUsers().add(user3);
+                achievement3.getUsers().add(user3);
                 userRepository.save(user3);
 
                 Set<Achievement> achievementsToAsignUser4 = new HashSet<Achievement>(
                                 Arrays.asList(achievement2, achievement3));
                 user4.setAchievements(achievementsToAsignUser4);
+                achievement2.getUsers().add(user4);
+                achievement3.getUsers().add(user4);
                 userRepository.save(user4);
 
                 /*
