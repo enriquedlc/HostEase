@@ -47,8 +47,8 @@ public class initDatabase implements CommandLineRunner {
         @Autowired
         private MessageRepository messageRepository;
 
-        // @Autowired
-        // private LikeRepository likeRepository;
+        @Autowired
+        private LikeRepository likeRepository;
 
         @Override
         public void run(String... args) throws Exception {
@@ -112,11 +112,21 @@ public class initDatabase implements CommandLineRunner {
                 Message message7 = new Message("Message body example 6", new Date(), event4, user4);
 
                 // LIKES
-                // Like like1 = new Like();
-                // Like like1 = new Like(event1, user1, false, "2023-04-19 23:51:30");
+                // Like like1 = new Like(event1, user1, true, "2023-04-19 23:51:30");
                 // Like like2 = new Like(event1, user2, true, "2023-04-19 23:51:30");
-                // Like like3 = new Like(event1, user3, true, "2023-04-19 23:51:30");
-                // Like like4 = new Like();
+                Like like3 = new Like(event1, user3, true, "2023-04-19 23:51:30");
+
+                Like like4 = new Like(event2, user1, true, "2023-04-19 23:51:30");
+                Like like5 = new Like(event2, user2, true, "2023-04-19 23:51:30");
+
+                Like like6 = new Like(event3, user1, true, "2023-04-19 23:51:30");
+                Like like7 = new Like(event3, user2, true, "2023-04-19 23:51:30");
+                Like like8 = new Like(event3, user3, true, "2023-04-19 23:51:30");
+                Like like9 = new Like(event3, user4, true, "2023-04-19 23:51:30");
+
+                Like like10 = new Like(event4, user1, true, "2023-04-19 23:51:30");
+                Like like11 = new Like(event4, user2, true, "2023-04-19 23:51:30");
+                Like like1 = new Like();
 
                 // SAVE USERS
                 userRepository.save(user1);
@@ -316,6 +326,103 @@ public class initDatabase implements CommandLineRunner {
                 userRepository.save(user4);
 
                 user5.setFollowers(new HashSet<>(Arrays.asList(user2, user4)));
+
+                /*
+                 * LIKES
+                 * 
+                 * 1. In order to save the likes we can construct it step by step:
+                 * 
+                 * - Firstable we set the event and the user to the like
+                 * - Next we set the like's state to true and give a date
+                 * and the hour when this happened
+                 * - Then we get the likes from the user and add
+                 * the current like, same with the event and
+                 * - Finally we save the like using the likeRepository.
+                 * (First example)
+                 * 
+                 * 2. Other way to save the likes:
+                 * - Firstable we need to construct the like with the user,
+                 * the event, the state of liked and the date it
+                 * happened as parameters.
+                 * - Then we need to set the event and the user to the like, next
+                 * we need to set the like into the event and the user and finally
+                 * we save the like using the likeRepository.
+                 * (Second example)
+                 * 
+                 */
+
+                // First example
+                like1.setEvent(event1);
+                like1.setUser(user1);
+                like1.setLiked(true);
+                like1.setLikedAt("2019-01-01 00:00:00");
+                user1.setLikes(new HashSet<>(Arrays.asList(like1)));
+                event1.getLikes().add(like1);
+                likeRepository.save(like1);
+
+                Like like2 = new Like();
+                like2.setEvent(event1);
+                like2.setUser(user2);
+                like2.setLiked(true);
+                like2.setLikedAt("2019-01-01 00:00:00");
+                user2.setLikes(new HashSet<>(Arrays.asList(like2)));
+                event1.getLikes().add(like2);
+                likeRepository.save(like2);
+
+                // Second example
+                like3.setEvent(event1);
+                like3.setUser(user3);
+                user3.getLikes().add(like3);
+                event1.getLikes().add(like3);
+                likeRepository.save(like3);
+
+                like4.setEvent(event2);
+                like4.setUser(user1);
+                user1.getLikes().add(like4);
+                event2.getLikes().add(like4);
+                likeRepository.save(like4);
+
+                like5.setEvent(event2);
+                like5.setUser(user2);
+                user2.getLikes().add(like5);
+                event2.getLikes().add(like5);
+                likeRepository.save(like5);
+
+                like6.setEvent(event3);
+                like6.setUser(user1);
+                user1.getLikes().add(like6);
+                event3.getLikes().add(like6);
+                likeRepository.save(like6);
+
+                like7.setEvent(event3);
+                like7.setUser(user2);
+                user2.getLikes().add(like7);
+                event3.getLikes().add(like7);
+                likeRepository.save(like7);
+
+                like8.setEvent(event3);
+                like8.setUser(user3);
+                user3.getLikes().add(like8);
+                event3.getLikes().add(like8);
+                likeRepository.save(like8);
+
+                like9.setEvent(event3);
+                like9.setUser(user4);
+                user4.getLikes().add(like9);
+                event3.getLikes().add(like9);
+                likeRepository.save(like9);
+
+                like10.setEvent(event4);
+                like10.setUser(user1);
+                user1.getLikes().add(like10);
+                event4.getLikes().add(like10);
+                likeRepository.save(like10);
+
+                like11.setEvent(event4);
+                like11.setUser(user2);
+                user2.getLikes().add(like11);
+                event4.getLikes().add(like11);
+                likeRepository.save(like11);
 
                 System.out.println("Database initialized");
 
