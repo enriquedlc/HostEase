@@ -18,10 +18,13 @@ import javax.persistence.Table;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tag_table")
 public class Tag {
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
@@ -42,6 +45,10 @@ public class Tag {
 
     public Tag(Long id, String tag) {
         this.id = id;
+        this.tag = tag;
+    }
+
+    public Tag(String tag) {
         this.tag = tag;
     }
 
