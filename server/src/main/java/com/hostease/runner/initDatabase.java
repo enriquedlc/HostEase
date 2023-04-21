@@ -62,22 +62,22 @@ public class initDatabase implements CommandLineRunner {
                 Category category5 = new Category("Category 5");
 
                 // TAGS
-                Tag tag1 = new Tag(1L, "Tag 1");
-                Tag tag2 = new Tag(2L, "Tag 2");
-                Tag tag3 = new Tag(3L, "Tag 3");
-                Tag tag4 = new Tag(4L, "Tag 4");
+                Tag tag1 = new Tag("Tag 1");
+                Tag tag2 = new Tag("Tag 2");
+                Tag tag3 = new Tag("Tag 3");
+                Tag tag4 = new Tag("Tag 4");
 
                 // EVENTS
-                Event event1 = new Event(1L, "Event 1", "Description 1", "2020-01-01", "2020-01-01", "12:00", "13:00",
+                Event event1 = new Event("Event 1", "Description 1", "2020-01-01", "2020-01-01", "12:00", "13:00",
                                 1.0, 1.0,
                                 10L, 0D, category1);
-                Event event2 = new Event(2L, "Event 2", "Description 2", "2020-01-01", "2020-01-01", "12:00", "13:00",
+                Event event2 = new Event("Event 2", "Description 2", "2020-01-01", "2020-01-01", "12:00", "13:00",
                                 1.0, 1.0,
                                 10L, 0D, category3);
-                Event event3 = new Event(3L, "Event 3", "Description 3", "2020-01-01", "2020-01-01", "12:00", "13:00",
+                Event event3 = new Event("Event 3", "Description 3", "2020-01-01", "2020-01-01", "12:00", "13:00",
                                 1.0, 1.0,
                                 10L, 0D, category4);
-                Event event4 = new Event(4L, "Event 4", "Description 4", "2020-01-01", "2020-01-01", "12:00", "13:00",
+                Event event4 = new Event("Event 4", "Description 4", "2020-01-01", "2020-01-01", "12:00", "13:00",
                                 1.0, 1.0,
                                 10L, 0D, category1);
 
@@ -98,21 +98,20 @@ public class initDatabase implements CommandLineRunner {
                                 100L, new Date());
 
                 // ACHIEVEMENTS
-                Achievement achievement1 = new Achievement(1L, "Achievement description 1", 100L, 1D);
-                Achievement achievement2 = new Achievement(2L, "Achievement description 2", 200L, 2D);
-                Achievement achievement3 = new Achievement(3L, "Achievement description 3", 300L, 3D);
+                Achievement achievement1 = new Achievement("Achievement description 1", 100L, 1D);
+                Achievement achievement2 = new Achievement("Achievement description 2", 200L, 2D);
+                Achievement achievement3 = new Achievement("Achievement description 3", 300L, 3D);
 
                 // MESSAGES
-                Message message1 = new Message("Message body example 1", new Date(), event1, user1);
+                // Message message1 = new Message("Message body example 1", new Date(), event1,
+                // user1);
                 Message message2 = new Message("Message body example 2", new Date());
                 Message message3 = new Message("Message body example 3", new Date());
                 Message message4 = new Message("Message body example 4", new Date(), event2, user3);
                 Message message5 = new Message("Message body example 5", new Date(), event3, user4);
                 Message message6 = new Message("Message body example 7", new Date(), event4, user4);
 
-                // LIKES
-                // Like like1 = new Like(event1, user1, true, "2023-04-19 23:51:30");
-                // Like like2 = new Like(event1, user2, true, "2023-04-19 23:51:30");
+                // // LIKES
                 Like like3 = new Like(event1, user3, true, "2023-04-19 23:51:30");
 
                 Like like4 = new Like(event2, user1, true, "2023-04-19 23:51:30");
@@ -125,7 +124,6 @@ public class initDatabase implements CommandLineRunner {
 
                 Like like10 = new Like(event4, user1, true, "2023-04-19 23:51:30");
                 Like like11 = new Like(event4, user2, true, "2023-04-19 23:51:30");
-                Like like1 = new Like();
 
                 // SAVE USERS
                 userRepository.save(user1);
@@ -158,11 +156,17 @@ public class initDatabase implements CommandLineRunner {
                 achievementRepository.save(achievement2);
                 achievementRepository.save(achievement3);
 
-                // SAVE MESSAGES
-                messageRepository.save(message1);
-                messageRepository.save(message4);
-                messageRepository.save(message5);
-                messageRepository.save(message6);
+                // event1.getTags().add(tag1);
+                // event1.setCategory(category1);
+                // categoryRepository.save(category1);
+                // tagRepository.save(tag1);
+                // eventRepository.save(event1);
+
+                // event2.getTags().add(tag2);
+                // event2.setCategory(category2);
+                // categoryRepository.save(category2);
+                // tagRepository.save(tag2);
+                // eventRepository.save(event2);
 
                 // SET THE TAGS FOR THE EVENTS
                 Set<Event> eventsToAsignTag1 = new HashSet<Event>(
@@ -259,33 +263,41 @@ public class initDatabase implements CommandLineRunner {
                 achievement3.getUsers().add(user4);
                 userRepository.save(user4);
 
-                /*
-                 * MESSAGES
-                 * 
-                 * - The messages are not saved up like the rest of the entities.
-                 * 
-                 * 1. One way to save a message properly is to construct the message
-                 * with the user and the event as parameters and then save the message.
-                 * 
-                 * Next we need to set the message into the user and the event, finally
-                 * we save the message again with the messageRepository.
-                 * (example: First example)
-                 * 
-                 * 2. The second way is to construct the message with only the body and
-                 * the date as parameters and not saving it yet.
-                 * 
-                 * Next we need to set the message into the user and the event, then
-                 * we set the user and the event to the message and finally we save the
-                 * message with the messageRepository.
-                 * (example: Second example)
-                 * 
-                 */
+                // /*
+                // * MESSAGES
+                // *
+                // * - The messages are not saved up like the rest of the entities.
+                // *
+                // * 1. One way to save a message properly is to construct the message
+                // * with the user and the event as parameters and then save the message.
+                // *
+                // * Next we need to set the message into the user and the event, finally
+                // * we save the message again with the messageRepository.
+                // * (example: First example)
+                // *
+                // * 2. The second way is to construct the message with only the body and
+                // * the date as parameters and not saving it yet.
+                // *
+                // * Next we need to set the message into the user and the event, then
+                // * we set the user and the event to the message and finally we save the
+                // * message with the messageRepository.
+                // * (example: Second example)
+                // *
+                // */
 
                 // SET THE MESSAGES INTO THE USERS AND EVENTS
                 // First example
+                Message message1 = new Message();
+                message1.setMessage("hola este es el primer mensaje");
+                message1.setPublishedAt(new Date());
+                message1.setUser(user1);
+                message1.setEvent(event1);
+
                 user1.getMessages().add(message1);
                 event1.getMessages().add(message1);
                 messageRepository.save(message1);
+                userRepository.save(user1);
+                eventRepository.save(event1);
 
                 user3.getMessages().add(message4);
                 event2.getMessages().add(message4);
@@ -321,11 +333,10 @@ public class initDatabase implements CommandLineRunner {
                 user1.getFollowing().add(user2);
                 userRepository.save(user1);
 
-                user2.setFollowers(new HashSet<>(Arrays.asList(user1, user3, user5)));
+                user2.setFollowers(new HashSet<>(Arrays.asList(user1)));
 
                 user2.getFollowing().add(user1);
-                user2.getFollowing().add(user3);
-                user2.getFollowing().add(user5);
+                userRepository.save(user1);
                 userRepository.save(user2);
 
                 user3.setFollowers(new HashSet<>(Arrays.asList(user2, user4, user5)));
@@ -343,38 +354,39 @@ public class initDatabase implements CommandLineRunner {
                 user4.getFollowing().add(user4);
                 userRepository.save(user4);
 
-                user5.setFollowers(new HashSet<>(Arrays.asList(user2, user4)));
+                // user5.setFollowers(new HashSet<>(Arrays.asList(user2, user4)));
 
-                /*
-                 * LIKES
-                 * 
-                 * 1. In order to save the likes we can construct it step by step:
-                 * 
-                 * - Firstable we set the event and the user to the like
-                 * - Next we set the like's state to true and give a date
-                 * and the hour when this happened
-                 * - Then we get the likes from the user and add
-                 * the current like, same with the event and
-                 * - Finally we save the like using the likeRepository.
-                 * (First example)
-                 * 
-                 * 2. Other way to save the likes:
-                 * - Firstable we need to construct the like with the user,
-                 * the event, the state of liked and the date it
-                 * happened as parameters.
-                 * - Then we need to set the event and the user to the like, next
-                 * we need to set the like into the event and the user and finally
-                 * we save the like using the likeRepository.
-                 * (Second example)
-                 * 
-                 */
+                // /*
+                // * LIKES
+                // *
+                // * 1. In order to save the likes we can construct it step by step:
+                // *
+                // * - Firstable we set the event and the user to the like
+                // * - Next we set the like's state to true and give a date
+                // * and the hour when this happened
+                // * - Then we get the likes from the user and add
+                // * the current like, same with the event and
+                // * - Finally we save the like using the likeRepository.
+                // * (First example)
+                // *
+                // * 2. Other way to save the likes:
+                // * - Firstable we need to construct the like with the user,
+                // * the event, the state of liked and the date it
+                // * happened as parameters.
+                // * - Then we need to set the event and the user to the like, next
+                // * we need to set the like into the event and the user and finally
+                // * we save the like using the likeRepository.
+                // * (Second example)
+                // *
+                // */
 
                 // First example
+                Like like1 = new Like();
                 like1.setEvent(event1);
                 like1.setUser(user1);
                 like1.setLiked(true);
                 like1.setLikedAt("2019-01-01 00:00:00");
-                user1.setLikes(new HashSet<>(Arrays.asList(like1)));
+                user1.getLikes().add(like1);
                 event1.getLikes().add(like1);
                 likeRepository.save(like1);
 
@@ -383,7 +395,7 @@ public class initDatabase implements CommandLineRunner {
                 like2.setUser(user2);
                 like2.setLiked(true);
                 like2.setLikedAt("2019-01-01 00:00:00");
-                user2.setLikes(new HashSet<>(Arrays.asList(like2)));
+                user2.getLikes().add(like2);
                 event1.getLikes().add(like2);
                 likeRepository.save(like2);
 
