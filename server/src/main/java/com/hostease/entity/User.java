@@ -20,8 +20,15 @@ import javax.persistence.Table;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.hostease.Serializer.CustomEventSerializer;
+
 @Entity
 @Table(name = "user_table")
+@JsonIgnoreProperties("followers")
 public class User {
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {
@@ -30,6 +37,7 @@ public class User {
     })
     @JoinTable(name = "users_on_event_table", joinColumns = @JoinColumn(name = "fk_event_id"), inverseJoinColumns = @JoinColumn(name = "fk_user_id"))
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonSerialize(using = CustomEventSerializer.class)
     private Set<Event> events = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {
@@ -41,12 +49,14 @@ public class User {
     private Set<Achievement> achievements = new HashSet<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Set<Message> messages = new HashSet<Message>();
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_followers", joinColumns = @JoinColumn(name = "following_user_id"), inverseJoinColumns = @JoinColumn(name = "followed_user_id"))
     private Set<User> followers = new HashSet<>();
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "followers", fetch = FetchType.LAZY)
     private Set<User> following = new HashSet<>();
 
