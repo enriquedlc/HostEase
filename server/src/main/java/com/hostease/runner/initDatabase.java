@@ -83,19 +83,19 @@ public class initDatabase implements CommandLineRunner {
 
                 // USERS
                 User user1 = new User("nickNameUser1", "user1email@gmail.com", "sha256...", "NameUser1", "SurnameUser1",
-                                0L, new Date());
+                                0L, "2020-01-01 12:00:00");
 
                 User user2 = new User("nickNameUser2", "user2email@gmail.com", "sha256...", "NameUser2", "SurnameUser2",
-                                100L, new Date());
+                                100L, "2020-01-01 12:00:00");
 
                 User user3 = new User("nickNameUser3", "user3email@gmail.com", "sha256...", "NameUser3", "SurnameUser3",
-                                100L, new Date());
+                                100L, "2020-01-01 12:00:00");
 
                 User user4 = new User("nickNameUser4", "user4email@gmail.com", "sha256...", "NameUser4", "SurnameUser4",
-                                100L, new Date());
+                                100L, "2020-01-01 12:00:00");
 
                 User user5 = new User("nickNameUser5", "user5email@gmail.com", "sha256...", "NameUser5", "SurnameUser5",
-                                100L, new Date());
+                                100L, "2020-01-01 12:00:00");
 
                 // ACHIEVEMENTS
                 Achievement achievement1 = new Achievement("Achievement description 1", 100L, 1D);
@@ -155,18 +155,6 @@ public class initDatabase implements CommandLineRunner {
                 achievementRepository.save(achievement1);
                 achievementRepository.save(achievement2);
                 achievementRepository.save(achievement3);
-
-                // event1.getTags().add(tag1);
-                // event1.setCategory(category1);
-                // categoryRepository.save(category1);
-                // tagRepository.save(tag1);
-                // eventRepository.save(event1);
-
-                // event2.getTags().add(tag2);
-                // event2.setCategory(category2);
-                // categoryRepository.save(category2);
-                // tagRepository.save(tag2);
-                // eventRepository.save(event2);
 
                 // SET THE TAGS FOR THE EVENTS
                 Set<Event> eventsToAsignTag1 = new HashSet<Event>(
