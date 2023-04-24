@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hostease.entity.Event;
+import com.hostease.enums.HttpStatusEnum;
 import com.hostease.service.EventService;
 
 @RestController
@@ -27,13 +28,13 @@ public class EventController {
         try {
             List<Event> events = eventService.findAll();
 
-            response.put("status", "200 OK");
+            response.put("status", HttpStatusEnum.STATUS_200_OK.getStatus());
             response.put("message", "Events successfully retrieved");
             response.put("data", events);
 
             return ResponseEntity.status(200).body(response);
         } catch (Exception e) {
-            response.put("status", "500 Internal Server Error");
+            response.put("status", HttpStatusEnum.STATUS_500_INTERNAL_SERVER_ERROR.getStatus());
             response.put("message", "Error retrieving events");
             response.put("error", e.getMessage());
             response.put("data", null);

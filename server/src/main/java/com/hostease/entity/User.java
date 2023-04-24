@@ -27,7 +27,7 @@ import com.hostease.serializer.CustomEventSerializer;
 
 @Entity
 @Table(name = "user_table")
-@JsonIgnoreProperties({ "events", "followers", "following", "likes", "messages", "achievements" })
+@JsonIgnoreProperties({"followers", "following", "likes", "messages", "achievements" })
 public class User {
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {

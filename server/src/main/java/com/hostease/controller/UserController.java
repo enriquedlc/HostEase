@@ -14,14 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hostease.entity.User;
+import com.hostease.enums.HttpStatusEnum;
 import com.hostease.service.UserService;
 
 @RestController
 @RequestMapping("/hostease")
 public class UserController {
-
-    private final String STATUS_200_OK = "200 OK";
-    private final String STATUS_500_INTERNAL_SERVER_ERROR = "500 Internal Server Error";
 
     @Autowired
     UserService userService;
@@ -33,14 +31,14 @@ public class UserController {
         try {
             List<User> users = userService.findAll();
 
-            jsonResponseMap.put("status", STATUS_200_OK);
+            jsonResponseMap.put("status", HttpStatusEnum.STATUS_200_OK.getStatus());
             jsonResponseMap.put("message", "Users successfully retrieved");
             jsonResponseMap.put("data", users);
 
             return ResponseEntity.status(200).body(jsonResponseMap);
 
         } catch (Exception e) {
-            jsonResponseMap.put("status", STATUS_500_INTERNAL_SERVER_ERROR);
+            jsonResponseMap.put("status", HttpStatusEnum.STATUS_500_INTERNAL_SERVER_ERROR.getStatus());
             jsonResponseMap.put("message", "Error retrieving users");
             jsonResponseMap.put("error", e.getMessage());
             jsonResponseMap.put("data", null);
@@ -56,14 +54,14 @@ public class UserController {
         try {
             User user = userService.findById(id);
 
-            jsonResponseMap.put("status", STATUS_200_OK);
+            jsonResponseMap.put("status", HttpStatusEnum.STATUS_200_OK.getStatus());
             jsonResponseMap.put("message", "User successfully retrieved");
             jsonResponseMap.put("data", user);
 
             return ResponseEntity.status(200).body(jsonResponseMap);
 
         } catch (Exception e) {
-            jsonResponseMap.put("status", STATUS_500_INTERNAL_SERVER_ERROR);
+            jsonResponseMap.put("status", HttpStatusEnum.STATUS_500_INTERNAL_SERVER_ERROR.getStatus());
             jsonResponseMap.put("message", "Error retrieving user");
             jsonResponseMap.put("error", e.getMessage());
             jsonResponseMap.put("data", null);
@@ -79,14 +77,14 @@ public class UserController {
         try {
             User savedUser = userService.save(user);
 
-            jsonResponseMap.put("status", STATUS_200_OK);
+            jsonResponseMap.put("status", HttpStatusEnum.STATUS_201_CREATED.getStatus());
             jsonResponseMap.put("message", "User successfully saved");
             jsonResponseMap.put("data", savedUser);
 
             return ResponseEntity.status(200).body(jsonResponseMap);
 
         } catch (Exception e) {
-            jsonResponseMap.put("status", STATUS_500_INTERNAL_SERVER_ERROR);
+            jsonResponseMap.put("status", HttpStatusEnum.STATUS_500_INTERNAL_SERVER_ERROR.getStatus());
             jsonResponseMap.put("message", "Error saving user");
             jsonResponseMap.put("error", e.getMessage());
             jsonResponseMap.put("data", null);

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hostease.entity.Tag;
+import com.hostease.enums.HttpStatusEnum;
 import com.hostease.service.TagService;
 
 @RestController
@@ -31,14 +32,14 @@ public class TagController {
         try {
             List<Tag> tags = tagService.findAll();
 
-            response.put("status", "200 OK");
+            response.put("status", HttpStatusEnum.STATUS_200_OK.getStatus());
             response.put("message", "Tags successfully retrieved");
             response.put("data", tags);
 
             return ResponseEntity.status(200).body(response);
 
         } catch (Exception e) {
-            response.put("status", "500 Internal Server Error");
+            response.put("status", HttpStatusEnum.STATUS_500_INTERNAL_SERVER_ERROR.getStatus());
             response.put("message", "Error retrieving tags");
             response.put("error", e.getMessage());
             response.put("data", null);
@@ -55,14 +56,14 @@ public class TagController {
         try {
             Tag tag = tagService.findById(id);
 
-            response.put("status", "200 OK");
+            response.put("status", HttpStatusEnum.STATUS_200_OK.getStatus());
             response.put("message", "Tag successfully retrieved");
             response.put("data", tag);
 
             return ResponseEntity.status(200).body(response);
 
         } catch (Exception e) {
-            response.put("status", "500 Internal Server Error");
+            response.put("status", HttpStatusEnum.STATUS_500_INTERNAL_SERVER_ERROR.getStatus());
             response.put("message", "Error retrieving tag");
             response.put("error", e.getMessage());
             response.put("data", null);
@@ -79,14 +80,14 @@ public class TagController {
         try {
             Tag tagToSave = tagService.save(tag);
 
-            response.put("status", "200 OK");
+            response.put("status", HttpStatusEnum.STATUS_201_CREATED.getStatus());
             response.put("message", "Tag successfully saved");
             response.put("data", tagToSave);
 
             return ResponseEntity.status(200).body(response);
 
         } catch (Exception e) {
-            response.put("status", "500 Internal Server Error");
+            response.put("status", HttpStatusEnum.STATUS_500_INTERNAL_SERVER_ERROR.getStatus());
             response.put("message", "Error saving tag");
             response.put("error", e.getMessage());
             response.put("data", null);
@@ -104,13 +105,13 @@ public class TagController {
             Tag tag = tagService.findById(id);
             tagService.deleteById(id);
 
-            response.put("status", "200 OK");
+            response.put("status", HttpStatusEnum.STATUS_200_OK.getStatus());
             response.put("message", String.format("Tag %s successfully deleted", tag.getTag()));
 
             return ResponseEntity.status(200).body(response);
 
         } catch (Exception e) {
-            response.put("status", "500 Internal Server Error");
+            response.put("status", HttpStatusEnum.STATUS_500_INTERNAL_SERVER_ERROR.getStatus());
             response.put("message", "Error deleting tag");
             response.put("error", e.getMessage());
             response.put("data", null);
