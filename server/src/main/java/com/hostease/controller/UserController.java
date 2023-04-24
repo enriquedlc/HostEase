@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -86,6 +87,29 @@ public class UserController {
         } catch (Exception e) {
             jsonResponseMap.put("status", HttpStatusEnum.STATUS_500_INTERNAL_SERVER_ERROR.getStatus());
             jsonResponseMap.put("message", "Error saving user");
+            jsonResponseMap.put("error", e.getMessage());
+            jsonResponseMap.put("data", null);
+
+            return ResponseEntity.status(500).body(jsonResponseMap);
+        }
+    }
+
+    @DeleteMapping("/users/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") Long id) {
+        Map<String, Object> jsonResponseMap = new LinkedHashMap<String, Object>();
+
+        try {
+            User userToDelete = userService.findById(id);
+            userService.deleteById(id);
+
+            jsonResponseMap.put("status", HttpStatusEnum.STATUS_200_OK.getStatus());
+            jsonResponseMap.put("message", String.format("User %s successfully deleted", userToDelete.getName()));
+
+            return ResponseEntity.status(200).body(jsonResponseMap);
+
+        } catch (Exception e) {
+            jsonResponseMap.put("status", HttpStatusEnum.STATUS_500_INTERNAL_SERVER_ERROR.getStatus());
+            jsonResponseMap.put("message", "Error deleting user");
             jsonResponseMap.put("error", e.getMessage());
             jsonResponseMap.put("data", null);
 
