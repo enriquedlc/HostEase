@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -63,6 +65,29 @@ public class UserController {
         } catch (Exception e) {
             jsonResponseMap.put("status", STATUS_500_INTERNAL_SERVER_ERROR);
             jsonResponseMap.put("message", "Error retrieving user");
+            jsonResponseMap.put("error", e.getMessage());
+            jsonResponseMap.put("data", null);
+
+            return ResponseEntity.status(500).body(jsonResponseMap);
+        }
+    }
+
+    @PostMapping("/users")
+    public ResponseEntity<?> save(@RequestBody User user) {
+        Map<String, Object> jsonResponseMap = new LinkedHashMap<String, Object>();
+
+        try {
+            User savedUser = userService.save(user);
+
+            jsonResponseMap.put("status", STATUS_200_OK);
+            jsonResponseMap.put("message", "User successfully saved");
+            jsonResponseMap.put("data", savedUser);
+
+            return ResponseEntity.status(200).body(jsonResponseMap);
+
+        } catch (Exception e) {
+            jsonResponseMap.put("status", STATUS_500_INTERNAL_SERVER_ERROR);
+            jsonResponseMap.put("message", "Error saving user");
             jsonResponseMap.put("error", e.getMessage());
             jsonResponseMap.put("data", null);
 

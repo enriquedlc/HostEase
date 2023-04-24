@@ -1,6 +1,5 @@
 package com.hostease.entity;
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,7 +27,7 @@ import com.hostease.serializer.CustomEventSerializer;
 
 @Entity
 @Table(name = "user_table")
-@JsonIgnoreProperties("followers")
+@JsonIgnoreProperties({ "events", "followers", "following", "likes", "messages", "achievements" })
 public class User {
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {
@@ -82,22 +81,17 @@ public class User {
     @Column(name = "surname", nullable = false, length = 60)
     private String surname;
 
-    @Column(name = "experiencePoints", nullable = true)
+    @Column(name = "experiencePoints", nullable = false, columnDefinition = "bigint(20) default 0")
     private Long experience;
 
-    @Column(name = "joinedAt", nullable = false)
-    private Date joinedAt;
-
-    // @PrePersist
-    // protected void onCreate() {
-    // joinedAt = new Date();
-    // }
+    @Column(name = "joinedAt", nullable = false, columnDefinition = "DATETIME default CURRENT_TIMESTAMP")
+    private String joinedAt;
 
     public User() {
     }
 
     public User(String nickname, String email, String password, String name, String surname,
-            Long experience, Date joinedAt) {
+            Long experience, String joinedAt) {
         this.nickname = nickname;
         this.email = email;
         this.password = password;
@@ -171,11 +165,11 @@ public class User {
         this.experience = experience;
     }
 
-    public Date getJoinedAt() {
+    public String getJoinedAt() {
         return joinedAt;
     }
 
-    public void setJoinedAt(Date joinedAt) {
+    public void setJoinedAt(String joinedAt) {
         this.joinedAt = joinedAt;
     }
 
