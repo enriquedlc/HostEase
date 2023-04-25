@@ -22,7 +22,8 @@ public class EventService {
         return eventRepository.findById(id).get();
     }
 
-    public Event save(Event event) {
+    public Event save(Event event, Long id) {
+        event.setCategory(eventRepository.findById(id).get().getCategory());
         return eventRepository.save(event);
     }
 

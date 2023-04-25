@@ -32,6 +32,10 @@ public class Category {
     public Category() {
     }
 
+    public Category(Integer id) {
+        this.id = (long) id;
+    }
+
     public Category(Long id, String category) {
         this.id = id;
         this.category = category;
