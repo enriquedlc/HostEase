@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -126,6 +127,31 @@ public class EventController {
 
         }
 
+    }
+
+    @DeleteMapping("events/{id}")
+    public ResponseEntity<Map<String, Object>> delete(@PathVariable Long id) {
+        Map<String, Object> jsonResponseMap = new LinkedHashMap<String, Object>();
+
+        try {
+            Event eventToDelete = eventService.findById(id);
+            eventService.deleteById(id);
+
+            jsonResponseMap.put("status", HttpStatusEnum.STATUS_200_OK.getStatus());
+            jsonResponseMap.put("message", String.format("event %s deleted successfully", eventToDelete.getTitle()));
+
+            return ResponseEntity.ok().body(jsonResponseMap);
+
+        } catch (Exception e) {
+
+            jsonResponseMap.put("status", HttpStatusEnum.STATUS_500_INTERNAL_SERVER_ERROR.getStatus());
+            jsonResponseMap.put("message", "Error deleting event");
+            jsonResponseMap.put("error", e.getMessage());
+            jsonResponseMap.put("data", null);
+
+            return ResponseEntity.ok().body(jsonResponseMap);
+
+        }
     }
 
 }
