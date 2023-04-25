@@ -73,13 +73,13 @@ public class initDatabase implements CommandLineRunner {
                                 10L, 0D, category1);
                 Event event2 = new Event("Event 2", "Description 2", "2020-01-01", "2020-01-01", "12:00", "13:00",
                                 1.0, 1.0,
-                                10L, 0D, category3);
+                                10L, 0D, category2);
                 Event event3 = new Event("Event 3", "Description 3", "2020-01-01", "2020-01-01", "12:00", "13:00",
                                 1.0, 1.0,
-                                10L, 0D, category4);
+                                10L, 0D, category3);
                 Event event4 = new Event("Event 4", "Description 4", "2020-01-01", "2020-01-01", "12:00", "13:00",
                                 1.0, 1.0,
-                                10L, 0D, category1);
+                                10L, 0D, category4);
 
                 // USERS
                 User user1 = new User("nickNameUser1", "user1email@gmail.com", "sha256...", "NameUser1", "SurnameUser1",
@@ -156,9 +156,31 @@ public class initDatabase implements CommandLineRunner {
                 achievementRepository.save(achievement2);
                 achievementRepository.save(achievement3);
 
+                // SET THE CATEGORIES FOR THE EVENTS
+                Set<Event> eventsToAsingCategory1 = new HashSet<Event>(
+                                Arrays.asList(event1));
+                category1.setEvents(eventsToAsingCategory1);
+                event1.setCategory(category1);
+                categoryRepository.save(category1);
+
+                Set<Event> eventsToAsignCategory2 = new HashSet<Event>(Arrays.asList(event2));
+                category2.setEvents(eventsToAsignCategory2);
+                event2.setCategory(category2);
+                categoryRepository.save(category2);
+
+                Set<Event> eventsToAsignCategory3 = new HashSet<Event>(Arrays.asList(event3));
+                category3.setEvents(eventsToAsignCategory3);
+                event3.setCategory(category3);
+                categoryRepository.save(category3);
+
+                Set<Event> eventsToAsignCategory4 = new HashSet<Event>(Arrays.asList(event4));
+                category4.setEvents(eventsToAsignCategory4);
+                event4.setCategory(category4);
+                categoryRepository.save(category4);
+
                 // SET THE TAGS FOR THE EVENTS
                 Set<Event> eventsToAsignTag1 = new HashSet<Event>(
-                                Arrays.asList(event1, event2));
+                                Arrays.asList(event1, event4));
                 tag1.setEvents(eventsToAsignTag1);
                 event1.getTags().add(tag1);
                 event2.getTags().add(tag1);
