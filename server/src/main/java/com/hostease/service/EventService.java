@@ -27,6 +27,24 @@ public class EventService {
         return eventRepository.save(event);
     }
 
+    public Event update(Event event, Long id) {
+        eventRepository.findById(id).ifPresent(eventToUpdate -> {
+            eventToUpdate.setTitle(event.getTitle());
+            eventToUpdate.setDescription(event.getDescription());
+            eventToUpdate.setStartDate(event.getStartDate());
+            eventToUpdate.setEndDate(event.getEndDate());
+            eventToUpdate.setStartTime(event.getStartTime());
+            eventToUpdate.setEndTime(event.getEndTime());
+            eventToUpdate.setLocationLat(event.getLocationLat());
+            eventToUpdate.setLocationLng(event.getLocationLng());
+            eventToUpdate.setMaxCapacity(event.getMaxCapacity());
+            eventToUpdate.setPhoto(event.getPhoto());
+            eventRepository.save(eventToUpdate);
+        });
+        return eventRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Event not found"));
+    }
+
     public void deleteById(Long id) {
         eventRepository.deleteById(id);
     }

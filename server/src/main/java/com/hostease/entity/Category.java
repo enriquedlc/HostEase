@@ -69,6 +69,10 @@ public class Category {
         this.events.add(event);
     }
 
+    public void setEvents(Set<Event> events) {
+        this.events = events;
+    }
+
     @Override
     public String toString() {
         return "Category [id=" + id + ", category=" + category + "]";
