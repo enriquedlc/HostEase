@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "event_table")
-@JsonIgnoreProperties({ "tags", "users", "messages", "likes", "category" })
+@JsonIgnoreProperties({ "users", "messages", "likes", "tags", "category" })
 public class Event {
 
     @JsonIgnore
