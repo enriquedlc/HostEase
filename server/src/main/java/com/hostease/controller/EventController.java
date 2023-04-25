@@ -16,10 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hostease.entity.Category;
 import com.hostease.entity.Event;
 import com.hostease.enums.HttpStatusEnum;
-import com.hostease.repository.CategoryRepository;
 import com.hostease.service.EventService;
 
 @RestController
@@ -28,9 +26,6 @@ public class EventController {
 
     @Autowired
     EventService eventService;
-
-    @Autowired
-    CategoryRepository categoryRepository;
 
     @GetMapping("/events")
     public ResponseEntity<Map<String, Object>> findAll() {
@@ -83,8 +78,6 @@ public class EventController {
         Map<String, Object> jsonResponseMap = new LinkedHashMap<String, Object>();
 
         try {
-            Category categoryToAssign = categoryRepository.findById(id).get();
-            categoryRepository.save(categoryToAssign);
             Event savedEvent = eventService.save(event, id);
 
             jsonResponseMap.put("status", HttpStatusEnum.STATUS_200_OK.getStatus());
