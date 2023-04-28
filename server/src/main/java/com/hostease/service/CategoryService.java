@@ -28,7 +28,7 @@ public class CategoryService {
 
     public Category update(Category category, Long id) {
         categoryRepository.findById(id).ifPresent(categoryToUpdate -> {
-            categoryToUpdate.setCategory(category.getCategory());
+            categoryToUpdate.setCategoryName(category.getCategoryName());
             categoryRepository.save(categoryToUpdate);
         });
         return categoryRepository.findById(id)

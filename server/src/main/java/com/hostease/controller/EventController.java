@@ -101,7 +101,7 @@ public class EventController {
         Map<String, Object> jsonResponseMap = new LinkedHashMap<String, Object>();
 
         try {
-            eventService.findById(id).getCategory().getCategory();
+            eventService.findById(id).getCategory().getCategoryName();
             Event eventToUpdate = eventService.update(event, id);
 
             jsonResponseMap.put("status", HttpStatusEnum.STATUS_200_OK.getStatus());
