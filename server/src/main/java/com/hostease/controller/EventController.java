@@ -47,7 +47,6 @@ public class EventController {
 
             return ResponseEntity.status(500).body(jsonResponseMap);
         }
-
     }
 
     @GetMapping("/events/{id}")
