@@ -26,6 +26,15 @@ public class TagService {
         return tagRepository.save(tag);
     }
 
+    public Tag update(Tag tag, Long id) {
+        tagRepository.findById(id).ifPresent(tagToUpdate -> {
+            tagToUpdate.setTag(tag.getTag());
+            tagRepository.save(tagToUpdate);
+        });
+        return tagRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Tag not found"));
+    }
+
     public void deleteById(Long id) {
         tagRepository.deleteById(id);
     }

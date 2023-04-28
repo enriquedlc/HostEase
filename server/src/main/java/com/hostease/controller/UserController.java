@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hostease.entity.User;
 import com.hostease.enums.HttpStatusEnum;
 import com.hostease.service.UserService;
+import com.hostease.utils.ControllerJsonResponseMap;
 
 @RestController
 @RequestMapping("/hostease")
@@ -26,72 +27,39 @@ public class UserController {
     UserService userService;
 
     @GetMapping("/users")
-    public ResponseEntity<?> findAll() {
-        Map<String, Object> jsonResponseMap = new LinkedHashMap<String, Object>();
+    public ResponseEntity<Map<String, Object>> findAll() {
 
-        try {
-            List<User> users = userService.findAll();
+        List<User> users = userService.findAll();
 
-            jsonResponseMap.put("status", HttpStatusEnum.STATUS_200_OK.getStatus());
-            jsonResponseMap.put("message", "Users successfully retrieved");
-            jsonResponseMap.put("data", users);
-
-            return ResponseEntity.status(200).body(jsonResponseMap);
-
-        } catch (Exception e) {
-            jsonResponseMap.put("status", HttpStatusEnum.STATUS_500_INTERNAL_SERVER_ERROR.getStatus());
-            jsonResponseMap.put("message", "Error retrieving users");
-            jsonResponseMap.put("error", e.getMessage());
-            jsonResponseMap.put("data", null);
-
-            return ResponseEntity.status(500).body(jsonResponseMap);
-        }
+        return new ControllerJsonResponseMap().jsonResponseMapListGenerator(
+                users,
+                HttpStatusEnum.STATUS_200_OK.getStatus(),
+                "Users successfully retrieved",
+                "Error retrieving users");
     }
 
     @GetMapping("/users/{id}")
     public ResponseEntity<?> findById(@PathVariable("id") Long id) {
-        Map<String, Object> jsonResponseMap = new LinkedHashMap<String, Object>();
 
-        try {
-            User user = userService.findById(id);
+        User user = userService.findById(id);
 
-            jsonResponseMap.put("status", HttpStatusEnum.STATUS_200_OK.getStatus());
-            jsonResponseMap.put("message", "User successfully retrieved");
-            jsonResponseMap.put("data", user);
-
-            return ResponseEntity.status(200).body(jsonResponseMap);
-
-        } catch (Exception e) {
-            jsonResponseMap.put("status", HttpStatusEnum.STATUS_500_INTERNAL_SERVER_ERROR.getStatus());
-            jsonResponseMap.put("message", "Error retrieving user");
-            jsonResponseMap.put("error", e.getMessage());
-            jsonResponseMap.put("data", null);
-
-            return ResponseEntity.status(500).body(jsonResponseMap);
-        }
+        return new ControllerJsonResponseMap().jsonResponseMapObjectGenerator(
+                user,
+                HttpStatusEnum.STATUS_200_OK.getStatus(),
+                "User successfully retrieved",
+                "Error retrieving user");
     }
 
     @PostMapping("/users")
     public ResponseEntity<?> save(@RequestBody User user) {
-        Map<String, Object> jsonResponseMap = new LinkedHashMap<String, Object>();
 
-        try {
-            User savedUser = userService.save(user);
+        User userToSave = userService.save(user);
 
-            jsonResponseMap.put("status", HttpStatusEnum.STATUS_201_CREATED.getStatus());
-            jsonResponseMap.put("message", "User successfully saved");
-            jsonResponseMap.put("data", savedUser);
-
-            return ResponseEntity.status(200).body(jsonResponseMap);
-
-        } catch (Exception e) {
-            jsonResponseMap.put("status", HttpStatusEnum.STATUS_500_INTERNAL_SERVER_ERROR.getStatus());
-            jsonResponseMap.put("message", "Error saving user");
-            jsonResponseMap.put("error", e.getMessage());
-            jsonResponseMap.put("data", null);
-
-            return ResponseEntity.status(500).body(jsonResponseMap);
-        }
+        return new ControllerJsonResponseMap().jsonResponseMapObjectGenerator(
+                userToSave,
+                HttpStatusEnum.STATUS_201_CREATED.getStatus(),
+                "User successfully created",
+                "Error creating user");
     }
 
     @DeleteMapping("/users/{id}")
