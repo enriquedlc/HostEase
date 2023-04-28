@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hostease.entity.Event;
 import com.hostease.enums.HttpStatusEnum;
 import com.hostease.service.EventService;
+import com.hostease.utils.ControllerJsonResponseMap;
 
 @RestController
 @RequestMapping("/hostease")
@@ -29,96 +30,50 @@ public class EventController {
 
     @GetMapping("/events")
     public ResponseEntity<Map<String, Object>> findAll() {
-        Map<String, Object> jsonResponseMap = new LinkedHashMap<String, Object>();
 
-        try {
-            List<Event> events = eventService.findAll();
+        List<Event> events = eventService.findAll();
 
-            jsonResponseMap.put("status", HttpStatusEnum.STATUS_200_OK.getStatus());
-            jsonResponseMap.put("message", "Events successfully retrieved");
-            jsonResponseMap.put("data", events);
-
-            return ResponseEntity.status(200).body(jsonResponseMap);
-        } catch (Exception e) {
-            jsonResponseMap.put("status", HttpStatusEnum.STATUS_500_INTERNAL_SERVER_ERROR.getStatus());
-            jsonResponseMap.put("message", "Error retrieving events");
-            jsonResponseMap.put("error", e.getMessage());
-            jsonResponseMap.put("data", null);
-
-            return ResponseEntity.status(500).body(jsonResponseMap);
-        }
+        return new ControllerJsonResponseMap().jsonResponseMapListGenerator(
+                events,
+                HttpStatusEnum.STATUS_200_OK.getStatus(),
+                "Events successfully retrieved",
+                "Error retrieving events");
     }
 
     @GetMapping("/events/{id}")
     public ResponseEntity<Map<String, Object>> findById(@PathVariable("id") Long id) {
-        Map<String, Object> jsonResponseMap = new LinkedHashMap<String, Object>();
 
-        try {
-            Event event = eventService.findById(id);
+        Event event = eventService.findById(id);
 
-            jsonResponseMap.put("status", HttpStatusEnum.STATUS_200_OK.getStatus());
-            jsonResponseMap.put("message", "Event successfully retrieved");
-            jsonResponseMap.put("data", event);
-
-            return ResponseEntity.status(200).body(jsonResponseMap);
-        } catch (Exception e) {
-            jsonResponseMap.put("status", HttpStatusEnum.STATUS_500_INTERNAL_SERVER_ERROR.getStatus());
-            jsonResponseMap.put("message", "Error retrieving event");
-            jsonResponseMap.put("error", e.getMessage());
-            jsonResponseMap.put("data", null);
-
-            return ResponseEntity.status(500).body(jsonResponseMap);
-        }
-
+        return new ControllerJsonResponseMap().jsonResponseMapObjectGenerator(
+                event,
+                HttpStatusEnum.STATUS_200_OK.getStatus(),
+                "Event successfully retrieved",
+                "Error retrieving event");
     }
 
     @PostMapping("/events{categoryId}")
     public ResponseEntity<Map<String, Object>> save(@RequestBody Event event, @RequestParam("categoryId") Long id) {
-        Map<String, Object> jsonResponseMap = new LinkedHashMap<String, Object>();
 
-        try {
-            Event savedEvent = eventService.save(event, id);
+        Event eventToSave = eventService.save(event, id);
 
-            jsonResponseMap.put("status", HttpStatusEnum.STATUS_200_OK.getStatus());
-            jsonResponseMap.put("message", "Event successfully saved");
-            jsonResponseMap.put("data", savedEvent);
-
-            return ResponseEntity.status(200).body(jsonResponseMap);
-        } catch (Exception e) {
-            jsonResponseMap.put("status", HttpStatusEnum.STATUS_500_INTERNAL_SERVER_ERROR.getStatus());
-            jsonResponseMap.put("message", "Error saving event");
-            jsonResponseMap.put("error", e.getMessage());
-            jsonResponseMap.put("data", null);
-
-            return ResponseEntity.status(500).body(jsonResponseMap);
-        }
-
+        return new ControllerJsonResponseMap().jsonResponseMapObjectGenerator(
+                eventToSave,
+                HttpStatusEnum.STATUS_201_CREATED.getStatus(),
+                "Event successfully created",
+                "Error creating event");
     }
 
     @PutMapping("/events/{id}")
     public ResponseEntity<Map<String, Object>> update(@RequestBody Event event, @PathVariable Long id) {
-        Map<String, Object> jsonResponseMap = new LinkedHashMap<String, Object>();
 
-        try {
-            eventService.findById(id).getCategory().getCategoryName();
-            Event eventToUpdate = eventService.update(event, id);
+        Event eventToUpdate = eventService.update(event, id);
 
-            jsonResponseMap.put("status", HttpStatusEnum.STATUS_200_OK.getStatus());
-            jsonResponseMap.put("message", "Event successfully updated");
-            jsonResponseMap.put("data", eventToUpdate);
-
-            return ResponseEntity.ok(jsonResponseMap);
-
-        } catch (Exception e) {
-            jsonResponseMap.put("status", HttpStatusEnum.STATUS_500_INTERNAL_SERVER_ERROR.getStatus());
-            jsonResponseMap.put("message", "Error updating event");
-            jsonResponseMap.put("error", e.getMessage());
-            jsonResponseMap.put("data", null);
-
-            return ResponseEntity.ok().body(jsonResponseMap);
-
-        }
-
+        return new ControllerJsonResponseMap().jsonResponseMapObjectGenerator(
+                eventToUpdate,
+                HttpStatusEnum.STATUS_200_OK.getStatus(),
+                "Event successfully updated",
+                "Error updating event");
     }
 
     @DeleteMapping("events/{id}")
@@ -133,7 +88,6 @@ public class EventController {
             jsonResponseMap.put("message", String.format("event %s deleted successfully", eventToDelete.getTitle()));
 
             return ResponseEntity.ok().body(jsonResponseMap);
-
         } catch (Exception e) {
 
             jsonResponseMap.put("status", HttpStatusEnum.STATUS_500_INTERNAL_SERVER_ERROR.getStatus());
@@ -142,7 +96,6 @@ public class EventController {
             jsonResponseMap.put("data", null);
 
             return ResponseEntity.ok().body(jsonResponseMap);
-
         }
     }
 
