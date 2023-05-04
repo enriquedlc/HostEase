@@ -24,7 +24,7 @@ const Home = () => {
           <Link to="/" className="featured">
             Create an event
           </Link>
-          <Link to="/" className={`${themeContext?.theme}-theme-font`}>
+          <Link to="/login" className={`${themeContext?.theme}-theme-font`}>
             Log In
           </Link>
           <Link to="/" className={`${themeContext?.theme}-theme-font`}>

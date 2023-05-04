@@ -1,9 +1,9 @@
-import React, { createContext, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Theme, ThemeContextValue, UserProfile } from "../Types/Types";
 
-import Home from "./Home/Home";
+import Home from "./Home";
+import Login from "./Login";
 import ThemeProvider from "../Components/ThemeProvider";
+import AuthPageLayout from "../Layout/AuthPageLayout";
 
 /**
  *
@@ -16,14 +16,16 @@ import ThemeProvider from "../Components/ThemeProvider";
  */
 
 const AppRouterProvider = () => {
-  
-  // const [userProfile, setUserProfile] = useState<UserProfile>(); // The UserProfile interface is not define yet if this comment still exists
-  
+
   return (
     <ThemeProvider>
       <BrowserRouter basename="/">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route element={<AuthPageLayout />} >
+            <Route path="/login" element={<Login />} />
+            {/* <Route path="/sign" element={<SignUp />}/> */}
+          </Route>
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

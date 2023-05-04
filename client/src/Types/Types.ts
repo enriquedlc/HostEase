@@ -7,7 +7,7 @@ export interface ThemeContextValue {
 
 export interface UserProfile {
     username: string;
-    last_name: string;
+    lastName: string;
     theme: Theme;
 };
 
