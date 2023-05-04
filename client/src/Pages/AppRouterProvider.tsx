@@ -2,7 +2,8 @@ import React, { createContext, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Theme, ThemeContextValue, UserProfile } from "../Types/Types";
 
-import Home from "./Home/Home";
+import Home from "./Home";
+import Login from "./Login";
 import ThemeProvider from "../Components/ThemeProvider";
 
 /**
@@ -24,6 +25,7 @@ const AppRouterProvider = () => {
       <BrowserRouter basename="/">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login type="signUp"/>} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
