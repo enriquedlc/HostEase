@@ -4,6 +4,7 @@ import Home from "./Home";
 import Login from "./Login";
 import ThemeProvider from "../Components/ThemeProvider";
 import AuthPageLayout from "../Layout/AuthPageLayout";
+import SignUp from "./SignUp/SignUp";
 
 /**
  *
@@ -16,16 +17,16 @@ import AuthPageLayout from "../Layout/AuthPageLayout";
  */
 
 const AppRouterProvider = () => {
-
   return (
     <ThemeProvider>
       <BrowserRouter basename="/">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route element={<AuthPageLayout />} >
+          <Route element={<AuthPageLayout />}>
             <Route path="/login" element={<Login />} />
-            {/* <Route path="/sign" element={<SignUp />}/> */}
+            <Route path="/sign" element={<SignUp />} />
           </Route>
+          <Route path="*" element={<p>Error 404</p>} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

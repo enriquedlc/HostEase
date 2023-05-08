@@ -2,15 +2,18 @@ import React, { useState } from "react";
 import { MdEmail } from "react-icons/md";
 import { HiLockClosed } from "react-icons/hi";
 import "./Login.css";
+import { useNavigate } from "react-router-dom";
 
-interface UserDataForm {
+interface UserLoginData {
   email: string;
   pass: string;
 }
 
 const Login = () => {
 
-  const [userData, setUserData] = useState<UserDataForm>({
+  const navigate = useNavigate();
+
+  const [userData, setUserData] = useState<UserLoginData>({
     email: "",
     pass: "",
   });
@@ -24,14 +27,14 @@ const Login = () => {
 
   return (
     <>
-      <div className="authform-block">
-        <div className="authform-header">
+      <div className="loginform-block">
+        <div className="loginform-header">
           <h1>HostEase</h1>
           <h2>Host it Easier!</h2>
         </div>
-        <form className="authform">
+        <form className="loginform">
           <h1>Sign In</h1>
-          <div className="authform-input">
+          <div className="loginform-input">
             <input
               type="email"
               name="email"
@@ -40,7 +43,7 @@ const Login = () => {
             />
             <MdEmail />
           </div>
-          <div className="authform-input">
+          <div className="loginform-input">
             <input
               type="password"
               name="pass"
@@ -49,8 +52,8 @@ const Login = () => {
             />
             <HiLockClosed />
           </div>
-          <div className="authform-button-panel">
-            <button>Sign Up</button>
+          <div className="loginform-button-panel">
+            <button onClick={() => navigate('/sign')}>Sign Up</button>
             <button type="submit">Sign In</button>
           </div>
         </form>
