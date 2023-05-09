@@ -5,7 +5,7 @@ import { MdEmail } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import "./SingUp.css";
 import { HiLockClosed, HiLockOpen } from "react-icons/hi";
-import { motion } from "framer-motion";
+import { MotionAdvancedProps, MotionProps, motion } from "framer-motion";
 
 interface UserSignUpData {
   nickname?: string;
@@ -53,31 +53,40 @@ const SignUp = () => {
     );
   };
 
+  const spanVariants = {
+    initial: { opacity: 0, y: -10 },
+    animate: {
+      opacity: 1, y: 0,
+      transition: { duration: 0.5 }
+    }
+  };
+
   const checkPassStrength = (password: string): JSX.Element => {
     const REGEX =
       /^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z]).{8,}$/;
     const MEDIUM_REGEX =
       /^(?=.*[A-Z].*[A-Z])(?=.*[0-9].*[0-9])(?=.*[a-z]).{5,}$/;
 
+
     if (REGEX.test(password)) {
       return (
         <div className="strong-password">
-          <span />
-          <span />
-          <span />
+          <motion.span variants={spanVariants} initial="initial" animate="animate" />
+          <motion.span variants={spanVariants} initial="initial" animate="animate" />
+          <motion.span variants={spanVariants} initial="initial" animate="animate" />
         </div>
       );
     } else if (MEDIUM_REGEX.test(password)) {
       return (
         <div className="medium-password">
-          <span />
-          <span />
+          <motion.span variants={spanVariants} initial="initial" animate="animate" />
+          <motion.span variants={spanVariants} initial="initial" animate="animate" />
         </div>
       );
     } else {
       return (
         <div className="weak-password">
-          <span />
+          <motion.span variants={spanVariants} initial="initial" animate="animate" />
         </div>
       );
     }
@@ -97,9 +106,9 @@ const SignUp = () => {
         ) : null;
       } else {
         return (
-          <div className="password-strength-block">
-            <label>Las contraseñas tienen que ser iguales</label>
-          </div>
+          <motion.div variants={spanVariants} className="password-strength-block">
+            <motion.label variants={spanVariants} initial="initial" animate="animate">Las contraseñas tienen que ser iguales</motion.label>
+          </motion.div>
         );
       }
     }
