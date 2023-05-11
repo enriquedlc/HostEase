@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { MdEmail } from "react-icons/md";
-import { HiLockClosed } from "react-icons/hi";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
+import PasswordInput from "../../Components/Inputs/PasswordInput/PasswordInput";
 
 interface UserLoginData {
   email: string;
@@ -39,19 +39,12 @@ const Login = () => {
               type="email"
               name="email"
               placeholder="Email"
+              autoComplete="off"
               onChange={handleInput}
             />
             <MdEmail />
           </div>
-          <div className="loginform-input">
-            <input
-              type="password"
-              name="pass"
-              placeholder="Password"
-              onChange={handleInput}
-            />
-            <HiLockClosed />
-          </div>
+          <PasswordInput className="loginform-input" name="pass" placeholder="Password" onChange={handleInput}/>
           <div className="loginform-button-panel">
             <button onClick={() => navigate('/sign')}>Sign Up</button>
             <button type="submit">Sign In</button>

@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { ChangeEventHandler, useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { IoMdPhonePortrait } from "react-icons/io";
 import { MdEmail } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import "./SingUp.css";
-import { HiLockClosed, HiLockOpen } from "react-icons/hi";
-import { MotionAdvancedProps, MotionProps, motion } from "framer-motion";
+import { motion } from "framer-motion";
+import PasswordInput from "../../Components/Inputs/PasswordInput/PasswordInput";
 
 interface UserSignUpData {
   nickname?: string;
@@ -26,39 +26,13 @@ const SignUp = () => {
 
   const navigate = useNavigate();
 
-  const renderPasswordInput = (
-    placeholder: string,
-    inputName: string
-  ): JSX.Element => {
-    const [showPass, setShowPass] = useState<boolean>(false);
-
-    return (
-      <div className="password-input">
-        <input
-          type={showPass ? "text" : "password"}
-          placeholder={placeholder}
-          name={inputName}
-          onChange={handleInput}
-        />
-        {showPass ? (
-          <motion.div whileTap={{ scale: 1.3 }} transition={{ duration: 0.4 }} className="showPass">
-            <HiLockOpen onClick={() => setShowPass(!showPass)} />
-          </motion.div>
-        ) : (
-          <motion.div whileTap={{ scale: 1.3 }} transition={{ duration: 0.4 }} className="showPass">
-            <HiLockClosed onClick={() => setShowPass(!showPass)} />
-          </motion.div>
-        )}
-      </div>
-    );
-  };
-
   const spanVariants = {
     initial: { opacity: 0, y: -10 },
     animate: {
-      opacity: 1, y: 0,
-      transition: { duration: 0.5 }
-    }
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5 },
+    },
   };
 
   const checkPassStrength = (password: string): JSX.Element => {
@@ -67,26 +41,49 @@ const SignUp = () => {
     const MEDIUM_REGEX =
       /^(?=.*[A-Z].*[A-Z])(?=.*[0-9].*[0-9])(?=.*[a-z]).{5,}$/;
 
-
     if (REGEX.test(password)) {
       return (
         <div className="strong-password">
-          <motion.span variants={spanVariants} initial="initial" animate="animate" />
-          <motion.span variants={spanVariants} initial="initial" animate="animate" />
-          <motion.span variants={spanVariants} initial="initial" animate="animate" />
+          <motion.span
+            variants={spanVariants}
+            initial="initial"
+            animate="animate"
+          />
+          <motion.span
+            variants={spanVariants}
+            initial="initial"
+            animate="animate"
+          />
+          <motion.span
+            variants={spanVariants}
+            initial="initial"
+            animate="animate"
+          />
         </div>
       );
     } else if (MEDIUM_REGEX.test(password)) {
       return (
         <div className="medium-password">
-          <motion.span variants={spanVariants} initial="initial" animate="animate" />
-          <motion.span variants={spanVariants} initial="initial" animate="animate" />
+          <motion.span
+            variants={spanVariants}
+            initial="initial"
+            animate="animate"
+          />
+          <motion.span
+            variants={spanVariants}
+            initial="initial"
+            animate="animate"
+          />
         </div>
       );
     } else {
       return (
         <div className="weak-password">
-          <motion.span variants={spanVariants} initial="initial" animate="animate" />
+          <motion.span
+            variants={spanVariants}
+            initial="initial"
+            animate="animate"
+          />
         </div>
       );
     }
@@ -106,8 +103,17 @@ const SignUp = () => {
         ) : null;
       } else {
         return (
-          <motion.div variants={spanVariants} className="password-strength-block">
-            <motion.label variants={spanVariants} initial="initial" animate="animate">Las contraseñas tienen que ser iguales</motion.label>
+          <motion.div
+            variants={spanVariants}
+            className="password-strength-block"
+          >
+            <motion.label
+              variants={spanVariants}
+              initial="initial"
+              animate="animate"
+            >
+              Las contraseñas tienen que ser iguales
+            </motion.label>
           </motion.div>
         );
       }
@@ -132,36 +138,44 @@ const SignUp = () => {
   return (
     <>
       <div className="signupform-block">
-        <motion.button whileHover={{ scale: 1.2 }} transition={{ duration: 0.4 }} className="goBack-button" onClick={() => navigate("/login")}>
+        <motion.button
+          whileHover={{ scale: 1.2 }}
+          transition={{ duration: 0.4 }}
+          className="goBack-button"
+          onClick={() => navigate("/login")}
+        >
           X
         </motion.button>
         <h1 className="signupform-header">Sign Up</h1>
         <form className="signupform" onSubmit={handleSubmit}>
-          <div>
+          <div className="nickname-input">
             <input
               type="text"
               placeholder="Nickname"
               name="nickname"
+              autoComplete="off"
               onChange={handleInput}
             />
             <FaUser />
           </div>
-          {renderPasswordInput("Password", "password")}
-          <div>
+          <PasswordInput className="password-input" placeholder="Password" name="password" onChange={handleInput}/>
+          <div className="phone-input">
             <input
               type="text"
               placeholder="Phone"
               name="phone"
+              autoComplete="off"
               onChange={handleInput}
             />
             <IoMdPhonePortrait />
           </div>
-          {renderPasswordInput("Confirm Password", "confirmPass")}
-          <div>
+          <PasswordInput className="confirm-password-input" placeholder="Confirm Password" name="confirmPass" onChange={handleInput}/>
+          <div className="email-input">
             <input
               type="email"
-              placeholder="Email"
+              placeholder="E-mail"
               name="email"
+              autoComplete="off"
               onChange={handleInput}
             />
             <MdEmail />

@@ -89,9 +89,9 @@
     border: none;
     border-radius: 7px;
     color: var(--second-auxiliar-color);
-    font-size: 20px;
+    font-size: 1.3rem;
     font-weight: bold;
-    margin: 0px 20px;
+    margin: 0px 0px;
     padding: 15px 40px;
     text-decoration: underline;
 }
@@ -114,4 +114,30 @@
 
 .loginform-button-panel :not(button:first-of-type):active, button.submit-sign-up {
     box-shadow: none;
+}
+
+
+@media (max-width: 1240px) { 
+    .loginform-block {
+        display: flex;
+        flex-direction: column;
+        height: 80%;
+        width: 85%;
+    }
+    .loginform-header {
+        justify-content: center;
+        flex: 1;
+    }
+    form > h1 {
+        display: none;
+    }
+    form.loginform {
+        padding: 0px;
+    }
+}
+
+@media (max-width: 281) {
+    .loginform h1 {
+        font-size: 12px;
+    }
 }
