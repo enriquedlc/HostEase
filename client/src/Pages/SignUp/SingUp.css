@@ -192,4 +192,8 @@ h1.signupform-header {
     order: 6;
   }
 
+  .signupform .password-strength-block {
+    order: 7;
+  }
+
 }

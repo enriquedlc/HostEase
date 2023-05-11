@@ -1,20 +1,20 @@
 import React, { useContext } from "react";
-import { Theme, ThemeContextValue } from "../Types/Types";
-import { ThemeContext } from "./ThemeProvider";
+import { Theme, UserContextValue } from "../Types/Types";
+import { UserContext } from "../Context/UserContext";
 
 const ThemeSwitcher = () => {
 
-  const themeContext = useContext<ThemeContextValue | null>(ThemeContext);
+  const userContext = useContext<UserContextValue | null>(UserContext);
 
   const switchTheme = () => {
-    themeContext?.setTheme((current: Theme) =>
+    userContext?.setTheme((current: Theme) =>
       current === "light" ? "dark" : "light"
     );
   };
 
   return (
     <button onClick={switchTheme}>
-      {themeContext?.theme === "light" ? "Dark Mode" : "Light Mode"}
+      {userContext?.theme === "light" ? "Dark Mode" : "Light Mode"}
     </button>
   );
 };

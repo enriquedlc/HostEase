@@ -2,9 +2,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from "./Home";
 import Login from "./Login";
-import ThemeProvider from "../Components/ThemeProvider";
+import ThemeProvider from "../Context/UserContext";
 import AuthPageLayout from "../Layout/AuthPageLayout";
 import SignUp from "./SignUp/SignUp";
+import UserProvider from "../Provider/UserProvider";
 
 /**
  *
@@ -18,7 +19,7 @@ import SignUp from "./SignUp/SignUp";
 
 const AppRouterProvider = () => {
   return (
-    <ThemeProvider>
+    <UserProvider>
       <BrowserRouter basename="/">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -29,7 +30,7 @@ const AppRouterProvider = () => {
           <Route path="*" element={<p>Error 404</p>} />
         </Routes>
       </BrowserRouter>
-    </ThemeProvider>
+    </UserProvider>
   );
 };
 
