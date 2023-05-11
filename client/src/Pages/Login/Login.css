@@ -1,0 +1,143 @@
+.loginform-block {
+    align-items: center;
+    background-color: var(--secondary-color);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    height: 550px;
+    padding: 50px;
+    width: 50%;
+}
+
+/* End of general loginform styles */
+/* Styles of the loginform header */
+
+.loginform-header {
+    display: flex;
+    color: var(--second-auxiliar-color);
+    flex-direction: column;
+    flex: 1;
+}
+
+.loginform-header h1 {
+    font-size: 52px;
+}
+
+.loginform-header h2 {
+    margin-top: 10px;
+    font-size: 32px;
+}
+
+/* End of the loginform header styles */
+/* Styles of the form */
+
+.loginform {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: left;
+    position: relative;
+    padding-left: 40px;
+}
+
+.loginform h1 {
+    color: var(--second-auxiliar-color);
+    text-align: center;
+    margin-bottom: 80px;
+    font-size: 36px;
+    width: 100%;
+}
+
+.loginform-input {
+    border-bottom: 1px solid var(--second-auxiliar-color);
+    margin: 30px 0px;
+    position: relative;
+}
+
+.loginform-input input {
+    border: none;
+    background-color: transparent;
+    color: var(--second-auxiliar-color);
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 10px;
+    padding: 5px 15px;
+    width: 100%;
+}
+
+.loginform-input input:focus {
+    outline: none;
+}
+
+.loginform-input svg {
+    color: var(--primary-color);
+    font-size: 26px;
+    top: 7px;
+    position: absolute;
+    right: 10px;
+}
+
+.loginform-button-panel {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.loginform-button-panel button {
+    background-color: transparent;
+    border: none;
+    border-radius: 7px;
+    color: var(--second-auxiliar-color);
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin: 0px 0px;
+    padding: 15px 40px;
+    text-decoration: underline;
+}
+
+.loginform-button-panel button:hover {
+    cursor: pointer;
+    color: var(--primary-color);
+}
+
+.loginform-button-panel :not(button:first-of-type), button.submit-sign-up {
+    background-color: var(--primary-color);
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+.loginform-button-panel :not(button:first-of-type):hover, button.submit-sign-up {
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+}
+
+.loginform-button-panel :not(button:first-of-type):active, button.submit-sign-up {
+    box-shadow: none;
+}
+
+
+@media (max-width: 1240px) { 
+    .loginform-block {
+        display: flex;
+        flex-direction: column;
+        height: 80%;
+        width: 85%;
+    }
+    .loginform-header {
+        justify-content: center;
+        flex: 1;
+    }
+    form > h1 {
+        display: none;
+    }
+    form.loginform {
+        padding: 0px;
+    }
+}
+
+@media (max-width: 281) {
+    .loginform h1 {
+        font-size: 12px;
+    }
+}

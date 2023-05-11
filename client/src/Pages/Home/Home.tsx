@@ -27,7 +27,7 @@ const Home = () => {
           <Link to="/login" className={`${themeContext?.theme}-theme-font`}>
             Log In
           </Link>
-          <Link to="/" className={`${themeContext?.theme}-theme-font`}>
+          <Link to="/sign" className={`${themeContext?.theme}-theme-font`}>
             Sign In
           </Link>
           <ThemeSwitcher />
