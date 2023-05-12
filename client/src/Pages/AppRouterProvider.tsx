@@ -1,9 +1,11 @@
-import React, { createContext, useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Theme, ThemeContextValue, UserProfile } from "../Types/Types";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import Home from "./Home/Home";
 import ThemeProvider from "../Components/ThemeProvider";
+import AuthPageLayout from "../Layout/AuthPageLayout";
+import { HostEaseRoutes } from "../Types/AppRoutes/HostEaseRoutes";
+import Home from "./Home";
+import Login from "./Login";
+import SignUp from "./SignUp/SignUp";
 
 /**
  *
@@ -16,14 +18,16 @@ import ThemeProvider from "../Components/ThemeProvider";
  */
 
 const AppRouterProvider = () => {
-  
-  // const [userProfile, setUserProfile] = useState<UserProfile>(); // The UserProfile interface is not define yet if this comment still exists
-  
   return (
     <ThemeProvider>
-      <BrowserRouter basename="/">
+      <BrowserRouter basename={HostEaseRoutes.Home}>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path={HostEaseRoutes.Home} element={<Home />} />
+          <Route element={<AuthPageLayout />}>
+            <Route path={HostEaseRoutes.Login} element={<Login />} />
+            <Route path={HostEaseRoutes.Sign} element={<SignUp />} />
+          </Route>
+          <Route path="*" element={<p>Error 404</p>} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

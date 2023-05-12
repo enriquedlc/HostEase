@@ -1,14 +1,15 @@
-import React, { useContext } from "react";
-import { Theme, ThemeContextValue } from "../../Types/Types";
+import { useContext } from "react";
+import { ThemeContextValue } from "../../Types/Types";
 
 import { Link } from "react-router-dom";
 
 import HostEaseLogo from "../../assets/HostEase.png";
 
-import "./Home.css";
-import { ThemeContext } from "../../Components/ThemeProvider";
 import CustomCarrousel from "../../Components/CustomCarrousel/CustomCarrousel";
+import { ThemeContext } from "../../Components/ThemeProvider";
 import ThemeSwitcher from "../../Components/ThemeSwitcher";
+import { HostEaseRoutes } from "../../Types/AppRoutes/HostEaseRoutes";
+import "./Home.css";
 
 const Home = () => {
   const themeContext = useContext<ThemeContextValue | null>(ThemeContext);
@@ -21,13 +22,13 @@ const Home = () => {
           <div className={`${themeContext?.theme}-theme-font`}>HostEase</div>
         </div>
         <div className={`top-bar-button-panel`}>
-          <Link to="/" className="featured">
+          <Link to={HostEaseRoutes.Home} className="featured">
             Create an event
           </Link>
-          <Link to="/" className={`${themeContext?.theme}-theme-font`}>
+          <Link to={HostEaseRoutes.Login} className={`${themeContext?.theme}-theme-font`}>
             Log In
           </Link>
-          <Link to="/" className={`${themeContext?.theme}-theme-font`}>
+          <Link to={HostEaseRoutes.Sign} className={`${themeContext?.theme}-theme-font`}>
             Sign In
           </Link>
           <ThemeSwitcher />
