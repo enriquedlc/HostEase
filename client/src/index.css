@@ -1,64 +1,65 @@
 :root {
+	--title-font-family: 'Varela Round', sans-serif;
 
-  --title-font-family: 'Varela Round', sans-serif;
+	--primary-color: #e1d4f6;
+	--primary-color-variant: #cbb8e9;
+	--secondary-color: #6d1dd6;
+	--ternary-color: #646cff;
 
-  --primary-color: #E1D4F6;
-  --primary-color-variant: #CBB8E9;
-  --secondary-color: #6D1DD6;
-  --ternary-color: #646CFF;
+	--primary-dark-color: #272c36;
+	--secondary-dark-color: #1b1d23;
 
-  --primary-dark-color: #272C36;
-  --secondary-dark-color: #1B1D23;
-
-  --first-auxiliar-color: #000;
-  --second-auxiliar-color: #FFF;
+	--first-auxiliar-color: #000;
+	--second-auxiliar-color: #fff;
 }
 
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 
-body, #root {
-  font-family: 'Varela Round', sans-serif;
-  height: 100vh;
-  width: 100vw;
+body,
+#root {
+	font-family: 'Varela Round', sans-serif;
+	height: 100vh;
+	width: 100vw;
 }
 
 a {
-  color: var(--first-auxiliar-color);
-  display: inline-block;
-  text-decoration: none;
-  position: relative;
+	color: var(--first-auxiliar-color);
+	display: inline-block;
+	text-decoration: none;
+	position: relative;
 }
 
 a::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  transform: scaleX(0);
-  height: 1px;
-  bottom: -10px;
-  left: 0;
-  background-color: var(--ternary-color);
-  transform-origin: bottom right;
-  transition: transform 0.25s ease-out;
+	content: '';
+	position: absolute;
+	width: 100%;
+	transform: scaleX(0);
+	height: 1px;
+	bottom: -10px;
+	left: 0;
+	background-color: var(--ternary-color);
+	transform-origin: bottom right;
+	transition: transform 0.25s ease-out;
 }
 
 a:visited {
-  color: inherit;
+	color: inherit;
 }
 
 a.featured {
-  color: var(--secondary-color);
+	color: var(--secondary-color);
 }
 
-a:hover, a:hover:visited {
-  color: var(--ternary-color);
+a:hover,
+a:hover:visited {
+	color: var(--ternary-color);
 }
 
 a:hover::after {
-  transform: scaleX(1);
-  transform-origin: bottom left;
+	transform: scaleX(1);
+	transform-origin: bottom left;
 }

@@ -1,11 +1,11 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import ThemeProvider from "../Components/ThemeProvider";
-import AuthPageLayout from "../Layout/AuthPageLayout";
-import { HostEaseRoutes } from "../Types/AppRoutes/HostEaseRoutes";
-import Home from "./Home";
-import Login from "./Login";
-import SignUp from "./SignUp/SignUp";
+import ThemeProvider from '../Components/ThemeProvider';
+import AuthPageLayout from '../Layout/AuthPageLayout';
+import { HostEaseRoutes } from '../Types/AppRoutes/HostEaseRoutes';
+import Home from './Home';
+import Login from './Login';
+import SignUp from './SignUp/SignUp';
 
 /**
  *
@@ -18,20 +18,20 @@ import SignUp from "./SignUp/SignUp";
  */
 
 const AppRouterProvider = () => {
-  return (
-    <ThemeProvider>
-      <BrowserRouter basename={HostEaseRoutes.Home}>
-        <Routes>
-          <Route path={HostEaseRoutes.Home} element={<Home />} />
-          <Route element={<AuthPageLayout />}>
-            <Route path={HostEaseRoutes.Login} element={<Login />} />
-            <Route path={HostEaseRoutes.Sign} element={<SignUp />} />
-          </Route>
-          <Route path="*" element={<p>Error 404</p>} />
-        </Routes>
-      </BrowserRouter>
-    </ThemeProvider>
-  );
+	return (
+		<ThemeProvider>
+			<BrowserRouter basename={HostEaseRoutes.Home}>
+				<Routes>
+					<Route path={HostEaseRoutes.Home} element={<Home />} />
+					<Route element={<AuthPageLayout />}>
+						<Route path={HostEaseRoutes.Login} element={<Login />} />
+						<Route path={HostEaseRoutes.Sign} element={<SignUp />} />
+					</Route>
+					<Route path="*" element={<p>Error 404</p>} />
+				</Routes>
+			</BrowserRouter>
+		</ThemeProvider>
+	);
 };
 
 export default AppRouterProvider;

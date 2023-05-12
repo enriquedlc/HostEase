@@ -1,13 +1,12 @@
-export type Theme = "light" | "dark";
+export type Theme = 'light' | 'dark';
 
 export interface ThemeContextValue {
-    theme: Theme;
-    setTheme: Function;
-};
+	theme: Theme;
+	setTheme: Function;
+}
 
 export interface UserProfile {
-    username: string;
-    lastName: string;
-    theme: Theme;
-};
-
+	username: string;
+	lastName: string;
+	theme: Theme;
+}

@@ -1,195 +1,194 @@
 .signupform-block {
-  align-items: center;
-  background-color: var(--secondary-color);
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  height: 80%;
-  padding: 50px;
-  position: relative;
-  width: 60%;
+	align-items: center;
+	background-color: var(--secondary-color);
+	border-radius: 20px;
+	display: flex;
+	flex-direction: column;
+	height: 80%;
+	padding: 50px;
+	position: relative;
+	width: 60%;
 }
 
 .goBack-button {
-  color: var(--secondary-color);
-  background-color: var(--primary-color);
-  border: none;
-  border-radius: 0px 10px 0px 10px;
-  font-size: 18px;
-  padding: 3px 12px 3px 12px;
-  position: absolute;
-  right: -7px;
-  top: -7px;
+	color: var(--secondary-color);
+	background-color: var(--primary-color);
+	border: none;
+	border-radius: 0px 10px 0px 10px;
+	font-size: 18px;
+	padding: 3px 12px 3px 12px;
+	position: absolute;
+	right: -7px;
+	top: -7px;
 }
 
 .goBack-button:hover {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 /* End of general signupform styles */
 /* Styles of the signupform header */
 
 h1.signupform-header {
-  color: white;
-  font-size: 32px;
+	color: white;
+	font-size: 32px;
 }
 
 /* End of the signupform header styles */
 /* Styles of the form */
 
 .signupform {
-  align-self: center;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: repeat(4, 1fr) auto;
-  row-gap: 23px;
-  height: 100%;
-  width: 100%;
+	align-self: center;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: repeat(4, 1fr) auto;
+	row-gap: 23px;
+	height: 100%;
+	width: 100%;
 }
 
 .signupform div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
 }
 
 .signupform div svg,
 .signupform div .showPass {
-  color: var(--primary-color);
-  font-size: 26px;
-  top: 37%;
-  position: absolute;
-  right: 10%;
+	color: var(--primary-color);
+	font-size: 26px;
+	top: 37%;
+	position: absolute;
+	right: 10%;
 }
 
 .signupform div.password-input svg:hover {
-  cursor: pointer;
-  color: var(--primary-color-variant);
+	cursor: pointer;
+	color: var(--primary-color-variant);
 }
 
 .signupform input {
-  background-color: transparent;
-  border: none;
-  border-bottom: 1px solid white;
-  color: var(--primary-color);
-  font-size: 20px;
-  padding: 15px;
-  width: 90%;
+	background-color: transparent;
+	border: none;
+	border-bottom: 1px solid white;
+	color: var(--primary-color);
+	font-size: 20px;
+	padding: 15px;
+	width: 90%;
 }
 
 .signupform input:focus {
-  outline: none;
+	outline: none;
 }
 
 .left-signup-form,
 .right-signup-form {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .button-group-signup {
-  grid-row: 4;
-  grid-column: 1 / span 2;
+	grid-row: 4;
+	grid-column: 1 / span 2;
 }
 
 .button-group-signup button {
-  background-color: var(--primary-color);
-  border: none;
-  border-radius: 7px;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
-  font-size: 20px;
-  font-weight: bold;
-  margin: 0px 20px;
-  padding: 15px 40px;
-  color: var(--secondary-color);
-  text-decoration: none;
+	background-color: var(--primary-color);
+	border: none;
+	border-radius: 7px;
+	box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+	font-size: 20px;
+	font-weight: bold;
+	margin: 0px 20px;
+	padding: 15px 40px;
+	color: var(--secondary-color);
+	text-decoration: none;
 }
 
 .button-group-signup button:hover {
-  cursor: pointer;
-  background-color: var(--primary-color);
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
-  color: var(--secondary-color);
-  text-decoration: none;
+	cursor: pointer;
+	background-color: var(--primary-color);
+	box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+	color: var(--secondary-color);
+	text-decoration: none;
 }
 
 /* End of form styles */
 /* Styles for the signup security */
 
 .password-strength-block {
-  flex-direction: column;
-  padding: 20px;
+	flex-direction: column;
+	padding: 20px;
 }
 
 .password-strength-block label {
-  font-weight: bold;
-  color: var(--second-auxiliar-color);
+	font-weight: bold;
+	color: var(--second-auxiliar-color);
 }
 
 .weak-password span,
 .strong-password span,
 .medium-password span {
-  height: 20px;
-  margin-top: 20px;
-  margin-right: 5px;
-  width: 100px;
+	height: 20px;
+	margin-top: 20px;
+	margin-right: 5px;
+	width: 100px;
 }
 
 .weak-password span {
-  background-color: #f04747;
+	background-color: #f04747;
 }
 
 .medium-password span {
-  background-color: #f1b031;
+	background-color: #f1b031;
 }
 
 .strong-password span {
-  background-color: #50e950;
+	background-color: #50e950;
 }
 
 @media (max-width: 1050px) {
-  .signupform-block {
-    border-radius: 0px;
-    height: 100%;
-    width: 100%;
-  }
+	.signupform-block {
+		border-radius: 0px;
+		height: 100%;
+		width: 100%;
+	}
 
-  .goBack-button {
-    top: 0px;
-    border-top-right-radius: 0px;
-    right: 0px;
-  }
+	.goBack-button {
+		top: 0px;
+		border-top-right-radius: 0px;
+		right: 0px;
+	}
 
-  .signupform {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 100%;
-  }
+	.signupform {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		width: 100%;
+	}
 
-  .signupform div.nickname-input {
-    order: 1;
-  }
+	.signupform div.nickname-input {
+		order: 1;
+	}
 
-  .signupform div.email-input {
-    border: 2;
-  }
+	.signupform div.email-input {
+		border: 2;
+	}
 
-  .signupform div.phone-input {
-    order: 3;
-  }
+	.signupform div.phone-input {
+		order: 3;
+	}
 
-  .signupform div.password-input {
-    order: 4;
-  }
+	.signupform div.password-input {
+		order: 4;
+	}
 
-  .signupform div.confirm-password-input {
-    order: 5;
-  }
+	.signupform div.confirm-password-input {
+		order: 5;
+	}
 
-  .signupform .button-group-signup {
-    order: 6;
-  }
-
+	.signupform .button-group-signup {
+		order: 6;
+	}
 }
