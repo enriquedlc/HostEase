@@ -1,6 +1,7 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Theme, ThemeContextValue } from "../Types/Types";
 import { ThemeContext } from "./ThemeProvider";
+import "./ThemeSwitcher.css";
 
 const ThemeSwitcher = () => {
 
@@ -13,7 +14,7 @@ const ThemeSwitcher = () => {
   };
 
   return (
-    <button onClick={switchTheme}>
+    <button className="theme-switcher-button" onClick={switchTheme}>
       {themeContext?.theme === "light" ? "Dark Mode" : "Light Mode"}
     </button>
   );

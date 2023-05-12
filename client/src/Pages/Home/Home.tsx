@@ -1,14 +1,14 @@
-import React, { useContext } from "react";
-import { Theme, ThemeContextValue } from "../../Types/Types";
+import { useContext } from "react";
+import { ThemeContextValue } from "../../Types/Types";
 
 import { Link } from "react-router-dom";
 
 import HostEaseLogo from "../../assets/HostEase.png";
 
-import "./Home.css";
-import { ThemeContext } from "../../Components/ThemeProvider";
 import CustomCarrousel from "../../Components/CustomCarrousel/CustomCarrousel";
+import { ThemeContext } from "../../Components/ThemeProvider";
 import ThemeSwitcher from "../../Components/ThemeSwitcher";
+import "./Home.css";
 
 const Home = () => {
   const themeContext = useContext<ThemeContextValue | null>(ThemeContext);

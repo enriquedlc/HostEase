@@ -170,3 +170,31 @@ div.light-home-body {
 
 /* // HOME-DESCRIPTION //*/
 /* End of the styles of the "Home Body" */
+
+/* media < 800px */
+
+@media screen and (max-width: 800px) {
+    div.top-bar-button-panel {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* padding-top: 5%; */
+}
+
+div.top-bar-button-panel > a {
+    font-weight: bold;
+    font-size: 0.7rem;
+    margin-left: 3%;
+    margin-right: 3%;
+    width: 6rem;
+}
+
+nav.home-top-bar {
+    flex-direction: column;
+    align-items: center;
+}
+
+div.top-bar-company {
+    margin-bottom: 10%;
+}
+}
