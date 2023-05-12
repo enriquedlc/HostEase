@@ -1,12 +1,15 @@
 import { motion } from 'framer-motion';
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { FaUser } from 'react-icons/fa';
 import { IoMdPhonePortrait } from 'react-icons/io';
 import { MdEmail } from 'react-icons/md';
-import { useNavigate } from 'react-router-dom';
+
 import PasswordInput from '../../Components/Inputs/PasswordInput/PasswordInput';
+import { HostEaseRoutes } from '../../Types/AppRoutes/HostEaseRoutes';
+
 import './SingUp.css';
-import { encryptPassword } from '../../services/auth.services';
 
 interface UserSignUpData {
 	nickname?: string;
@@ -143,7 +146,7 @@ const SignUp = () => {
 					whileHover={{ scale: 1.2 }}
 					transition={{ duration: 0.4 }}
 					className="goBack-button"
-					onClick={() => navigate('/login')}
+					onClick={() => navigate(HostEaseRoutes.Login)}
 				>
 					X
 				</motion.button>
