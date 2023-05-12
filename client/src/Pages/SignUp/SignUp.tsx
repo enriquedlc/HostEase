@@ -6,6 +6,7 @@ import { MdEmail } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import PasswordInput from "../../Components/Inputs/PasswordInput/PasswordInput";
 import "./SingUp.css";
+import { encryptPassword } from "../../services/auth.services";
 
 interface UserSignUpData {
   nickname?: string;
@@ -130,9 +131,10 @@ const SignUp = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (userSignUp.password === userSignUp.password) {
-      console.log(userSignUp);
-    }
+    userSignUp.password &&
+      encryptPassword(userSignUp.password)
+        .then((hash) => console.log(hash))
+        .catch((err) => console.log(err));
   };
 
   return (
@@ -155,10 +157,17 @@ const SignUp = () => {
               name="nickname"
               autoComplete="off"
               onChange={handleInput}
+              required
             />
             <FaUser />
           </div>
-          <PasswordInput className="password-input" placeholder="Password" name="password" onChange={handleInput} />
+          <PasswordInput
+            required
+            className="password-input"
+            placeholder="Password"
+            name="password"
+            onChange={handleInput}
+          />
           <div className="phone-input">
             <input
               type="text"
@@ -166,10 +175,17 @@ const SignUp = () => {
               name="phone"
               autoComplete="off"
               onChange={handleInput}
+              required
             />
             <IoMdPhonePortrait />
           </div>
-          <PasswordInput className="confirm-password-input" placeholder="Confirm Password" name="confirmPass" onChange={handleInput} />
+          <PasswordInput
+            required
+            className="confirm-password-input"
+            placeholder="Confirm Password"
+            name="confirmPass"
+            onChange={handleInput}
+          />
           <div className="email-input">
             <input
               type="email"
@@ -177,6 +193,7 @@ const SignUp = () => {
               name="email"
               autoComplete="off"
               onChange={handleInput}
+              required
             />
             <MdEmail />
           </div>

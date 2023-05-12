@@ -5,13 +5,14 @@ import "./PasswordInput.css"
 
 interface PasswordInputProps {
   className?: string;
-  placeholder: string;
-  name: string;
-  onChange: ChangeEventHandler<HTMLInputElement>;
+  placeholder ?: string;
+  name ?: string;
+  onChange ?: ChangeEventHandler<HTMLInputElement>;
+  required ?: boolean;
 }
 
 const PasswordInput = (props: PasswordInputProps) => {
-  const { className, placeholder, name, onChange } = props;
+  const { className, placeholder, name, onChange, required } = props;
   const [showPass, setShowPass] = useState<boolean>(false);
 
   return (
@@ -22,6 +23,7 @@ const PasswordInput = (props: PasswordInputProps) => {
         name={name}
         onChange={onChange}
         autoComplete="off"
+        required={required}
       />
       {showPass ? (
         <div

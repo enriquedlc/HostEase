@@ -1,11 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import ThemeProvider from "../Components/ThemeProvider";
-import AuthPageLayout from "../Layout/AuthPageLayout";
-import { HostEaseRoutes } from "../Types/AppRoutes/HostEaseRoutes";
 import Home from "./Home";
 import Login from "./Login";
+import ThemeProvider from "../Context/UserContext";
+import { HostEaseRoutes } from "../Types/AppRoutes/HostEaseRoutes";
+import AuthPageLayout from "../Layout/AuthPageLayout";
 import SignUp from "./SignUp/SignUp";
+import UserProvider from "../Provider/UserProvider";
 
 /**
  *
@@ -19,8 +20,8 @@ import SignUp from "./SignUp/SignUp";
 
 const AppRouterProvider = () => {
   return (
-    <ThemeProvider>
-      <BrowserRouter basename={HostEaseRoutes.Home}>
+    <UserProvider>
+      <BrowserRouter basename="/">
         <Routes>
           <Route path={HostEaseRoutes.Home} element={<Home />} />
           <Route element={<AuthPageLayout />}>
@@ -30,7 +31,7 @@ const AppRouterProvider = () => {
           <Route path="*" element={<p>Error 404</p>} />
         </Routes>
       </BrowserRouter>
-    </ThemeProvider>
+    </UserProvider>
   );
 };
 
