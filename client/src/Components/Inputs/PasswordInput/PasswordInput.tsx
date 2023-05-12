@@ -1,5 +1,4 @@
-import React, { ChangeEventHandler, useState } from 'react';
-import { motion } from 'framer-motion';
+import { ChangeEventHandler, useState } from 'react';
 import { HiLockClosed, HiLockOpen } from 'react-icons/hi';
 import './PasswordInput.css';
 

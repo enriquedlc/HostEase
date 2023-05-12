@@ -191,4 +191,8 @@ h1.signupform-header {
 	.signupform .button-group-signup {
 		order: 6;
 	}
+
+	.signupform .password-strength-block {
+		order: 7;
+	}
 }

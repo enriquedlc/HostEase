@@ -1,7 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import ThemeProvider from '../Components/ThemeProvider';
+import React from 'react';
 import AuthPageLayout from '../Layout/AuthPageLayout';
+import UserProvider from '../Provider/UserProvider';
 import { HostEaseRoutes } from '../Types/AppRoutes/HostEaseRoutes';
 import Home from './Home';
 import Login from './Login';
@@ -19,7 +20,7 @@ import SignUp from './SignUp/SignUp';
 
 const AppRouterProvider = () => {
 	return (
-		<ThemeProvider>
+		<UserProvider>
 			<BrowserRouter basename={HostEaseRoutes.Home}>
 				<Routes>
 					<Route path={HostEaseRoutes.Home} element={<Home />} />
@@ -30,7 +31,7 @@ const AppRouterProvider = () => {
 					<Route path="*" element={<p>Error 404</p>} />
 				</Routes>
 			</BrowserRouter>
-		</ThemeProvider>
+		</UserProvider>
 	);
 };
 

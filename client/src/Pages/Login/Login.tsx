@@ -25,6 +25,10 @@ const Login = () => {
 		});
 	};
 
+	const handleLogin = () => {
+		console.log(userData);
+	};
+
 	return (
 		<>
 			<div className="loginform-block">
@@ -32,7 +36,7 @@ const Login = () => {
 					<h1>HostEase</h1>
 					<h2>Host it Easier!</h2>
 				</div>
-				<form className="loginform">
+				<form className="loginform" onSubmit={handleLogin}>
 					<h1>Sign In</h1>
 					<div className="loginform-input">
 						<input
