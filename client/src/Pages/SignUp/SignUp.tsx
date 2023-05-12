@@ -1,11 +1,11 @@
-import React, { ChangeEventHandler, useState } from "react";
+import { motion } from "framer-motion";
+import React, { useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { IoMdPhonePortrait } from "react-icons/io";
 import { MdEmail } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import "./SingUp.css";
-import { motion } from "framer-motion";
 import PasswordInput from "../../Components/Inputs/PasswordInput/PasswordInput";
+import "./SingUp.css";
 
 interface UserSignUpData {
   nickname?: string;
@@ -158,7 +158,7 @@ const SignUp = () => {
             />
             <FaUser />
           </div>
-          <PasswordInput className="password-input" placeholder="Password" name="password" onChange={handleInput}/>
+          <PasswordInput className="password-input" placeholder="Password" name="password" onChange={handleInput} />
           <div className="phone-input">
             <input
               type="text"
@@ -169,7 +169,7 @@ const SignUp = () => {
             />
             <IoMdPhonePortrait />
           </div>
-          <PasswordInput className="confirm-password-input" placeholder="Confirm Password" name="confirmPass" onChange={handleInput}/>
+          <PasswordInput className="confirm-password-input" placeholder="Confirm Password" name="confirmPass" onChange={handleInput} />
           <div className="email-input">
             <input
               type="email"

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { MdEmail } from "react-icons/md";
-import "./Login.css";
 import { useNavigate } from "react-router-dom";
 import PasswordInput from "../../Components/Inputs/PasswordInput/PasswordInput";
+import { HostEaseRoutes } from "../../Types/AppRoutes/HostEaseRoutes";
+import "./Login.css";
 
 interface UserLoginData {
   email: string;
@@ -44,9 +45,13 @@ const Login = () => {
             />
             <MdEmail />
           </div>
-          <PasswordInput className="loginform-input" name="pass" placeholder="Password" onChange={handleInput}/>
+          <PasswordInput
+            className="loginform-input"
+            name="pass" placeholder="Password"
+            onChange={handleInput}
+          />
           <div className="loginform-button-panel">
-            <button onClick={() => navigate('/sign')}>Sign Up</button>
+            <button onClick={() => navigate(HostEaseRoutes.Sign)}>Sign Up</button>
             <button type="submit">Sign In</button>
           </div>
         </form>
