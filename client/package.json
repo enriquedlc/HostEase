@@ -12,6 +12,7 @@
 	},
 	"dependencies": {
 		"@types/bcrypt": "^5.0.0",
+		"axios": "^1.4.0",
 		"bcryptjs": "^2.4.3",
 		"framer-motion": "^10.12.8",
 		"react": "^18.2.0",

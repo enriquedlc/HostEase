@@ -56,6 +56,7 @@ a.featured {
 
 a:hover,
 a:hover:visited {
+	cursor: pointer;
 	color: var(--ternary-color);
 }
 

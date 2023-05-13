@@ -1,12 +1,15 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import React from 'react';
-import AuthPageLayout from '../Layout/AuthPageLayout';
-import UserProvider from '../Provider/UserProvider';
-import { HostEaseRoutes } from '../Types/AppRoutes/HostEaseRoutes';
-import Home from './Home';
-import Login from './Login';
-import SignUp from './SignUp/SignUp';
+import React, { ReactNode, useContext } from "react";
+import AuthPageLayout from "../Layout/AuthPageLayout";
+import UserProvider from "../Provider/UserProvider";
+import Home from "./Home";
+import Login from "./Login";
+import SignUp from "./SignUp";
+import MainPage from "./MainPage";
+import UserContext from "../Context/UserContext";
+import { HostEaseRoutes } from "../Types/AppRoutes/HostEaseRoutes";
+import MainSiteLayout from "../Layout/MainSiteLayout/MainSiteLayout";
 
 /**
  *
@@ -19,20 +22,36 @@ import SignUp from './SignUp/SignUp';
  */
 
 const AppRouterProvider = () => {
-	return (
-		<UserProvider>
-			<BrowserRouter basename={HostEaseRoutes.Home}>
-				<Routes>
-					<Route path={HostEaseRoutes.Home} element={<Home />} />
-					<Route element={<AuthPageLayout />}>
-						<Route path={HostEaseRoutes.Login} element={<Login />} />
-						<Route path={HostEaseRoutes.Sign} element={<SignUp />} />
-					</Route>
-					<Route path="*" element={<p>Error 404</p>} />
-				</Routes>
-			</BrowserRouter>
-		</UserProvider>
-	);
+  const debug = (): ReactNode => {
+    console.log("MAIN", userContext?.user);
+    return <></>;
+  };
+
+  const userContext = useContext(UserContext);
+
+  return (
+    <BrowserRouter basename={HostEaseRoutes.Home}>
+      {debug()}
+      <Routes>
+        <Route path={HostEaseRoutes.Home} element={<Home />} />
+        {!userContext?.user ? (
+          <Route element={<AuthPageLayout />}>
+            <Route path={HostEaseRoutes.Login} element={<Login />} />
+            <Route path={HostEaseRoutes.Sign} element={<SignUp />} />
+          </Route>
+        ) : (
+          <Route element={<MainSiteLayout />}>
+            <Route path={HostEaseRoutes.MainPage} element={<MainPage />} />
+          </Route>
+        )}
+        {/* Hay que convertir este trozo en un componente que detecte los enlaces */}
+        <Route
+          path="*"
+          element={userContext?.user ? <p>Error 404</p> : <p>Log into</p>}
+        />
+      </Routes>
+    </BrowserRouter>
+  );
 };
 
 export default AppRouterProvider;

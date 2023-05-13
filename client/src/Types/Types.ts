@@ -4,8 +4,9 @@ export interface UserContextValue {
 	user: User | null;
 	theme: Theme;
 	setTheme: React.Dispatch<React.SetStateAction<Theme>>;
+	signUp: (arg0: UserSignUpData) => Promise<boolean>;
+	logIn: (arg0: LoginRequest) => Promise<boolean>;
 	logOut: () => void;
-	logIn: () => void;
 }
 
 export interface User {
@@ -13,8 +14,7 @@ export interface User {
 	nickname: string;
 	email: string;
 	password: string;
-	name: string;
-	surname: string;
+	phone: string;
 	experience: number;
 	joinedAt: string;
 	events: HostEaseEvent[];
@@ -46,12 +46,6 @@ interface Category {
 	category: string;
 }
 
-export interface UserProfile {
-	username: string;
-	lastName: string;
-	theme: Theme;
-}
-
 interface Tag {
     id: number;
     tag: string;
@@ -76,3 +70,19 @@ interface Tag {
     likes: number;
   }
   
+export interface LoginRequest {
+	email: string;
+	password: string;
+}
+
+export interface UserSubmit {
+	nickname: string;
+	phone: string;
+	email: string;
+	password: string;
+}
+
+export interface UserSignUpData extends UserSubmit {
+	confirmPass: string;  
+}
+
