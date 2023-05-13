@@ -12,7 +12,16 @@ repositories {
 	mavenCentral()
 }
 
+sourceSets {
+    main {
+        resources {
+            srcDirs = ['src/main/resources', 'src/main/custom-config']
+        }
+    }
+}
+
 dependencies {
+    implementation 'org.springframework.security:spring-security-crypto:5.6.1'	
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
