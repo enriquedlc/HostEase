@@ -46,9 +46,10 @@ interface Category {
 	category: string;
 }
 
-interface Tag {
+export interface Tag {
     id: number;
     tag: string;
+	color: string
   }
   
   interface HostEaseEvent {
