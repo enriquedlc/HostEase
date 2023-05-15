@@ -6,7 +6,7 @@ section.home-section {
 
 a.dark-theme-font:visited,
 .dark-theme-font {
-	color: var(--second-auxiliar-color);
+	color: var(--font-color);
 }
 
 /* End of the "General Styles" for the Home Page */
@@ -29,6 +29,10 @@ nav.dark-top-bar {
 	background-color: var(--primary-dark-color);
 }
 
+nav.dark-top-bar div.top-bar-button-panel a:not(:first-of-type) {
+	color: var(--font-color);
+}
+
 div.top-bar-company {
 	align-items: center;
 	font-weight: bold;
@@ -45,10 +49,48 @@ div.top-bar-button-panel {
 	flex-direction: row;
 }
 
-div.top-bar-button-panel > a {
+div.top-bar-button-panel a {
+	color: var(--first-auxiliar-color);
 	font-weight: bold;
+	display: inline-block;
 	margin-left: 50px;
 	margin-right: 50px;
+	text-decoration: none;
+	position: relative;
+}
+
+div.top-bar-button-panel a::after {
+	content: '';
+	position: absolute;
+	width: 100%;
+	transform: scaleX(0);
+	height: 1px;
+	bottom: -10px;
+	left: 0;
+	background-color: var(--ternary-color);
+	transform-origin: bottom right;
+	transition: transform 0.25s ease-out;
+}
+
+div.top-bar-button-panel a:visited {
+	color: inherit;
+}
+
+div.top-bar-button-panel a.featured {
+	color: var(--secondary-color);
+}
+
+div.top-bar-button-panel a:hover,
+div.top-bar-button-panel a:hover:visited,
+nav.dark-top-bar div.top-bar-button-panel a:hover,
+nav.dark-top-bar div.top-bar-button-panel a:hover:visited {
+	cursor: pointer;
+	color: var(--ternary-color);
+}
+
+div.top-bar-button-panel a:hover::after {
+	transform: scaleX(1);
+	transform-origin: bottom left;
 }
 
 /* End of the styles of the "TopBar" */
@@ -112,11 +154,11 @@ div.light-home-body {
 }
 
 .dark-presentation-title {
-	color: var(--second-auxiliar-color);
+	color: var(--font-color);
 }
 
 .light-presentation-title {
-	color: var(--first-auxiliar-color);
+	color: var(--auxiliar-color);
 }
 
 .home-carousel {

@@ -27,15 +27,15 @@ const Home = () => {
 					</Link>
 					{userContext?.user ? (
 						<>
-							<Link to="/home">Go to Home</Link>
-							<a onClick={userContext.logOut}>Log Out</a>
+							<Link to={HostEaseRoutes.MainPage} className={`${userContext?.theme}-theme-font`}>Go to Home</Link>
+							<a className={`${userContext?.theme}-theme-font`} onClick={userContext.logOut}>Log Out</a>
 						</>
 					) : (
 						<>
-							<Link to="/login" className={`${userContext?.theme}-theme-font`}>
+							<Link to={HostEaseRoutes.Login} className={`${userContext?.theme}-theme-font`}>
 								Log In
 							</Link>
-							<Link to="/sign" className={`${userContext?.theme}-theme-font`}>
+							<Link to={HostEaseRoutes.Sign} className={`${userContext?.theme}-theme-font`}>
 								Sign In
 							</Link>{' '}
 						</>

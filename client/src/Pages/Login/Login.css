@@ -14,7 +14,7 @@
 
 .loginform-header {
 	display: flex;
-	color: var(--second-auxiliar-color);
+	color: var(--font-color);
 	flex-direction: column;
 	flex: 1;
 }
@@ -41,7 +41,7 @@
 }
 
 .loginform h1 {
-	color: var(--second-auxiliar-color);
+	color: var(--font-color);
 	text-align: center;
 	margin-bottom: 80px;
 	font-size: 36px;
@@ -49,7 +49,7 @@
 }
 
 .loginform-input {
-	border-bottom: 1px solid var(--second-auxiliar-color);
+	border-bottom: 1px solid var(--font-color);
 	margin: 30px 0px;
 	position: relative;
 }
@@ -57,7 +57,7 @@
 .loginform-input input {
 	border: none;
 	background-color: transparent;
-	color: var(--second-auxiliar-color);
+	color: var(--font-color);
 	font-weight: bold;
 	font-size: 20px;
 	margin-bottom: 10px;
@@ -88,7 +88,7 @@
 	background-color: transparent;
 	border: none;
 	border-radius: 7px;
-	color: var(--second-auxiliar-color);
+	color: var(--font-color);
 	font-size: 1.3rem;
 	font-weight: bold;
 	margin: 0px 0px;

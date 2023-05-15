@@ -14,19 +14,3 @@ export function encryptPassword(passwordToEncrypt: string): Promise<string> {
 		});
 	});
 }
-
-export function authenticateUser(
-	plainTextPassword: string,
-	dataBasePassword: string
-): Promise<boolean> {
-	return new Promise((resolve, reject) => {
-		bcrypt.compare(plainTextPassword, dataBasePassword, (err: Error, result: boolean) => {
-			if (err) {
-				console.log(err);
-				reject(err);
-			} else {
-				resolve(result);
-			}
-		});
-	});
-}

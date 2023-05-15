@@ -7,8 +7,9 @@ import { ThemeIcon } from './ThemeSwitcherButton/ThemeSwitcherButton';
 
 import './ThemeSwitcher.css';
 
-const ThemeSwitcher = () => {
+const ThemeSwitcher = (props: { className ?: String }) => {
 	const userContext = useContext<UserContextValue | null>(UserContext);
+	const { className } = props;
 
 	const switchTheme = () => {
 		userContext?.setTheme((current: Theme) =>
@@ -17,7 +18,7 @@ const ThemeSwitcher = () => {
 	};
 
 	return (
-		<div className="theme-switcher-container">
+		<div className={`theme-switcher-container ${className}`}>
 			<motion.label
 				className="theme-switcher-label"
 				whileHover={{ scale: 1.1 }}
@@ -31,7 +32,7 @@ const ThemeSwitcher = () => {
 					checked={userContext?.theme === 'dark'}
 				/>
 				<motion.span
-					className="theme-switcher-slider-round"
+					className={`${userContext?.theme}-switcher-slider-round`}
 					transition={{ duration: 0.3 }}
 				>
 					<ThemeIcon theme={userContext?.theme} />

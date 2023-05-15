@@ -1,0 +1,23 @@
+.general-section {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    width: 100%;
+}
+
+.light-theme {
+    background-color: var(--primary-color);
+}
+
+.dark-theme {
+    background-color: var(--primary-dark-color);
+}
+
+.general-section-bottom {
+    align-self: flex-end;
+    top: 10%;
+    right: 2%;
+    position: absolute;
+    display: flex;
+}
