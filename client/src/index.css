@@ -5,12 +5,15 @@
 	--primary-color-variant: #cbb8e9;
 	--secondary-color: #6d1dd6;
 	--ternary-color: #646cff;
+	--font-color: #DFD8F0;
 
 	--primary-dark-color: #272c36;
 	--secondary-dark-color: #1b1d23;
 
-	--first-auxiliar-color: #000;
-	--second-auxiliar-color: #fff;
+	--auxiliar-color: #000;
+
+	--error-color: #F00056
+
 }
 
 * {
@@ -28,39 +31,8 @@ body,
 
 a {
 	color: var(--first-auxiliar-color);
+	font-weight: bold;
 	display: inline-block;
 	text-decoration: none;
 	position: relative;
-}
-
-a::after {
-	content: '';
-	position: absolute;
-	width: 100%;
-	transform: scaleX(0);
-	height: 1px;
-	bottom: -10px;
-	left: 0;
-	background-color: var(--ternary-color);
-	transform-origin: bottom right;
-	transition: transform 0.25s ease-out;
-}
-
-a:visited {
-	color: inherit;
-}
-
-a.featured {
-	color: var(--secondary-color);
-}
-
-a:hover,
-a:hover:visited {
-	cursor: pointer;
-	color: var(--ternary-color);
-}
-
-a:hover::after {
-	transform: scaleX(1);
-	transform-origin: bottom left;
 }

@@ -1,0 +1,68 @@
+
+/* GENERAL NAV STYLES */
+
+.navbar-body {
+    display: flex;
+    font-size: 20px;
+    width: 100%;
+}
+
+.navbar-light {
+    background-color: var(--secondary-color);
+    color: var(--font-color);
+}
+
+.navbar-dark {
+    background-color: var(--secondary-dark-color);
+    color: var(--primary-color);
+}
+
+.navbar-dark .navbar-button-panel div svg {
+    color: var(--secondary-color);
+}
+
+.navbar-body div svg {
+    margin-right: 10px;
+}
+
+/* END OF GENERAL NAV STYLES */
+/* LEFT SIDE NAV STYLES */
+
+.navbar-button-panel {
+    display: flex;
+    flex: 1;
+}
+
+.navbar-button-panel div {
+    display: flex;
+    align-items: center;
+}
+
+
+.navbar-button-panel div, div.navbar-add-event {
+    padding: 15px;
+}
+
+div.active-light {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+div.active-dark {
+    background-color: var(--primary-dark-color);
+}
+
+/* END OF LEFT SIDE NAV STYLES */
+/* CREATE EVENT STYLES */
+
+.navbar-body .navbar-add-event {
+    align-self: flex-end;
+}
+
+.navbar-add-event {
+    background-color: var(--ternary-color);
+    display: flex;
+    justify-content: center;
+}
+
+/* END OF CREATE EVENT STYLES */

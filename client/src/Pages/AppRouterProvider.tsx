@@ -9,7 +9,9 @@ import SignUp from "./SignUp";
 import MainPage from "./MainPage";
 import UserContext from "../Context/UserContext";
 import { HostEaseRoutes } from "../Types/AppRoutes/HostEaseRoutes";
-import MainSiteLayout from "../Layout/MainSiteLayout/MainSiteLayout";
+import MainSiteLayout from "../Layout/MainSiteLayout";
+import LogInto from "./Error/LogInto";
+import NotFound from "./Error/NotFound";
 
 /**
  *
@@ -40,14 +42,14 @@ const AppRouterProvider = () => {
             <Route path={HostEaseRoutes.Sign} element={<SignUp />} />
           </Route>
         ) : (
-          <Route element={<MainSiteLayout />}>
+        <Route element={<MainSiteLayout />}>
             <Route path={HostEaseRoutes.MainPage} element={<MainPage />} />
-          </Route>
+        </Route>
         )}
         {/* Hay que convertir este trozo en un componente que detecte los enlaces */}
         <Route
           path="*"
-          element={userContext?.user ? <p>Error 404</p> : <p>Log into</p>}
+          element={userContext?.user ? <NotFound/> : <LogInto/>}
         />
       </Routes>
     </BrowserRouter>

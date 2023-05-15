@@ -3,6 +3,9 @@ interface HostEaseRoutes {
   Login: string;
   Sign: string;
   MainPage: string;
+  Explore: string;
+  MyEvents: string;
+  Profile: string;
 }
 
 export const HostEaseRoutes: HostEaseRoutes = {
@@ -10,4 +13,7 @@ export const HostEaseRoutes: HostEaseRoutes = {
   Login: "/login",
   Sign: "/sign",
   MainPage: "/dashboard",
+  Explore: "/explore",
+  MyEvents: "/my-events",
+  Profile: "/profile",
 };

@@ -124,7 +124,7 @@ h1.signupform-header {
 
 .password-strength-block label {
 	font-weight: bold;
-	color: var(--second-auxiliar-color);
+	color: var(--font-color);
 }
 
 .weak-password span,
