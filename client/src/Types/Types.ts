@@ -17,10 +17,10 @@ export interface User {
 	phone: string;
 	experience: number;
 	joinedAt: string;
-	events: HostEaseEvent[];
-	achievements: Achievement[];
-	messages: Message[];
-	followers: number;
+	events?: HostEaseEvent[];
+	achievements?: Achievement[];
+	messages?: Message[];
+	followers?: number;
 }
 
 // Pendiente
@@ -41,7 +41,7 @@ interface Achievement {
 	xpPoints: number;
 }
 
-interface Category {
+export interface Category {
 	id: number;
 	category: string;
 }
@@ -52,7 +52,7 @@ export interface Tag {
 	color: string
   }
   
-  interface HostEaseEvent {
+  export interface HostEaseEvent {
     id: number;
     title: string;
     description: string;
@@ -63,9 +63,9 @@ export interface Tag {
     locationLat: number;
     locationLng: number;
     maxCapacity: number;
-    photo: number;
+    photo?: number;
     tags?: Tag[];
-    users?: User[];
+    users: number;
     category: Category;
     messages?: Message[];
     likes: number;

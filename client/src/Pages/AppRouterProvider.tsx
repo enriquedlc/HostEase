@@ -36,20 +36,20 @@ const AppRouterProvider = () => {
       {debug()}
       <Routes>
         <Route path={HostEaseRoutes.Home} element={<Home />} />
-        {!userContext?.user ? (
-          <Route element={<AuthPageLayout />}>
-            <Route path={HostEaseRoutes.Login} element={<Login />} />
-            <Route path={HostEaseRoutes.Sign} element={<SignUp />} />
-          </Route>
-        ) : (
-        <Route element={<MainSiteLayout />}>
-            <Route path={HostEaseRoutes.MainPage} element={<MainPage />} />
+        <Route element={<AuthPageLayout />}>
+          <Route path={HostEaseRoutes.Login} element={<Login />} />
+          <Route path={HostEaseRoutes.Sign} element={<SignUp />} />
         </Route>
+        {/* userContext?.user && */}
+        {(
+          <Route element={<MainSiteLayout />}>
+            <Route path={HostEaseRoutes.MainPage} element={<MainPage />} />
+          </Route>
         )}
         {/* Hay que convertir este trozo en un componente que detecte los enlaces */}
         <Route
           path="*"
-          element={userContext?.user ? <NotFound/> : <LogInto/>}
+          element={userContext?.user ? <NotFound /> : <LogInto />}
         />
       </Routes>
     </BrowserRouter>

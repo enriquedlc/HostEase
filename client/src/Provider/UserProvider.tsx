@@ -1,10 +1,9 @@
-import React, { ReactNode, useState } from "react";
-import { User, Theme, UserSignUpData, LoginRequest } from "../Types/Types";
-import { encryptPassword } from "../services/auth.services";
-import UserContext from "../Context/UserContext";
-import { logInUser, signUpUser } from "../services/main.services";
-import { AxiosResponse } from "axios";
+import { ReactNode, useState } from "react";
 import { toast } from "react-toastify";
+import UserContext from "../Context/UserContext";
+import { LoginRequest, Theme, User, UserSignUpData } from "../Types/Types";
+import { encryptPassword } from "../services/auth.services";
+import { logInUser, signUpUser } from "../services/main.services";
 
 const UserProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState<Theme>("light");

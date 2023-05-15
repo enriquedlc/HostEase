@@ -14,6 +14,6 @@ export const HostEaseRoutes: HostEaseRoutes = {
   Sign: "/sign",
   MainPage: "/dashboard",
   Explore: "/explore",
-  MyEvents: "/my-events",
+  MyEvents: "/events",
   Profile: "/profile",
 };

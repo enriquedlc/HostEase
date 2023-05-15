@@ -1,0 +1,26 @@
+.tag-body {
+    display: flex;
+    border-radius: 0px 7px 7px 0px;
+    background-color: var(--primary-color);
+    position: relative;
+    height: 20px;
+    margin: 2.5px;
+}
+
+.tag-text {
+    color: var(primary-dark-color);
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    margin: 0 8px;
+    padding: 5px;
+}
+
+.tag-color {
+    border-radius: 7px 0px 0px 7px;
+    width: 10px;
+    height: 100%;
+    position: absolute;
+    left: -10px;
+    top: 0;
+}
