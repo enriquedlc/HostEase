@@ -3,7 +3,7 @@ import MainDashboard from './Components/MainDashboard/MainDashboard';
 import Sidebar from './Components/Sidebar/Sidebar';
 import './Dashboard.css';
 
-const Dashboard = () => {
+const Dashboard: React.FC = () => {
   return (
     <section className='dashboard-section'>
       <div className='dashboard-div'>

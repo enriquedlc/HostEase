@@ -4,7 +4,6 @@ import Card from '../Card/Card'
 
 import './Cards.css'
 
-
 const CardsData = [
     {
         title: "Users",
@@ -57,7 +56,7 @@ const CardsData = [
     }
 ]
 
-const Cards = () => {
+const Cards: React.FC = () => {
     return (
         <div className="cards">
             {CardsData.map((card, id) => {
@@ -71,7 +70,6 @@ const Cards = () => {
                             value={card.value}
                             png={card.png}
                             series={card.series}
-
                         />
                     </div>)
             })}

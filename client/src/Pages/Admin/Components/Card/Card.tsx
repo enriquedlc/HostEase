@@ -22,44 +22,35 @@ interface CardProps {
     }[]
 }
 
-interface StatusCardProps {
-    Icon: any
-    value: string
-    showedDataTime: string
+interface CompactedCardProps {
+    params: CardProps;
 }
 
 const Card: React.FC<CardProps> = (props: CardProps) => {
 
-    const [expandedCard, setExpandedCars] = useState<boolean>(false);
+    const [expandedCard, setExpandedCard] = useState<boolean>(false);
 
     return (
         <AnimatePresence>
-            {
-                expandedCard
-                    ? (<ExpandedCard />)
-                    : (<CompactedCard params={props} />)
-            }
+            {expandedCard ? (<ExpandedCard />) : (<CompactedCard params={props} />)}
         </AnimatePresence>
     )
 }
 
 // Compacted Card
-const CompactedCard = ({ params }) => {
-
-    const Icon = params.png
+const CompactedCard: React.FC<CompactedCardProps> = ({ params }) => {
+    const Icon = params.png;
 
     return (
-        <div className="compacted-card"
+        <div
+            className="compacted-card"
             style={{
                 background: params.color.backGround,
                 boxShadow: params.color.boxShadow
             }}
         >
             <div className="percentage-circle">
-                <CircularProgressbar
-                    value={params.barValue}
-                    text={`${params.barValue}%`}
-                />
+                <CircularProgressbar value={params.barValue} text={`${params.barValue}%`} />
                 <span>{params.title}</span>
             </div>
             <div className="detail">
@@ -68,8 +59,9 @@ const CompactedCard = ({ params }) => {
                 <span>time</span>
             </div>
         </div>
-    )
-}
+    );
+};
+
 
 // Expanded Card
 const ExpandedCard = () => {
