@@ -13,6 +13,9 @@ import MainSiteLayout from "../Layout/MainSiteLayout";
 import LogInto from "./Error/LogInto";
 import NotFound from "./Error/NotFound";
 
+// dev
+import Dashboard from "./Admin/Dashboard";
+
 /**
  *
  * The Skeleton of the App. This side its made for the Routing section of HostEase
@@ -35,6 +38,7 @@ const AppRouterProvider = () => {
     <BrowserRouter basename={HostEaseRoutes.Home}>
       {debug()}
       <Routes>
+        <Route path="/dev" element={<Dashboard/>} />
         <Route path={HostEaseRoutes.Home} element={<Home />} />
         {!userContext?.user ? (
           <Route element={<AuthPageLayout />}>
