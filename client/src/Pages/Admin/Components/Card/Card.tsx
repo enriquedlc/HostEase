@@ -4,6 +4,8 @@ import { AnimatePresence } from 'framer-motion'
 import { CircularProgressbar } from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css'
 
+import { FaTimes } from 'react-icons/fa'
+
 import './Card.css'
 
 interface CardProps {
@@ -24,21 +26,37 @@ interface CardProps {
 
 interface CompactedCardProps {
     params: CardProps;
+    setExpanded: any;
+}
+
+interface ExpandedCardProps {
+    params: CardProps;
+    setExpanded: any;
 }
 
 const Card: React.FC<CardProps> = (props: CardProps) => {
-
     const [expandedCard, setExpandedCard] = useState<boolean>(false);
+
+    const handleExpand = () => {
+        setExpandedCard(true);
+    };
+
+    const handleCollapse = () => {
+        setExpandedCard(false);
+    };
 
     return (
         <AnimatePresence>
-            {expandedCard ? (<ExpandedCard />) : (<CompactedCard params={props} />)}
+            {expandedCard ? (
+                <ExpandedCard params={props} setExpanded={handleCollapse} />
+            ) : (
+                <CompactedCard params={props} setExpanded={handleExpand} />
+            )}
         </AnimatePresence>
-    )
-}
+    );
+};
 
-// Compacted Card
-const CompactedCard: React.FC<CompactedCardProps> = ({ params }) => {
+const CompactedCard: React.FC<CompactedCardProps> = ({ params, setExpanded }) => {
     const Icon = params.png;
 
     return (
@@ -48,26 +66,37 @@ const CompactedCard: React.FC<CompactedCardProps> = ({ params }) => {
                 background: params.color.backGround,
                 boxShadow: params.color.boxShadow
             }}
-        >
+            onClick={setExpanded}>
             <div className="percentage-circle">
                 <CircularProgressbar value={params.barValue} text={`${params.barValue}%`} />
                 <span>{params.title}</span>
             </div>
             <div className="detail">
                 <Icon />
-                <span>{params.value}</span>
+                <span className='detail-number'>{params.value}</span>
                 <span>time</span>
             </div>
         </div>
     );
 };
 
-
 // Expanded Card
-const ExpandedCard = () => {
+const ExpandedCard: React.FC<ExpandedCardProps> = ({ params, setExpanded }) => {
     return (
-        <div className="expanded-card">
-
+        <div
+            className="expanded-card"
+            style={{
+                background: params.color.backGround,
+                boxShadow: params.color.boxShadow
+            }}>
+            <div onClick={setExpanded}>
+                <FaTimes />
+            </div>
+            <span>{params.title}</span>
+            <div className="chart-container">
+                Chart
+            </div>
+            <span>last x hours</span>
         </div>
     )
 }

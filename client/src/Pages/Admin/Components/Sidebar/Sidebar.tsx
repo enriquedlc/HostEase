@@ -1,11 +1,10 @@
 
-import { FaTag, FaClipboard, FaUsers, FaHome, FaComments, } from 'react-icons/fa'
-import { MdLogout, MdOutlineHouse, MdOutlineEditCalendar, MdOutlineGroup, MdTag, MdOutlineComment } from 'react-icons/md'
+import { MdLogout, MdOutlineComment, MdOutlineEditCalendar, MdOutlineGroup, MdOutlineHouse, MdTag } from 'react-icons/md'
 
 import HostEaseLogo from '../../../../assets/HostEase.png'
 
-import './Sidebar.css'
 import { useState } from 'react'
+import './Sidebar.css'
 
 type SidebarOptions = {
     icon: any
