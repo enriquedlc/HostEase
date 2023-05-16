@@ -1,0 +1,41 @@
+.create-form-body {
+  border-radius: 20px;
+  display: flex;
+  color: var(--primary-color);
+  flex-direction: column;
+  height: 80%;
+  width: 80%;
+  padding: 50px;
+  margin: 50px auto;
+}
+
+.light-theme-form {
+  background-color: var(--secondary-color);
+}
+
+.dark-theme-form {
+  background-color: var(--secondary-dark-color);
+}
+
+.tab-list {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+}
+
+.tab-button {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  margin-right: 10px;
+  cursor: pointer;
+  outline: none;
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

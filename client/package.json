@@ -16,10 +16,12 @@
 		"bcryptjs": "^2.4.3",
 		"framer-motion": "^10.12.8",
 		"react": "^18.2.0",
+		"react-datepicker": "^4.11.0",
 		"react-dom": "^18.2.0",
 		"react-icons": "^4.8.0",
 		"react-responsive-carousel": "^3.2.23",
 		"react-router-dom": "^6.9.0",
+		"react-tabs": "^6.0.1",
 		"react-toastify": "^9.1.2"
 	},
 	"devDependencies": {

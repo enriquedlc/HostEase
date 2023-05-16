@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 import { FaUser } from "react-icons/fa";
 import { IoMdPhonePortrait } from "react-icons/io";
@@ -10,12 +10,13 @@ import PasswordInput from "../../Components/Inputs/PasswordInput/PasswordInput";
 import { HostEaseRoutes } from "../../Types/AppRoutes/HostEaseRoutes";
 
 import UserContext from "../../Context/UserContext";
-import { UserSignUpData } from "../../Types/Types";
+import { UserContextValue, UserSignUpData } from "../../Types/Types";
 import "./SingUp.css";
 import { toast } from "react-toastify";
 
 const SignUp = () => {
-  const userContext = useContext(UserContext);
+
+  const userContext = useOutletContext<UserContextValue | null>();
 
   const [userSignUp, setUserSignUp] = useState<UserSignUpData>({
     nickname: "",

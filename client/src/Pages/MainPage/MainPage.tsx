@@ -2,12 +2,13 @@ import React, { useContext } from "react";
 import UserContext from "../../Context/UserContext";
 import "./MainPage.css";
 import EventCard from "../../Components/EventCard/EventCard";
-import { HostEaseEvent } from "../../Types/Types";
+import { HostEaseEvent, UserContextValue } from "../../Types/Types";
 import noEvents from "./assets/noEvents.jpg"
+import { useOutletContext } from "react-router-dom";
 
 const MainPage = () => {
-  const userContext = useContext(UserContext);
-  console.log("PÁGINA PRINCIPAL", userContext?.user);
+
+  const userContext = useOutletContext<UserContextValue | null>();
   const user = userContext?.user;
 
   return (

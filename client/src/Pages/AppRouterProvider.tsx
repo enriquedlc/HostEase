@@ -12,6 +12,7 @@ import { HostEaseRoutes } from "../Types/AppRoutes/HostEaseRoutes";
 import MainSiteLayout from "../Layout/MainSiteLayout";
 import LogInto from "./Error/LogInto";
 import NotFound from "./Error/NotFound";
+import NewEvent from "./NewEvent";
 
 /**
  *
@@ -24,28 +25,29 @@ import NotFound from "./Error/NotFound";
  */
 
 const AppRouterProvider = () => {
-  const debug = (): ReactNode => {
-    console.log("MAIN", userContext?.user);
-    return <></>;
-  };
-
   const userContext = useContext(UserContext);
 
   return (
     <BrowserRouter basename={HostEaseRoutes.Home}>
-      {debug()}
       <Routes>
-        <Route path={HostEaseRoutes.Home} element={<Home />} />
-        <Route element={<AuthPageLayout />}>
+        <Route
+          path={HostEaseRoutes.Home}
+          element={<Home context={userContext} />}
+        />
+        <Route element={<AuthPageLayout context={userContext} />}>
           <Route path={HostEaseRoutes.Login} element={<Login />} />
           <Route path={HostEaseRoutes.Sign} element={<SignUp />} />
         </Route>
         {/* userContext?.user && */}
-        {(
-          <Route element={<MainSiteLayout />}>
+        {
+          <Route element={<MainSiteLayout context={userContext} />}>
             <Route path={HostEaseRoutes.MainPage} element={<MainPage />} />
+            <Route
+              path={`${HostEaseRoutes.NewEvent}/:id`}
+              element={<NewEvent />}
+            />
           </Route>
-        )}
+        }
         {/* Hay que convertir este trozo en un componente que detecte los enlaces */}
         <Route
           path="*"
