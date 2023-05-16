@@ -1,0 +1,114 @@
+.card-body {
+  background-color: var(--secondary-color);
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  height: 365px;
+  margin: 50px;
+}
+
+.map-side {
+  background-color: #fff;
+  flex: 1;
+}
+
+.content-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex: 1;
+  margin-left: 20px;
+}
+
+.content-side h1 {
+  align-self: center;
+  margin: 20px 0px;
+}
+
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.tags-container div {
+    flex: 0 0 25%;
+    max-width: 25%;
+}
+
+.row {
+  font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.row div {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.row div > svg {
+  margin-right: 10px;
+}
+
+.content-side h1,
+.row div,
+.user-amount,
+.view-event {
+  color: var(--font-color);
+}
+
+.view-event {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  transition: color 0.3s;
+}
+
+.view-event svg {
+  margin-left: 10px;
+}
+
+.view-event:hover {
+  color: var(--ternary-color);
+}
+
+.user-amount {
+  align-items: center;
+  background-color: var(--ternary-color);
+  border-radius: 10px 0px 0px 0px;
+  bottom: 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 25px;
+  position: absolute;
+  right: 0px;
+  width: 120px;
+}
+
+.light {
+  background-color: var(--secondary-color)
+}
+
+.dark {
+  background-color: var(--secondary-dark-color);
+}
+
+.user-amount svg {
+  margin-left: 10px;
+}
+
+.user-amount.light {
+  background-color: var(--ternary-color);
+}
+
+.user-amount.dark {
+  background-color: var(--secondary-color);
+}

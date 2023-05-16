@@ -140,7 +140,9 @@ const SignUp = () => {
     ) {
       try {
         const signedUp = await userContext?.signUp(userSignUp);
-        console.log(signedUp);
+        if (signedUp) {
+          navigate('/dashboard')
+        }
       } catch (error: any) {
         console.log("ERROR");
       }

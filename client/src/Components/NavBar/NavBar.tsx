@@ -23,20 +23,20 @@ const NavBar = () => {
         </div>
         <div className={`${pathname === HostEaseRoutes.Explore && "active"}-${userContext?.theme}`}>
           <TbInputSearch />
-          <Link to="/dashboard">Explore</Link>
+          <Link to="/explore">Explore</Link>
         </div>
         <div className={`${pathname === HostEaseRoutes.MyEvents && "active"}-${userContext?.theme}`}>
           <HiUserGroup />
-          <Link to="/dashboard">My Events</Link>
+          <Link to={`/user/events/${userContext?.user?.id}`}>My Events</Link>
         </div>
         <div className={`${pathname === HostEaseRoutes.Profile && "active"}-${userContext?.theme}`}>
           <RiProfileFill />
-          <Link to="/dashboard">Profile</Link>
+          <Link to={`/user/profile/${userContext?.user?.id}`}>Profile</Link>
         </div>
       </div>
       <div className={`navbar-add-event ${""}`}>
         <MdAssignmentAdd />
-        <Link to="/dashboard">New Event</Link>
+        <Link to="/new">New Event</Link>
       </div>
     </nav>
   );
