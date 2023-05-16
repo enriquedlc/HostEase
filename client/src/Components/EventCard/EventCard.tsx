@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import "./EventCard.css";
-import { Category, Tag, User } from "../../Types/Types";
+import { Category, LatLngLiteral, Tag, User } from "../../Types/Types";
 import {
   AiFillLike,
   AiOutlineArrowRight,
@@ -11,6 +11,7 @@ import { FaUsers } from "react-icons/fa";
 import TagCard from "../TagCard";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../../Context/UserContext";
+import Map from "../Map";
 
 interface EventCardOptions {
   id: number;
@@ -21,8 +22,7 @@ interface EventCardOptions {
   startTime?: string;
   endDate?: string | null;
   endTime?: string | null;
-  locationLat?: number;
-  locationLng?: number;
+  location?: LatLngLiteral | null;
   tags?: Tag[];
   users?: number;
 }
@@ -39,8 +39,7 @@ const EventCard = (props: EventCardOptions) => {
     startTime,
     endDate,
     endTime,
-    locationLat,
-    locationLng,
+    location,
     tags,
     users,
   } = props;
@@ -58,7 +57,7 @@ const EventCard = (props: EventCardOptions) => {
 
   return (
     <div className={`card-body ${userContext?.theme}`}>
-      <div className="map-side">Mapa</div>
+      <div className="map-side">{location && <Map name="map" coordinates={location}  mode="view" />}</div>
       <div className="content-side">
         <h1>{title}</h1>
         {slicedTags && (

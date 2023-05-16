@@ -1,0 +1,181 @@
+.datepicker-container {
+  font-family: 'Roboto', sans-serif;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+  padding: 25px;
+  margin-top: 60px;
+  width: 100%;
+}
+
+.datepicker-row {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.datepicker-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.datepicker-label {
+  font-weight: bold;
+}
+
+.datepicker-input {
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  font-size: 1.2rem;
+  font-weight: bold;
+  outline: none;
+  margin: 10px 15px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  transition: color 0.1s ease;
+  padding: 10px;
+  width: 200px;
+}
+
+.datepicker-input::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+.datepicker-input:focus {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  border: none;
+  transition: background-color 0.2s linear;
+}
+
+.datepicker-input:disabled {
+  cursor: not-allowed;
+  background-color: var(--secondary-dark-color);
+}
+
+.button-panel {
+  margin-top: 20px;
+}
+
+.datepicker-button {
+  padding: 10px 20px;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 0px 15px;
+  transition: background-color 0.3s ease;
+}
+
+/* Light Theme */
+
+.light-datepicker {
+  color: var(--secondary-color);
+}
+
+.light-datepicker .datepicker-label {
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.light-datepicker .datepicker-input:focus {
+  background-color: var(--primary-color);
+  border-radius: 10px;
+  color: var(--secondary-color);
+}
+
+.light-datepicker .datepicker-input:disabled {
+  cursor: not-allowed;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--ternary-color);
+  color: var(--primary-color);
+}
+
+.light-datepicker .datepicker-button:hover {
+  color: var(--primary-color);
+  background-color: var(--secondary-color);
+}
+
+.light-datepicker .datepicker-button.blocked {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  transition: background-color 0.3s ease;
+}
+
+.light-datepicker .datepicker-button.blocked:hover {
+  color: var(--primary-color);
+  background-color: var(--ternary-color);
+}
+
+.light-datepicker button {
+  background-color: var(--ternary-color);
+  color: var(--primary-color);
+}
+
+.light-datepicker .react-datepicker__header {
+  background-color: var(--ternary-color);
+}
+
+.dark-datepicker .react-datepicker__header {
+  background-color: var(--primary-dark-color) ;
+}
+
+.dark-datepicker .react-datepicker__day-name, .dark-datepicker .react-datepicker__current-month {
+  color: var(--font-color);
+}
+
+/* Dark Theme */
+
+.dark-datepicker {
+    color: var(--secondary-color);
+  }
+  
+  .dark-datepicker .datepicker-label {
+    color: var(--primary-color);
+    font-weight: bold;
+  }
+  
+  .dark-datepicker .datepicker-input:focus {
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    color: var(--primary-dark-color);
+  }
+  
+  .dark-datepicker .datepicker-input:disabled {
+    cursor: not-allowed;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--primary-dark-color);
+    color: var(--primary-color);
+  }
+  
+  .dark-datepicker .datepicker-button:hover {
+    color: var(--primary-color);
+    background-color: var(--ternary-color);
+  }
+  
+  .dark-datepicker .datepicker-button.blocked {
+    background-color: var(--primary-color);
+    color: var(--primary-dark-color);
+    transition: background-color 0.3s ease;
+  }
+  
+  .dark-datepicker .datepicker-button.blocked:hover {
+    color: var(--primary-color);
+    background-color: var(--primary-dark-color);
+  }
+  
+  .dark-datepicker button {
+    background-color: var(--primary-dark-color);
+    color: var(--primary-color);
+  }

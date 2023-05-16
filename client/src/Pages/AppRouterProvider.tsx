@@ -1,18 +1,17 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import React, { ReactNode, useContext } from "react";
-import AuthPageLayout from "../Layout/AuthPageLayout";
-import UserProvider from "../Provider/UserProvider";
-import Home from "./Home";
-import Login from "./Login";
-import SignUp from "./SignUp";
-import MainPage from "./MainPage";
+import { useContext } from "react";
 import UserContext from "../Context/UserContext";
-import { HostEaseRoutes } from "../Types/AppRoutes/HostEaseRoutes";
+import AuthPageLayout from "../Layout/AuthPageLayout";
 import MainSiteLayout from "../Layout/MainSiteLayout";
+import { HostEaseRoutes } from "../Types/AppRoutes/HostEaseRoutes";
 import LogInto from "./Error/LogInto";
 import NotFound from "./Error/NotFound";
+import Home from "./Home";
+import Login from "./Login";
+import MainPage from "./MainPage";
 import NewEvent from "./NewEvent";
+import SignUp from "./SignUp";
 
 /**
  *
@@ -39,7 +38,7 @@ const AppRouterProvider = () => {
           <Route path={HostEaseRoutes.Sign} element={<SignUp />} />
         </Route>
         {/* userContext?.user && */}
-        {
+        { 
           <Route element={<MainSiteLayout context={userContext} />}>
             <Route path={HostEaseRoutes.MainPage} element={<MainPage />} />
             <Route

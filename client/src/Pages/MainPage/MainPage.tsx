@@ -3,11 +3,10 @@ import UserContext from "../../Context/UserContext";
 import "./MainPage.css";
 import EventCard from "../../Components/EventCard/EventCard";
 import { HostEaseEvent, UserContextValue } from "../../Types/Types";
-import noEvents from "./assets/noEvents.jpg"
+import noEvents from "./assets/noEvents.jpg";
 import { useOutletContext } from "react-router-dom";
 
 const MainPage = () => {
-
   const userContext = useOutletContext<UserContextValue | null>();
   const user = userContext?.user;
 
@@ -17,49 +16,47 @@ const MainPage = () => {
         Welcome, {user?.nickname}
       </h1>
       <div className="">
-        <h1 className={`${userContext?.theme}-header`}>Your events</h1>
         {user?.events ? (
-          <div className="dashboard-site-events">
-            {user?.events.map(
-              ({
-                id,
-                title,
-                likes,
-                startDate,
-                startTime,
-                endDate,
-                endTime,
-                locationLat,
-                locationLng,
-                category,
-                maxCapacity,
-                messages,
-                tags,
-                users,
-              }) => {
-                return (
-                  <EventCard
-                    key={id}
-                    id={id}
-                    title={title}
-                    likes={likes}
-                    startDate={startDate}
-                    endDate={endDate && endDate}
-                    startTime={startTime}
-                    endTime={endTime}
-                    locationLat={locationLat}
-                    locationLng={locationLng}
-                    tags={tags}
-                    users={users}
-                  />
-                );
-              }
-            )}
-          </div>
+          <>
+            <h1 className={`${userContext?.theme}-header`}>Your events</h1>(
+            <div className="dashboard-site-events">
+              {user?.events.map(
+                ({
+                  id,
+                  title,
+                  likes,
+                  startDate,
+                  startTime,
+                  endDate,
+                  endTime,
+                  location,
+                  tags,
+                  users,
+                }, index) => {
+                  return (
+                    <EventCard
+                      key={index}
+                      id={id}
+                      title={title}
+                      likes={likes}
+                      startDate={startDate}
+                      endDate={endDate && endDate}
+                      startTime={startTime}
+                      endTime={endTime}
+                      location={location}
+                      tags={tags}
+                      users={users}
+                    />
+                  );
+                }
+              )}
+            </div>
+            )
+          </>
         ) : (
           <div className={`eventless ${userContext?.theme}-theme-mssg`}>
             <h2>No te has unido o has creado ningún evento todavía</h2>
-            <img src={noEvents} alt="No Events?"/>
+            <img src={noEvents} alt="No Events?" />
           </div>
         )}
       </div>

@@ -3,7 +3,8 @@ import { toast } from "react-toastify";
 import UserContext from "../Context/UserContext";
 import { LoginRequest, Theme, User, UserSignUpData } from "../Types/Types";
 import { encryptPassword } from "../services/auth.services";
-import { logInUser, signUpUser } from "../services/main.services";
+import { logInUser, mapLibraries, signUpUser } from "../services/main.services";
+import { useLoadScript } from "@react-google-maps/api";
 
 const UserProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState<Theme>("light");
@@ -35,6 +36,11 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
       return false;
     }
   };
+  
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: "AIzaSyB09X3RuC3qKVhtqxqw4QAZudU3h0GIZEM",
+    libraries: mapLibraries,
+  });
 
   const logOut = () => {
     setUser(null);
@@ -70,7 +76,7 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <UserContext.Provider
-      value={{ user, theme, setTheme, logIn, logOut, signUp }}
+      value={{ user, theme, setTheme, logIn, logOut, signUp, isLoaded }}
     >
       {children}
     </UserContext.Provider>
