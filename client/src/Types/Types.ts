@@ -2,11 +2,13 @@ export type Theme = "light" | "dark";
 
 export interface UserContextValue {
   user: User | null;
+  setUser: React.Dispatch<React.SetStateAction<User | null>>;
   theme: Theme;
   setTheme: React.Dispatch<React.SetStateAction<Theme>>;
   signUp: (arg0: UserSignUpData) => Promise<boolean>;
   logIn: (arg0: LoginRequest) => Promise<boolean>;
   logOut: () => void;
+  getUserEvents: () => void;
   isLoaded: boolean;
 }
 

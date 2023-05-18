@@ -47,7 +47,7 @@ const Map = ({
   const handleLocation = (e: MapMouseEvent) => {
     const position = e.latLng?.toJSON();
     if (mode === "form") {
-      setCoordinates &&
+      position && setCoordinates &&
         setCoordinates(
           position.lat === coordinates?.lat && position.lng === coordinates?.lng
             ? null

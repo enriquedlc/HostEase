@@ -57,7 +57,7 @@ const EventCard = (props: EventCardOptions) => {
 
   return (
     <div className={`card-body ${userContext?.theme}`}>
-      <div className="map-side">{location && <Map name="map" coordinates={location}  mode="view" />}</div>
+      <div className="map-side">{location && <Map name="map" coordinates={location} center mode="view" />}</div>
       <div className="content-side">
         <h1>{title}</h1>
         {slicedTags && (

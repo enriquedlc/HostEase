@@ -6,23 +6,25 @@ import {
   HostEaseEvent,
   HostEaseEventForm,
   LatLngLiteral,
+  Tag,
   UserContextValue,
 } from "../../Types/Types";
 import "./NewEvent.css";
 import CustomDatePicker from "../../Components/CustomDatePicker/CustomDatePicker";
 import Map from "../../Components/Map";
+import Selector from "../../Components/Selector";
 
 const NewEvent = () => {
   const userContext = useOutletContext<UserContextValue>();
   const [event, setEvent] = useState<HostEaseEventForm | null>(null);
+  const [tagList, setTagList] = useState<Tag[]>([]);
   const [currentTab, setCurrentTab] = useState(0);
 
   const handleChange = (data: any, name: string) => {
     setEvent((prevEvent) => ({
       ...prevEvent,
       [name]: data,
-    })
-    );
+    }));
   };
 
   const handleNextTab = () => {
@@ -61,6 +63,7 @@ const NewEvent = () => {
                 onChangeEnd={handleChange}
                 valueStart={event?.startDate}
                 valueEnd={event?.endDate}
+                required
               />
               <CustomDatePicker
                 nameStart="startTime"
@@ -72,6 +75,7 @@ const NewEvent = () => {
                 type="time"
                 valueStart={event?.startTime}
                 valueEnd={event?.endTime}
+                required
               />
             </div>
             <div className="create-form-page-column">
@@ -88,8 +92,20 @@ const NewEvent = () => {
           </div>
         </TabPanel>
         <TabPanel>
-          <div></div>
-          <div></div>
+          <div className="create-form-page">
+            <div className="create-form-page-column">
+              {tagList.length !== 0 ? <Selector
+                multiple
+                onChange={handleChange}
+                name="tags"
+                options={tagList}
+                value={event?.tags}
+              /> : <p>Loading...</p>}
+            </div>
+            <div className="create-form-page-column">
+              
+            </div>
+          </div>
         </TabPanel>
         <TabList className="tab-panel">
           <div className="tab-buttons-panel ">

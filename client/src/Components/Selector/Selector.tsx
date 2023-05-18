@@ -7,22 +7,24 @@ import styles from "./Selector.module.css"
 
 type MultipleSelectProps = {
     multiple: true
-    value: Tag[]
+    value?: Tag[]
     color?: string
-    onChange: (value: Tag[]) => void
+    name: string;
+    onChange: (value: Tag[], name: string) => void
 }
 
 type SingleSelectProps = {
     multiple?: false
     value?: Tag
-    onChange: (value: Tag | undefined) => void
+    name: string;
+    onChange: (value: Tag | undefined, name: string) => void
 }
 
 type SelectProps = {
     options: Tag[]
 } & (SingleSelectProps | MultipleSelectProps)
 
-export function Select({ multiple, value, onChange, options }: SelectProps) {
+export default function Select({ multiple, value, onChange, options, name }: SelectProps) {
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -33,23 +35,23 @@ export function Select({ multiple, value, onChange, options }: SelectProps) {
     }, [isOpen])
 
     const clearOptions = () => {
-        multiple ? onChange([]) : onChange(undefined)
+        multiple ? onChange([], name) : onChange(undefined, name)
     }
 
     const selectOption = (option: Tag) => {
         if (multiple) {
-            if (value.includes(option)) {
-                onChange(value.filter(optn => optn !== option))
+            if (value?.includes(option)) {
+                onChange(value.filter(optn => optn !== option), name)
             } else {
-                onChange([...value, option])
+                value && onChange([...value, option], name)
             }
         } else {
-            if (option !== value) onChange(option)
+            if (option !== value) onChange(option, name)
         }
     }
 
     const isOptionSelected = (option: Tag) => {
-        return multiple ? value.includes(option) : option === value
+        return multiple ? value?.includes(option) : option === value
     }
 
     const motionButtonProps = {
@@ -62,7 +64,7 @@ export function Select({ multiple, value, onChange, options }: SelectProps) {
 
     return (
         <motion.div onBlur={() => setIsOpen(false)} onClick={() => setIsOpen(prev => !prev)} tabIndex={0} className={styles.container}>
-            <span className={styles.value}>{multiple ? value.map(value => (
+            <span className={styles.value}>{multiple ? value?.map(value => (
                 <motion.button key={value.id}
                     onClick={e => {
                         e.stopPropagation(); selectOption(value)

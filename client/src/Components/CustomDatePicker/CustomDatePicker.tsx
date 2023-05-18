@@ -12,6 +12,7 @@ interface CustomDatePickerProps {
   nameEnd: string;
   valueStart?: string;
   valueEnd?: string;
+  required: boolean;
   type?: "time" | "date";
   theme?: "light" | "dark";
 }
@@ -25,6 +26,7 @@ const CustomDatePicker = ({
   theme = "light",
   valueStart,
   valueEnd,
+  required = false
 }: CustomDatePickerProps) => {
   const currentDate = new Date();
 
@@ -66,13 +68,13 @@ const CustomDatePicker = ({
 
   const handleStartChange = (data: any) => {
     if (type === "date") {
+      const formattedDate = formatDate(data.toISOString());
       setStartDate(data);
+      if (onChangeStart) {
+        onChangeStart(formattedDate, nameStart);
+      }
       if (!endEnabled) {
         setEndDate(data);
-      }
-      if (onChangeStart) {
-        const formattedDate = formatDate(data.toISOString());
-        onChangeStart(formattedDate, nameStart);
         onChangeEnd && onChangeEnd(formattedDate, nameEnd);
       }
     } else if (type === "time") {
@@ -160,6 +162,7 @@ const CustomDatePicker = ({
               disabled={isBlocked}
               name={nameStart}
               value={startHour}
+              required={required}
             />
           ) : (
             <DatePicker
@@ -170,6 +173,7 @@ const CustomDatePicker = ({
               disabled={isBlocked}
               name={nameStart}
               value={valueStart}
+              required={required}
             />
           )}
         </div>
@@ -183,6 +187,7 @@ const CustomDatePicker = ({
               disabled={isBlocked}
               name={nameEnd}
               value={endHour}
+              required={required}
             />
           </div>
         ) : (
@@ -196,6 +201,7 @@ const CustomDatePicker = ({
               disabled={isBlocked}
               name={nameEnd}
               value={valueEnd}
+              required={required}
             />
           </div>
         )}

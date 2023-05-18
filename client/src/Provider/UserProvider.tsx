@@ -1,10 +1,12 @@
 import { ReactNode, useState } from "react";
 import { toast } from "react-toastify";
 import UserContext from "../Context/UserContext";
-import { LoginRequest, Theme, User, UserSignUpData } from "../Types/Types";
-import { encryptPassword } from "../services/auth.services";
-import { logInUser, mapLibraries, signUpUser } from "../services/main.services";
+import { HostEaseEvent, LoginRequest, Theme, User, UserSignUpData } from "../Types/Types";
+import { encryptPassword, fetchUserEvents } from "../services/main.services";
+import { logInUser, signUpUser } from "../services/main.services";
 import { useLoadScript } from "@react-google-maps/api";
+import { AxiosError } from "axios";
+import { mapLibraries } from "../services/main.services";
 
 const UserProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState<Theme>("light");
@@ -18,6 +20,7 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
         setUser(response.data.data);
         return true;
       } else {
+        console.log(response.data)
         if (!toast.isActive("loginErrorMessage")) {
           toast.error("Se ha producido un error al iniciar sesión.", {
             toastId: "loginErrorMessage",
@@ -36,6 +39,24 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
       return false;
     }
   };
+
+  const getUserEvents = async () => {
+    try {
+      if (user?.id) {
+        await fetchUserEvents(user?.id).then((response) => {
+          console.log(response.data.data)
+          setUser({ ...user, events: response.data.data  })
+        })
+      }
+    } catch (err: any) {
+      if (!toast.isActive("mainPageErrorMessage")) {
+        toast.error("No se han podido cargar los eventos del usuario en cuestión.", {
+          toastId: "mainPageErrorMessage",
+          theme: theme,
+        });
+      }
+    }
+  }
   
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyB09X3RuC3qKVhtqxqw4QAZudU3h0GIZEM",
@@ -72,11 +93,9 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const fetchUserEvents = async () => {};
-
   return (
     <UserContext.Provider
-      value={{ user, theme, setTheme, logIn, logOut, signUp, isLoaded }}
+      value={{ user, setUser, getUserEvents, theme, setTheme, logIn, logOut, signUp, isLoaded }}
     >
       {children}
     </UserContext.Provider>

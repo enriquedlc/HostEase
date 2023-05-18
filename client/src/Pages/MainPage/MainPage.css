@@ -8,7 +8,7 @@
     grid-template-columns: 1fr 1fr; 
     grid-gap: 20px; 
     overflow-y: auto;
-    height: 68vh;
+    height: 65vh;
     width: 100%;
 }
 
@@ -39,5 +39,6 @@
     .dashboard-site-events {
         display: flex;
         flex-direction: column;
+        height: 100%;
     }
 }

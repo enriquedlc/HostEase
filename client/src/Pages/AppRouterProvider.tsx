@@ -37,8 +37,7 @@ const AppRouterProvider = () => {
           <Route path={HostEaseRoutes.Login} element={<Login />} />
           <Route path={HostEaseRoutes.Sign} element={<SignUp />} />
         </Route>
-        {/* userContext?.user && */}
-        { 
+        {userContext?.user && (
           <Route element={<MainSiteLayout context={userContext} />}>
             <Route path={HostEaseRoutes.MainPage} element={<MainPage />} />
             <Route
@@ -46,7 +45,7 @@ const AppRouterProvider = () => {
               element={<NewEvent />}
             />
           </Route>
-        }
+        )}
         {/* Hay que convertir este trozo en un componente que detecte los enlaces */}
         <Route
           path="*"
