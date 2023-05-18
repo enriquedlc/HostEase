@@ -12,10 +12,12 @@
 	},
 	"dependencies": {
 		"@types/bcrypt": "^5.0.0",
+		"apexcharts": "^3.40.0",
 		"axios": "^1.4.0",
 		"bcryptjs": "^2.4.3",
 		"framer-motion": "^10.12.8",
 		"react": "^18.2.0",
+		"react-apexcharts": "^1.4.0",
 		"react-circular-progressbar": "^2.1.0",
 		"react-dom": "^18.2.0",
 		"react-icons": "^4.8.0",
