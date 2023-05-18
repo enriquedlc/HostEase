@@ -2,4 +2,9 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    margin-top: 2rem;
+}
+
+.main-dashboard-title {
+    padding-bottom: .7rem;
 }

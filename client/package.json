@@ -11,6 +11,10 @@
 		"prettier-format": "prettier --config .prettierrc 'src/**/*.{ts,tsx}' --write"
 	},
 	"dependencies": {
+		"@emotion/react": "^11.11.0",
+		"@emotion/styled": "^11.11.0",
+		"@mui/material": "^5.13.1",
+		"@mui/x-data-grid": "^6.4.0",
 		"@types/bcrypt": "^5.0.0",
 		"apexcharts": "3.40.0",
 		"axios": "^1.4.0",
