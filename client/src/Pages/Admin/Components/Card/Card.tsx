@@ -143,8 +143,7 @@ const ExpandedCard: React.FC<ExpandedCardProps> = ({ params, setExpanded }) => {
             style={{
                 background: params.color.backGround,
                 boxShadow: params.color.boxShadow
-            }}
-            layoutId='expanded-card'>
+            }}>
             <div onClick={setExpanded}>
                 <FaTimes />
             </div>
