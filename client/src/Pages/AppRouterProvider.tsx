@@ -10,7 +10,7 @@ import NotFound from "./Error/NotFound";
 import Home from "./Home";
 import Login from "./Login";
 import MainPage from "./MainPage";
-import NewEvent from "./NewEvent";
+import FormEvent from "./FormEvent";
 import SignUp from "./SignUp";
 
 /**
@@ -41,8 +41,8 @@ const AppRouterProvider = () => {
           <Route element={<MainSiteLayout context={userContext} />}>
             <Route path={HostEaseRoutes.MainPage} element={<MainPage />} />
             <Route
-              path={`${HostEaseRoutes.NewEvent}/:id`}
-              element={<NewEvent />}
+              path={`${HostEaseRoutes.NewEvent}`}
+              element={<FormEvent />}
             />
           </Route>
         )}

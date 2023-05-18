@@ -208,6 +208,7 @@ const CustomDatePicker = ({
       </div>
       <div className={`datepicker-row button-panel ${theme}-datepicker`}>
         <button
+          type="button"
           onClick={handleDefaultButtonClick}
           className="datepicker-button"
           disabled={isBlocked}
@@ -215,6 +216,7 @@ const CustomDatePicker = ({
           Default
         </button>
         <button
+          type="button"
           onClick={handleBlockButtonClick}
           className={`datepicker-button ${
             isBlocked ? "blocked" : ""

@@ -1,10 +1,6 @@
 import axios from "axios";
 import bcrypt from "bcryptjs";
-import {
-    LoginRequest,
-    MapLibraries,
-    UserSubmit
-} from "../Types/Types";
+import { LoginRequest, MapLibraries, UserSubmit } from "../Types/Types";
 
 const API_URL = "http://localhost:8080/hostease";
 const SALTROUNDS = 10;
@@ -27,11 +23,23 @@ export const logInUser = async (loginData: LoginRequest) => {
 };
 
 export const signUpUser = async (userData: UserSubmit) => {
-  return axios.post(`${API_URL}/user/sign`, userData);
+  return axios.post(`${API_URL}/user/sign`, userData, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 };
 
 export const fetchUserEvents = async (userId: number) => {
-  return axios.get(`${API_URL}/user/events/${userId}`);  
-}
+  return axios.get(`${API_URL}/user/events/${userId}`);
+};
+
+export const fetchAllCategories = async () => {
+  return axios.get(`${API_URL}/categories`);
+};
+
+export const fetchAllTags = async () => {
+  return axios.get(`${API_URL}/tags`);
+};
 
 export const mapLibraries: MapLibraries[] = ["places"];

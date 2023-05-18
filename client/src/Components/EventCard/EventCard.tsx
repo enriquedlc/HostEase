@@ -6,7 +6,8 @@ import {
   AiOutlineArrowRight,
   AiOutlineClockCircle,
 } from "react-icons/ai";
-import { BsCalendarWeekFill } from "react-icons/bs";
+import { BsCalendarWeekFill, BsPeopleFill } from "react-icons/bs";
+import { FaCommentDots } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa";
 import TagCard from "../TagCard";
 import { useNavigate } from "react-router-dom";
@@ -18,6 +19,7 @@ interface EventCardOptions {
   title?: string;
   category?: Category;
   likes?: number;
+  messages?: number;
   startDate?: string;
   startTime?: string;
   endDate?: string | null;
@@ -25,6 +27,7 @@ interface EventCardOptions {
   location?: LatLngLiteral | null;
   tags?: Tag[];
   users?: number;
+  maxCapacity?: number;
 }
 
 const EventCard = (props: EventCardOptions) => {
@@ -40,6 +43,9 @@ const EventCard = (props: EventCardOptions) => {
     endDate,
     endTime,
     location,
+    category,
+    maxCapacity,
+    messages,
     tags,
     users,
   } = props;
@@ -57,9 +63,16 @@ const EventCard = (props: EventCardOptions) => {
 
   return (
     <div className={`card-body ${userContext?.theme}`}>
-      <div className="map-side">{location && <Map name="map" coordinates={location} center mode="view" />}</div>
+      <div className="map-side">
+        {location && (
+          <Map name="map" coordinates={location} center mode="view" />
+        )}
+      </div>
       <div className="content-side">
-        <h1>{title}</h1>
+        <div className="content-header">
+          <h1>{title}</h1>
+          <h5>{category?.categoryName}</h5>
+        </div>
         {slicedTags && (
           <div className="tags-container">
             {slicedTags?.map(({ tag, color }) => {
@@ -70,7 +83,7 @@ const EventCard = (props: EventCardOptions) => {
             )}
           </div>
         )}
-        <div className="row">
+        <div className="col">
           {startDate && (
             <div>
               <BsCalendarWeekFill />
@@ -88,6 +101,14 @@ const EventCard = (props: EventCardOptions) => {
           <div>
             <AiFillLike />
             <div>{likes}</div>
+          </div>
+          <div>
+            <FaCommentDots />
+            <div>{messages}</div>
+          </div>
+          <div>
+            <BsPeopleFill />
+            <div>{maxCapacity}</div>
           </div>
         </div>
         <div className="view-event" onClick={() => navigate("/event/id")}>

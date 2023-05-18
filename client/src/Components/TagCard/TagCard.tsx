@@ -1,18 +1,20 @@
-import React from 'react'
-import './TagCard.css'
+import React from "react";
+import "./TagCard.css";
 
-const TagCard = (props : { color: string, text: string }) => {
+const TagCard = (props: {
+  color: string;
+  text: string;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
+  style?: React.CSSProperties;
+}) => {
+  const { color, text, style, onClick } = props;
 
-    const { color, text } = props;  
-
-    return (
-    <div className='tag-body'>
-        <div className='tag-color' style={{ backgroundColor: color }}/>
-        <div className='tag-text'>
-            {text}
-        </div>
+  return (
+    <div className="tag-body" onClick={onClick} style={style}>
+      <div className="tag-color" style={{ backgroundColor: color }} />
+      <div className="tag-text">{text}</div>
     </div>
-  )
-}
+  );
+};
 
-export default TagCard
+export default TagCard;

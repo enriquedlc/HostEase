@@ -16,19 +16,20 @@ const MainPage = () => {
   
   return (
     <div className="dashboard-site-page">
-      <h1 className={`${userContext?.theme}-header`}>
+      <h1 className={`${userContext?.theme}-header`} style={{ marginBottom: 0 }}>
         Welcome, {user?.nickname}
       </h1>
       {user?.events ? (
         <>
-          <h1 className={`${userContext?.theme}-header`}>Your events</h1>
-          <div className="dashboard-site-events">
+          <h3 className={`${userContext?.theme}-header`} style={{ marginTop: 10, marginBottom: 0 }}>This are some of the events you have joined: </h3>
+          <div className={`${userContext?.theme}-dashboard dashboard-site-events`}>
             {user.events?.map(
               (
                 {
                   id,
                   title,
                   likes,
+                  messages,
                   startDate,
                   startTime,
                   endDate,
@@ -36,6 +37,8 @@ const MainPage = () => {
                   location,
                   tags,
                   users,
+                  category,
+                  maxCapacity
                 },
                 index
               ) => {
@@ -52,6 +55,9 @@ const MainPage = () => {
                     location={location}
                     tags={tags}
                     users={users}
+                    category={category}
+                    messages={messages}
+                    maxCapacity={maxCapacity}
                   />
                 );
               }

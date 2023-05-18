@@ -37,7 +37,7 @@ const NavBar = (prop : { context : UserContextValue | null }) => {
       </div>
       {!pathname.includes(HostEaseRoutes.NewEvent) && <div className={`navbar-add-event ${""}`}>
         <MdAssignmentAdd />
-        <Link to={`${HostEaseRoutes.NewEvent}/${context?.user?.id}`}>New Event</Link>
+        <Link to={`${HostEaseRoutes.NewEvent}`}>New Event</Link>
       </div>}
     </nav>
   );

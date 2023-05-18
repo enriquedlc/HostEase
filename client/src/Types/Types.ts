@@ -70,7 +70,7 @@ interface Achievement {
 
 export interface Category {
   id: number;
-  category: string;
+  categoryName: string;
 }
 
 export interface Tag {
@@ -79,7 +79,7 @@ export interface Tag {
   color: string;
 }
 
-export type HostEaseHandlerFunction = (date: string | LatLngLiteral | Date | Category | Tag[] | number | null, name: string ) => void
+export type HostEaseHandlerFunction = (date: File | string | LatLngLiteral | Date | Category | Tag[] | number | null, name: string ) => void
 
 export interface HostEaseEventForm {
   title?: string;
@@ -98,7 +98,7 @@ export interface HostEaseEventForm {
 export interface HostEaseEvent extends HostEaseEventForm {
   id: number;
   users: number;
-  messages?: Message[];
+  messages?: number;
   likes: number;
 }
 
