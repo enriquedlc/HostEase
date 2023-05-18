@@ -144,12 +144,18 @@ const ExpandedCard: React.FC<ExpandedCardProps> = ({ params, setExpanded }) => {
                 background: params.color.backGround,
                 boxShadow: params.color.boxShadow
             }}>
-            <div onClick={setExpanded}>
+            <div
+                style={{
+                    alignSelf: "flex-end",
+                    cursor: "pointer",
+                    color: "white",
+                }}
+                onClick={setExpanded}>
                 <FaTimes />
             </div>
             <span>{params.title}</span>
             <div className="chart-container" ref={chartRef} />
-            <span>last x hours</span>
+            <span>last month</span>
         </motion.div>
     );
 }
