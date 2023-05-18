@@ -76,6 +76,8 @@ public class UserController {
                     .body(errorMessage);
         }
 
+        Set<Event> events = user.getEvents();
+
         if (passwordEncoder.matches(password, user.getPassword())) {
 
             return new ControllerJsonResponseMap().jsonResponseMapObjectGenerator(
