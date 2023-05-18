@@ -22,6 +22,10 @@ public class UserService {
         return userRepository.findById(id).get();
     }
 
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
     public User save(User user) {
         return userRepository.save(user);
     }
@@ -33,8 +37,7 @@ public class UserService {
     public User update(User user) {
         userRepository.findById(user.getId()).ifPresent(userToUpdate -> {
             userToUpdate.setNickname(user.getNickname());
-            userToUpdate.setName(user.getName());
-            userToUpdate.setSurname(user.getSurname());
+            userToUpdate.setPhone(user.getPhone());
             userToUpdate.setEmail(user.getEmail());
             userToUpdate.setPassword(user.getPassword());
             userRepository.save(userToUpdate);

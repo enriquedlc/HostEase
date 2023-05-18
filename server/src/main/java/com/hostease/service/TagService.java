@@ -29,6 +29,7 @@ public class TagService {
     public Tag update(Tag tag, Long id) {
         tagRepository.findById(id).ifPresent(tagToUpdate -> {
             tagToUpdate.setTag(tag.getTag());
+            tagToUpdate.setColor(tag.getColor());
             tagRepository.save(tagToUpdate);
         });
         return tagRepository.findById(id)

@@ -1,5 +1,6 @@
 package com.hostease.runner;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
@@ -62,10 +63,10 @@ public class initDatabase implements CommandLineRunner {
                 Category category5 = new Category("Category 5");
 
                 // TAGS
-                Tag tag1 = new Tag("Tag 1");
-                Tag tag2 = new Tag("Tag 2");
-                Tag tag3 = new Tag("Tag 3");
-                Tag tag4 = new Tag("Tag 4");
+                Tag tag1 = new Tag("Tag 1", "red");
+                Tag tag2 = new Tag("Tag 2", "blue");
+                Tag tag3 = new Tag("Tag 3", "green");
+                Tag tag4 = new Tag("Tag 4", "yellow");
 
                 // EVENTS
                 Event event1 = new Event("Event 1", "Description 1", "2020-01-01", "2020-01-01", "12:00", "13:00",
@@ -82,20 +83,25 @@ public class initDatabase implements CommandLineRunner {
                                 10L, 0D, category4);
 
                 // USERS
-                User user1 = new User("nickNameUser1", "user1email@gmail.com", "sha256...", "NameUser1", "SurnameUser1",
-                                0L, "2020-01-01 12:00:00");
+                User user1 = new User("nickNameUser1", "user1email@gmail.com",
+                                "$2a$10$GNLnjxfAGA/0E7idq.2OruVeGWCOIVPVh4y943isTzIHHplKeVOM.", "687779560",
+                                0L, LocalDateTime.now());
 
-                User user2 = new User("nickNameUser2", "user2email@gmail.com", "sha256...", "NameUser2", "SurnameUser2",
-                                100L, "2020-01-01 12:00:00");
+                User user2 = new User("nickNameUser2", "user2email@gmail.com",
+                                "$2a$10$GNLnjxfAGA/0E7idq.2OruVeGWCOIVPVh4y943isTzIHHplKeVOM.", "687779560",
+                                100L, LocalDateTime.now());
 
-                User user3 = new User("nickNameUser3", "user3email@gmail.com", "sha256...", "NameUser3", "SurnameUser3",
-                                100L, "2020-01-01 12:00:00");
+                User user3 = new User("nickNameUser3", "user3email@gmail.com",
+                                "$2a$10$GNLnjxfAGA/0E7idq.2OruVeGWCOIVPVh4y943isTzIHHplKeVOM.", "687779560",
+                                100L, LocalDateTime.now());
 
-                User user4 = new User("nickNameUser4", "user4email@gmail.com", "sha256...", "NameUser4", "SurnameUser4",
-                                100L, "2020-01-01 12:00:00");
+                User user4 = new User("nickNameUser4", "user4email@gmail.com",
+                                "$2a$10$GNLnjxfAGA/0E7idq.2OruVeGWCOIVPVh4y943isTzIHHplKeVOM.", "687779560",
+                                100L, LocalDateTime.now());
 
-                User user5 = new User("nickNameUser5", "user5email@gmail.com", "sha256...", "NameUser5", "SurnameUser5",
-                                100L, "2020-01-01 12:00:00");
+                User user5 = new User("nickNameUser5", "user5email@gmail.com",
+                                "$2a$10$GNLnjxfAGA/0E7idq.2OruVeGWCOIVPVh4y943isTzIHHplKeVOM.", "687779560",
+                                100L, LocalDateTime.now());
 
                 // ACHIEVEMENTS
                 Achievement achievement1 = new Achievement("Achievement description 1", 100L, 1D);

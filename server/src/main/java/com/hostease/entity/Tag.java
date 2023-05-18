@@ -40,16 +40,21 @@ public class Tag {
     @Column(name = "tag", nullable = false, length = 50)
     private String tag;
 
+    @Column(name = "color", nullable = false, length = 50)
+    private String color;
+
     public Tag() {
     }
 
-    public Tag(Long id, String tag) {
+    public Tag(Long id, String tag, String color) {
         this.id = id;
         this.tag = tag;
+        this.color = color;
     }
 
-    public Tag(String tag) {
+    public Tag(String tag, String color) {
         this.tag = tag;
+        this.color = color;
     }
 
     public Long getId() {
@@ -66,6 +71,14 @@ public class Tag {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 
     public Set<Event> getEvents() {

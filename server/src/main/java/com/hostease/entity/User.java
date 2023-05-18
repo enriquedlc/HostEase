@@ -1,5 +1,6 @@
 package com.hostease.entity;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -75,28 +76,24 @@ public class User {
     @Column(name = "password", nullable = false, length = 70)
     private String password;
 
-    @Column(name = "name", nullable = false, length = 45)
-    private String name;
+    @Column(name = "phone", nullable = false, length = 45)
+    private String phone;
 
-    @Column(name = "surname", nullable = false, length = 60)
-    private String surname;
+    @Column(name = "experiencePoints", nullable = true, columnDefinition = "bigint(20) default 0")
+    private Long experience = 0L;
 
-    @Column(name = "experiencePoints", nullable = false, columnDefinition = "bigint(20) default 0")
-    private Long experience;
-
-    @Column(name = "joinedAt", nullable = false, columnDefinition = "DATETIME default CURRENT_TIMESTAMP")
-    private String joinedAt;
+    @Column(name = "joinedAt", nullable = true, columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
+    private LocalDateTime joinedAt = LocalDateTime.now();
 
     public User() {
     }
 
-    public User(String nickname, String email, String password, String name, String surname,
-            Long experience, String joinedAt) {
+    public User(String nickname, String email, String password, String phone,
+            Long experience, LocalDateTime joinedAt) {
         this.nickname = nickname;
         this.email = email;
         this.password = password;
-        this.name = name;
-        this.surname = surname;
+        this.phone = phone;
         this.experience = experience;
         this.joinedAt = joinedAt;
     }
@@ -141,21 +138,14 @@ public class User {
         this.password = password;
     }
 
-    public String getName() {
-        return name;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
 
     public Long getExperience() {
         return experience;
@@ -165,11 +155,11 @@ public class User {
         this.experience = experience;
     }
 
-    public String getJoinedAt() {
+    public LocalDateTime getJoinedAt() {
         return joinedAt;
     }
 
-    public void setJoinedAt(String joinedAt) {
+    public void setJoinedAt(LocalDateTime joinedAt) {
         this.joinedAt = joinedAt;
     }
 
@@ -215,6 +205,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "User" + this.name;
+        return "User" + this.nickname;
     }
 }
