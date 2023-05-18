@@ -1,8 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { CircularProgressbar } from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css'
+// import { ApexChart } from 'react-apexcharts';
+import ApexCharts from 'apexcharts';
+import { ApexOptions } from 'apexcharts';
 
 import { FaTimes } from 'react-icons/fa'
 
@@ -82,23 +85,75 @@ const CompactedCard: React.FC<CompactedCardProps> = ({ params, setExpanded }) =>
 
 // Expanded Card
 const ExpandedCard: React.FC<ExpandedCardProps> = ({ params, setExpanded }) => {
+    const chartRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (chartRef.current) {
+            const chartOptions: ApexOptions = {
+                series: params.series,
+                chart: {
+                    type: "area",
+                    height: "auto",
+                },
+                fill: {
+                    colors: ["#fff"],
+                    type: "gradient",
+                },
+                dataLabels: {
+                    enabled: false,
+                },
+                stroke: {
+                    curve: "smooth",
+                    colors: ["white"],
+                },
+                tooltip: {
+                    x: {
+                        format: "dd/MM/yy HH:mm",
+                    },
+                },
+                grid: {
+                    show: true,
+                },
+                xaxis: {
+                    type: "datetime",
+                    categories: [
+                        "2018-09-19T00:00:00.000Z",
+                        "2018-09-19T01:30:00.000Z",
+                        "2018-09-19T02:30:00.000Z",
+                        "2018-09-19T03:30:00.000Z",
+                        "2018-09-19T04:30:00.000Z",
+                        "2018-09-19T05:30:00.000Z",
+                        "2018-09-19T06:30:00.000Z",
+                    ],
+                },
+            };
+
+            const chart = new ApexCharts(chartRef.current, chartOptions);
+            chart.render();
+
+            return () => {
+                chart.destroy();
+            };
+        }
+    }, [params.series]);
+
     return (
-        <div
+        <motion.div
             className="expanded-card"
             style={{
                 background: params.color.backGround,
                 boxShadow: params.color.boxShadow
-            }}>
+            }}
+            layoutId='expanded-card'>
             <div onClick={setExpanded}>
                 <FaTimes />
             </div>
             <span>{params.title}</span>
-            <div className="chart-container">
-                Chart
-            </div>
+            <div className="chart-container" ref={chartRef} />
             <span>last x hours</span>
-        </div>
-    )
+        </motion.div>
+    );
 }
+
 
 export default Card
