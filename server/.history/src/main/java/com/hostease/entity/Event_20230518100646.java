@@ -5,7 +5,6 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -22,7 +21,6 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.hostease.models.Location;
 
 @Entity
 @Table(name = "event_table")
@@ -75,9 +73,11 @@ public class Event {
     @Column(name = "endTime", nullable = false)
     private String endTime;
 
-    @Embedded
-    @Column(name = "location")
-    private Location location;
+    @Column(name = "locationLat", nullable = false)
+    private Double locationLat;
+
+    @Column(name = "locationLng", nullable = false)
+    private Double locationLng;
 
     @Column(name = "maxCapacity", nullable = false)
     private Long maxCapacity;
@@ -89,7 +89,7 @@ public class Event {
     }
 
     public Event(Long id, String title, String description, String startDate, String endDate, String startTime,
-            String endTime, Location location, Long maxCapacity, Double photo) {
+            String endTime, Double locationLat, Double locationLng, Long maxCapacity, Double photo) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -97,13 +97,14 @@ public class Event {
         this.endDate = endDate;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.location = location;
+        this.locationLat = locationLat;
+        this.locationLng = locationLng;
         this.maxCapacity = maxCapacity;
         this.photo = photo;
     }
 
     public Event(Long id, String title, String description, String startDate, String endDate, String startTime,
-            String endTime, Location location, Long maxCapacity, Double photo, Category category) {
+            String endTime, Double locationLat, Double locationLng, Long maxCapacity, Double photo, Category category) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -111,21 +112,23 @@ public class Event {
         this.endDate = endDate;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.location = location;
+        this.locationLat = locationLat;
+        this.locationLng = locationLng;
         this.maxCapacity = maxCapacity;
         this.photo = photo;
         this.category = category;
     }
 
     public Event(String title, String description, String startDate, String endDate, String startTime,
-            String endTime, Location location, Long maxCapacity, Double photo, Category category) {
+            String endTime, Double locationLat, Double locationLng, Long maxCapacity, Double photo, Category category) {
         this.title = title;
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.location = location;
+        this.locationLat = locationLat;
+        this.locationLng = locationLng;
         this.maxCapacity = maxCapacity;
         this.photo = photo;
         this.category = category;
@@ -187,12 +190,20 @@ public class Event {
         this.endTime = endTime;
     }
 
-    public Location getLocation() {
-        return location;
+    public Double getLocationLat() {
+        return locationLat;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setLocationLat(Double locationLat) {
+        this.locationLat = locationLat;
+    }
+
+    public Double getLocationLng() {
+        return locationLng;
+    }
+
+    public void setLocationLng(Double locationLng) {
+        this.locationLng = locationLng;
     }
 
     public Long getMaxCapacity() {
@@ -254,8 +265,8 @@ public class Event {
     @Override
     public String toString() {
         return "Event [id=" + id + ", title=" + title + ", description=" + description + ", startDate=" + startDate
-                + ", endDate=" + endDate + ", startTime=" + startTime + ", endTime=" + endTime + ", location="
-                + location + ", maxCapacity=" + maxCapacity + ", photo=" + photo
+                + ", endDate=" + endDate + ", startTime=" + startTime + ", endTime=" + endTime + ", locationLat="
+                + locationLat + ", locationLng=" + locationLng + ", maxCapacity=" + maxCapacity + ", photo=" + photo
                 + "]";
     }
 }

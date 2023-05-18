@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.hostease.entity.Event;
 import com.hostease.repository.EventRepository;
+import com.hostease.repository.UserRepository;
 
 @Service
 public class EventService {
@@ -14,8 +15,11 @@ public class EventService {
     @Autowired
     EventRepository eventRepository;
 
+    @Autowired
+    UserRepository userRepository;
+
     public List<Event> findByUserId(Long id) {
-        return eventRepository.findEventsByUsersId(id);
+        return userRepository.findEventsById(id);
     }
 
     public List<Event> findAll() {
@@ -39,7 +43,8 @@ public class EventService {
             eventToUpdate.setEndDate(event.getEndDate());
             eventToUpdate.setStartTime(event.getStartTime());
             eventToUpdate.setEndTime(event.getEndTime());
-            eventToUpdate.setLocation(event.getLocation());
+            eventToUpdate.setLocationLat(event.getLocationLat());
+            eventToUpdate.setLocationLng(event.getLocationLng());
             eventToUpdate.setMaxCapacity(event.getMaxCapacity());
             eventToUpdate.setPhoto(event.getPhoto());
             eventRepository.save(eventToUpdate);

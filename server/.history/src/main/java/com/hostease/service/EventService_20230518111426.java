@@ -39,7 +39,8 @@ public class EventService {
             eventToUpdate.setEndDate(event.getEndDate());
             eventToUpdate.setStartTime(event.getStartTime());
             eventToUpdate.setEndTime(event.getEndTime());
-            eventToUpdate.setLocation(event.getLocation());
+            eventToUpdate.setLocationLat(event.getLocationLat());
+            eventToUpdate.setLocationLng(event.getLocationLng());
             eventToUpdate.setMaxCapacity(event.getMaxCapacity());
             eventToUpdate.setPhoto(event.getPhoto());
             eventRepository.save(eventToUpdate);

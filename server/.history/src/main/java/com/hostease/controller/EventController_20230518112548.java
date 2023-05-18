@@ -24,7 +24,6 @@ import com.hostease.utils.ControllerJsonResponseMap;
 
 @RestController
 @RequestMapping("/hostease")
-@CrossOrigin("*")
 public class EventController {
 
     @Autowired
