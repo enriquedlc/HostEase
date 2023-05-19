@@ -24,13 +24,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.hostease.models.Location;
+import com.hostease.serializer.CustomCategorySerializer;
 import com.hostease.serializer.CustomCountLikeSerializer;
 import com.hostease.serializer.CustomCountMessageSerializer;
 import com.hostease.serializer.CustomCountUserSerializer;
 
 @Entity
 @Table(name = "event_table")
-@JsonIgnoreProperties({ "tags", "category" })
+@JsonIgnoreProperties({ "tags" })
 public class Event {
 
     @JsonIgnore
@@ -47,6 +48,7 @@ public class Event {
     })
     private Set<User> users = new HashSet<>();
 
+    @JsonSerialize(using = CustomCategorySerializer.class)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "categoryId", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
