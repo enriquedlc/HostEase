@@ -22,11 +22,14 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.hostease.models.Location;
+import com.hostease.serializer.CustomCountMessageSerializer;
+import com.hostease.serializer.CustomCountUserSerializer;
 
 @Entity
 @Table(name = "event_table")
-@JsonIgnoreProperties({ "users", "messages", "likes", "tags", "category" })
+@JsonIgnoreProperties({ "likes", "tags", "category" })
 public class Event {
 
     @JsonIgnore
@@ -36,6 +39,7 @@ public class Event {
     })
     private Set<Tag> tags = new HashSet<>();
 
+    @JsonSerialize(using = CustomCountUserSerializer.class)
     @ManyToMany(mappedBy = "events", fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
@@ -47,6 +51,7 @@ public class Event {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Category category;
 
+    @JsonSerialize(using = CustomCountMessageSerializer.class)
     @OneToMany(mappedBy = "event", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Message> messages = new HashSet<>();
 
