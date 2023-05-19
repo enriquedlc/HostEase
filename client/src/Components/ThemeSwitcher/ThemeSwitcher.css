@@ -45,7 +45,7 @@
   }
 
   .dark-switcher-slider-round:before {
-	background-color: var(--primary-color);
+	background-color: var(--secondary-dark-color);
   }
 
   .light-switcher-slider-round:before {
@@ -57,10 +57,15 @@
   }
 
   .theme-switcher-slider:checked + .dark-switcher-slider-round {
-	background-color: var(--secondary-dark-color);
+	background-color: var(--primary-dark-color);
   }
   
   .theme-switcher-slider:checked + .dark-switcher-slider-round:before {
 	transform: translateX(26px);
   }
+
+  .dark-switcher-slider-round svg {
+	color: var(--secondary-color);
+  }
   
+

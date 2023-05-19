@@ -14,9 +14,6 @@ const MainSiteLayout = () => {
     <section className={`general-section ${userContext?.theme}-theme`}>
       <Navbar/>
       <Outlet/>
-      <div className="general-section-bottom">
-        <ThemeSwitcher />
-      </div>
     </section>
   );
 };

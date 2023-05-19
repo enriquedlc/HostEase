@@ -1,10 +1,26 @@
-.light-switcher-button, .dark-switcher-button {
-    top: 17%;
-    left: 8%;
-    position: absolute;
-    z-index: 1;
+.light-switcher-button,
+.dark-switcher-button {
+  font-size: 15px;
+  align-self: auto;
+  bottom: -43%;
+  position: absolute;
+  z-index: 1;
+}
+
+.light-switcher-button {
+  right: 11.5%;
+  transition: transform 0.3s ease;
+}
+
+.dark-switcher-button {
+  transform: translateX(15px);
+  transition: transform 0.3s ease;
 }
 
 .theme-switcher-container svg {
-    color: var(--secondary-color)
+  color: var(--secondary-color);
+}
+
+.dark-switcher-button {
+  color: var(--primary-color);
 }

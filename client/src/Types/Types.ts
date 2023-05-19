@@ -43,7 +43,7 @@ interface Achievement {
 
 export interface Category {
 	id: number;
-	category: string;
+	categoryName: string;
 }
 
 export interface Tag {
