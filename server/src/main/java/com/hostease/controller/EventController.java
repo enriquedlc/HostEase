@@ -16,12 +16,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hostease.entity.Category;
 import com.hostease.entity.Event;
 import com.hostease.entity.Tag;
 import com.hostease.enums.HttpStatusEnum;
+import com.hostease.repository.CategoryRepository;
 import com.hostease.repository.TagRepository;
 import com.hostease.service.EventService;
 import com.hostease.utils.ControllerJsonResponseMap;
@@ -36,6 +37,9 @@ public class EventController {
 
     @Autowired
     TagRepository tagRepository;
+
+    @Autowired
+    CategoryRepository categoryRepository;
 
     @GetMapping("/user/events/{userId}")
     public ResponseEntity<Map<String, Object>> findByUserId(@PathVariable("userId") Long id) {
@@ -73,28 +77,26 @@ public class EventController {
                 "Error retrieving event");
     }
 
-    @PostMapping("/events{categoryId}")
-    public ResponseEntity<Map<String, Object>> save(@RequestBody Event event, @RequestParam("categoryId") Long id) {
-        Set<Tag> managedTags = new HashSet<>();
+    @PostMapping("/events/{categoryId}")
+    public ResponseEntity<Map<String, Object>> save(@RequestBody Event event, @PathVariable("categoryId") Long id) {
+        Category category = categoryRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid category id: " + id));
 
+        event.setCategory(category);
+
+        Set<Tag> tagsToSave = new HashSet<>();
         for (Tag tag : event.getTags()) {
-            if (tag.getId() != null) {
-                Tag managedTag = tagRepository.findById(tag.getId()).orElse(null);
-                if (managedTag != null) {
-                    managedTags.add(managedTag);
-                }
-            } else {
-                Tag savedTag = tagRepository.save(tag);
-                managedTags.add(savedTag);
-            }
+            Tag managedTag = tagRepository.findById(tag.getId())
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid tag id: " + tag.getId()));
+            tagsToSave.add(managedTag);
+            managedTag.getEvents().add(event); // Bidirectional association
         }
+        event.setTags(tagsToSave);
 
-        event.setTags(managedTags);
-
-        Event savedEvent = eventService.save(event, id);
+        eventService.save(event, id);
 
         return new ControllerJsonResponseMap().jsonResponseMapObjectGenerator(
-                savedEvent,
+                event,
                 HttpStatusEnum.STATUS_201_CREATED.getStatus(),
                 "Event successfully created",
                 "Error creating event");

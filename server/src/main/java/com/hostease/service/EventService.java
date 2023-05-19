@@ -45,7 +45,7 @@ public class EventService {
             eventRepository.save(eventToUpdate);
         });
         return eventRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Event not found"));
+                .orElseThrow(() -> new RuntimeException("Event not found"));
     }
 
     public void deleteById(Long id) {

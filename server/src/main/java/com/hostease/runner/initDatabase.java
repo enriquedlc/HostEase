@@ -164,8 +164,7 @@ public class initDatabase implements CommandLineRunner {
                 achievementRepository.save(achievement3);
 
                 // SET THE CATEGORIES FOR THE EVENTS
-                Set<Event> eventsToAsingCategory1 = new HashSet<Event>(
-                                Arrays.asList(event1));
+                Set<Event> eventsToAsingCategory1 = new HashSet<Event>(Arrays.asList(event1));
                 category1.setEvents(eventsToAsingCategory1);
                 event1.setCategory(category1);
                 categoryRepository.save(category1);
@@ -470,6 +469,8 @@ public class initDatabase implements CommandLineRunner {
                 user2.getLikes().add(like11);
                 event4.getLikes().add(like11);
                 likeRepository.save(like11);
+
+                System.out.println(event1.getTags());
 
                 System.out.println("Database initialized");
 

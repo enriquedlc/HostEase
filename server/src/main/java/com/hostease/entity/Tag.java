@@ -26,7 +26,7 @@ public class Tag {
 
     @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, cascade = {
-            CascadeType.PERSIST,
+            // CascadeType.PERSIST,
             CascadeType.MERGE
     })
     @JoinTable(name = "event_tag_table", joinColumns = @JoinColumn(name = "fk_event_id"), inverseJoinColumns = @JoinColumn(name = "fk_tag_id"))
