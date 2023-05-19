@@ -22,7 +22,6 @@ import com.hostease.enums.HttpStatusEnum;
 import com.hostease.service.UserService;
 import com.hostease.utils.ControllerJsonResponseMap;
 
-
 @RestController
 @RequestMapping("/hostease")
 @CrossOrigin("*")
@@ -65,7 +64,7 @@ public class UserController {
         String password = LoginRequest.get("password");
 
         User user = userService.findByEmail(email);
- 
+
         if (user == null) {
             String errorMessage = String.format("ERROR: User with email %s does not exists", email);
             HttpStatus status = HttpStatus.CONFLICT;
@@ -93,8 +92,7 @@ public class UserController {
 
     @PostMapping("/user/sign")
     public ResponseEntity<?> save(@RequestBody User user) {
-        System.out.println("DATOOOOS: " + user.getNickname() + ", " + user.getPassword() + ", " + user.getEmail());
-        
+
         if (userService.findByEmail(user.getEmail()) != null) {
 
             String errorMessage = String.format("ERROR: User with email %s already exists", user.getEmail());

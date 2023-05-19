@@ -24,7 +24,9 @@ import com.hostease.entity.Tag;
 import com.hostease.enums.HttpStatusEnum;
 import com.hostease.service.CategoryService;
 import com.hostease.service.EventService;
+import com.hostease.service.MessageService;
 import com.hostease.service.TagService;
+import com.hostease.service.UserService;
 import com.hostease.utils.ControllerJsonResponseMap;
 
 @RestController
@@ -40,6 +42,12 @@ public class EventController {
 
     @Autowired
     TagService tagService;
+
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    MessageService messageService;
 
     @GetMapping("/user/events/{userId}")
     public ResponseEntity<Map<String, Object>> findByUserId(@PathVariable("userId") Long id) {
@@ -88,7 +96,7 @@ public class EventController {
             Tag managedTag = tagService.findById(tag.getId());
 
             tagsToSave.add(managedTag);
-            managedTag.getEvents().add(event); // Bidirectional association
+            managedTag.getEvents().add(event);
         }
         event.setTags(tagsToSave);
 

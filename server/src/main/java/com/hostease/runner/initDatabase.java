@@ -2,7 +2,6 @@ package com.hostease.runner;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -112,11 +111,11 @@ public class initDatabase implements CommandLineRunner {
                 // MESSAGES
                 // Message message1 = new Message("Message body example 1", new Date(), event1,
                 // user1);
-                Message message2 = new Message("Message body example 2", new Date());
-                Message message3 = new Message("Message body example 3", new Date());
-                Message message4 = new Message("Message body example 4", new Date(), event2, user3);
-                Message message5 = new Message("Message body example 5", new Date(), event3, user4);
-                Message message6 = new Message("Message body example 7", new Date(), event4, user4);
+                Message message2 = new Message("Message body example 2", "2023-04-19 23:51:30");
+                Message message3 = new Message("Message body example 3", "2023-04-19 23:51:30");
+                Message message4 = new Message("Message body example 4", "2023-04-19 23:51:30", event2, user3);
+                Message message5 = new Message("Message body example 5", "2023-04-19 23:51:30", event3, user4);
+                Message message6 = new Message("Message body example 7", "2023-04-19 23:51:30", event4, user4);
 
                 // // LIKES
                 Like like3 = new Like(event1, user3, true, "2023-04-19 23:51:30");
@@ -305,7 +304,7 @@ public class initDatabase implements CommandLineRunner {
                 // First example
                 Message message1 = new Message();
                 message1.setMessage("hola este es el primer mensaje");
-                message1.setPublishedAt(new Date());
+                message1.setPublishedAt("2023-04-19 23:51:30");
                 message1.setUser(user1);
                 message1.setEvent(event1);
 

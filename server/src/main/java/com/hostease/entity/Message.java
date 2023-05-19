@@ -1,7 +1,5 @@
 package com.hostease.entity;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,9 +11,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.hostease.deserializer.CustomMessageDeserializer;
 
 @Entity
 @Table(name = "message_table")
+@JsonDeserialize(using = CustomMessageDeserializer.class)
 public class Message {
 
     @Id
@@ -26,7 +27,7 @@ public class Message {
     private String message;
 
     @Column(name = "published_at", nullable = false, columnDefinition = "DATETIME default CURRENT_TIMESTAMP")
-    private Date publishedAt;
+    private String publishedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_event_id", nullable = false)
@@ -41,7 +42,7 @@ public class Message {
     public Message() {
     }
 
-    public Message(Long id, String message, Date publishedAt, Event event, User user) {
+    public Message(Long id, String message, String publishedAt, Event event, User user) {
         this.id = id;
         this.message = message;
         this.publishedAt = publishedAt;
@@ -49,12 +50,12 @@ public class Message {
         this.user = user;
     }
 
-    public Message(String message, Date publishedAt) {
+    public Message(String message, String publishedAt) {
         this.message = message;
         this.publishedAt = publishedAt;
     }
 
-    public Message(String string, Date date, Event event1, User user1) {
+    public Message(String string, String date, Event event1, User user1) {
         this.message = string;
         this.publishedAt = date;
         this.event = event1;
@@ -93,11 +94,11 @@ public class Message {
         this.user = user;
     }
 
-    public Date getPublishedAt() {
+    public String getPublishedAt() {
         return publishedAt;
     }
 
-    public void setPublishedAt(Date publishedAt) {
+    public void setPublishedAt(String publishedAt) {
         this.publishedAt = publishedAt;
     }
 
