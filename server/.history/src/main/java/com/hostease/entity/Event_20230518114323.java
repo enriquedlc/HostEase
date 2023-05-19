@@ -20,43 +20,36 @@ import javax.persistence.Table;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.hostease.models.Location;
-import com.hostease.serializer.CustomCategorySerializer;
-import com.hostease.serializer.CustomCountLikeSerializer;
-import com.hostease.serializer.CustomCountMessageSerializer;
-import com.hostease.serializer.CustomCountUserSerializer;
-import com.hostease.serializer.CustomTagSerializer;
 
 @Entity
 @Table(name = "event_table")
+@JsonIgnoreProperties({ "users", "messages", "likes", "tags", "category" })
 public class Event {
 
-    @JsonSerialize(using = CustomTagSerializer.class)
+    @JsonIgnore
     @ManyToMany(mappedBy = "events", fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
     })
     private Set<Tag> tags = new HashSet<>();
 
-    @JsonSerialize(using = CustomCountUserSerializer.class)
     @ManyToMany(mappedBy = "events", fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
     })
     private Set<User> users = new HashSet<>();
 
-    @JsonSerialize(using = CustomCategorySerializer.class)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "categoryId", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Category category;
 
-    @JsonSerialize(using = CustomCountMessageSerializer.class)
     @OneToMany(mappedBy = "event", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Message> messages = new HashSet<>();
 
-    @JsonSerialize(using = CustomCountLikeSerializer.class)
     @OneToMany(mappedBy = "event", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Like> likes = new HashSet<Like>();
 

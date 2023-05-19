@@ -18,7 +18,6 @@ import com.hostease.entity.Like;
 import com.hostease.entity.Message;
 import com.hostease.entity.Tag;
 import com.hostease.entity.User;
-import com.hostease.models.Location;
 import com.hostease.repository.AchievementRepository;
 import com.hostease.repository.CategoryRepository;
 import com.hostease.repository.EventRepository;
@@ -71,16 +70,16 @@ public class initDatabase implements CommandLineRunner {
 
                 // EVENTS
                 Event event1 = new Event("Event 1", "Description 1", "2020-01-01", "2020-01-01", "12:00", "13:00",
-                                new Location(50.3785D, 14.9706D),
+                                50.3785D, 14.9706D,
                                 10L, 0D, category1);
                 Event event2 = new Event("Event 2", "Description 2", "2020-01-01", "2020-01-01", "12:00", "13:00",
-                                new Location(50.3785D, 14.9706D),
+                                50.3785D, 14.9706D,
                                 10L, 0D, category2);
                 Event event3 = new Event("Event 3", "Description 3", "2020-01-01", "2020-01-01", "12:00", "13:00",
-                                new Location(50.3785D, 14.9706D),
+                                50.3785D, 14.9706D,
                                 10L, 0D, category3);
                 Event event4 = new Event("Event 4", "Description 4", "2020-01-01", "2020-01-01", "12:00", "13:00",
-                                new Location(50.3785D, 14.9706D),
+                                50.3785D, 14.9706D,
                                 10L, 0D, category4);
 
                 // USERS

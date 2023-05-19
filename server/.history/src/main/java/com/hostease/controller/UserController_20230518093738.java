@@ -2,6 +2,7 @@ package com.hostease.controller;
 
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Set;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hostease.entity.User;
+import com.hostease.entity.Event;
 import com.hostease.enums.HttpStatusEnum;
 import com.hostease.service.UserService;
 import com.hostease.utils.ControllerJsonResponseMap;
