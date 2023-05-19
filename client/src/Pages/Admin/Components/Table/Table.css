@@ -5,3 +5,8 @@
 .table-title {
     margin-bottom: .5rem;
 }
+
+/* to set it to the right mui table component */
+.MuiDataGrid-columnHeaderTitleContainer {
+    flex-direction: row !important;
+}
