@@ -19,16 +19,15 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.data.relational.core.mapping.Embedded.Nullable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.hostease.serializer.CustomEventSerializer;
 
 @Entity
 @Table(name = "user_table")
-@JsonIgnoreProperties({"followers", "following", "likes", "messages", "achievements" })
+@JsonIgnoreProperties({ "followers", "following", "likes", "messages", "achievements", "events" })
 public class User {
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {
@@ -37,7 +36,6 @@ public class User {
     })
     @JoinTable(name = "users_on_event_table", joinColumns = @JoinColumn(name = "fk_event_id"), inverseJoinColumns = @JoinColumn(name = "fk_user_id"))
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonSerialize(using = CustomEventSerializer.class)
     private Set<Event> events = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {
@@ -50,6 +48,7 @@ public class User {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference
+    @Nullable
     private Set<Message> messages = new HashSet<Message>();
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -145,7 +144,6 @@ public class User {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
 
     public Long getExperience() {
         return experience;

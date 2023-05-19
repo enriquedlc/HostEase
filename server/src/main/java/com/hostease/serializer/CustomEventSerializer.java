@@ -19,7 +19,8 @@ public class CustomEventSerializer extends StdSerializer<Set<Event>> {
     }
 
     @Override
-    public void serialize(Set<Event> events, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+    public void serialize(Set<Event> events, JsonGenerator jsonGenerator, SerializerProvider serializerProvider)
+            throws IOException {
         jsonGenerator.writeStartArray();
         for (Event event : events) {
             jsonGenerator.writeObject(event.getId());

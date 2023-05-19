@@ -1,8 +1,10 @@
 package com.hostease.controller;
 
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hostease.entity.Event;
+import com.hostease.entity.Tag;
 import com.hostease.enums.HttpStatusEnum;
+import com.hostease.repository.TagRepository;
 import com.hostease.service.EventService;
 import com.hostease.utils.ControllerJsonResponseMap;
 
@@ -29,6 +33,9 @@ public class EventController {
 
     @Autowired
     EventService eventService;
+
+    @Autowired
+    TagRepository tagRepository;
 
     @GetMapping("/user/events/{userId}")
     public ResponseEntity<Map<String, Object>> findByUserId(@PathVariable("userId") Long id) {
@@ -50,8 +57,8 @@ public class EventController {
         return new ControllerJsonResponseMap().jsonResponseMapListGenerator(
                 events,
                 HttpStatusEnum.STATUS_200_OK.getStatus(),
-                "Events successfully retrieved",
-                "Error retrieving events");
+                "Event successfully retrieved",
+                "Error retrieving event");
     }
 
     @GetMapping("/events/{id}")
@@ -68,11 +75,26 @@ public class EventController {
 
     @PostMapping("/events{categoryId}")
     public ResponseEntity<Map<String, Object>> save(@RequestBody Event event, @RequestParam("categoryId") Long id) {
+        Set<Tag> managedTags = new HashSet<>();
 
-        Event eventToSave = eventService.save(event, id);
+        for (Tag tag : event.getTags()) {
+            if (tag.getId() != null) {
+                Tag managedTag = tagRepository.findById(tag.getId()).orElse(null);
+                if (managedTag != null) {
+                    managedTags.add(managedTag);
+                }
+            } else {
+                Tag savedTag = tagRepository.save(tag);
+                managedTags.add(savedTag);
+            }
+        }
+
+        event.setTags(managedTags);
+
+        Event savedEvent = eventService.save(event, id);
 
         return new ControllerJsonResponseMap().jsonResponseMapObjectGenerator(
-                eventToSave,
+                savedEvent,
                 HttpStatusEnum.STATUS_201_CREATED.getStatus(),
                 "Event successfully created",
                 "Error creating event");

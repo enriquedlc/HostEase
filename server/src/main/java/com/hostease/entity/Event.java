@@ -20,8 +20,6 @@ import javax.persistence.Table;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.hostease.models.Location;
 import com.hostease.serializer.CustomCategorySerializer;
@@ -32,7 +30,6 @@ import com.hostease.serializer.CustomTagSerializer;
 
 @Entity
 @Table(name = "event_table")
-@JsonIgnoreProperties({ "messages"})
 public class Event {
 
     @JsonSerialize(using = CustomTagSerializer.class)
@@ -55,7 +52,7 @@ public class Event {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Category category;
 
-    // @JsonSerialize(using = CustomCountMessageSerializer.class)
+    @JsonSerialize(using = CustomCountMessageSerializer.class)
     // @JsonManagedReference
     @OneToMany(mappedBy = "event", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Message> messages = new HashSet<>();
