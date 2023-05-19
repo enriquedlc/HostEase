@@ -22,9 +22,9 @@ import com.hostease.entity.Category;
 import com.hostease.entity.Event;
 import com.hostease.entity.Tag;
 import com.hostease.enums.HttpStatusEnum;
-import com.hostease.repository.CategoryRepository;
-import com.hostease.repository.TagRepository;
+import com.hostease.service.CategoryService;
 import com.hostease.service.EventService;
+import com.hostease.service.TagService;
 import com.hostease.utils.ControllerJsonResponseMap;
 
 @RestController
@@ -36,10 +36,10 @@ public class EventController {
     EventService eventService;
 
     @Autowired
-    TagRepository tagRepository;
+    CategoryService categoryService;
 
     @Autowired
-    CategoryRepository categoryRepository;
+    TagService tagService;
 
     @GetMapping("/user/events/{userId}")
     public ResponseEntity<Map<String, Object>> findByUserId(@PathVariable("userId") Long id) {
@@ -79,15 +79,14 @@ public class EventController {
 
     @PostMapping("/events/{categoryId}")
     public ResponseEntity<Map<String, Object>> save(@RequestBody Event event, @PathVariable("categoryId") Long id) {
-        Category category = categoryRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid category id: " + id));
+        Category category = categoryService.findById(id);
 
         event.setCategory(category);
 
         Set<Tag> tagsToSave = new HashSet<>();
         for (Tag tag : event.getTags()) {
-            Tag managedTag = tagRepository.findById(tag.getId())
-                    .orElseThrow(() -> new IllegalArgumentException("Invalid tag id: " + tag.getId()));
+            Tag managedTag = tagService.findById(tag.getId());
+
             tagsToSave.add(managedTag);
             managedTag.getEvents().add(event); // Bidirectional association
         }
