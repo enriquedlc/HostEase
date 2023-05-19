@@ -1,10 +1,12 @@
 package com.hostease.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +18,6 @@ import com.hostease.entity.Event;
 import com.hostease.entity.Message;
 import com.hostease.entity.User;
 import com.hostease.enums.HttpStatusEnum;
-import com.hostease.repository.MessageRepository;
 import com.hostease.service.EventService;
 import com.hostease.service.MessageService;
 import com.hostease.service.UserService;
@@ -36,8 +37,18 @@ public class MessageController {
     @Autowired
     MessageService messageService;
 
-    @Autowired
-    MessageRepository messageRepository;
+    @GetMapping("/events/{eventId}/messages")
+    public ResponseEntity<Map<String, Object>> findByEventId(@PathVariable("eventId") Long id) {
+
+        List<Message> messages = messageService.findByEventId(id);
+
+        return new ControllerJsonResponseMap().jsonResponseMapListGenerator(
+                messages,
+                HttpStatusEnum.STATUS_200_OK.getStatus(),
+                "Messages successfully retrieved for event with id: " + id,
+                "Error retrieving messages for event with id: " + id);
+
+    }
 
     @PostMapping("/events/{eventId}/messages")
     public ResponseEntity<Map<String, Object>> saveMessage(

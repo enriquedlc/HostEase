@@ -1,5 +1,7 @@
 package com.hostease.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,10 @@ public class MessageService {
 
     public Message save(Message message) {
         return messageRepository.save(message);
+    }
+
+    public List<Message> findByEventId(Long id) {
+        return messageRepository.findByEventId(id);
     }
 
 }
