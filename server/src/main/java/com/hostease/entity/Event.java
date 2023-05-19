@@ -20,21 +20,19 @@ import javax.persistence.Table;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.hostease.models.Location;
 import com.hostease.serializer.CustomCategorySerializer;
 import com.hostease.serializer.CustomCountLikeSerializer;
 import com.hostease.serializer.CustomCountMessageSerializer;
 import com.hostease.serializer.CustomCountUserSerializer;
+import com.hostease.serializer.CustomTagSerializer;
 
 @Entity
 @Table(name = "event_table")
-@JsonIgnoreProperties({ "tags" })
 public class Event {
 
-    @JsonIgnore
+    @JsonSerialize(using = CustomTagSerializer.class)
     @ManyToMany(mappedBy = "events", fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
