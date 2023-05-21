@@ -41,20 +41,24 @@ const columns: GridColDef[] = [
     }
 ];
 
+const createData = (id: number, title: string, startDate: string, startTime: string, maxCapacity: number, users: number) => {
+    return { id, title, startDate, startTime, maxCapacity, users };
+}
+
 const rows = [
-    { id: 1, title: 'Car Event', startDate: '10/10/2021', startTime: '10:00', maxCapacity: 10, users: 5 },
-    { id: 2, title: 'Tech Event', startDate: '10/10/2021', startTime: '10:00', maxCapacity: 10, users: 5 },
-    { id: 3, title: 'Music Event', startDate: '10/10/2021', startTime: '10:00', maxCapacity: 10, users: 5 },
-    { id: 4, title: 'Food Event', startDate: '10/10/2021', startTime: '10:00', maxCapacity: 10, users: 5 },
-    { id: 5, title: 'Meet and Greet', startDate: '10/10/2021', startTime: '10:00', maxCapacity: 10, users: 5 },
-    { id: 6, title: 'Festival', startDate: '10/10/2021', startTime: '10:00', maxCapacity: 10, users: 5 },
+    createData(1, 'Event 1', '2021-10-10', '10:00', 10, 5),
+    createData(2, 'Event 2', '2021-10-10', '10:00', 10, 5),
+    createData(3, 'Event 3', '2021-10-10', '10:00', 10, 5),
+    createData(4, 'Event 4', '2021-10-10', '10:00', 10, 5),
+    createData(5, 'Event 5', '2021-10-10', '10:00', 10, 5),
+    createData(6, 'Event 6', '2021-10-10', '10:00', 10, 5),
 ]
 
 const DataTable = () => {
     return (
         <div className='table'>
             <h3 className='table-title'>Recent Events</h3>
-            <Box sx={{ height: 520, width: '100%', background: 'white', maxHeight: '70%' }}>
+            <Box sx={{ height: 520, width: '100%', background: 'white', maxHeight: '70%', boxShadow: '0px 15px 20px 0px #80808029' }}>
                 <DataGrid
                     rows={rows}
                     columns={columns}

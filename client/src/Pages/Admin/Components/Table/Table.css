@@ -1,12 +1,27 @@
 .table {
-    margin-top: 2rem !important;
+    margin-top: 3rem !important;
 }
 
 .table-title {
-    margin-bottom: .5rem;
+    margin-bottom: 2rem;
 }
 
 /* to set it to the right mui table component */
 .MuiDataGrid-columnHeaderTitleContainer {
     flex-direction: row !important;
+}
+
+.MuiDataGrid-columnHeaderTitleContainer .MuiDataGrid-columnHeaderTitle {
+    font-weight: bold !important;
+}
+
+.MuiDataGrid-cell .MuiDataGrid-cell--textLeft .MuiDataGrid-withBorderColor {
+    border: none !important;
+}
+
+
+.MuiBox-root {
+    border-radius: 5px !important;
+    outline: none !important;
+
 }
