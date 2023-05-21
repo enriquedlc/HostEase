@@ -29,7 +29,7 @@ const Updates = () => {
         <div className="updates">
             {UpdatesData.map((update, index) => {
                 return (
-                    <div className="update">
+                    <div className="update" key={index}>
                         <img className='photo' src={update.img} alt="photo" />
                         <div className="comment">
                             <div style={{ marginBottom: '0.5rem' }}>
