@@ -11,8 +11,8 @@
 	height: 24px;
   }
 
-  .theme-switcher-label {
-	color: var(--secondary-color);
+  .navbar-dark .navbar-button-panel div svg {
+	color: var(--primary-color);
   }
   
   .theme-switcher-slider {

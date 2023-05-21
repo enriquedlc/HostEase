@@ -8,7 +8,7 @@ export const logInUser = async ( loginData : LoginRequest ) => {
 }
 
 export const signUpUser = async ( userData : UserSubmit ) => {
-    return axios.post(`${API_URL}/hostease/user/sign`, userData);
+    return axios.post(`${API_URL}/user/sign`, userData);
 } 
 
 export const fetchAllCategories = async () => {

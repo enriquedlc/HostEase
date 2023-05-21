@@ -1,22 +1,24 @@
 import React, { useState } from "react";
-import "./ExploreOver.css";
+import "./ExploreList.css";
 import { HostEaseEvent } from "../../Types/Types";
 import EventCard from "../EventCard/EventCard";
 
-interface ExploreOptions {
+interface ExploreListOptions {
   label: string;
-}
-interface ExploreOverProps {
-  listToFilter: HostEaseEvent[];
-  filterOptions: ExploreOptions[];
+  action ?: () => void;
 }
 
-const ExploreOver: React.FC<ExploreOverProps> = ({
+interface ExploreListProps {
+  listToFilter: HostEaseEvent[];
+  filterOptions: ExploreListOptions[];
+}
+
+const ExploreList: React.FC<ExploreListProps> = ({
   listToFilter,
   filterOptions,
 }) => {
   const [selectedButton, setSelectedButton] = useState<string | null>(null);
-  const [isOptionsVisible, setIsOptionsVisible] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const filteredList = selectedButton
     ? listToFilter.filter(
         (event) =>
@@ -25,24 +27,23 @@ const ExploreOver: React.FC<ExploreOverProps> = ({
       )
     : listToFilter;
 
-  const toggleOptions = () => {
-    setIsOptionsVisible((prevIsVisible) => !prevIsVisible);
-  };
+    console.log(filterOptions)
+    console.log(listToFilter);
 
   return (
     <div className="explorer-container">
-      <div className={`options-panel ${isOptionsVisible ? "visible" : ""}`}>
+      <div className={`options-panel ${isMenuOpen ? "visible" : ""}`}>
         {filterOptions.map((element, index) => (
           <button
-            key={index}
+            key={index.toString() + element}
             onClick={() => {
               if (selectedButton === element.label) {
-                setSelectedButton(null); // Deseleccionar el botón si se hace clic nuevamente en él
+                setSelectedButton(null); 
               } else {
                 setSelectedButton(element.label);
               }
-              toggleOptions();
             }}
+            className={selectedButton === element.label ? "active" : ""}
           >
             {element.label}
           </button>
@@ -70,4 +71,4 @@ const ExploreOver: React.FC<ExploreOverProps> = ({
   );
 };
 
-export default ExploreOver;
+export default ExploreList;

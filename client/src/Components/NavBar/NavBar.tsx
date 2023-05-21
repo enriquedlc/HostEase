@@ -49,7 +49,7 @@ const NavBar = () => {
           <Link to={`/user/profile/${userContext?.user?.id}`}>Profile</Link>
         </div>
         <div className="general-section-bottom">
-          <ThemeSwitcher />
+          <ThemeSwitcher className={'navbar-switcher'}/>
         </div>
       </div>
       <div className={`navbar-add-event ${""}`}>

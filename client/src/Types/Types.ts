@@ -9,6 +9,14 @@ export interface UserContextValue {
 	logOut: () => void;
 }
 
+export interface EventOwner {
+	id: number;
+	nickname: string;
+	email: string;
+	phone: string;
+	followers: number;
+}
+
 export interface User {
 	id: number;
 	nickname: string;
@@ -63,6 +71,7 @@ export interface Tag {
     locationLat: number;
     locationLng: number;
     maxCapacity: number;
+	owner: EventOwner;
     photo?: number;
     tags?: Tag[];
     users: number;
