@@ -12,7 +12,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.hostease.entity.Event;
 import com.hostease.entity.Tag;
-import com.hostease.entity.User;
 import com.hostease.models.Location;
 
 public class CustomEventDeserializer extends StdDeserializer<Event> {

@@ -1,12 +1,18 @@
 package com.hostease.service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hostease.entity.Category;
 import com.hostease.entity.Event;
+import com.hostease.entity.Tag;
+import com.hostease.entity.User;
 import com.hostease.repository.EventRepository;
+import com.hostease.repository.TagRepository;
 import com.hostease.repository.UserRepository;
 
 @Service
@@ -15,8 +21,14 @@ public class EventService {
     @Autowired
     EventRepository eventRepository;
 
-    @Autowired 
+    @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    TagRepository tagRepository;
+
+    @Autowired
+    CategoryService categoryService;
 
     public List<Event> findByUserId(Long id) {
         return eventRepository.findEventsByUsersId(id);
@@ -36,6 +48,22 @@ public class EventService {
     }
 
     public Event save(Event event, Long categoryId, Long ownerId) {
+
+        User user = userRepository.findById(ownerId).get();
+        Category category = categoryService.findById(categoryId);
+
+        event.setOwner(user);
+        event.setCategory(category);
+
+        Set<Tag> tagsToSave = new HashSet<>();
+        for (Tag tag : event.getTags()) {
+            Tag managedTag = tagRepository.findById(tag.getId()).get();
+
+            tagsToSave.add(managedTag);
+            managedTag.getEvents().add(event);
+        }
+        event.setTags(tagsToSave);
+
         event.setOwner(userRepository.findById(ownerId).get());
         event.setCategory(eventRepository.findById(categoryId).get().getCategory());
         return eventRepository.save(event);
