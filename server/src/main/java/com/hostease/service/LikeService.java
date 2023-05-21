@@ -22,20 +22,37 @@ public class LikeService {
     @Autowired
     UserRepository userRepository;
 
-    public Like likeEvent(Long eventId, Long userId) {
-        Event event = eventRepository.findById(eventId).get();
-        User user = userRepository.findById(userId).get();
-        Like like = new Like();
+    public boolean likeEvent(Long eventId, Long userId) {
+        Event event = eventRepository.findById(eventId).orElse(null);
+        User user = userRepository.findById(userId).orElse(null);
 
-        like.setLikedAt("2019-01-01 00:00:00");
-        like.setLiked(true);
-        like.setEvent(event);
-        like.setUser(user);
-        user.getLikes().add(like);
-        event.getLikes().add(like);
+        if (event == null || user == null) {
+            return false; // No se encontró el evento o el usuario correspondiente
+        }
 
-        return likeRepository.save(like);
+        Like existingLike = user.getLikes()
+                .stream()
+                .filter(like -> like.getEvent().getId().equals(eventId))
+                .findFirst()
+                .orElse(null);
 
+        if (existingLike != null && existingLike.getLiked()) {
+            user.getLikes().remove(existingLike);
+            event.getLikes().remove(existingLike);
+            likeRepository.delete(existingLike);
+            return false; // El like ya existía y fue eliminado
+        }
+
+        Like newLike = new Like();
+        newLike.setLikedAt("2019-01-01 00:00:00");
+        newLike.setLiked(true);
+        newLike.setEvent(event);
+        newLike.setUser(user);
+        user.getLikes().add(newLike);
+        event.getLikes().add(newLike);
+
+        Like savedLike = likeRepository.save(newLike); // Se crea el nuevo like
+        return savedLike != null; // Devuelve true si se guardó correctamente, false en caso contrario
     }
 
 }

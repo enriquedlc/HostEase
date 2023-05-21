@@ -477,8 +477,8 @@ public class initDatabase implements CommandLineRunner {
                 event4.getLikes().add(like11);
                 likeRepository.save(like11);
 
-                System.out.println(event1.getOwner());
-                System.out.println(user1.getOwnedEvents());
+                System.out.println(event1.getLikes());
+                System.out.println(user1.getLikes());
 
                 System.out.println("Database initialized");
 

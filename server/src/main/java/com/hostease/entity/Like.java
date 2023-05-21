@@ -11,9 +11,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.hostease.serializer.CustomUserSerializer;
 
 @Entity
 @Table(name = "like_table")
+
 public class Like {
 
     @Id
@@ -25,6 +28,7 @@ public class Like {
     @JoinColumn(name = "fk_event_id", nullable = false)
     private Event event;
 
+    @JsonSerialize(using = CustomUserSerializer.class)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_user_id", nullable = false)
     private User user;
