@@ -90,6 +90,9 @@ public class User {
     @Column(name = "joinedAt", nullable = true, columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime joinedAt = LocalDateTime.now();
 
+    @Column(name = "role", nullable = false, length = 20, columnDefinition = "varchar(20) default 'USER'")
+    private String role = "USER";
+
     public User() {
     }
 
@@ -215,10 +218,17 @@ public class User {
         this.ownedEvents = ownedEvents;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
         return "User: " + this.nickname;
     }
 
-    
 }
