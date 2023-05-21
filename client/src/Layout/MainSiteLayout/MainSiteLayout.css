@@ -8,16 +8,10 @@
 
 .light-theme {
     background-color: var(--primary-color);
+    transition: background-color 0.3s ease-in-out;
 }
 
 .dark-theme {
     background-color: var(--primary-dark-color);
-}
-
-.general-section-bottom {
-    align-self: flex-end;
-    top: 10%;
-    right: 2%;
-    position: absolute;
-    display: flex;
+    transition: background-color 0.3s ease-in-out;
 }

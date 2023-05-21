@@ -216,7 +216,7 @@ const SignUp = () => {
           </div>
           {renderPassStrength()}
           <div className="button-group-signup">
-            <button type="submit">Sing Up</button>
+            <button type="submit">Sign Up</button>
           </div>
         </form>
       </div>

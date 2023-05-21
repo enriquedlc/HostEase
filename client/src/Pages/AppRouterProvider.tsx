@@ -12,6 +12,7 @@ import { HostEaseRoutes } from "../Types/AppRoutes/HostEaseRoutes";
 import MainSiteLayout from "../Layout/MainSiteLayout";
 import LogInto from "./Error/LogInto";
 import NotFound from "./Error/NotFound";
+import Explore from "./Explore/Explore";
 
 /**
  *
@@ -44,6 +45,7 @@ const AppRouterProvider = () => {
         {(
           <Route element={<MainSiteLayout />}>
             <Route path={HostEaseRoutes.MainPage} element={<MainPage />} />
+            <Route path={HostEaseRoutes.Explore} element={<Explore />} />
           </Route>
         )}
         {/* Hay que convertir este trozo en un componente que detecte los enlaces */}

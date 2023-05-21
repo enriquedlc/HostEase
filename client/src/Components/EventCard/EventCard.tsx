@@ -34,6 +34,7 @@ const EventCard = (props: EventCardOptions) => {
 
   const {
     title,
+    category,
     likes,
     startDate,
     startTime,
@@ -61,6 +62,7 @@ const EventCard = (props: EventCardOptions) => {
       <div className="map-side">Mapa</div>
       <div className="content-side">
         <h1>{title}</h1>
+        <h1>{category?.categoryName}</h1>
         {slicedTags && (
           <div className="tags-container">
             {slicedTags?.map(({ tag, color }) => {

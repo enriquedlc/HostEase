@@ -10,15 +10,18 @@
 .navbar-light {
     background-color: var(--secondary-color);
     color: var(--font-color);
+    transition: background-color 0.3s ease-in-out;
 }
 
 .navbar-dark {
     background-color: var(--secondary-dark-color);
     color: var(--primary-color);
+    transition: background-color 0.3s ease-in-out;
 }
 
 .navbar-dark .navbar-button-panel div svg {
     color: var(--secondary-color);
+    transition: background-color 0.3s ease-in-out;
 }
 
 .navbar-body div svg {
@@ -31,6 +34,7 @@
 .navbar-button-panel {
     display: flex;
     flex: 1;
+    position: relative;
 }
 
 .navbar-button-panel div {
@@ -46,10 +50,12 @@
 div.active-light {
     background-color: var(--primary-color);
     color: var(--secondary-color);
+    transition: background-color 0.3s ease-in-out;
 }
 
 div.active-dark {
     background-color: var(--primary-dark-color);
+    transition: background-color 0.3s ease-in-out;
 }
 
 /* END OF LEFT SIDE NAV STYLES */
@@ -66,3 +72,12 @@ div.active-dark {
 }
 
 /* END OF CREATE EVENT STYLES */
+
+.general-section-bottom {
+    align-self: flex-end;
+    top: 0%;
+    bottom: 5%;
+    right: 0%;
+    position: absolute;
+    display: flex;
+}
