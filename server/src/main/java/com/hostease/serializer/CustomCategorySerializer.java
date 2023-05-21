@@ -22,7 +22,7 @@ public class CustomCategorySerializer extends StdSerializer<Category> {
             throws IOException {
         jsonGenerator.writeStartObject();
         jsonGenerator.writeNumberField("id", category.getId());
-        jsonGenerator.writeStringField("name", category.getCategoryName());
+        jsonGenerator.writeStringField("categoryName", category.getCategoryName());
         jsonGenerator.writeEndObject();
     }
 

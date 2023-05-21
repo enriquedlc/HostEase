@@ -7,12 +7,16 @@ import org.springframework.stereotype.Service;
 
 import com.hostease.entity.Event;
 import com.hostease.repository.EventRepository;
+import com.hostease.repository.UserRepository;
 
 @Service
 public class EventService {
 
     @Autowired
     EventRepository eventRepository;
+
+    @Autowired 
+    UserRepository userRepository;
 
     public List<Event> findByUserId(Long id) {
         return eventRepository.findEventsByUsersId(id);
@@ -26,8 +30,14 @@ public class EventService {
         return eventRepository.findById(id).get();
     }
 
-    public Event save(Event event, Long id) {
-        event.setCategory(eventRepository.findById(id).get().getCategory());
+    public Event save(Event event, Long categoryId) {
+        event.setCategory(eventRepository.findById(categoryId).get().getCategory());
+        return eventRepository.save(event);
+    }
+
+    public Event save(Event event, Long categoryId, Long ownerId) {
+        event.setOwner(userRepository.findById(ownerId).get());
+        event.setCategory(eventRepository.findById(categoryId).get().getCategory());
         return eventRepository.save(event);
     }
 

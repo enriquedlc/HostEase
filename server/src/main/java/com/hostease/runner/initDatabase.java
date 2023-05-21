@@ -68,20 +68,6 @@ public class initDatabase implements CommandLineRunner {
                 Tag tag3 = new Tag("Tag 3", "green");
                 Tag tag4 = new Tag("Tag 4", "yellow");
 
-                // EVENTS
-                Event event1 = new Event("Event 1", "Description 1", "2020-01-01", "2020-01-01", "12:00", "13:00",
-                                new Location(50.3785D, 14.9706D),
-                                10L, 0D, category1);
-                Event event2 = new Event("Event 2", "Description 2", "2020-01-01", "2020-01-01", "12:00", "13:00",
-                                new Location(50.3785D, 14.9706D),
-                                10L, 0D, category2);
-                Event event3 = new Event("Event 3", "Description 3", "2020-01-01", "2020-01-01", "12:00", "13:00",
-                                new Location(50.3785D, 14.9706D),
-                                10L, 0D, category3);
-                Event event4 = new Event("Event 4", "Description 4", "2020-01-01", "2020-01-01", "12:00", "13:00",
-                                new Location(50.3785D, 14.9706D),
-                                10L, 0D, category4);
-
                 // USERS
                 User user1 = new User("nickNameUser1", "user1email@gmail.com",
                                 "$2a$10$GNLnjxfAGA/0E7idq.2OruVeGWCOIVPVh4y943isTzIHHplKeVOM.", "687779560",
@@ -102,6 +88,21 @@ public class initDatabase implements CommandLineRunner {
                 User user5 = new User("nickNameUser5", "user5email@gmail.com",
                                 "$2a$10$GNLnjxfAGA/0E7idq.2OruVeGWCOIVPVh4y943isTzIHHplKeVOM.", "687779560",
                                 100L, LocalDateTime.now());
+
+                // EVENTS
+                Event event1 = new Event("Event 1", user1, "Description 1", "2020-01-01", "2020-01-01", "12:00",
+                                "13:00",
+                                new Location(50.3785D, 14.9706D),
+                                10L, 0D, category1);
+                Event event2 = new Event("Event 2", user1, "Description 2", "2020-01-01", "2020-01-01", "12:00", "13:00",
+                                new Location(50.3785D, 14.9706D),
+                                10L, 0D, category2);
+                Event event3 = new Event("Event 3", user1, "Description 3", "2020-01-01", "2020-01-01", "12:00", "13:00",
+                                new Location(50.3785D, 14.9706D),
+                                10L, 0D, category3);
+                Event event4 = new Event("Event 4", user1, "Description 4", "2020-01-01", "2020-01-01", "12:00", "13:00",
+                                new Location(50.3785D, 14.9706D),
+                                10L, 0D, category4);
 
                 // ACHIEVEMENTS
                 Achievement achievement1 = new Achievement("Achievement description 1", 100L, 1D);
@@ -247,6 +248,13 @@ public class initDatabase implements CommandLineRunner {
                 event3.getUsers().add(user5);
                 event4.getUsers().add(user5);
                 userRepository.save(user5);
+
+                // SET THE EVENTS AS OWNERSHIP OF USER 1
+
+                Set<Event> ownedEventsForUser1 = new HashSet<Event>(
+                                Arrays.asList(event1, event2, event3, event4));
+
+                user1.setOwnedEvents(ownedEventsForUser1);
 
                 // SET THE ACHIEVEMENTS INTO THE USERS
                 Set<Achievement> achievementsToAsignUser1 = new HashSet<Achievement>(
@@ -469,7 +477,8 @@ public class initDatabase implements CommandLineRunner {
                 event4.getLikes().add(like11);
                 likeRepository.save(like11);
 
-                System.out.println(event1.getTags());
+                System.out.println(event1.getOwner());
+                System.out.println(user1.getOwnedEvents());
 
                 System.out.println("Database initialized");
 

@@ -16,11 +16,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hostease.entity.Category;
 import com.hostease.entity.Event;
 import com.hostease.entity.Tag;
+import com.hostease.entity.User;
 import com.hostease.enums.HttpStatusEnum;
 import com.hostease.service.CategoryService;
 import com.hostease.service.EventService;
@@ -86,9 +88,12 @@ public class EventController {
     }
 
     @PostMapping("/events/{categoryId}")
-    public ResponseEntity<Map<String, Object>> save(@RequestBody Event event, @PathVariable("categoryId") Long id) {
-        Category category = categoryService.findById(id);
+    public ResponseEntity<Map<String, Object>> save(@RequestBody Event event, @PathVariable("categoryId") Long categoryId, @RequestParam("owner") Long ownerId) {
+        
+        User user = userService.findById(ownerId);
+        Category category = categoryService.findById(categoryId);
 
+        event.setOwner(user);
         event.setCategory(category);
 
         Set<Tag> tagsToSave = new HashSet<>();
@@ -100,7 +105,7 @@ public class EventController {
         }
         event.setTags(tagsToSave);
 
-        eventService.save(event, id);
+        eventService.save(event, categoryId, ownerId);
 
         return new ControllerJsonResponseMap().jsonResponseMapObjectGenerator(
                 event,

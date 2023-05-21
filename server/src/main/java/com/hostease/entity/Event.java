@@ -28,8 +28,9 @@ import com.hostease.serializer.CustomCategorySerializer;
 import com.hostease.serializer.CustomCountLikeSerializer;
 import com.hostease.serializer.CustomCountMessageSerializer;
 import com.hostease.serializer.CustomCountUserSerializer;
+import com.hostease.serializer.CustomEventOwnerSerializer;
 import com.hostease.serializer.CustomTagSerializer;
-
+ 
 @Entity
 @Table(name = "event_table")
 @JsonDeserialize(using = CustomEventDeserializer.class)
@@ -67,6 +68,12 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonSerialize(using = CustomEventOwnerSerializer.class)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "ownerId", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private User owner;
+
     @Column(name = "title", nullable = false, length = 45)
     private String title;
 
@@ -98,9 +105,10 @@ public class Event {
     public Event() {
     }
 
-    public Event(Long id, String title, String description, String startDate, String endDate, String startTime,
+    public Event(Long id, User owner, String title, String description, String startDate, String endDate, String startTime,
             String endTime, Location location, Long maxCapacity, Double photo) {
         this.id = id;
+        this.owner = owner;
         this.title = title;
         this.description = description;
         this.startDate = startDate;
@@ -112,9 +120,10 @@ public class Event {
         this.photo = photo;
     }
 
-    public Event(Long id, String title, String description, String startDate, String endDate, String startTime,
+    public Event(Long id, User owner, String title, String description, String startDate, String endDate, String startTime,
             String endTime, Location location, Long maxCapacity, Double photo, Category category) {
         this.id = id;
+        this.owner = owner;
         this.title = title;
         this.description = description;
         this.startDate = startDate;
@@ -127,9 +136,10 @@ public class Event {
         this.category = category;
     }
 
-    public Event(String title, String description, String startDate, String endDate, String startTime,
+    public Event(String title, User owner, String description, String startDate, String endDate, String startTime,
             String endTime, Location location, Long maxCapacity, Double photo, Category category) {
         this.title = title;
+        this.owner = owner;
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -147,6 +157,14 @@ public class Event {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 
     public String getTitle() {
@@ -248,7 +266,7 @@ public class Event {
     public void setUsers(Set<User> users) {
         this.users = users;
     }
-
+    
     public void setMessages(HashSet<Message> hashSet) {
         this.messages = hashSet;
     }
@@ -263,7 +281,7 @@ public class Event {
 
     @Override
     public String toString() {
-        return "Event [id=" + id + ", title=" + title + ", description=" + description + ", startDate=" + startDate
+        return "Event [id=" + id + ", owner=" + owner + ", title=" + title + ", description=" + description + ", startDate=" + startDate
                 + ", endDate=" + endDate + ", startTime=" + startTime + ", endTime=" + endTime + ", location="
                 + location + ", maxCapacity=" + maxCapacity + ", photo=" + photo
                 + "]";

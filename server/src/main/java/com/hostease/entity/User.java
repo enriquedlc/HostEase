@@ -24,6 +24,8 @@ import org.springframework.data.relational.core.mapping.Embedded.Nullable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.hostease.serializer.CustomEventSerializer;
 
 @Entity
 @Table(name = "user_table")
@@ -50,6 +52,10 @@ public class User {
     @JsonManagedReference
     @Nullable
     private Set<Message> messages = new HashSet<Message>();
+
+    @JsonSerialize(using = CustomEventSerializer.class)
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Event> ownedEvents = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_followers", joinColumns = @JoinColumn(name = "following_user_id"), inverseJoinColumns = @JoinColumn(name = "followed_user_id"))
@@ -201,8 +207,18 @@ public class User {
         this.likes = likes;
     }
 
+    public Set<Event> getOwnedEvents() {
+        return ownedEvents;
+    }
+
+    public void setOwnedEvents(Set<Event> ownedEvents) {
+        this.ownedEvents = ownedEvents;
+    }
+
     @Override
     public String toString() {
-        return "User" + this.nickname;
+        return "User: " + this.nickname;
     }
+
+    
 }
