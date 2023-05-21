@@ -106,6 +106,17 @@ public class User {
         this.joinedAt = joinedAt;
     }
 
+    public User(String nickname, String email, String password, String phone,
+            Long experience, LocalDateTime joinedAt, String role) {
+        this.nickname = nickname;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+        this.experience = experience;
+        this.joinedAt = joinedAt;
+        this.role = role;
+    }
+
     public Set<Event> getEvents() {
         return events;
     }

@@ -28,7 +28,7 @@ import com.hostease.repository.UserRepository;
 
 @Component
 @Order(value = 1)
-public class initDatabase implements CommandLineRunner {
+public class InitDatabase implements CommandLineRunner {
 
         @Autowired
         private EventRepository eventRepository;
@@ -89,18 +89,26 @@ public class initDatabase implements CommandLineRunner {
                                 "$2a$10$GNLnjxfAGA/0E7idq.2OruVeGWCOIVPVh4y943isTzIHHplKeVOM.", "687779560",
                                 100L, LocalDateTime.now());
 
+                // CREATE ADMIN USER
+                User admin1 = new User("nickNameAdmin1", "admin1@gmail.com",
+                "$2a$10$GNLnjxfAGA/0E7idq.2OruVeGWCOIVPVh4y943isTzIHHplKeVOM.",
+                "698546054", 0L, LocalDateTime.now(), "ADMIN");
+
                 // EVENTS
                 Event event1 = new Event("Event 1", user1, "Description 1", "2020-01-01", "2020-01-01", "12:00",
                                 "13:00",
                                 new Location(50.3785D, 14.9706D),
                                 10L, 0D, category1);
-                Event event2 = new Event("Event 2", user1, "Description 2", "2020-01-01", "2020-01-01", "12:00", "13:00",
+                Event event2 = new Event("Event 2", user1, "Description 2", "2020-01-01", "2020-01-01", "12:00",
+                                "13:00",
                                 new Location(50.3785D, 14.9706D),
                                 10L, 0D, category2);
-                Event event3 = new Event("Event 3", user1, "Description 3", "2020-01-01", "2020-01-01", "12:00", "13:00",
+                Event event3 = new Event("Event 3", user1, "Description 3", "2020-01-01", "2020-01-01", "12:00",
+                                "13:00",
                                 new Location(50.3785D, 14.9706D),
                                 10L, 0D, category3);
-                Event event4 = new Event("Event 4", user1, "Description 4", "2020-01-01", "2020-01-01", "12:00", "13:00",
+                Event event4 = new Event("Event 4", user1, "Description 4", "2020-01-01", "2020-01-01", "12:00",
+                                "13:00",
                                 new Location(50.3785D, 14.9706D),
                                 10L, 0D, category4);
 
@@ -118,7 +126,7 @@ public class initDatabase implements CommandLineRunner {
                 Message message5 = new Message("Message body example 5", "2023-04-19 23:51:30", event3, user4);
                 Message message6 = new Message("Message body example 7", "2023-04-19 23:51:30", event4, user4);
 
-                // // LIKES
+                // LIKES
                 Like like3 = new Like(event1, user3, true, "2023-04-19 23:51:30");
 
                 Like like4 = new Like(event2, user1, true, "2023-04-19 23:51:30");
@@ -138,6 +146,7 @@ public class initDatabase implements CommandLineRunner {
                 userRepository.save(user3);
                 userRepository.save(user4);
                 userRepository.save(user5);
+                userRepository.save(admin1);
 
                 // SAVE CATEGORIES
                 categoryRepository.save(category1);
@@ -476,9 +485,6 @@ public class initDatabase implements CommandLineRunner {
                 user2.getLikes().add(like11);
                 event4.getLikes().add(like11);
                 likeRepository.save(like11);
-
-                System.out.println(event1.getLikes());
-                System.out.println(user1.getLikes());
 
                 System.out.println("Database initialized");
 
