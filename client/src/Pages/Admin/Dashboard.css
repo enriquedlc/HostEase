@@ -17,6 +17,6 @@ div.dashboard-div {
     background-color: rgba(255, 255, 255, 0.30);
     overflow: hidden;
     grid-template-columns: 11rem auto 20rem;
-    gap: 16px;
+    gap: 10px;
 
 }

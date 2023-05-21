@@ -2,8 +2,16 @@
     margin-top: 3rem !important;
 }
 
+.table td, th {
+    border: none !important;
+}
+
+.table:first-child {
+    border-radius: 1rem !important;
+}
+
 .table-title {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 /* to set it to the right mui table component */
@@ -19,9 +27,7 @@
     border: none !important;
 }
 
-
 .MuiBox-root {
     border-radius: 5px !important;
     outline: none !important;
-
 }
