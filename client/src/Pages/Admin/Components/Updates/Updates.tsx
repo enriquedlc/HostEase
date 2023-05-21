@@ -34,7 +34,7 @@ const Updates = () => {
                         <div className="comment">
                             <div style={{ marginBottom: '0.5rem' }}>
                                 <span>{update.name}</span>
-                                <span>{update.comment}</span>
+                                <span>{` ${update.comment}`}</span>
                             </div>
                             <span>{update.time}</span>
                         </div>

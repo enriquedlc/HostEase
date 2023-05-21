@@ -1,5 +1,5 @@
 
-import { MdLogout, MdOutlineComment, MdOutlineEditCalendar, MdOutlineGroup, MdOutlineHouse, MdTag } from 'react-icons/md'
+import { MdLogout, MdOutlineComment, MdOutlineEditCalendar, MdOutlineGroup, MdOutlineHouse, MdTag, MdOutlineCategory } from 'react-icons/md'
 
 import HostEaseLogo from '../../../../assets/HostEase.png'
 
@@ -27,6 +27,10 @@ const SidebarData: SidebarOptions[] = [
     {
         icon: MdTag,
         title: "Tags"
+    },
+    {
+        icon: MdOutlineCategory,
+        title: "Categories"
     },
     {
         icon: MdOutlineComment,

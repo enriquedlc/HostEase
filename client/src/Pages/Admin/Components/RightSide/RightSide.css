@@ -1,8 +1,10 @@
 .right-side {
     display: flex;
     flex-direction: column;
-    width: 95%;
-    justify-content: space-evenly;
-    margin-left: 1rem;
-
+    /* width: 95%; */
+    justify-content: flex-start;
+    /* margin-left: 0.5rem; */
+    margin-top: 3rem;
+    gap: 2rem;
 }
+
