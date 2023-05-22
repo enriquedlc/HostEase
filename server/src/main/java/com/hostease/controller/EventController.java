@@ -118,7 +118,7 @@ public class EventController {
             eventToDelete.getUsers().clear();
             eventToDelete.setTags(null);
             eventToDelete.setUsers(null);
-            
+
             eventService.deleteById(id);
 
             jsonResponseMap.put("status", HttpStatusEnum.STATUS_200_OK.getStatus());
@@ -138,4 +138,14 @@ public class EventController {
         }
     }
 
+    @PostMapping("/user/{userId}")
+    public ResponseEntity<Map<String, Object>> addUserToEvent(@PathVariable("userId") Long userId,
+            @RequestParam("eventId") Long eventId) {
+
+        return new ControllerJsonResponseMap().jsonResponseMapObjectGenerator(
+                eventService.manageUserOnEvent(eventId, userId),
+                HttpStatusEnum.STATUS_200_OK.getStatus(),
+                "User successfully added to event",
+                "Error adding user to event");
+    }
 }

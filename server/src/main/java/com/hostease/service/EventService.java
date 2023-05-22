@@ -90,4 +90,24 @@ public class EventService {
         eventRepository.deleteById(id);
     }
 
+    public boolean manageUserOnEvent(Long eventId, Long userId) {
+        User user = userRepository.findById(userId).get();
+        Event event = eventRepository.findById(eventId).get();
+
+        boolean result = true;
+
+        if (event.getUsers().contains(user)) {
+            result = false;
+            event.getUsers().remove(user);
+            user.getEvents().remove(event);
+        } else {
+            event.getUsers().add(user);
+            user.getEvents().add(event);
+        }
+
+        userRepository.save(user);
+        eventRepository.save(event);
+        return result;
+    }
+
 }
