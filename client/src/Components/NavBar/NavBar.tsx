@@ -20,19 +20,19 @@ const NavBar = (prop : { context : UserContextValue | null }) => {
       <div className="navbar-button-panel ">
         <div className={`${pathname === HostEaseRoutes.MainPage && "active"}-${context?.theme}`}>
           <RiHomeLine />
-          <Link to="/dashboard">Main Screen</Link>
+          <Link to={`${HostEaseRoutes.MainPage}`}>Main Screen</Link>
         </div>
         <div className={`${pathname === HostEaseRoutes.Explore && "active"}-${context?.theme}`}>
           <TbInputSearch />
-          <Link to="/explore">Explore</Link>
+          <Link to={`${HostEaseRoutes.Explore}`}>Explore</Link>
         </div>
-        <div className={`${pathname === HostEaseRoutes.MyEvents && "active"}-${context?.theme}`}>
+        <div className={`${pathname.includes('/events/') && "active"}-${context?.theme}`}>
           <HiUserGroup />
-          <Link to={`/user/events/${context?.user?.id}`}>My Events</Link>
+          <Link to={`/events/${context?.user?.id}`}>My Events</Link>
         </div>
-        <div className={`${pathname === HostEaseRoutes.Profile && "active"}-${context?.theme}`}>
+        <div className={`${pathname.includes('/profile/') && "active"}-${context?.theme}`}>
           <RiProfileFill />
-          <Link to={`/user/profile/${context?.user?.id}`}>Profile</Link>
+          <Link to={`/profile/${context?.user?.id}`}>Profile</Link>
         </div>
         <div className="general-section-bottom">
           <ThemeSwitcher className={'navbar-switcher'}/>
