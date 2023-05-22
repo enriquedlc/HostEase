@@ -46,7 +46,7 @@ public class EventController {
     @Autowired
     MessageService messageService;
 
-    @GetMapping("/user/events/{userId}")
+    @GetMapping("/user/{userId}/events")
     public ResponseEntity<Map<String, Object>> findByUserId(@PathVariable("userId") Long id) {
 
         List<Event> events = eventService.findByUserId(id);
