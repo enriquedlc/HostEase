@@ -23,7 +23,6 @@ import org.springframework.data.relational.core.mapping.Embedded.Nullable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.hostease.serializer.CustomEventSerializer;
 
@@ -49,7 +48,6 @@ public class User {
     private Set<Achievement> achievements = new HashSet<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonManagedReference
     @Nullable
     private Set<Message> messages = new HashSet<Message>();
 

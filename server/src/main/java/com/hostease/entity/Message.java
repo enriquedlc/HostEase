@@ -12,7 +12,9 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.hostease.deserializer.CustomMessageDeserializer;
+import com.hostease.serializer.CustomUserSerializer;
 
 @Entity
 @Table(name = "message_table")
@@ -34,9 +36,9 @@ public class Message {
     @JsonBackReference
     private Event event;
 
+    @JsonSerialize(using = CustomUserSerializer.class)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_user_id", nullable = false)
-    @JsonBackReference
     private User user;
 
     public Message() {
