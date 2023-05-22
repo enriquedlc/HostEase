@@ -1,6 +1,6 @@
 import axios, { AxiosAdapter, AxiosResponse } from "axios";
 import bcrypt from "bcryptjs";
-import { LoginRequest, MapLibraries, UserSubmit } from "../Types/Types";
+import { HostEaseEventForm, LoginRequest, MapLibraries, UserSubmit } from "../Types/Types";
 
 const API_URL = "http://localhost:8080/hostease";
 const SALTROUNDS = 10;
@@ -25,6 +25,10 @@ export const logInUser = async (loginData: LoginRequest) => {
 export const signUpUser = async (userData: UserSubmit) => {
   return axios.post(`${API_URL}/user/sign`, userData);
 };
+
+export const createEvent = async (eventData: HostEaseEventForm, ownerId: number) => {
+  return axios.post(`${API_URL}/event/${eventData.category?.id}?owner=${ownerId}`, eventData);
+}
 
 export const fetchUserEvents = async (userId: number) => {
   return axios.get(`${API_URL}/user/${userId}/events`)

@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import { toast } from "react-toastify";
-import CustomDatePicker from "../../Components/CustomDatePicker/CustomDatePicker";
-import AnimatedInput from "../../Components/Inputs/AnimatedInput/AnimatedInput";
+import CustomDatePicker from "../../Components/CustomDatePicker";
+import AnimatedInput from "../../Components/Inputs/AnimatedInput";
 import Map from "../../Components/Map";
 import Selector from "../../Components/Selector";
 import {
@@ -13,7 +13,11 @@ import {
   Tag,
   UserContextValue,
 } from "../../Types/Types";
-import { fetchAllCategories, fetchAllTags } from "../../services/main.services";
+import {
+  createEvent,
+  fetchAllCategories,
+  fetchAllTags,
+} from "../../services/main.services";
 import "./FormEvent.css";
 import Select from "react-select";
 
@@ -41,7 +45,7 @@ const FormEvent = () => {
             label: category.categoryName,
           }))
         );
-        console.log(categoryList)
+        console.log(categoryList);
         setEvent((prevEvent) => ({
           ...prevEvent,
           category: response.data.data[0],
@@ -74,28 +78,51 @@ const FormEvent = () => {
     setCurrentTab(currentTab - 1);
   };
 
-  const handleSubmit = (e : React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (Object.values(event).every(value => {
-      if (value === null || value === undefined || value === '') {
-        return false;
-      } 
-      return true;
-    })) {
-      console.log(event)
+    if (
+      Object.values(event).every((value) => {
+        if (value === null || value === undefined || value === "") {
+          return false;
+        } else {
+          return true;
+        }
+      })
+    ) {
+      console.log('TODOS LOS DATOS HAN SIDO RELLENADOS');
+      userContext.user &&
+        createEvent(event, userContext.user?.id).then((response) => {
+          if (response.data.data) {
+            if (!toast.isActive("formSuccessMessage")) {
+              toast.success("Se ha creado el evento correctamente.", {
+                toastId: "formSuccessMessage",
+                theme: userContext?.theme,
+              });
+            }
+            return true;
+          } else {
+            if (!toast.isActive("formFatalMessage")) {
+              toast.error("Ha ocurrido un error al crear el evento.", {
+                toastId: "formFatalMessage",
+                theme: userContext?.theme,
+              });
+            }
+            return false;
+          }
+        });
     } else {
-      toast.error(
-        "Rellene todos los campos del formulario.",
-        {
+      if (!toast.isActive("formErrorMessage")) {
+        toast.error("Rellene todos los campos del formulario.", {
           toastId: "formErrorMessage",
           theme: userContext?.theme,
-        }
-      );
+        });
+      }
     }
-  }
+  };
 
   return (
     <form
+      encType="multipart/form-data"
       onSubmit={handleSubmit}
       className={`create-form-body ${userContext?.theme}-theme-form`}
     >
@@ -110,9 +137,17 @@ const FormEvent = () => {
               <AnimatedInput
                 className="event-title"
                 onChange={handleChange}
-                label="Titulo del evento"
+                label="Event Title"
                 value={event?.title}
                 name="title"
+              />
+              <input
+                className="max-capacity"
+                onChange={(e) => handleChange(e.target.value, e.target.name)}
+                value={event?.maxCapacity}
+                type="number"
+                placeholder="Max Capacity"
+                name="maxCapacity"
               />
               <CustomDatePicker
                 nameStart="startDate"
@@ -213,33 +248,6 @@ const FormEvent = () => {
               ) : (
                 <p>Loading...</p>
               )}
-
-              <div className="photo-form">
-                <label className="photo-label" htmlFor="photo">
-                  Image:{" "}
-                </label>
-                <input
-                  className="photo-input"
-                  type="file"
-                  name="photo"
-                  accept=".jpeg, .jpg, .png, .svg"
-                  onChange={(e) => {
-                    const file = e.target.files && e.target.files[0];
-                    const allowedExtensions = /(\.jpeg|\.jpg|\.png|\.svg)$/i;
-                    if (file && !allowedExtensions.exec(file.name)) {
-                      if (!toast.isActive("eventFormErrorMessage")) {
-                        toast.error("Formato de imagen no válido.", {
-                          toastId: "eventFormErrorMessage",
-                          theme: userContext.theme,
-                        });
-                      }
-                      e.target.value = "";
-                    } else if (file) {
-                      handleChange(file, e.target.name);
-                    }
-                  }}
-                />
-              </div>
             </div>
           </div>
         </TabPanel>

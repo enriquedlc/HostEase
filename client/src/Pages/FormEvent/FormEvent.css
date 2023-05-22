@@ -21,6 +21,17 @@
   width: 35%;
 }
 
+.max-capacity {
+  width: 20%;
+  margin-top: 15px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid var(--font-color);
+  padding-bottom: 10px;
+  outline: none;
+  color: var(--font-color);
+}
+
 .event-title input,
 .event-title label {
   font-size: 17px;
@@ -126,6 +137,10 @@
 
 .light-theme-form .tab-panel {
   background-color: var(--secondary-color);
+}
+
+.dark-theme-form .tab-panel {
+  background-color: var(--secondary-dark-color);
 }
 
 .category-select {
@@ -292,6 +307,10 @@
 
   .event-title {
     width: 50%;
+  }
+
+  .max-capacity {
+    width: 25%;
   }
 
   .tab-panel {
