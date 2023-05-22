@@ -82,17 +82,18 @@ public class EventController {
                 "Error retrieving event");
     }
 
-    @PostMapping("/events/{categoryId}")
+    @PostMapping("/event/{categoryId}")
     public ResponseEntity<Map<String, Object>> save(@RequestBody Event event,
             @PathVariable("categoryId") Long categoryId, @RequestParam("owner") Long ownerId) {
 
-        eventService.save(event, categoryId, ownerId);
+        Event output = eventService.save(event, categoryId, ownerId);
 
         return new ControllerJsonResponseMap().jsonResponseMapObjectGenerator(
-                event,
+                output != null ? true : false,
                 HttpStatusEnum.STATUS_201_CREATED.getStatus(),
                 "Event successfully created",
                 "Error creating event");
+
     }
 
     @PutMapping("/events/{id}")

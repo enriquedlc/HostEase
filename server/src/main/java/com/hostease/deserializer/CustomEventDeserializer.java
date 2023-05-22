@@ -38,34 +38,9 @@ public class CustomEventDeserializer extends StdDeserializer<Event> {
         String startTime = rootNode.get("startTime").asText();
         String endTime = rootNode.get("endTime").asText();
         Long maxCapacity = rootNode.get("maxCapacity").asLong();
-        Double photo = rootNode.get("photo").asDouble();
         Location location = rootNode.get("location").traverse(mapper).readValueAs(Location.class);
 
         Event event = new Event();
-
-        JsonNode tagsNode = rootNode.get("tags");
-
-        if (tagsNode != null && tagsNode.isArray()) {
-            Set<Tag> tags = new HashSet<>();
-            for (JsonNode tagElement : tagsNode) {
-                // Extract the fields from the 'tagNode'
-                Long tagId = tagElement.get("id").asLong();
-                String tagName = tagElement.get("tag").asText();
-                String tagColor = tagElement.get("color").asText();
-
-                // Create a new Tag instance and set the extracted fields
-                Tag tag = new Tag();
-                tag.setId(tagId);
-                tag.setTag(tagName);
-                tag.setColor(tagColor);
-                // ...
-
-                // Add the Tag instance to the 'tags' collection
-                tags.add(tag);
-
-            }
-            event.setTags(tags);
-        }
 
         event.setTitle(title);
         event.setDescription(description);
@@ -74,11 +49,29 @@ public class CustomEventDeserializer extends StdDeserializer<Event> {
         event.setStartTime(startTime);
         event.setEndTime(endTime);
         event.setMaxCapacity(maxCapacity);
-        event.setPhoto(photo);
         event.setLocation(location);
-        // event.setTags(tags);
 
-        // Return the created Event instance
+        JsonNode tagsNode = rootNode.get("tags");
+
+        if (tagsNode != null && tagsNode.isArray()) {
+            Set<Tag> tags = new HashSet<>();
+            for (JsonNode tagElement : tagsNode) {
+
+                Long tagId = tagElement.get("id").asLong();
+                String tagName = tagElement.get("tag").asText();
+                String tagColor = tagElement.get("color").asText();
+
+                Tag tag = new Tag();
+                tag.setId(tagId);
+                tag.setTag(tagName);
+                tag.setColor(tagColor);
+
+                tags.add(tag);
+
+            }
+            event.setTags(tags);
+        }
+
         return event;
     }
 

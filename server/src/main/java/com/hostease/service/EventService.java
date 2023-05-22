@@ -49,12 +49,13 @@ public class EventService {
 
     public Event save(Event event, Long categoryId, Long ownerId) {
 
+        
         User user = userRepository.findById(ownerId).get();
         Category category = categoryService.findById(categoryId);
-
+        
         event.setOwner(user);
         event.setCategory(category);
-
+        
         Set<Tag> tagsToSave = new HashSet<>();
         for (Tag tag : event.getTags()) {
             Tag managedTag = tagRepository.findById(tag.getId()).get();
@@ -63,9 +64,15 @@ public class EventService {
             managedTag.getEvents().add(event);
         }
         event.setTags(tagsToSave);
+        eventRepository.save(event);
+
+        event.getUsers().add(user);
+        user.getEvents().add(event);
 
         event.setOwner(userRepository.findById(ownerId).get());
         event.setCategory(eventRepository.findById(categoryId).get().getCategory());
+
+        userRepository.save(user);
         return eventRepository.save(event);
     }
 
@@ -79,7 +86,6 @@ public class EventService {
             eventToUpdate.setEndTime(event.getEndTime());
             eventToUpdate.setLocation(event.getLocation());
             eventToUpdate.setMaxCapacity(event.getMaxCapacity());
-            eventToUpdate.setPhoto(event.getPhoto());
             eventRepository.save(eventToUpdate);
         });
         return eventRepository.findById(id)

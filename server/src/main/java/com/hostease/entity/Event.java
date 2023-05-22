@@ -101,15 +101,11 @@ public class Event {
     @Column(name = "maxCapacity", nullable = false)
     private Long maxCapacity;
 
-    @Column(name = "photo", nullable = false)
-    private Double photo;
-
     public Event() {
     }
 
-    public Event(Long id, User owner, String title, String description, String startDate, String endDate, String startTime,
-            String endTime, Location location, Long maxCapacity, Double photo) {
-        this.id = id;
+    public Event(User owner, String title, String description, String startDate, String endDate, String startTime,
+            String endTime, Location location, Long maxCapacity, Category category) {
         this.owner = owner;
         this.title = title;
         this.description = description;
@@ -119,40 +115,9 @@ public class Event {
         this.endTime = endTime;
         this.location = location;
         this.maxCapacity = maxCapacity;
-        this.photo = photo;
-    }
-
-    public Event(Long id, User owner, String title, String description, String startDate, String endDate, String startTime,
-            String endTime, Location location, Long maxCapacity, Double photo, Category category) {
-        this.id = id;
-        this.owner = owner;
-        this.title = title;
-        this.description = description;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.location = location;
-        this.maxCapacity = maxCapacity;
-        this.photo = photo;
         this.category = category;
     }
-
-    public Event(String title, User owner, String description, String startDate, String endDate, String startTime,
-            String endTime, Location location, Long maxCapacity, Double photo, Category category) {
-        this.title = title;
-        this.owner = owner;
-        this.description = description;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.location = location;
-        this.maxCapacity = maxCapacity;
-        this.photo = photo;
-        this.category = category;
-    }
-
+    
     public Long getId() {
         return id;
     }
@@ -231,14 +196,6 @@ public class Event {
 
     public void setMaxCapacity(Long maxCapacity) {
         this.maxCapacity = maxCapacity;
-    }
-
-    public Double getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(Double photo) {
-        this.photo = photo;
     }
 
     public Set<Tag> getTags() {
