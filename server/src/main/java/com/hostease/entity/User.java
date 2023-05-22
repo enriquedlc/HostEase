@@ -21,14 +21,14 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.relational.core.mapping.Embedded.Nullable;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.hostease.serializer.CustomEventSerializer;
+import com.hostease.serializer.CustomUserListSerializer;
 
 @Entity
 @Table(name = "user_table")
-@JsonIgnoreProperties({ "followers", "following", "likes", "messages", "achievements", "events" })
+@JsonIgnoreProperties({ "following", "likes", "messages", "achievements", "events" })
 public class User {
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {
@@ -55,11 +55,13 @@ public class User {
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Event> ownedEvents = new HashSet<>();
 
+    @JsonSerialize(using = CustomUserListSerializer.class)
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_followers", joinColumns = @JoinColumn(name = "following_user_id"), inverseJoinColumns = @JoinColumn(name = "followed_user_id"))
     private Set<User> followers = new HashSet<>();
 
-    @JsonIgnore
+    // @JsonIgnore
+    @JsonSerialize(using = CustomUserListSerializer.class)
     @ManyToMany(mappedBy = "followers", fetch = FetchType.LAZY)
     private Set<User> following = new HashSet<>();
 

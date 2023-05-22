@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hostease.entity.User;
@@ -133,6 +134,27 @@ public class UserController {
 
             return ResponseEntity.status(500).body(jsonResponseMap);
         }
+    }
+
+    @GetMapping("/users/followers/{id}")
+    public ResponseEntity<Map<String, Object>> findFollowersByUserId(@PathVariable("userId") Long userId) {
+
+        List<User> followers = userService.findFollowersByUserId(userId);
+
+        return new ControllerJsonResponseMap().jsonResponseMapListGenerator(
+                followers,
+                HttpStatusEnum.STATUS_200_OK.getStatus(),
+                "Followers successfully retrieved",
+                "Error retrieving followers");
+    }
+
+    @PostMapping("/users/follow")
+    public ResponseEntity<Map<String, Object>> followUser(@RequestParam Long followedUserId, @RequestParam Long followerUserId) {
+        return new ControllerJsonResponseMap().jsonResponseMapObjectGenerator(
+                userService.followUser(followedUserId, followerUserId),
+                HttpStatusEnum.STATUS_200_OK.getStatus(),
+                "User successfully followed",
+                "Error following user");
     }
 
 }

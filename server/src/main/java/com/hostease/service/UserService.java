@@ -45,4 +45,24 @@ public class UserService {
         return userRepository.findById(user.getId()).get();
     }
 
+    public boolean followUser(Long followedUserId, Long followerUserId) {
+        User followedUser = userRepository.findById(followedUserId).get();
+        User followerUser = userRepository.findById(followerUserId).get();
+        if (followedUser.getFollowers().contains(followerUser)) {
+            followedUser.getFollowers().remove(followerUser);
+            userRepository.save(followedUser);
+            userRepository.save(followerUser);
+            return false;
+        } else {
+            followedUser.getFollowers().add(followerUser);
+            userRepository.save(followedUser);
+            userRepository.save(followerUser);
+            return true;
+        }
+    }
+
+    public List<User> findFollowersByUserId(Long id) {
+        return userRepository.findFollowersById(id);
+    }
+
 }
