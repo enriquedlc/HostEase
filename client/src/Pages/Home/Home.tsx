@@ -11,7 +11,7 @@ import { UserContext } from "../../Context/UserContext";
 import { HostEaseRoutes } from "../../Types/AppRoutes/HostEaseRoutes";
 import "./Home.css";
 
-const Home = () => {
+const Home = (props : { context : UserContextValue | null }) => {
   const userContext = useContext<UserContextValue | null>(UserContext);
 
   return (

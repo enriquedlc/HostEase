@@ -1,0 +1,317 @@
+.create-form-body {
+  border-radius: 20px;
+  display: flex;
+  color: var(--primary-color);
+  flex-direction: column;
+  height: 80%;
+  width: 80%;
+  padding: 50px;
+  position: relative;
+  margin: 50px auto;
+}
+
+.create-form-header {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  margin-bottom: 20px;
+}
+
+.event-title {
+  width: 35%;
+}
+
+.event-title input,
+.event-title label {
+  font-size: 17px;
+}
+
+.light-theme-form {
+  background-color: var(--secondary-color);
+}
+
+.create-form-page {
+  display: flex;
+}
+
+.create-form-page-column {
+  flex: 1;
+}
+
+.create-form-page-column .tag-text {
+  padding: 0px 10px;
+}
+
+.description-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+}
+
+.tag-selector,
+.description-form {
+  width: 90%;
+}
+
+.description-label {
+  font-weight: bold;
+}
+
+.description-textarea {
+  font-weight: "Roboto";
+  border-radius: 5px;
+  margin-top: 20px;
+  padding: 5px;
+  resize: none;
+}
+
+.description-textarea::-webkit-scrollbar {
+  width: 8px; /* Ancho del scroll */
+}
+
+.dark-theme-form .description-textarea {
+  background-color: var(--primary-dark-color);
+  border-color: var(--secondary-dark-color);
+  color: var(--font-color);
+}
+
+.light-theme-form .description-textarea {
+  background-color: var(--primary-color);
+  border: none;
+  color: var(--primary-dark-color);
+  outline: none;
+}
+
+.dark-theme-form .description-textarea::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+}
+
+.dark-theme-form .description-textarea::-webkit-scrollbar-thumb {
+  background-color: var(--secondary-color);
+}
+
+.dark-theme-form .description-textarea::-webkit-scrollbar {
+  background-color: var(--secondary-dark-color);
+}
+
+.dark-theme-form {
+  background-color: var(--secondary-dark-color);
+}
+
+.photo-form {
+  align-self: flex-end;
+  display: flex;
+  margin-top: 20px;
+}
+
+.photo-form .photo-label {
+  margin-right: 10px;
+}
+
+.photo-form .photo-input#file-upload-button {
+  background-color: var(--primary-color);
+}
+
+.tab-panel {
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  list-style-type: none;
+  text-align: center;
+  bottom: 20px;
+  right: 20px;
+  padding: 15px 5px 15px 15px;
+}
+
+.light-theme-form .tab-panel {
+  background-color: var(--secondary-color);
+}
+
+.category-select {
+  margin-top: 20px;
+  margin-bottom: 50px;
+  color: var(--secondary-color);
+}
+
+.category-select > svg {
+  color: var(--secondary-color);
+}
+
+
+.tab-buttons-panel {
+  display: flex;
+  flex-direction: row;
+}
+
+.tab-button {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  margin-right: 10px;
+  cursor: pointer;
+  outline: none;
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+.index-reference {
+  margin-top: 15px;
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.button-submit-panel {
+  border-radius: 10px;
+  padding: 20px 50px 20px 50px;
+  position: absolute;
+  bottom: 10%;
+  left: 5%;
+}
+
+.button-submit-panel button {
+  padding: 10px 30px 10px 30px;
+  border: none;
+  border-radius: 10px;
+}
+
+.light-theme-form .category-select__control {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+}
+
+.light-theme-form .category-select__control--is-focused .category-select__single-value {
+  color: var(--secondary-color);
+}
+
+.light-theme-form .category-select__indicators svg {
+  color: var(--secondary-color);
+}
+
+.light-theme-form .category-select__indicators span {
+  background-color: var(--secondary-color);
+}
+
+.light-theme-form .category-select__menu {
+  background-color: var(--primary-color);
+}
+
+.light-theme-form .category-select__menu .category-select__option {
+  color: var(--secondary-color);
+}
+
+.light-theme-form .category-select__menu .category-select__option--is-selected {
+  color: var(--font-color);
+  background-color: var(--secondary-color);
+}
+
+.light-theme-form .button-submit-panel button {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.light-theme-form .button-submit-panel button:hover {
+  background-color: var(--ternary-color);
+  color: var(--font-color);
+  cursor: pointer;
+}
+
+.dark-theme-form .button-submit-panel button {
+  background-color: var(--primary-dark-color);
+  color: var(--font-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark-theme-form .button-submit-panel button:hover {
+  background-color: var(--ternary-color);
+  cursor: pointer;
+}
+
+.dark-theme-form .category-select__control {
+  background-color: var(--primary-dark-color);
+  color: var(--font-color);
+}
+
+.dark-theme-form .category-select__single-value {
+  color: var(--font-color);
+}
+
+.dark-theme-form .category-select__control--is-focused .category-select__single-value {
+  color: var(--font-color);
+}
+
+.dark-theme-form .category-select__control--is-focused .category-select__indicators svg {
+  color: var(--secondary-color);
+}
+
+.dark-theme-form .category-select__menu {
+  background-color: var(--primary-dark-color);
+}
+
+.dark-theme-form .category-select__menu .category-select__option {
+  color: var(--font-color);
+  transition: background-color 0.3s ease;
+}
+
+.dark-theme-form .category-select__menu .category-select__option.category-select__option--is-focused {
+  background-color: var(--primary-dark-color);
+  color: var(--font-color);
+}
+
+
+.dark-theme-form .category-select__menu .category-select__option:hover {
+  background-color: var(--secondary-dark-color);
+  color: var(--font-color);
+}
+
+
+.dark-theme-form .category-select__menu .category-select__option--is-selected {
+  color: var(--secondary-color);
+  background-color: var(--font-color);
+}
+
+
+
+@media screen and (max-width: 1000px) {
+  .create-form-body {
+    border-radius: 0px;
+    border-top: 2px solid var(--primary-color);
+    margin: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  .create-form-page {
+    flex-direction: column;
+  }
+
+  .event-title {
+    width: 50%;
+  }
+
+  .tab-panel {
+    right: 5px;
+    bottom: 10px;
+    padding: 10px;
+  }
+
+  .button-submit-panel {
+    bottom: 5%;
+    left: 0%;
+  }
+
+  .disabled {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .event-title {
+    width: 100%;
+  }
+}

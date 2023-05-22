@@ -25,12 +25,42 @@
   cursor: pointer;
 }
 
-.options-panel button:focus {
-  outline: none;
+.light-panel button.active {
+  background-color: var(--ternary-color);
+  transition: background-color 0.1s ease-in-out;
 }
 
-.options-panel button.active {
+.light-panel button.active:hover {
+  background-color: var(--secondary-color);
+  transition: background-color 0.1s ease-in-out;
+}
+
+.light-panel button:hover {
+  background-color: var(--ternary-color);
+}
+
+.dark-panel button {
   background-color: var(--secondary-dark-color);
+  transition: background-color 0.1s ease-in-out;
+}
+
+.dark-panel button:hover {
+  background-color: var(--secondary-color);
+}
+
+.dark-panel button.active {
+  background-color: var(--secondary-color);
+  transition: background-color 0.1s ease-in-out;
+}
+
+.dark-panel button.active:hover {
+  background-color: var(--secondary-dark-color);
+  transition: background-color 0.1s ease-in-out;
+}
+
+
+.options-panel button:focus {
+  outline: none;
 }
 
 .event-grid {

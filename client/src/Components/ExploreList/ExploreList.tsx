@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./ExploreList.css";
-import { HostEaseEvent } from "../../Types/Types";
+import { HostEaseEvent, Theme } from "../../Types/Types";
 import EventCard from "../EventCard/EventCard";
 
 interface ExploreListOptions {
@@ -11,11 +11,13 @@ interface ExploreListOptions {
 interface ExploreListProps {
   listToFilter: HostEaseEvent[];
   filterOptions: ExploreListOptions[];
+  theme?: Theme
 }
 
 const ExploreList: React.FC<ExploreListProps> = ({
   listToFilter,
   filterOptions,
+  theme
 }) => {
   const [selectedButton, setSelectedButton] = useState<string | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -32,7 +34,7 @@ const ExploreList: React.FC<ExploreListProps> = ({
 
   return (
     <div className="explorer-container">
-      <div className={`options-panel ${isMenuOpen ? "visible" : ""}`}>
+      <div className={`options-panel ${isMenuOpen ? "visible" : ""} ${theme}-panel`}>
         {filterOptions.map((element, index) => (
           <button
             key={index.toString() + element}
@@ -43,7 +45,7 @@ const ExploreList: React.FC<ExploreListProps> = ({
                 setSelectedButton(element.label);
               }
             }}
-            className={selectedButton === element.label ? "active" : ""}
+            className={`${selectedButton === element.label ? "active" : ""}`}
           >
             {element.label}
           </button>
@@ -60,8 +62,7 @@ const ExploreList: React.FC<ExploreListProps> = ({
             endDate={event.endDate && event.endDate}
             startTime={event.startTime}
             endTime={event.endTime}
-            locationLat={event.locationLat}
-            locationLng={event.locationLng}
+            location={event.location}
             tags={event.tags}
             users={event.users}
           />

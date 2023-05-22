@@ -1,18 +1,18 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import React, { ReactNode, useContext } from "react";
-import AuthPageLayout from "../Layout/AuthPageLayout";
-import UserProvider from "../Provider/UserProvider";
-import Home from "./Home";
-import Login from "./Login";
-import SignUp from "./SignUp";
-import MainPage from "./MainPage";
+import { useContext } from "react";
 import UserContext from "../Context/UserContext";
-import { HostEaseRoutes } from "../Types/AppRoutes/HostEaseRoutes";
+import AuthPageLayout from "../Layout/AuthPageLayout";
 import MainSiteLayout from "../Layout/MainSiteLayout";
+import { HostEaseRoutes } from "../Types/AppRoutes/HostEaseRoutes";
 import LogInto from "./Error/LogInto";
 import NotFound from "./Error/NotFound";
 import Explore from "./Explore/Explore";
+import Home from "./Home";
+import Login from "./Login";
+import MainPage from "./MainPage";
+import FormEvent from "./FormEvent";
+import SignUp from "./SignUp";
 
 /**
  *
@@ -25,27 +25,27 @@ import Explore from "./Explore/Explore";
  */
 
 const AppRouterProvider = () => {
-  const debug = (): ReactNode => {
-    console.log("MAIN", userContext?.user);
-    return <></>;
-  };
-
   const userContext = useContext(UserContext);
 
   return (
     <BrowserRouter basename={HostEaseRoutes.Home}>
-      {debug()}
       <Routes>
-        <Route path={HostEaseRoutes.Home} element={<Home />} />
-        <Route element={<AuthPageLayout />}>
+        <Route
+          path={HostEaseRoutes.Home}
+          element={<Home context={userContext} />}
+        />
+        <Route element={<AuthPageLayout context={userContext} />}>
           <Route path={HostEaseRoutes.Login} element={<Login />} />
           <Route path={HostEaseRoutes.Sign} element={<SignUp />} />
         </Route>
-        {/* userContext?.user && */}
-        {(
-          <Route element={<MainSiteLayout />}>
+        {userContext?.user && (
+          <Route element={<MainSiteLayout context={userContext} />}>
             <Route path={HostEaseRoutes.MainPage} element={<MainPage />} />
             <Route path={HostEaseRoutes.Explore} element={<Explore />} />
+            <Route
+              path={`${HostEaseRoutes.NewEvent}`}
+              element={<FormEvent />}
+            />
           </Route>
         )}
         {/* Hay que convertir este trozo en un componente que detecte los enlaces */}

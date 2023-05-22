@@ -1,16 +1,16 @@
 import React, { useState, useContext } from "react";
 import { MdEmail } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import PasswordInput from "../../Components/Inputs/PasswordInput/PasswordInput";
 import { HostEaseRoutes } from "../../Types/AppRoutes/HostEaseRoutes";
 import "./Login.css";
 import UserContext from "../../Context/UserContext";
-import { LoginRequest } from "../../Types/Types";
+import { LoginRequest, UserContextValue } from "../../Types/Types";
 import { toast } from "react-toastify";
 
 const Login = () => {
-  const userContext = useContext(UserContext);
 
+  const userContext = useOutletContext<UserContextValue | null>();
   const navigate = useNavigate();
 
   const [userData, setUserData] = useState<LoginRequest>({

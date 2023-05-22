@@ -1,12 +1,39 @@
-export type Theme = 'light' | 'dark';
+export type Theme = "light" | "dark";
 
 export interface UserContextValue {
-	user: User | null;
-	theme: Theme;
-	setTheme: React.Dispatch<React.SetStateAction<Theme>>;
-	signUp: (arg0: UserSignUpData) => Promise<boolean>;
-	logIn: (arg0: LoginRequest) => Promise<boolean>;
-	logOut: () => void;
+  user: User | null;
+  setUser: React.Dispatch<React.SetStateAction<User | null>>;
+  theme: Theme;
+  setTheme: React.Dispatch<React.SetStateAction<Theme>>;
+  signUp: (arg0: UserSignUpData) => Promise<boolean>;
+  logIn: (arg0: LoginRequest) => Promise<boolean>;
+  logOut: () => void;
+  getUserEvents: () => void;
+  isLoaded: boolean;
+}
+
+export type ModeOptions = "form" | "view";
+export type LatLngLiteral = google.maps.LatLngLiteral;
+export type DirectionsResult = google.maps.DirectionsResult;
+// @ts-ignore Estos dos tipos fallan por algun motivo en algunos equipos (aun haciendo npm i)
+export type MapOptions = google.maps.MapOptions;
+// @ts-ignore 
+export type MapMouseEvent = google.maps.MapMouseEvent;
+
+export type MapLibraries =
+  | "drawing"
+  | "geometry"
+  | "localContext"
+  | "places"
+  | "visualization";
+
+export interface MapProperties {
+  coordinates?: LatLngLiteral | null;
+  setCoordinates?: HostEaseHandlerFunction;
+  handleDbClick?: HostEaseHandlerFunction;
+  center?: boolean;
+  mode?: ModeOptions;
+  name: string
 }
 
 export interface EventOwner {
@@ -18,17 +45,17 @@ export interface EventOwner {
 }
 
 export interface User {
-	id: number;
-	nickname: string;
-	email: string;
-	password: string;
-	phone: string;
-	experience: number;
-	joinedAt: string;
-	events?: HostEaseEvent[];
-	achievements?: Achievement[];
-	messages?: Message[];
-	followers?: number;
+  id: number;
+  nickname: string;
+  email: string;
+  password: string;
+  phone: string;
+  experience: number;
+  joinedAt: string;
+  events?: HostEaseEvent[];
+  achievements?: Achievement[];
+  messages?: Message[];
+  followers?: number;
 }
 
 // Pendiente
@@ -36,63 +63,66 @@ export interface User {
 // setTheme: React.Dispatch<React.SetStateAction<UserTheme>>
 
 interface Message {
-	id: number;
-	message: string;
-	publishedAt: string;
-	event: HostEaseEvent;
-	user: User;
+  id: number;
+  message: string;
+  publishedAt: string;
+  event: HostEaseEvent;
+  user: User;
 }
 
 interface Achievement {
-	id: number;
-	achievement: string;
-	xpPoints: number;
+  id: number;
+  achievement: string;
+  xpPoints: number;
 }
 
 export interface Category {
-	id: number;
-	categoryName: string;
+  id: number;
+  categoryName: string;
 }
 
 export interface Tag {
-    id: number;
-    tag: string;
-	color: string
-  }
-  
-  export interface HostEaseEvent {
-    id: number;
-    title: string;
-    description: string;
-    startDate: string;
-    endDate?: string | null;
-    startTime: string;
-    endTime?: string;
-    locationLat: number;
-    locationLng: number;
-    maxCapacity: number;
-	owner: EventOwner;
-    photo?: number;
-    tags?: Tag[];
-    users: number;
-    category: Category;
-    messages?: Message[];
-    likes: number;
-  }
-  
+  id: number;
+  tag: string;
+  color: string;
+}
+
+export type HostEaseHandlerFunction = (date: File | string | LatLngLiteral | Date | Category | Tag[] | number | null, name: string ) => void
+
+export interface HostEaseEventForm {
+  title?: string;
+  description?: string;
+  startDate?: string;
+  endDate?: string;
+  startTime?: string;
+  endTime?: string;
+  location?: LatLngLiteral | null;
+  maxCapacity?: number;
+  photo?: number;
+  tags?: Tag[];
+  category?: Category;
+}
+
+export interface HostEaseEvent extends HostEaseEventForm {
+  id: number;
+  users: number;
+  messages?: number;
+  likes: number;
+  owner: EventOwner;
+}
+
 export interface LoginRequest {
-	email: string;
-	password: string;
+  email: string;
+  password: string;
 }
 
 export interface UserSubmit {
-	nickname: string;
-	phone: string;
-	email: string;
-	password: string;
+  nickname: string;
+  phone: string;
+  email: string;
+  password: string;
 }
 
 export interface UserSignUpData extends UserSubmit {
-	confirmPass: string;  
+  confirmPass: string;
 }
-

@@ -1,30 +1,33 @@
 import React, { useContext } from "react";
 import "./EventCard.css";
-import { Category, Tag, User } from "../../Types/Types";
+import { Category, LatLngLiteral, Tag, User } from "../../Types/Types";
 import {
   AiFillLike,
   AiOutlineArrowRight,
   AiOutlineClockCircle,
 } from "react-icons/ai";
-import { BsCalendarWeekFill } from "react-icons/bs";
+import { BsCalendarWeekFill, BsPeopleFill } from "react-icons/bs";
+import { FaCommentDots } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa";
 import TagCard from "../TagCard";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../../Context/UserContext";
+import Map from "../Map";
 
 interface EventCardOptions {
   id: number;
   title?: string;
   category?: Category;
   likes?: number;
+  messages?: number;
   startDate?: string;
   startTime?: string;
   endDate?: string | null;
   endTime?: string | null;
-  locationLat?: number;
-  locationLng?: number;
+  location?: LatLngLiteral | null;
   tags?: Tag[];
   users?: number;
+  maxCapacity?: number;
 }
 
 const EventCard = (props: EventCardOptions) => {
@@ -40,8 +43,9 @@ const EventCard = (props: EventCardOptions) => {
     startTime,
     endDate,
     endTime,
-    locationLat,
-    locationLng,
+    location,
+    maxCapacity,
+    messages,
     tags,
     users,
   } = props;
@@ -59,10 +63,16 @@ const EventCard = (props: EventCardOptions) => {
 
   return (
     <div className={`card-body ${userContext?.theme}`}>
-      <div className="map-side">Mapa</div>
+      <div className="map-side">
+        {location && (
+          <Map name="map" coordinates={location} center mode="view" />
+        )}
+      </div>
       <div className="content-side">
-        <h1>{title}</h1>
-        <h1>{category?.categoryName}</h1>
+        <div className="content-header">
+          <h1>{title}</h1>
+          <h5>{category?.categoryName}</h5>
+        </div>
         {slicedTags && (
           <div className="tags-container">
             {slicedTags?.map(({ tag, color }) => {
@@ -73,7 +83,7 @@ const EventCard = (props: EventCardOptions) => {
             )}
           </div>
         )}
-        <div className="row">
+        <div className="col">
           {startDate && (
             <div>
               <BsCalendarWeekFill />
@@ -91,6 +101,14 @@ const EventCard = (props: EventCardOptions) => {
           <div>
             <AiFillLike />
             <div>{likes}</div>
+          </div>
+          <div>
+            <FaCommentDots />
+            <div>{messages}</div>
+          </div>
+          <div>
+            <BsPeopleFill />
+            <div>{maxCapacity}</div>
           </div>
         </div>
         <div className="view-event" onClick={() => navigate("/event/id")}>
