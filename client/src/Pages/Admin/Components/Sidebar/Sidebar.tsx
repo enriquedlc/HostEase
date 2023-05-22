@@ -77,9 +77,6 @@ const Sidebar = () => {
                 {/* logo */}
                 <div className="logo">
                     <img src={HostEaseLogo} alt="" />
-                    <span>
-                        HostEase
-                    </span>
                 </div>
                 {/* menu */}
                 <div className="menu">
