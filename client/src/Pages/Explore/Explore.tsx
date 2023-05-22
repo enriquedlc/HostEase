@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
-import "./Explore.css";
+import { useEffect, useState } from "react";
+import { useOutletContext } from "react-router-dom";
 import ExploreList from "../../Components/ExploreList";
 import { Category, HostEaseEvent, UserContextValue } from "../../Types/Types";
 import { fetchAllCategories, fetchAllEvents } from "../../services/main.services";
-import { useOutletContext } from "react-router-dom";
 
 const Explore = () => {
   const userContext = useOutletContext<UserContextValue | null>();
@@ -25,13 +24,11 @@ const Explore = () => {
     getAllCategories();
   }, []);
 
-  console.log('EVENTOS: ', allEvents);
-  console.log('CAT:', allCategories);
-
   return (
     <>
       {allEvents && allCategories ? (
         <ExploreList
+
           theme={userContext?.theme}
           listToFilter={allEvents}
           filterOptions={allCategories.map(category => ({

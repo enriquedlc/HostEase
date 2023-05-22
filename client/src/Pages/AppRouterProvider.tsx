@@ -8,10 +8,11 @@ import { HostEaseRoutes } from "../Types/AppRoutes/HostEaseRoutes";
 import LogInto from "./Error/LogInto";
 import NotFound from "./Error/NotFound";
 import Explore from "./Explore/Explore";
+import FormEvent from "./FormEvent";
 import Home from "./Home";
 import Login from "./Login";
 import MainPage from "./MainPage";
-import FormEvent from "./FormEvent";
+import MyEvents from "./MyEvents";
 import SignUp from "./SignUp";
 
 /**
@@ -42,6 +43,7 @@ const AppRouterProvider = () => {
           <Route element={<MainSiteLayout context={userContext} />}>
             <Route path={HostEaseRoutes.MainPage} element={<MainPage />} />
             <Route path={HostEaseRoutes.Explore} element={<Explore />} />
+            <Route path={HostEaseRoutes.MyEvents} element={<MyEvents />} />
             <Route
               path={`${HostEaseRoutes.NewEvent}`}
               element={<FormEvent />}
