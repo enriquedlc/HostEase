@@ -41,6 +41,7 @@ public class Event {
             CascadeType.PERSIST,
             CascadeType.MERGE
     })
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Tag> tags = new HashSet<>();
 
     @JsonSerialize(using = CustomCountUserSerializer.class)
@@ -48,6 +49,7 @@ public class Event {
             CascadeType.PERSIST,
             CascadeType.MERGE
     })
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<User> users = new HashSet<>();
 
     @JsonSerialize(using = CustomCategorySerializer.class)

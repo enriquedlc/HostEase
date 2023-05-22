@@ -8,4 +8,5 @@ import com.hostease.entity.Event;
 
 public interface EventRepository extends JpaRepository<Event, Long> {
     List<Event> findEventsByUsersId(Long userId);
+    
 }

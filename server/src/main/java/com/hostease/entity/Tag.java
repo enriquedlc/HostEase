@@ -15,9 +15,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -25,12 +22,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Tag {
 
     @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {
-            // CascadeType.PERSIST,
-            CascadeType.MERGE
-    })
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "event_tag_table", joinColumns = @JoinColumn(name = "fk_event_id"), inverseJoinColumns = @JoinColumn(name = "fk_tag_id"))
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Event> events = new HashSet<>();
 
     @Id
