@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosAdapter, AxiosResponse } from "axios";
 import bcrypt from "bcryptjs";
 import { LoginRequest, MapLibraries, UserSubmit } from "../Types/Types";
 
@@ -27,8 +27,16 @@ export const signUpUser = async (userData: UserSubmit) => {
 };
 
 export const fetchUserEvents = async (userId: number) => {
-  return axios.get(`${API_URL}/user/events/${userId}`);
+  return axios.get(`${API_URL}/user/${userId}/events`)
 };
+
+export const deleteEvent = async (eventId: number) => {
+  return axios.delete(`${API_URL}/event/${eventId}`)
+}
+
+export const removeUserFromEvent = async (eventId: number) => {
+  return axios.delete(`${API_URL}/user?eventId=${eventId}`)
+}
 
 export const fetchAllEvents = async () => {
   return axios.get(`${API_URL}/events`);

@@ -1,8 +1,32 @@
 .explorer-container {
   position: relative;
   display: flex;
-  height: 100vh;
+  height: 95vh;
   overflow-y: scroll;
+}
+
+.light-scroll::-webkit-scrollbar {
+  background-color: var(--primary-color);
+}
+
+.light-scroll::-webkit-scrollbar-thumb {
+  background-color: var(--secondary-color);
+}
+
+.light-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: var(--ternary-color);
+}
+
+.dark-scroll::-webkit-scrollbar {
+  background-color: var(--primary-dark-color);
+}
+
+.dark-scroll::-webkit-scrollbar-thumb {
+  background-color: var(--secondary-color);
+}
+
+.dark-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: var(--secondary-dark-color);
 }
 
 .options-panel {
@@ -58,9 +82,57 @@
   transition: background-color 0.1s ease-in-out;
 }
 
-
 .options-panel button:focus {
   outline: none;
+}
+
+.event-edit-view {
+  flex: 4;
+}
+
+.event-row {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+.light-button-panel button {
+  color: var(--secondary-color);
+}
+
+.light-button-panel button:hover {
+  color: var(--ternary-color);
+}
+
+.dark-button-panel button {
+  color: var(--font-color);
+}
+
+.dark-button-panel button:hover {
+  color: var(--secondary-color);
+}
+
+.event-button-panel {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.event-button-panel button {
+  border: none;
+  background-color: transparent;
+  transition: color 0.1s ease-in-out;
+  font-size: 40px;
+}
+
+.event-button-panel button:hover {
+  cursor: pointer
+}
+
+.event-card {
+  flex: 3;
 }
 
 .event-grid {

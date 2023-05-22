@@ -28,6 +28,7 @@ interface EventCardOptions {
   tags?: Tag[];
   users?: number;
   maxCapacity?: number;
+  className ?: string;
 }
 
 const EventCard = (props: EventCardOptions) => {
@@ -48,6 +49,7 @@ const EventCard = (props: EventCardOptions) => {
     messages,
     tags,
     users,
+    className
   } = props;
 
   const renderUsers = (users: number) => {
@@ -62,7 +64,7 @@ const EventCard = (props: EventCardOptions) => {
   const slicedTags = tags?.slice(0, 6);
 
   return (
-    <div className={`card-body ${userContext?.theme}`}>
+    <div className={`card-body ${userContext?.theme} ${className}`}>
       <div className="map-side">
         {location && (
           <Map name="map" coordinates={location} center mode="view" />
@@ -75,8 +77,8 @@ const EventCard = (props: EventCardOptions) => {
         </div>
         {slicedTags && (
           <div className="tags-container">
-            {slicedTags?.map(({ tag, color }) => {
-              return <TagCard text={tag} color={color} />;
+            {slicedTags?.map(({ id, tag, color }) => {
+              return <TagCard key={id} text={tag} color={color} />;
             })}
             {slicedTags?.length > 6 && (
               <span> + {slicedTags?.length - 6} more</span>
