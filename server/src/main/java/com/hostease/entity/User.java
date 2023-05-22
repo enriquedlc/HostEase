@@ -60,7 +60,6 @@ public class User {
     @JoinTable(name = "user_followers", joinColumns = @JoinColumn(name = "following_user_id"), inverseJoinColumns = @JoinColumn(name = "followed_user_id"))
     private Set<User> followers = new HashSet<>();
 
-    // @JsonIgnore
     @JsonSerialize(using = CustomUserListSerializer.class)
     @ManyToMany(mappedBy = "followers", fetch = FetchType.LAZY)
     private Set<User> following = new HashSet<>();

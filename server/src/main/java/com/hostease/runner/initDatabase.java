@@ -224,7 +224,7 @@ public class initDatabase implements CommandLineRunner {
 
                 // SET THE USERS INTO THE EVENTS
                 Set<Event> eventsToAsignUser1 = new HashSet<Event>(
-                                Arrays.asList(event1, event2));
+                                Arrays.asList(event1, event2, event3, event4));
                 user1.setEvents(eventsToAsignUser1);
                 event1.getUsers().add(user1);
                 event2.getUsers().add(user1);
@@ -486,8 +486,10 @@ public class initDatabase implements CommandLineRunner {
                 event4.getLikes().add(like11);
                 likeRepository.save(like11);
 
-                System.out.println(user1.getFollowers());
-                System.out.println(user1.getFollowers().size());
+                System.out.println(event1.getUsers());
+                System.out.println(user1.getEvents());
+                System.out.println(user1.getOwnedEvents());
+
 
                 System.out.println("Database initialized");
 
