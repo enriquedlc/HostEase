@@ -7,6 +7,7 @@ interface HostEaseRoutes {
   MyEvents: string;
   Profile: string;
   NewEvent: string;
+  Admin: string;
 }
 
 export const HostEaseRoutes: HostEaseRoutes = {
@@ -18,4 +19,5 @@ export const HostEaseRoutes: HostEaseRoutes = {
   MyEvents: "/events",
   Profile: "/profile",
   NewEvent: "/new",
+  Admin: "/admin",
 };
