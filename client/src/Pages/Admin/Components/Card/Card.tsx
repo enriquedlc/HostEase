@@ -1,15 +1,14 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react';
 
-import { AnimatePresence, motion } from 'framer-motion'
-import { CircularProgressbar } from 'react-circular-progressbar'
-import 'react-circular-progressbar/dist/styles.css'
+import { AnimatePresence, motion } from 'framer-motion';
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 // import { ApexChart } from 'react-apexcharts';
-import ApexCharts from 'apexcharts';
-import { ApexOptions } from 'apexcharts';
+import ApexCharts, { ApexOptions } from 'apexcharts';
 
-import { FaTimes } from 'react-icons/fa'
+import { FaTimes } from 'react-icons/fa';
 
-import './Card.css'
+import './Card.css';
 
 interface CardProps {
     title: string

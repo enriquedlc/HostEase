@@ -9,3 +9,20 @@
     padding-bottom: .7rem;
     padding-top: 2.1rem;
 }
+
+@media screen and (max-width: 1200px) {
+
+    .main-dashboard {
+        justify-content: flex-start;
+        margin-top: 2rem;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+
+    .main-dashboard {
+        align-items: center
+    }
+
+}

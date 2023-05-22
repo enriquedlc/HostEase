@@ -7,7 +7,7 @@ import './Dashboard.css';
 const Dashboard: React.FC = () => {
   return (
     <section className='dashboard-section'>
-      <div className='dashboard-div'>
+      <div className='dashboard-div-glass'>
         <Sidebar />
         <MainDashboard />
         <RightSide />

@@ -1,5 +1,6 @@
 
-import { MdLogout, MdOutlineComment, MdOutlineEditCalendar, MdOutlineGroup, MdOutlineHouse, MdTag, MdOutlineCategory } from 'react-icons/md'
+import { motion } from 'framer-motion'
+import { MdLogout, MdMenu, MdOutlineCategory, MdOutlineComment, MdOutlineEditCalendar, MdOutlineGroup, MdOutlineHouse, MdTag } from 'react-icons/md'
 
 import HostEaseLogo from '../../../../assets/HostEase.png'
 
@@ -38,37 +39,67 @@ const SidebarData: SidebarOptions[] = [
     }
 ]
 
+const sidebarVariants = {
+    true: {
+        left: "0"
+    },
+    false: {
+        left: "-60%"
+    }
+}
+
 const Sidebar = () => {
 
     const [selected, setSelected] = useState<number>(0)
+    const [showMenu, setShowMenu] = useState<boolean>(false)
+
+    const handleShowMenu = () => {
+        setShowMenu(!showMenu)
+    }
 
     return (
-        <div className="sidebar">
-            {/* logo */}
-            <div className="logo">
-                <img src={HostEaseLogo} alt="" />
-                <span>
-                    HostEase
-                </span>
-            </div>
-            {/* menu */}
-            <div className="menu">
-                {SidebarData.map((item, index) => {
-                    return (
-                        <div className={selected === index ? "menu-item active" : "menu-item"}
-                            onClick={() => setSelected(index)}
-                            key={index}>
-                            <item.icon />
-                            <span>{item.title}</span>
-                        </div>
-                    )
-                })
-                }
-                <div className="menu-item">
-                    <MdLogout />
+        <>
+            <motion.div
+                onClick={() => handleShowMenu()}
+                whileTap={{ scale: 1.4 }}
+                whileHover={{ scale: 1.1 }}
+                className='menu-icon'
+                style={
+                    showMenu
+                        ? { left: "5%" }
+                        : { left: "5%" }}>
+                <MdMenu />
+            </motion.div>
+            <motion.div
+                className="sidebar"
+                variants={sidebarVariants}
+                animate={window.innerWidth <= 768 ? `${showMenu}` : ""}>
+                {/* logo */}
+                <div className="logo">
+                    <img src={HostEaseLogo} alt="" />
+                    <span>
+                        HostEase
+                    </span>
                 </div>
-            </div>
-        </div>
+                {/* menu */}
+                <div className="menu">
+                    {SidebarData.map((item, index) => {
+                        return (
+                            <div className={selected === index ? "menu-item active" : "menu-item"}
+                                onClick={() => setSelected(index)}
+                                key={index}>
+                                <item.icon />
+                                <span>{item.title}</span>
+                            </div>
+                        )
+                    })
+                    }
+                    <div className="menu-item">
+                        <MdLogout />
+                    </div>
+                </div>
+            </motion.div>
+        </>
     )
 }
 

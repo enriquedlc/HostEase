@@ -1,6 +1,6 @@
 import './Updates.css';
 
-import genericProfileImg from './user.png'
+import genericProfileImg from './user.png';
 
 export const UpdatesData = [
     {

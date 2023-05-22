@@ -101,3 +101,28 @@
 .chart-container {
     width: 68.5%;
 }
+
+@media screen and (max-width: 1200px) {
+
+    .expanded-card {
+        top: 6rem;
+        height: 60vh;
+        left: 6rem;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+
+    .expanded-card {
+        top: 8rem;
+        height: 50%;
+        left: 15px;
+        width: 90%;
+    }
+
+    .chart-container {
+        width: 100%;
+    }
+
+}
