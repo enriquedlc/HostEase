@@ -14,6 +14,7 @@ import Login from "./Login";
 import MainPage from "./MainPage";
 import MyEvents from "./MyEvents";
 import SignUp from "./SignUp";
+import Dashboard from "./Admin/Dashboard";
 
 /**
  *
@@ -31,6 +32,7 @@ const AppRouterProvider = () => {
   return (
     <BrowserRouter basename={HostEaseRoutes.Home}>
       <Routes>
+        <Route path={HostEaseRoutes.Admin} element={<Dashboard />} />
         <Route
           path={HostEaseRoutes.Home}
           element={<Home context={userContext} />}
