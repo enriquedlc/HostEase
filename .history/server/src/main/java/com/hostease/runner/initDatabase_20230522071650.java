@@ -28,7 +28,7 @@ import com.hostease.repository.UserRepository;
 
 @Component
 @Order(value = 1)
-public class initDatabase implements CommandLineRunner {
+public class InitDatabase implements CommandLineRunner {
 
         @Autowired
         private EventRepository eventRepository;
