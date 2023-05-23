@@ -90,6 +90,7 @@ export interface Tag {
 export type HostEaseHandlerFunction = (date: File | string | LatLngLiteral | Date | Category | Tag[] | number | null, name: string ) => void
 
 export interface HostEaseEventForm {
+  [key: string]: any;
   title?: string;
   description?: string;
   startDate?: string;
@@ -98,7 +99,6 @@ export interface HostEaseEventForm {
   endTime?: string;
   location?: LatLngLiteral | null;
   maxCapacity?: number;
-  photo?: number;
   tags?: Tag[];
   category?: Category;
 }

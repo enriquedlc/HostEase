@@ -37,9 +37,6 @@ const NavBar = (prop : { context : UserContextValue | null }) => {
         <div className="general-section-bottom">
           <ThemeSwitcher className={'navbar-switcher'}/>
         </div>
-        <div className="general-section-bottom">
-          <ThemeSwitcher className={'navbar-switcher'}/>
-        </div>
       </div>
       {!pathname.includes(HostEaseRoutes.NewEvent) && <div className={`navbar-add-event ${""}`}>
         <MdAssignmentAdd />

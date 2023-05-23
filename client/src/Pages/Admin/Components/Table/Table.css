@@ -37,23 +37,15 @@ th {
 
     .table {
         width: 170%;
-        margin-top: 7rem;
+        margin-top: 6.2rem !important;
     }
 
 }
 
-@media screen and (max-width: 1120px) {
+@media screen and (max-width: 1070px) {
 
     .table {
-        margin-top: 5rem;
-    }
-
-}
-
-@media screen and (max-width: 1000px) {
-
-    .table {
-        margin-top: 4rem !important;
+        margin-top: 5rem !important;
     }
 
 }
