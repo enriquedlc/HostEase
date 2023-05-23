@@ -23,7 +23,7 @@ public class LikeController {
     LikeService likeService;
 
     @PostMapping("/event/like")
-    public ResponseEntity<Map<String, Object>> likeEvent(@RequestParam Long eventId, @RequestParam Long userId) {
+    public ResponseEntity<Map<String, Object>> likeEvent(@RequestParam("eventId") Long eventId, @RequestParam("userId") Long userId) {
 
         boolean like = likeService.likeEvent(eventId, userId);
 

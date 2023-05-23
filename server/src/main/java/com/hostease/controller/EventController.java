@@ -80,10 +80,10 @@ public class EventController {
         Event event = eventService.findById(eventId);
 
         boolean hasLikedEvent = user.getLikes().stream()
-                .anyMatch(like -> like.getEvent().getId().equals(eventId));
+                .anyMatch(onLike -> onLike.getEvent().getId().equals(eventId));
 
-        boolean isUserInEvent = user.getEvents().stream()
-                .anyMatch(onEvent -> onEvent.getId().equals(userId));
+        boolean isUserInEvent = event.getUsers().stream()
+                .anyMatch(onUser -> onUser.getId().equals(userId));
 
         EventDAO eventDAO = new EventDAO();
 

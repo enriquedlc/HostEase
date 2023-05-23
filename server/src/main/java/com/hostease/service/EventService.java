@@ -97,6 +97,7 @@ public class EventService {
     }
 
     public boolean manageUserOnEvent(Long eventId, Long userId) {
+        
         User user = userRepository.findById(userId).get();
         Event event = eventRepository.findById(eventId).get();
 
