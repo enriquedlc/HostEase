@@ -1,23 +1,24 @@
-
 import { AdminContextValue } from '../../Types/Types';
-import MainDashboard from './Components/MainDashboard/MainDashboard';
-import RightSide from './Components/RightSide/RightSide';
-import Sidebar from './Components/Sidebar/Sidebar';
 import './Dashboard.css';
 
-const Dashboard = (props: {context: AdminContextValue | null}) => {
+interface LayoutDefinitionProps {
+  sidebar: JSX.Element;
+  mainDashboard: JSX.Element;
+  rightSide: JSX.Element;
+}
 
-  const {context} = props;
+const AdminPageLayout = (props: { context: AdminContextValue | null } & LayoutDefinitionProps) => {
+  const { context, sidebar, mainDashboard, rightSide } = props;
 
   return (
     <section className='dashboard-section'>
       <div className='dashboard-div-glass'>
-        <Sidebar />
-        <MainDashboard />
-        <RightSide />
+        {sidebar}
+        {mainDashboard}
+        {rightSide}
       </div>
     </section>
   )
 }
 
-export default Dashboard;
+export default AdminPageLayout;

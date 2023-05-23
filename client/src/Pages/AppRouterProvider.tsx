@@ -14,8 +14,11 @@ import Login from "./Login";
 import MainPage from "./MainPage";
 import MyEvents from "./MyEvents";
 import SignUp from "./SignUp";
-import Dashboard from "./Admin/Dashboard";
+import AdminPageLayout from "./Admin/Dashboard";
 import AdminContext from "../Context/AdminContext";
+import Sidebar from "./Admin/Components/Sidebar/Sidebar";
+import MainDashboard from "./Admin/Components/MainDashboard/MainDashboard";
+import RightSide from "./Admin/Components/RightSide/RightSide";
 
 /**
  *
@@ -34,12 +37,12 @@ const AppRouterProvider = () => {
   return (
     <BrowserRouter basename={HostEaseRoutes.Home}>
       <Routes>
-        <Route element={<Dashboard context={adminContext} /> } path={HostEaseRoutes.Admin} >
-          <Route path={HostEaseRoutes.AdminEvents} element={<Dashboard />} />
-          <Route path={HostEaseRoutes.AdminUsers} element={<Dashboard />} />
-          <Route path={HostEaseRoutes.AdminTags} element={<Dashboard />} />
-          <Route path={HostEaseRoutes.AdminCategories} element={<Dashboard />} />
-          <Route path={HostEaseRoutes.AdminComments} element={<Dashboard />} />
+        <Route element={<AdminPageLayout sidebar={<Sidebar />} mainDashboard={<MainDashboard />} rightSide={<RightSide />} context={adminContext} />} path={HostEaseRoutes.Admin} >
+          {/* <Route path={HostEaseRoutes.AdminEvents} element={<AdminPageLayout />} /> */}
+          {/* <Route path={HostEaseRoutes.AdminUsers} element={<AdminPageLayout />} /> */}
+          {/* <Route path={HostEaseRoutes.AdminTags} element={<AdminPageLayout />} /> */}
+          {/* <Route path={HostEaseRoutes.AdminCategories} element={<AdminPageLayout />} /> */}
+          {/* <Route path={HostEaseRoutes.AdminComments} element={<AdminPageLayout />} /> */}
         </Route>
         <Route
           path={HostEaseRoutes.Home}
