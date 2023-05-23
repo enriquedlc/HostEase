@@ -15,6 +15,7 @@ import MainPage from "./MainPage";
 import MyEvents from "./MyEvents";
 import SignUp from "./SignUp";
 import Dashboard from "./Admin/Dashboard";
+import AdminContext from "../Context/AdminContext";
 
 /**
  *
@@ -28,16 +29,18 @@ import Dashboard from "./Admin/Dashboard";
 
 const AppRouterProvider = () => {
   const userContext = useContext(UserContext);
+  const adminContext = useContext(AdminContext);
 
   return (
     <BrowserRouter basename={HostEaseRoutes.Home}>
       <Routes>
-        <Route path={HostEaseRoutes.Admin} element={<Dashboard />} />
-        <Route path={HostEaseRoutes.AdminEvents} element={<Dashboard />} />
-        <Route path={HostEaseRoutes.AdminUsers} element={<Dashboard />} />
-        <Route path={HostEaseRoutes.AdminTags} element={<Dashboard />} />
-        <Route path={HostEaseRoutes.AdminCategories} element={<Dashboard />} />
-        <Route path={HostEaseRoutes.AdminComments} element={<Dashboard />} />
+        <Route element={<Dashboard context={adminContext} /> } path={HostEaseRoutes.Admin} >
+          <Route path={HostEaseRoutes.AdminEvents} element={<Dashboard />} />
+          <Route path={HostEaseRoutes.AdminUsers} element={<Dashboard />} />
+          <Route path={HostEaseRoutes.AdminTags} element={<Dashboard />} />
+          <Route path={HostEaseRoutes.AdminCategories} element={<Dashboard />} />
+          <Route path={HostEaseRoutes.AdminComments} element={<Dashboard />} />
+        </Route>
         <Route
           path={HostEaseRoutes.Home}
           element={<Home context={userContext} />}

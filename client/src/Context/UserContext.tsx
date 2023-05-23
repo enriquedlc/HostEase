@@ -1,4 +1,4 @@
-import React, { ReactElement, createContext, useState } from 'react';
+import { createContext } from 'react';
 import { UserContextValue } from '../Types/Types';
 
 export const UserContext = createContext<UserContextValue | null>(null);

@@ -12,6 +12,29 @@ export interface UserContextValue {
   isLoaded: boolean;
 }
 
+export interface AdminContextValue {
+  // users
+  users: User[];
+  setUsers: React.Dispatch<React.SetStateAction<User[]>>;
+  // events
+  events: HostEaseEvent[];
+  setEvents: React.Dispatch<React.SetStateAction<HostEaseEvent[]>>;
+  // tags
+  tag: Tag;
+  setTag: React.Dispatch<React.SetStateAction<Tag>>;
+  tags: Tag[];
+  setTags: React.Dispatch<React.SetStateAction<Tag[]>>;
+  // categories
+  category: Category;
+  setCategory: React.Dispatch<React.SetStateAction<Category>>;
+  categories: Category[];
+  setCategories: React.Dispatch<React.SetStateAction<Category[]>>;
+  // messages
+  comments: Message[];
+  setComments: React.Dispatch<React.SetStateAction<Message[]>>;
+  UserContext?: React.Context<UserContextValue>;
+}
+
 export type ModeOptions = "form" | "view";
 export type LatLngLiteral = google.maps.LatLngLiteral;
 export type DirectionsResult = google.maps.DirectionsResult;
@@ -62,7 +85,7 @@ export interface User {
 //   theme: UserTheme;
 // setTheme: React.Dispatch<React.SetStateAction<UserTheme>>
 
-interface Message {
+export interface Message {
   id: number;
   message: string;
   publishedAt: string;
