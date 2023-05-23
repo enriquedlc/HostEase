@@ -95,22 +95,22 @@ public class InitDatabase implements CommandLineRunner {
                 "698546054", 0L, LocalDateTime.now(), "ADMIN");
 
                 // EVENTS
-                Event event1 = new Event("Event 1", user1, "Description 1", "2020-01-01", "2020-01-01", "12:00",
+                Event event1 = new Event(user1, "Event 1", "Description 1", "2020-01-01", "2020-01-01", "12:00",
                                 "13:00",
                                 new Location(50.3785D, 14.9706D),
-                                10L, 0D, category1);
-                Event event2 = new Event("Event 2", user1, "Description 2", "2020-01-01", "2020-01-01", "12:00",
+                                10L, category1);
+                Event event2 = new Event(user1, "Event 2", "Description 2", "2020-01-01", "2020-01-01", "12:00",
                                 "13:00",
                                 new Location(50.3785D, 14.9706D),
-                                10L, 0D, category2);
-                Event event3 = new Event("Event 3", user1, "Description 3", "2020-01-01", "2020-01-01", "12:00",
+                                10L, category2);
+                Event event3 = new Event(user1, "Event 3", "Description 3", "2020-01-01", "2020-01-01", "12:00",
                                 "13:00",
                                 new Location(50.3785D, 14.9706D),
-                                10L, 0D, category3);
-                Event event4 = new Event("Event 4", user1, "Description 4", "2020-01-01", "2020-01-01", "12:00",
+                                10L, category3);
+                Event event4 = new Event(user1, "Event 4", "Description 4", "2020-01-01", "2020-01-01", "12:00",
                                 "13:00",
                                 new Location(50.3785D, 14.9706D),
-                                10L, 0D, category4);
+                                10L, category4);
 
                 // ACHIEVEMENTS
                 Achievement achievement1 = new Achievement("Achievement description 1", 100L, 1D);

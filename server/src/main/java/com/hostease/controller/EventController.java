@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hostease.dao.EventDAO;
 import com.hostease.entity.Event;
+import com.hostease.entity.User;
 import com.hostease.enums.HttpStatusEnum;
 import com.hostease.service.CategoryService;
 import com.hostease.service.EventService;
@@ -70,13 +72,27 @@ public class EventController {
                 "Error retrieving event");
     }
 
-    @GetMapping("/events/{id}")
-    public ResponseEntity<Map<String, Object>> findById(@PathVariable("id") Long id) {
+    @GetMapping("/event/{eventId}")
+    public ResponseEntity<Map<String, Object>> findById(@PathVariable("eventId") Long eventId,
+            @RequestParam("userId") Long userId) {
 
-        Event event = eventService.findById(id);
+        User user = userService.findById(userId);
+        Event event = eventService.findById(eventId);
+
+        boolean hasLikedEvent = user.getLikes().stream()
+                .anyMatch(like -> like.getEvent().getId().equals(eventId));
+
+        boolean isUserInEvent = user.getEvents().stream()
+                .anyMatch(onEvent -> onEvent.getId().equals(userId));
+
+        EventDAO eventDAO = new EventDAO();
+
+        eventDAO.setEvent(event);
+        eventDAO.setLiked(hasLikedEvent);
+        eventDAO.setJoined(isUserInEvent);
 
         return new ControllerJsonResponseMap().jsonResponseMapObjectGenerator(
-                event,
+                eventDAO,
                 HttpStatusEnum.STATUS_200_OK.getStatus(),
                 "Event successfully retrieved",
                 "Error retrieving event");
@@ -140,13 +156,15 @@ public class EventController {
     }
 
     @PostMapping("/user/{userId}")
-    public ResponseEntity<Map<String, Object>> addUserToEvent(@PathVariable("userId") Long userId,
+    public ResponseEntity<Map<String, Object>> manageUserOnEvent(@PathVariable("userId") Long userId,
             @RequestParam("eventId") Long eventId) {
 
+        boolean result = eventService.manageUserOnEvent(eventId, userId);
+
         return new ControllerJsonResponseMap().jsonResponseMapObjectGenerator(
-                eventService.manageUserOnEvent(eventId, userId),
+                result,
                 HttpStatusEnum.STATUS_200_OK.getStatus(),
-                "User successfully added to event",
+                "User successfully " + (result ? "added to" : "removed from") + " event",
                 "Error adding user to event");
     }
 }
