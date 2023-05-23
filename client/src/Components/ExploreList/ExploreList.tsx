@@ -20,7 +20,7 @@ interface ExploreListProps {
   mode?: "view" | "edit";
   theme?: Theme;
   owner?: User | null;
-  currentUserId ?: number;
+  currentUserId?: number;
 }
 
 const ExploreList: React.FC<ExploreListProps> = ({
@@ -29,7 +29,7 @@ const ExploreList: React.FC<ExploreListProps> = ({
   theme,
   mode = "view",
   owner,
-  currentUserId
+  currentUserId,
 }) => {
   const [selectedButton, setSelectedButton] = useState<string | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -56,46 +56,48 @@ const ExploreList: React.FC<ExploreListProps> = ({
   const handleRemove = (
     eventId: number,
     action: "delete" | "leave",
-    userId ?: number,
+    userId?: number,
     eventName?: string
   ) => {
     if (action === "delete") {
-      deleteEvent(eventId)
-        .then((response) => {
-          const result = response.data.data;
-          if (result) {
-            setFilteredList((prevList) =>
-              prevList.filter((event) => event.id !== eventId)
-            );
-            if (!toast.isActive("deleteSuccessMessage")) {
-              toast.success(
-                `Se ha borrado correctamente el evento ${eventName}.`,
+      if (confirm(`Estás segur@ que quieres borrar el evento "${eventName}"`)) {
+        deleteEvent(eventId)
+          .then((response) => {
+            const result = response.data.data;
+            if (result) {
+              setFilteredList((prevList) =>
+                prevList.filter((event) => event.id !== eventId)
+              );
+              if (!toast.isActive("deleteSuccessMessage")) {
+                toast.success(
+                  `Se ha borrado correctamente el evento "${eventName}".`,
+                  {
+                    toastId: "deleteSuccessMessage",
+                    theme: theme,
+                  }
+                );
+              }
+            } else {
+              if (!toast.isActive("deleteWarningMessage")) {
+                toast.info(`No se ha encontrado el evento ${eventName}.`, {
+                  toastId: "deleteWarningMessage",
+                  theme: theme,
+                });
+              }
+            }
+          })
+          .catch(() => {
+            if (!toast.isActive("deleteErrorMessage")) {
+              toast.error(
+                `Ha ocurrido un error al intentar borrar el evento ${eventName}.`,
                 {
-                  toastId: "deleteSuccessMessage",
+                  toastId: "deleteErrorMessage",
                   theme: theme,
                 }
               );
             }
-          } else {
-            if (!toast.isActive("deleteWarningMessage")) {
-              toast.info(`No se ha encontrado el evento ${eventName}.`, {
-                toastId: "deleteWarningMessage",
-                theme: theme,
-              });
-            }
-          }
-        })
-        .catch(() => {
-          if (!toast.isActive("deleteErrorMessage")) {
-            toast.error(
-              `Ha ocurrido un error al intentar borrar el evento ${eventName}.`,
-              {
-                toastId: "deleteErrorMessage",
-                theme: theme,
-              }
-            );
-          }
-        });
+          });
+      }
     } else {
       /* removeUserFromEvent(eventId, userId)
         .then((response) => {
@@ -135,7 +137,7 @@ const ExploreList: React.FC<ExploreListProps> = ({
         });
 
     */
-    console.log('Me boi')
+      console.log("Me boi");
     }
   };
 
@@ -201,7 +203,12 @@ const ExploreList: React.FC<ExploreListProps> = ({
                   <>
                     <button
                       onClick={() =>
-                        handleRemove(event.id, "delete", currentUserId, event.title)
+                        handleRemove(
+                          event.id,
+                          "delete",
+                          currentUserId,
+                          event.title
+                        )
                       }
                     >
                       <ImBin />
@@ -215,9 +222,6 @@ const ExploreList: React.FC<ExploreListProps> = ({
                     <IoMdExit />
                   </button>
                 )}
-                <button>
-                  <BiInfoCircle />
-                </button>
               </div>
             )}
           </div>

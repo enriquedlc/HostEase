@@ -15,6 +15,7 @@ import MainPage from "./MainPage";
 import MyEvents from "./MyEvents";
 import SignUp from "./SignUp";
 import Dashboard from "./Admin/Dashboard";
+import EventProfile from "./EventProfile/EventProfile";
 
 /**
  *
@@ -46,6 +47,7 @@ const AppRouterProvider = () => {
             <Route path={HostEaseRoutes.MainPage} element={<MainPage />} />
             <Route path={HostEaseRoutes.Explore} element={<Explore />} />
             <Route path={HostEaseRoutes.MyEvents} element={<MyEvents />} />
+            <Route path={HostEaseRoutes.EventProfile} element={<EventProfile />} />
             <Route
               path={`${HostEaseRoutes.NewEvent}`}
               element={<FormEvent />}

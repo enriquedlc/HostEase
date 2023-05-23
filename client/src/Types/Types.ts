@@ -17,7 +17,7 @@ export type LatLngLiteral = google.maps.LatLngLiteral;
 export type DirectionsResult = google.maps.DirectionsResult;
 // @ts-ignore Estos dos tipos fallan por algun motivo en algunos equipos (aun haciendo npm i)
 export type MapOptions = google.maps.MapOptions;
-// @ts-ignore 
+// @ts-ignore
 export type MapMouseEvent = google.maps.MapMouseEvent;
 
 export type MapLibraries =
@@ -33,21 +33,18 @@ export interface MapProperties {
   handleDbClick?: HostEaseHandlerFunction;
   center?: boolean;
   mode?: ModeOptions;
-  name: string
+  name: string;
 }
 
 export interface EventOwner {
-	id: number;
-	nickname: string;
-	email: string;
-	phone: string;
-	followers: number;
-}
-
-export interface User {
   id: number;
   nickname: string;
   email: string;
+  phone: string;
+  followers: number;
+}
+
+export interface User extends ShortUser {
   password: string;
   phone: string;
   experience: number;
@@ -58,16 +55,21 @@ export interface User {
   followers?: number;
 }
 
+export interface ShortUser {
+  id: number;
+  nickname: string;
+  email: string;
+}
+
 // Pendiente
 //   theme: UserTheme;
 // setTheme: React.Dispatch<React.SetStateAction<UserTheme>>
 
-interface Message {
+export interface Message {
   id: number;
   message: string;
   publishedAt: string;
-  event: HostEaseEvent;
-  user: User;
+  user: ShortUser;
 }
 
 interface Achievement {
@@ -87,7 +89,10 @@ export interface Tag {
   color: string;
 }
 
-export type HostEaseHandlerFunction = (date: File | string | LatLngLiteral | Date | Category | Tag[] | number | null, name: string ) => void
+export type HostEaseHandlerFunction = (
+  date: File | string | LatLngLiteral | Date | Category | Tag[] | number | null,
+  name: string
+) => void;
 
 export interface HostEaseEventForm {
   [key: string]: any;
@@ -101,6 +106,7 @@ export interface HostEaseEventForm {
   maxCapacity?: number;
   tags?: Tag[];
   category?: Category;
+  role: "ADMIN" | "USER";
 }
 
 export interface HostEaseEvent extends HostEaseEventForm {

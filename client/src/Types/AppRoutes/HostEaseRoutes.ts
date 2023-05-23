@@ -5,6 +5,7 @@ interface HostEaseRoutes {
   MainPage: string;
   Explore: string;
   MyEvents: string;
+  EventProfile: string;
   Profile: string;
   NewEvent: string;
   Admin: string;
@@ -17,6 +18,7 @@ export const HostEaseRoutes: HostEaseRoutes = {
   MainPage: "/dashboard",
   Explore: "/explore",
   MyEvents: "/events/:id",
+  EventProfile: "/event/:id",
   Profile: "/profile/:id",
   NewEvent: "/new",
   Admin: "/admin",

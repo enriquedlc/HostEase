@@ -89,7 +89,7 @@ const FormEvent = () => {
         }
       })
     ) {
-      console.log('TODOS LOS DATOS HAN SIDO RELLENADOS');
+      console.log("TODOS LOS DATOS HAN SIDO RELLENADOS");
       userContext.user &&
         createEvent(event, userContext.user?.id).then((response) => {
           if (response.data.data) {
@@ -248,6 +248,32 @@ const FormEvent = () => {
               ) : (
                 <p>Loading...</p>
               )}
+              {/* <div className="photo-form">
+                <label className="photo-label" htmlFor="photo">
+                  Image:{" "}
+                </label>
+                <input
+                  className="photo-input"
+                  type="file"
+                  name="photo"
+                  accept=".jpeg, .jpg, .png, .svg"
+                  onChange={(e) => {
+                    const file = e.target.files && e.target.files[0];
+                    const allowedExtensions = /(\.jpeg|\.jpg|\.png|\.svg)$/i;
+                    if (file && !allowedExtensions.exec(file.name)) {
+                      if (!toast.isActive("eventFormErrorMessage")) {
+                        toast.error("Formato de imagen no válido.", {
+                          toastId: "eventFormErrorMessage",
+                          theme: userContext.theme,
+                        });
+                      }
+                      e.target.value = "";
+                    } else if (file) {
+                      handleChange(file, e.target.name);
+                    }
+                  }}
+                />
+              </div> */}
             </div>
           </div>
         </TabPanel>
