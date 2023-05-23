@@ -1,6 +1,7 @@
 import { ReactNode, useState } from "react";
 import AdminContext from "../Context/AdminContext";
 import { Category, HostEaseEvent, User, Tag, Message } from "../Types/Types";
+import { fetchAllEvents } from "../services/main.services";
 
 export const AdminProvider = ({ children }: { children: ReactNode }) => {
 

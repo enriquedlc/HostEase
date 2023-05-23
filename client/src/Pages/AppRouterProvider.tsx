@@ -1,10 +1,16 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { useContext } from "react";
+import AdminContext from "../Context/AdminContext";
 import UserContext from "../Context/UserContext";
 import AuthPageLayout from "../Layout/AuthPageLayout";
 import MainSiteLayout from "../Layout/MainSiteLayout";
 import { HostEaseRoutes } from "../Types/AppRoutes/HostEaseRoutes";
+import MainDashboard from "./Admin/Components/MainDashboard/MainDashboard";
+import RightSide from "./Admin/Components/RightSide/RightSide";
+import Sidebar from "./Admin/Components/Sidebar/Sidebar";
+import AdminPageLayout from "./Admin/Dashboard";
+import EventPage from "./Admin/Pages/Event/EventPage";
 import LogInto from "./Error/LogInto";
 import NotFound from "./Error/NotFound";
 import Explore from "./Explore/Explore";
@@ -14,11 +20,6 @@ import Login from "./Login";
 import MainPage from "./MainPage";
 import MyEvents from "./MyEvents";
 import SignUp from "./SignUp";
-import AdminPageLayout from "./Admin/Dashboard";
-import AdminContext from "../Context/AdminContext";
-import Sidebar from "./Admin/Components/Sidebar/Sidebar";
-import MainDashboard from "./Admin/Components/MainDashboard/MainDashboard";
-import RightSide from "./Admin/Components/RightSide/RightSide";
 
 /**
  *
@@ -37,13 +38,12 @@ const AppRouterProvider = () => {
   return (
     <BrowserRouter basename={HostEaseRoutes.Home}>
       <Routes>
-        <Route element={<AdminPageLayout sidebar={<Sidebar />} mainDashboard={<MainDashboard />} rightSide={<RightSide />} context={adminContext} />} path={HostEaseRoutes.Admin} >
-          {/* <Route path={HostEaseRoutes.AdminEvents} element={<AdminPageLayout />} /> */}
-          {/* <Route path={HostEaseRoutes.AdminUsers} element={<AdminPageLayout />} /> */}
-          {/* <Route path={HostEaseRoutes.AdminTags} element={<AdminPageLayout />} /> */}
-          {/* <Route path={HostEaseRoutes.AdminCategories} element={<AdminPageLayout />} /> */}
-          {/* <Route path={HostEaseRoutes.AdminComments} element={<AdminPageLayout />} /> */}
-        </Route>
+        <Route path={HostEaseRoutes.Admin} element={<AdminPageLayout sidebar={<Sidebar />} mainDashboard={<MainDashboard />} rightSide={<RightSide />} context={adminContext} />} />
+        <Route path={HostEaseRoutes.AdminEvents} element={<AdminPageLayout sidebar={<Sidebar />}  mainDashboard={<EventPage />} rightSide={<RightSide />} context={adminContext} />} />
+        {/* <Route path={HostEaseRoutes.AdminUsers} element={<AdminPageLayout />} /> */}
+        {/* <Route path={HostEaseRoutes.AdminTags} element={<AdminPageLayout />} /> */}
+        {/* <Route path={HostEaseRoutes.AdminCategories} element={<AdminPageLayout />} /> */}
+        {/* <Route path={HostEaseRoutes.AdminComments} element={<AdminPageLayout />} /> */}
         <Route
           path={HostEaseRoutes.Home}
           element={<Home context={userContext} />}
