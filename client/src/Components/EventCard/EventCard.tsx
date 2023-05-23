@@ -37,6 +37,7 @@ const EventCard = (props: EventCardOptions) => {
   const userContext = useContext(UserContext);
 
   const {
+    id,
     title,
     category,
     likes,
@@ -67,7 +68,7 @@ const EventCard = (props: EventCardOptions) => {
     <div className={`card-body ${userContext?.theme} ${className}`}>
       <div className="map-side">
         {location && (
-          <Map name="map" coordinates={location} center mode="view" />
+          <Map name="map" zoom={6} coordinates={location} center mode="view" />
         )}
       </div>
       <div className="content-side">
@@ -113,7 +114,7 @@ const EventCard = (props: EventCardOptions) => {
             <div>{maxCapacity}</div>
           </div>
         </div>
-        <div className="view-event" onClick={() => navigate("/event/id")}>
+        <div className="view-event" onClick={() => navigate(`/event/${id}`)}>
           View Event
           <AiOutlineArrowRight />
         </div>

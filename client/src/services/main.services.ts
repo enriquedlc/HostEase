@@ -38,8 +38,20 @@ export const deleteEvent = async (eventId: number) => {
   return axios.delete(`${API_URL}/event/${eventId}`)
 }
 
-export const removeUserFromEvent = async (eventId: number) => {
-  return axios.delete(`${API_URL}/user?eventId=${eventId}`)
+export const userOnEvent = async (eventId:number, userId: number) => {
+  return axios.post(`${API_URL}/user/${userId}?eventId=${eventId}`)
+}
+
+export const likeInteraction = async (userId: number, eventId: number) => {
+  return axios.post(`${API_URL}/event/like?eventId=${eventId}&userId=${userId}`)
+}
+
+export const fetchInfoFromEvent = async (eventId: number, userId: number) => {
+  return axios.get(`${API_URL}/event/${eventId}?userId=${userId}`)
+}
+
+export const fetchMessages = async (eventId: number) => {
+  return axios.get(`${API_URL}/events/${eventId}/messages`)
 }
 
 export const fetchAllEvents = async () => {

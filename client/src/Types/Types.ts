@@ -29,11 +29,13 @@ export type MapLibraries =
 
 export interface MapProperties {
   coordinates?: LatLngLiteral | null;
+  className ?: string;
   setCoordinates?: HostEaseHandlerFunction;
   handleDbClick?: HostEaseHandlerFunction;
   center?: boolean;
   mode?: ModeOptions;
   name: string;
+  zoom?: number;
 }
 
 export interface EventOwner {
@@ -42,6 +44,7 @@ export interface EventOwner {
   email: string;
   phone: string;
   followers: number;
+  role: "ADMIN" | "USER";
 }
 
 export interface User extends ShortUser {
@@ -95,7 +98,6 @@ export type HostEaseHandlerFunction = (
 ) => void;
 
 export interface HostEaseEventForm {
-  [key: string]: any;
   title?: string;
   description?: string;
   startDate?: string;
@@ -106,7 +108,6 @@ export interface HostEaseEventForm {
   maxCapacity?: number;
   tags?: Tag[];
   category?: Category;
-  role: "ADMIN" | "USER";
 }
 
 export interface HostEaseEvent extends HostEaseEventForm {
@@ -115,6 +116,12 @@ export interface HostEaseEvent extends HostEaseEventForm {
   messages?: number;
   likes: number;
   owner: EventOwner;
+}
+
+export interface EventProfileInfo {
+  event: HostEaseEvent;
+  liked: boolean;
+  joined: boolean;
 }
 
 export interface LoginRequest {

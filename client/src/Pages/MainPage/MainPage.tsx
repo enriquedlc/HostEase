@@ -12,22 +12,34 @@ const MainPage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const getUserEvents = async (context : UserContextValue) => {
+    const getUserEvents = async (context: UserContextValue) => {
       context.getUserEvents();
       setLoading(false);
     };
-    user && getUserEvents(userContext)
-  }, [])
-  
+    user && getUserEvents(userContext);
+  }, []);
+
   return (
     <div className="dashboard-site-page">
-      <h1 className={`${userContext?.theme}-header`} style={{ marginBottom: 0 }}>
+      <h1
+        className={`${userContext?.theme}-header`}
+        style={{ marginBottom: 0 }}
+      >
         Welcome, {user?.nickname}
       </h1>
-      {loading ? <Loading theme={userContext?.theme}/> : user?.events ? (
+      {loading ? (
+        <Loading theme={userContext?.theme} />
+      ) : user?.events && user?.events?.length !== 0 ? (
         <>
-          <h3 className={`${userContext?.theme}-header`} style={{ marginTop: 10, marginBottom: 0 }}>This are some of the events you have joined: </h3>
-          <div className={`${userContext?.theme}-dashboard dashboard-site-events`}>
+          <h3
+            className={`${userContext?.theme}-header`}
+            style={{ marginTop: 10, marginBottom: 0 }}
+          >
+            This are some of the events you have joined:{" "}
+          </h3>
+          <div
+            className={`${userContext?.theme}-dashboard dashboard-site-events`}
+          >
             {user.events?.map(
               (
                 {
@@ -43,7 +55,7 @@ const MainPage = () => {
                   tags,
                   users,
                   category,
-                  maxCapacity
+                  maxCapacity,
                 },
                 index
               ) => {
