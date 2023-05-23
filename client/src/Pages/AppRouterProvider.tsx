@@ -33,6 +33,11 @@ const AppRouterProvider = () => {
     <BrowserRouter basename={HostEaseRoutes.Home}>
       <Routes>
         <Route path={HostEaseRoutes.Admin} element={<Dashboard />} />
+        <Route path={HostEaseRoutes.AdminEvents} element={<Dashboard />} />
+        <Route path={HostEaseRoutes.AdminUsers} element={<Dashboard />} />
+        <Route path={HostEaseRoutes.AdminTags} element={<Dashboard />} />
+        <Route path={HostEaseRoutes.AdminCategories} element={<Dashboard />} />
+        <Route path={HostEaseRoutes.AdminComments} element={<Dashboard />} />
         <Route
           path={HostEaseRoutes.Home}
           element={<Home context={userContext} />}

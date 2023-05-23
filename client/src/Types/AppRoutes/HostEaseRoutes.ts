@@ -8,6 +8,11 @@ interface HostEaseRoutes {
   Profile: string;
   NewEvent: string;
   Admin: string;
+  AdminEvents: string;
+  AdminUsers: string;
+  AdminTags: string;
+  AdminCategories: string;
+  AdminComments: string;
 }
 
 export const HostEaseRoutes: HostEaseRoutes = {
@@ -20,4 +25,9 @@ export const HostEaseRoutes: HostEaseRoutes = {
   Profile: "/profile/:id",
   NewEvent: "/new",
   Admin: "/admin",
+  AdminEvents: "/admin/events",
+  AdminUsers: "/admin/users",
+  AdminTags: "/admin/tags",
+  AdminCategories: "/admin/categories",
+  AdminComments: "/admin/comments",
 };

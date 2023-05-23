@@ -6,36 +6,45 @@ import HostEaseLogo from '../../../../assets/HostEase.png'
 
 import { useState } from 'react'
 import './Sidebar.css'
+import { Link } from 'react-router-dom'
+import { HostEaseRoutes } from '../../../../Types/AppRoutes/HostEaseRoutes'
 
 type SidebarOptions = {
     icon: any
     title: string
+    route?: string
 }
 
 const SidebarData: SidebarOptions[] = [
     {
         icon: MdOutlineHouse,
-        title: "Dashboard"
+        title: "Dashboard",
+        route: HostEaseRoutes.Admin
     },
     {
         icon: MdOutlineEditCalendar,
-        title: "Events"
+        title: "Events",
+        route: HostEaseRoutes.AdminEvents
     },
     {
         icon: MdOutlineGroup,
-        title: "Users"
+        title: "Users",
+        route: HostEaseRoutes.AdminUsers
     },
     {
         icon: MdTag,
-        title: "Tags"
+        title: "Tags",
+        route: HostEaseRoutes.AdminTags
     },
     {
         icon: MdOutlineCategory,
-        title: "Categories"
+        title: "Categories",
+        route: HostEaseRoutes.AdminCategories
     },
     {
         icon: MdOutlineComment,
-        title: "Comments"
+        title: "Comments",
+        route: HostEaseRoutes.AdminComments
     }
 ]
 
@@ -52,6 +61,8 @@ const Sidebar = () => {
 
     const [selected, setSelected] = useState<number>(0)
     const [showMenu, setShowMenu] = useState<boolean>(false)
+
+    const getRoutePath = (title: string): string => SidebarData.find(item => item.title === title)?.route ?? '';
 
     const handleShowMenu = () => {
         setShowMenu(!showMenu)
@@ -82,15 +93,18 @@ const Sidebar = () => {
                 <div className="menu">
                     {SidebarData.map((item, index) => {
                         return (
-                            <div className={selected === index ? "menu-item active" : "menu-item"}
+                            <Link
+                                to={getRoutePath(item.title)} 
+                                className={selected === index ? "menu-item active" : "menu-item"}
                                 onClick={() => setSelected(index)}
-                                key={index}>
+                                key={index}
+                            >
                                 <item.icon />
                                 <span>{item.title}</span>
-                            </div>
-                        )
-                    })
-                    }
+                            </Link>
+                        );
+                    })}
+
                     <div className="menu-item">
                         <MdLogout />
                     </div>
