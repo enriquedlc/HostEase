@@ -7,7 +7,7 @@ import './EventComponent.css';
 
 
 import Card from '../../Components/Card/Card';
-import { events } from '../../Pages/Event/EventPage';
+import { eventList } from '../../Pages/Event/EventPage';
 
 interface EventComponentProps {
     eventList: HostEaseEvent[] | undefined;
@@ -36,7 +36,7 @@ const EventCardData =
 const EventComponent = (props: EventComponentProps) => {
     const { title, eventList } = props;
 
-    console.log(events, 'events');
+    console.log(eventList, 'events');
 
     return (
         <div className="main-dashboard">
@@ -49,7 +49,7 @@ const EventComponent = (props: EventComponentProps) => {
                 png={EventCardData.png}
                 series={EventCardData.series}
             />
-            <EventTable eventList={events} title="Recent Events" />
+            <EventTable eventList={eventList} title="Recent Events" />
         </div>
     );
 };

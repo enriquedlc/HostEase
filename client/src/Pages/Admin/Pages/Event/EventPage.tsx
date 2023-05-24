@@ -7,7 +7,7 @@ import { fetchAllEvents } from '../../../../services/main.services';
 import './EventComponent.css';
 
 
-export const events: HostEaseEvent[] = [
+export const eventList: HostEaseEvent[] = [
     {
       tags: [
         {
@@ -177,7 +177,7 @@ export const events: HostEaseEvent[] = [
 const EventPage = () => {
 
     return (
-        <EventComponent title="Events" eventList={events} />
+        <EventComponent title="Events" eventList={eventList} />
     )
 }
 export default EventPage

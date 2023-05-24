@@ -3,7 +3,7 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 
 import './EventTable.css';
 
-import { events } from '../../Pages/Event/EventPage';
+import { eventList } from '../../Pages/Event/EventPage';
 import { HostEaseEvent } from '../../../../Types/Types';
 
 const columns: GridColDef[] = [
@@ -48,12 +48,8 @@ const createData = (id: number, title: string | undefined, startDate: string | u
   return { id, title, startDate, maxCapacity, users };
 };
 
-const rows = events.map((event: HostEaseEvent) => {
-  return createData(event.id, event.title, event.startTime, event.maxCapacity, event.users);
-});
-
 interface EventTableProps {
-  eventList: HostEaseEvent[];
+  eventList: HostEaseEvent[] | undefined;
   title: string;
 }
 
@@ -62,6 +58,10 @@ interface EventTableProps {
 const EventTable = (props: EventTableProps) => {
 
   const { eventList, title } = props;
+
+  const rows = eventList?.map((event: HostEaseEvent) => {
+    return createData(event.id, event.title, event.startTime, event.maxCapacity, event.users);
+  });
 
   return (
     <div className='table'>
