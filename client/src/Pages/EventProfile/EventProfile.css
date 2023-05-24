@@ -5,7 +5,6 @@
   overflow: auto;
 }
 
-
 .event-profile-banner {
   position: relative;
   height: 50%;
@@ -337,6 +336,26 @@ button.disabled-join:hover {
 
 @media screen and (max-width: 768px) {
   .event-profile-body {
-    flex-direction: column-reverse;
+    flex-direction: column;
+  }
+
+  .event-profile-general-info {
+    margin-top: 50px;
+    width: 100%;
+  }
+
+  .event-profile-banner .profile-button-panel {
+    align-items: center;
+    flex-direction: row-reverse;
+    left: 0px;
+    bottom: 20%;
+    right: inherit;
+    top: inherit;
+    width: 50%;
+  }
+
+  .event-profile-banner .banner-title {
+    width: 100%;
+    border-radius: 0px;
   }
 }
