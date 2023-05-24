@@ -6,33 +6,10 @@ export interface UserContextValue {
   theme: Theme;
   setTheme: React.Dispatch<React.SetStateAction<Theme>>;
   signUp: (arg0: UserSignUpData) => Promise<boolean>;
-  logIn: (arg0: LoginRequest) => Promise<boolean>;
+  logIn: (arg0: LoginRequest) => Promise<string | null>;
   logOut: () => void;
   getUserEvents: () => void;
   isLoaded: boolean;
-}
-
-export interface AdminContextValue {
-  // users
-  users: User[];
-  setUsers: React.Dispatch<React.SetStateAction<User[]>>;
-  // events
-  events: HostEaseEvent[];
-  setEvents: React.Dispatch<React.SetStateAction<HostEaseEvent[]>>;
-  // tags
-  tag: Tag;
-  setTag: React.Dispatch<React.SetStateAction<Tag>>;
-  tags: Tag[];
-  setTags: React.Dispatch<React.SetStateAction<Tag[]>>;
-  // categories
-  category: Category;
-  setCategory: React.Dispatch<React.SetStateAction<Category>>;
-  categories: Category[];
-  setCategories: React.Dispatch<React.SetStateAction<Category[]>>;
-  // messages
-  comments: Message[];
-  setComments: React.Dispatch<React.SetStateAction<Message[]>>;
-  UserContext?: React.Context<UserContextValue>;
 }
 
 export type ModeOptions = "form" | "view";
@@ -79,6 +56,7 @@ export interface User {
   achievements?: Achievement[];
   messages?: Message[];
   followers?: number;
+  role: "ADMIN" | "USER";
 }
 
 // Pendiente

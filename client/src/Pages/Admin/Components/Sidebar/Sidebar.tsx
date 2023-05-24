@@ -8,6 +8,7 @@ import { useState } from 'react'
 import './Sidebar.css'
 import { Link } from 'react-router-dom'
 import { HostEaseRoutes } from '../../../../Types/AppRoutes/HostEaseRoutes'
+import { User } from '../../../../Types/Types'
 
 type SidebarOptions = {
     icon: any

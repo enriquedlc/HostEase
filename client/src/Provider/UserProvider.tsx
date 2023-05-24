@@ -7,6 +7,7 @@ import { logInUser, signUpUser } from "../services/main.services";
 import { useLoadScript } from "@react-google-maps/api";
 import { AxiosError } from "axios";
 import { mapLibraries } from "../services/main.services";
+import { useNavigate } from "react-router-dom";
 
 const UserProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState<Theme>("light");
@@ -18,7 +19,8 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
       const response = await logInUser(loginParams);
       if (response.data.status === "200 OK") {
         setUser(response.data.data);
-        return true;
+        const link = response.data.data.role === "USER" ? "/dashboard" : "/admin";
+        return link;
       } else {
         console.log(response.data)
         if (!toast.isActive("loginErrorMessage")) {
@@ -27,7 +29,7 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
             theme: theme,
           });
         }
-        return false;
+        return null;
       }
     } catch (err) {
       if (!toast.isActive("loginErrorMessage")) {
@@ -36,7 +38,7 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
           theme: theme,
         });
       }
-      return false;
+      return null;
     }
   };
 

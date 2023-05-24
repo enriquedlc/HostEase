@@ -4,10 +4,7 @@ import '../../Components/MainDashboard/MainDashboard.css';
 import EventTable from '../../Components/Table/EventTable';
 import './EventComponent.css';
 
-
-
 import Card from '../../Components/Card/Card';
-import { eventList } from '../../Pages/Event/EventPage';
 
 interface EventComponentProps {
     eventList: HostEaseEvent[] | undefined;

@@ -9,7 +9,6 @@ import { LoginRequest, UserContextValue } from "../../Types/Types";
 import { toast } from "react-toastify";
 
 const Login = () => {
-
   const userContext = useOutletContext<UserContextValue | null>();
   const navigate = useNavigate();
 
@@ -29,10 +28,8 @@ const Login = () => {
     e.preventDefault();
     if (userData.email.trim() !== "" && userData.password !== "") {
       try {
-        const loggedIn = await userContext?.logIn(userData);
-        if (loggedIn) {
-          navigate("/dashboard");
-        }
+        const link = await userContext?.logIn(userData);
+        navigate(`${link && link}`);
       } catch (error) {}
     }
   };

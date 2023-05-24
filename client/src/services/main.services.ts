@@ -42,6 +42,10 @@ export const removeUserFromEvent = async (eventId: number) => {
   return axios.delete(`${API_URL}/user?eventId=${eventId}`)
 }
 
+export const fetchAllUsers = async () => { 
+  return axios.get(`${API_URL}/users`)
+};
+
 export const fetchAllEvents = async () => {
   return axios.get(`${API_URL}/events`);
 }

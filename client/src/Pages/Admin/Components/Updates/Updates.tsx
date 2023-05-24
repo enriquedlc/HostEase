@@ -1,22 +1,20 @@
+import { User } from '../../../../Types/Types';
 import './Updates.css';
 
 import genericProfileImg from './user.png';
 
 export const UpdatesData = [
     {
-        img: genericProfileImg,
         name: "Andrew Thomas",
         comment: "has ordered Apple smart watch 2500mh battery.",
         time: "25 seconds ago",
     },
     {
-        img: genericProfileImg,
         name: "Andrew Thomas",
         comment: "has ordered Apple smart watch 2500mh battery.",
         time: "25 seconds ago",
     },
     {
-        img: genericProfileImg,
         name: "Andrew Thomas",
         comment: "has ordered Apple smart watch 2500mh battery.",
         time: "25 seconds ago",
@@ -24,19 +22,19 @@ export const UpdatesData = [
 ]
 
 
-const Updates = () => {
+const Updates = ({ users } : { users : User[]}) => {
     return (
         <div className="updates">
-            {UpdatesData.map((update, index) => {
+            {users.map(({ nickname, joinedAt, id }, index) => {
                 return (
                     <div className="update" key={index}>
-                        <img className='photo' src={update.img} alt="photo" />
+                        <img className='photo' src={genericProfileImg} alt="photo" />
                         <div className="comment">
                             <div style={{ marginBottom: '0.5rem' }}>
-                                <span>{update.name}</span>
-                                <span>{` ${update.comment}`}</span>
+                                <span>{nickname}</span>
+                                <span>{` has joined.`}</span>
                             </div>
-                            <span>{update.time}</span>
+                            <span>{joinedAt}</span>
                         </div>
                     </div>
                 )
