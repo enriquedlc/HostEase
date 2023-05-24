@@ -22,7 +22,7 @@ const Home = (props : { context : UserContextValue | null }) => {
           <div className={`${userContext?.theme}-theme-font`}>HostEase</div>
         </div>
         <div className={`top-bar-button-panel`}>
-          <Link to={HostEaseRoutes.Home} className="featured">
+          <Link to={userContext?.user ? HostEaseRoutes.NewEvent : HostEaseRoutes.Login} className="featured">
             Create an event
           </Link>
           {userContext?.user ? (

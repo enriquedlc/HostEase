@@ -20,6 +20,7 @@ import {
 } from "../../services/main.services";
 import "./FormEvent.css";
 import Select from "react-select";
+import { formatDate, formatHour } from "../../services/Utils/main.utils";
 
 interface CategoryOptions {
   value: number;
@@ -27,10 +28,21 @@ interface CategoryOptions {
 }
 
 const FormEvent = () => {
+  const currentDate = formatDate(new Date().toISOString());
+
+  const initialStartHour = formatHour(new Date());
+  const initialEndHour = formatHour(
+    new Date(new Date().getTime() + 60 * 60 * 1000)
+  );
+
   const userContext = useOutletContext<UserContextValue>();
   const [event, setEvent] = useState<HostEaseEventForm>({
     description: "",
     tags: [],
+    startDate: currentDate,
+    endDate: currentDate,
+    startTime: initialStartHour,
+    endTime: initialEndHour,
   });
   const [tagList, setTagList] = useState<Tag[]>([]);
   const [categoryList, setCategoryList] = useState<CategoryOptions[]>([]);
@@ -89,7 +101,7 @@ const FormEvent = () => {
         }
       })
     ) {
-      console.log('TODOS LOS DATOS HAN SIDO RELLENADOS');
+      console.log(event);
       userContext.user &&
         createEvent(event, userContext.user?.id).then((response) => {
           if (response.data.data) {
@@ -148,6 +160,7 @@ const FormEvent = () => {
                 type="number"
                 placeholder="Max Capacity"
                 name="maxCapacity"
+                required
               />
               <CustomDatePicker
                 nameStart="startDate"
@@ -248,6 +261,32 @@ const FormEvent = () => {
               ) : (
                 <p>Loading...</p>
               )}
+              {/* <div className="photo-form">
+                <label className="photo-label" htmlFor="photo">
+                  Image:{" "}
+                </label>
+                <input
+                  className="photo-input"
+                  type="file"
+                  name="photo"
+                  accept=".jpeg, .jpg, .png, .svg"
+                  onChange={(e) => {
+                    const file = e.target.files && e.target.files[0];
+                    const allowedExtensions = /(\.jpeg|\.jpg|\.png|\.svg)$/i;
+                    if (file && !allowedExtensions.exec(file.name)) {
+                      if (!toast.isActive("eventFormErrorMessage")) {
+                        toast.error("Formato de imagen no válido.", {
+                          toastId: "eventFormErrorMessage",
+                          theme: userContext.theme,
+                        });
+                      }
+                      e.target.value = "";
+                    } else if (file) {
+                      handleChange(file, e.target.name);
+                    }
+                  }}
+                />
+              </div> */}
             </div>
           </div>
         </TabPanel>

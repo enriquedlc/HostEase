@@ -17,7 +17,7 @@ export type LatLngLiteral = google.maps.LatLngLiteral;
 export type DirectionsResult = google.maps.DirectionsResult;
 // @ts-ignore Estos dos tipos fallan por algun motivo en algunos equipos (aun haciendo npm i)
 export type MapOptions = google.maps.MapOptions;
-// @ts-ignore 
+// @ts-ignore
 export type MapMouseEvent = google.maps.MapMouseEvent;
 
 export type MapLibraries =
@@ -29,25 +29,25 @@ export type MapLibraries =
 
 export interface MapProperties {
   coordinates?: LatLngLiteral | null;
+  className ?: string;
   setCoordinates?: HostEaseHandlerFunction;
   handleDbClick?: HostEaseHandlerFunction;
   center?: boolean;
   mode?: ModeOptions;
-  name: string
+  name: string;
+  zoom?: number;
 }
 
 export interface EventOwner {
-	id: number;
-	nickname: string;
-	email: string;
-	phone: string;
-	followers: number;
-}
-
-export interface User {
   id: number;
   nickname: string;
   email: string;
+  phone: string;
+  followers: number;
+  role: "ADMIN" | "USER";
+}
+
+export interface User extends ShortUser {
   password: string;
   phone: string;
   experience: number;
@@ -58,16 +58,23 @@ export interface User {
   followers?: number;
 }
 
-// Pendiente
-//   theme: UserTheme;
-// setTheme: React.Dispatch<React.SetStateAction<UserTheme>>
-
-interface Message {
+export interface ShortUser {
   id: number;
+  nickname: string;
+  email: string;
+}
+
+export interface UserMessageData {
+  userId?: number;
+  userName: string;
+  userEmail?: string;
+}
+
+export interface Message {
+  id?: number;
   message: string;
   publishedAt: string;
-  event: HostEaseEvent;
-  user: User;
+  user: UserMessageData;
 }
 
 interface Achievement {
@@ -87,10 +94,12 @@ export interface Tag {
   color: string;
 }
 
-export type HostEaseHandlerFunction = (date: File | string | LatLngLiteral | Date | Category | Tag[] | number | null, name: string ) => void
+export type HostEaseHandlerFunction = (
+  date: File | string | LatLngLiteral | Date | Category | Tag[] | number | null,
+  name: string
+) => void;
 
 export interface HostEaseEventForm {
-  [key: string]: any;
   title?: string;
   description?: string;
   startDate?: string;
@@ -109,6 +118,12 @@ export interface HostEaseEvent extends HostEaseEventForm {
   messages?: number;
   likes: number;
   owner: EventOwner;
+}
+
+export interface EventProfileInfo {
+  event: HostEaseEvent;
+  liked: boolean;
+  joined: boolean;
 }
 
 export interface LoginRequest {

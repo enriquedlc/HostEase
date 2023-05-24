@@ -20,6 +20,8 @@ const Map = ({
   center = false,
   mode = "view",
   name,
+  zoom,
+  className,
 }: MapProperties) => {
   const mapRef = useRef<GoogleMap>();
 
@@ -28,6 +30,8 @@ const Map = ({
     () => (center && coordinates ? coordinates : { lat: 54.526, lng: 15.2551 }),
     []
   );
+
+  const zoomValue = useMemo<number>(() => (zoom ? zoom : 5), [zoom]);
 
   const options = useMemo<MapOptions>(
     () => ({
@@ -47,7 +51,8 @@ const Map = ({
   const handleLocation = (e: MapMouseEvent) => {
     const position = e.latLng?.toJSON();
     if (mode === "form") {
-      position && setCoordinates &&
+      position &&
+        setCoordinates &&
         setCoordinates(
           position.lat === coordinates?.lat && position.lng === coordinates?.lng
             ? null
@@ -61,10 +66,10 @@ const Map = ({
     <>
       <GoogleMap
         center={centerCords}
-        mapContainerClassName="mapContainer"
+        mapContainerClassName={`mapContainer ${className}`}
         onLoad={onLoad}
         options={options}
-        zoom={5}
+        zoom={zoomValue}
         onClick={handleLocation}
       >
         <>

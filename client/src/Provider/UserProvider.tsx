@@ -44,7 +44,6 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
     try {
       if (user?.id) {
         await fetchUserEvents(user?.id).then((response) => {
-          console.log(response.data.data)
           setUser({ ...user, events: response.data.data  })
         })
       }

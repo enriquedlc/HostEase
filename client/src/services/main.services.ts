@@ -1,6 +1,11 @@
 import axios, { AxiosAdapter, AxiosResponse } from "axios";
 import bcrypt from "bcryptjs";
-import { HostEaseEventForm, LoginRequest, MapLibraries, UserSubmit } from "../Types/Types";
+import {
+  HostEaseEventForm,
+  LoginRequest,
+  MapLibraries,
+  UserSubmit,
+} from "../Types/Types";
 
 const API_URL = "http://localhost:8080/hostease";
 const SALTROUNDS = 10;
@@ -26,25 +31,55 @@ export const signUpUser = async (userData: UserSubmit) => {
   return axios.post(`${API_URL}/user/sign`, userData);
 };
 
-export const createEvent = async (eventData: HostEaseEventForm, ownerId: number) => {
-  return axios.post(`${API_URL}/event/${eventData.category?.id}?owner=${ownerId}`, eventData);
-}
+export const createEvent = async (
+  eventData: HostEaseEventForm,
+  ownerId: number
+) => {
+  return axios.post(
+    `${API_URL}/event/${eventData.category?.id}?owner=${ownerId}`,
+    eventData
+  );
+};
 
 export const fetchUserEvents = async (userId: number) => {
-  return axios.get(`${API_URL}/user/${userId}/events`)
+  return axios.get(`${API_URL}/user/${userId}/events`);
 };
 
 export const deleteEvent = async (eventId: number) => {
-  return axios.delete(`${API_URL}/event/${eventId}`)
-}
+  return axios.delete(`${API_URL}/event/${eventId}`);
+};
 
-export const removeUserFromEvent = async (eventId: number) => {
-  return axios.delete(`${API_URL}/user?eventId=${eventId}`)
-}
+export const userOnEvent = async (eventId: number, userId: number) => {
+  return axios.post(`${API_URL}/user/${userId}?eventId=${eventId}`);
+};
+
+export const sendMessage = (
+  eventId: number,
+  userId: number,
+  message: string
+) => {
+  return axios.post(`${API_URL}/events/${eventId}/messages?userId=${userId}`, {
+    message: message,
+  });
+};
+
+export const likeInteraction = async (userId: number, eventId: number) => {
+  return axios.post(
+    `${API_URL}/event/like?eventId=${eventId}&userId=${userId}`
+  );
+};
+
+export const fetchInfoFromEvent = async (eventId: number, userId: number) => {
+  return axios.get(`${API_URL}/event/${eventId}?userId=${userId}`);
+};
+
+export const fetchMessages = async (eventId: number) => {
+  return axios.get(`${API_URL}/events/${eventId}/messages`);
+};
 
 export const fetchAllEvents = async () => {
   return axios.get(`${API_URL}/events`);
-}
+};
 
 export const fetchAllCategories = async () => {
   return axios.get(`${API_URL}/categories`);
