@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hostease.dao.MessageDAO;
 import com.hostease.entity.Event;
 import com.hostease.entity.Message;
 import com.hostease.entity.User;
@@ -52,7 +53,7 @@ public class MessageController {
 
     @PostMapping("/events/{eventId}/messages")
     public ResponseEntity<Map<String, Object>> saveMessage(
-            @RequestBody Message messageContent,
+            @RequestBody MessageDAO messageContent,
             @RequestParam("userId") Long userId,
             @PathVariable("eventId") Long eventId) {
 
@@ -61,7 +62,6 @@ public class MessageController {
 
         Message message = new Message();
         message.setMessage(messageContent.getMessage());
-        message.setPublishedAt(messageContent.getPublishedAt());
         message.setUser(user);
         message.setEvent(event);
 

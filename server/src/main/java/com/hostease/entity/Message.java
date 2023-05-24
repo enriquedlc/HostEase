@@ -1,5 +1,7 @@
 package com.hostease.entity;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -29,7 +31,7 @@ public class Message {
     private String message;
 
     @Column(name = "published_at", nullable = false, columnDefinition = "DATETIME default CURRENT_TIMESTAMP")
-    private String publishedAt;
+    private String publishedAt = LocalDateTime.now().toString();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_event_id", nullable = false)
