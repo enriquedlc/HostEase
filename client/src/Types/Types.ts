@@ -64,15 +64,17 @@ export interface ShortUser {
   email: string;
 }
 
-// Pendiente
-//   theme: UserTheme;
-// setTheme: React.Dispatch<React.SetStateAction<UserTheme>>
+export interface UserMessageData {
+  userId?: number;
+  userName: string;
+  userEmail?: string;
+}
 
 export interface Message {
-  id: number;
+  id?: number;
   message: string;
   publishedAt: string;
-  user: ShortUser;
+  user: UserMessageData;
 }
 
 interface Achievement {

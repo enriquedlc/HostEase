@@ -1,5 +1,16 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import {
+  AiFillLike,
+  AiOutlineClockCircle,
+  AiOutlineLike,
+} from "react-icons/ai";
+import { BsCalendarWeekFill, BsPeopleFill } from "react-icons/bs";
 import { useOutletContext, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import Loading from "../../Components/Loading/Loading";
+import Map from "../../Components/Map/Map";
+import MessageCard from "../../Components/MessageCard";
+import TagCard from "../../Components/TagCard/TagCard";
 import {
   EventProfileInfo,
   HostEaseEvent,
@@ -8,55 +19,104 @@ import {
 } from "../../Types/Types";
 import {
   fetchInfoFromEvent,
+  fetchMessages,
   likeInteraction,
+  sendMessage,
   userOnEvent,
 } from "../../services/main.services";
-import Loading from "../../Components/Loading/Loading";
-import Map from "../../Components/Map/Map";
 import "./EventProfile.css";
-import {
-  AiFillLike,
-  AiOutlineClockCircle,
-  AiOutlineLike,
-} from "react-icons/ai";
-import TagCard from "../../Components/TagCard/TagCard";
-import { BsCalendarWeekFill, BsPeopleFill } from "react-icons/bs";
-import { toast } from "react-toastify";
-
-interface UserMessage {
-  message: string;
-}
+import { RiSendPlaneFill } from "react-icons/ri";
 
 const EventProfile = () => {
   const userContext = useOutletContext<UserContextValue>();
+
   const [loading, setLoading] = useState(true);
+  const [loadingMsgs, setLoadingMsgs] = useState(true);
+
   const [event, setEvent] = useState<HostEaseEvent | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
-  const [userMessage, setUserMessage] = useState<UserMessage>();
+  const [userMessage, setUserMessage] = useState<string>("");
   const [like, setLike] = useState<boolean>(false);
   const [joined, setJoined] = useState<boolean>(false);
 
   const { id } = useParams();
 
+  const messageContainerRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    if (messageContainerRef.current) {
+      messageContainerRef.current.scrollTop =
+        messageContainerRef.current.scrollHeight;
+    }
+  };
+
   useEffect(() => {
-    const retrieveDataFormEvent = (eventId: number, userId: number) => {
+    const retrieveDataFromEvent = (eventId: number, userId: number) => {
       fetchInfoFromEvent(eventId, userId).then((response) => {
-        console.log(response.data);
         if (response.data.data) {
           const info: EventProfileInfo = response.data.data;
           setJoined(info.joined);
           setEvent(info.event);
           setLike(info.liked);
         } else {
+          // Manejar el caso de error o datos no encontrados
         }
       });
-      setLoading(false);
     };
 
-    id &&
-      userContext.user &&
-      retrieveDataFormEvent(parseInt(id), userContext.user?.id);
+    const retrieveMessages = (eventId: number) => {
+      const interval = setInterval(() => {
+        fetchMessages(eventId).then((response) => {
+          if (response.data.data) {
+            setMessages(response.data.data);
+            scrollToBottom();
+          }
+        });
+      }, 5000);
+
+      return () => {
+        clearInterval(interval);
+      };
+    };
+
+    if (id && userContext.user) {
+      retrieveDataFromEvent(parseInt(id), userContext.user.id);
+      retrieveMessages(parseInt(id));
+    }
   }, []);
+
+  const handleSubmit = () => {
+    if (userContext.user) {
+      if (id && userMessage?.trim()?.length !== 0) {
+        sendMessage(parseInt(id), userContext.user?.id, userMessage).then(
+          (response) => {
+            if (response.data.data && userContext.user?.nickname) {
+              setMessages([
+                ...messages,
+                {
+                  message: userMessage,
+                  publishedAt: new Date().toString(),
+                  user: {
+                    userId: userContext.user?.id,
+                    userName: userContext.user?.nickname,
+                  },
+                },
+              ]);
+              setUserMessage("");
+              scrollToBottom();
+            }
+          }
+        );
+      } else {
+      }
+    }
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event.key === "Enter") {
+      handleSubmit();
+    }
+  };
 
   const handleLike = () => {
     setLike((prevLike) => !prevLike);
@@ -129,7 +189,9 @@ const EventProfile = () => {
   return (
     <>
       {loading ? (
-        <Loading theme={userContext.theme} />
+        <div className={`${userContext.theme}-event-profile-container`}>
+          <Loading theme={userContext.theme} />
+        </div>
       ) : (
         <div className="event-profile-container">
           <div className={`event-profile-banner ${userContext.theme}-banner`}>
@@ -160,7 +222,7 @@ const EventProfile = () => {
               {event?.owner.id !== userContext.user?.id && (
                 <button
                   className={`${
-                    event?.maxCapacity && (event?.users === event?.maxCapacity)
+                    event?.maxCapacity && event?.users === event?.maxCapacity
                       ? "disabled-join"
                       : ""
                   }`}
@@ -208,7 +270,43 @@ const EventProfile = () => {
                 </div>
               </div>
             </div>
-            <div className="event-profile-col"></div>
+            <div className="event-profile-col">
+              {loadingMsgs ? (
+                <Loading />
+              ) : (
+                <>
+                  <div
+                    className="profile-message-block"
+                    ref={messageContainerRef}
+                  >
+                    {messages.map(({ id, message, publishedAt, user }) => {
+                      return (
+                        <MessageCard
+                          theme={userContext.theme}
+                          key={id}
+                          nickname={user.userName}
+                          isOwner={user.userId === event?.owner.id}
+                          message={message}
+                          time={new Date(publishedAt)}
+                        />
+                      );
+                    })}{" "}
+                  </div>
+                  <div className="event-submit-message">
+                    <textarea
+                      className="input"
+                      onKeyDown={handleKeyDown}
+                      onChange={(event) => setUserMessage(event.target.value)}
+                      value={userMessage}
+                    />
+                    <button type="submit" onClick={handleSubmit}>
+                      Send
+                      <RiSendPlaneFill />
+                    </button>
+                  </div>
+                </>
+              )}
+            </div>
           </div>
         </div>
       )}

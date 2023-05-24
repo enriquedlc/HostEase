@@ -1,0 +1,60 @@
+.msg-container {
+    position: relative;
+    border-radius: 5px;
+    margin: 7.5px 0px;
+    padding: 10px;
+    width: 100%;
+}
+
+.light-msg-container {
+    background-color: var(--secondary-color);
+    color: var(--font-color);
+}
+
+.dark-msg-container {
+    background-color: var(--primary-dark-color);
+    color: var(--font-color);
+}
+
+.msg-prof-pic svg {
+    width: 50px;
+    height: 100%;
+    margin-right: 10px;
+}
+
+.msg-user {
+    position: relative;
+    font-weight: bold;
+}
+
+.msg-user svg {
+    color: #fada5e;
+    color: linear-gradient(to bottom right, #fada5e, #f9c638);
+}
+
+.msg-tooltip {
+    border-radius: 5px;
+    margin-left: 5px;
+    padding: 0px 5px;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+.msg-user {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+
+.msg-user svg {
+    margin-left: 5px;
+}
+
+.msg-text {
+    margin: 10px 5px;
+}
+
+.msg-timestamp {
+    font-size: 10px;
+    opacity: 70%;
+}
