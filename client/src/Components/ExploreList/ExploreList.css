@@ -189,7 +189,7 @@
 }
 
 
-@media (min-width: 1000px) and (max-width: 1600px) {
+@media screen and (max-width: 1600px) {
   .event-grid {
     display: flex;
     flex-direction: column;
@@ -197,7 +197,7 @@
   }
 }
 
-@media (max-width: 770px) {
+@media (max-width: 800px) {
   .options-panel {
     display: flex;
     flex-direction: row;
