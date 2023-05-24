@@ -16,6 +16,7 @@ import MyEvents from "./MyEvents";
 import SignUp from "./SignUp";
 import Dashboard from "./Admin/Dashboard";
 import EventProfile from "./EventProfile/EventProfile";
+import UserProfile from "./UserProfile/UserProfile";
 
 /**
  *
@@ -52,6 +53,7 @@ const AppRouterProvider = () => {
               path={`${HostEaseRoutes.NewEvent}`}
               element={<FormEvent />}
             />
+            <Route path={`${HostEaseRoutes.Profile}`} element={<UserProfile />}/>
           </Route>
         )}
         {/* Hay que convertir este trozo en un componente que detecte los enlaces */}

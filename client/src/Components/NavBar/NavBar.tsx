@@ -48,7 +48,7 @@ const NavBar = (prop: { context: UserContextValue | null }) => {
           </Link>
         </div>
         <div
-          className={`${pathname.includes("/profile/") && "active"}-${
+          className={`${pathname.includes(`/profile/${context?.user?.id}`) && "active"}-${
             context?.theme
           }`}
         >

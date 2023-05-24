@@ -46,6 +46,10 @@
     padding: 15px;
 }
 
+div.navbar-add-event {
+    display: block;
+}
+
 div.active-light {
     background-color: var(--primary-color);
     color: var(--secondary-color);

@@ -16,10 +16,12 @@
     color: var(--font-color);
 }
 
-.msg-prof-pic svg {
-    width: 50px;
-    height: 100%;
-    margin-right: 10px;
+.dark-msg-container.sender {
+    background-color: var(--ternary-color);
+}
+
+.light-msg-container.sender {
+    background-color: var(--ternary-color);
 }
 
 .msg-user {
@@ -27,9 +29,13 @@
     font-weight: bold;
 }
 
+.msg-user:hover {
+    cursor: pointer;
+}
+
 .msg-user svg {
-    color: #fada5e;
-    color: linear-gradient(to bottom right, #fada5e, #f9c638);
+    color: var(--admin-color);
+    margin-right: 5px;
 }
 
 .msg-tooltip {

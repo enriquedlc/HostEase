@@ -5,9 +5,9 @@ import EventCard from "../EventCard/EventCard";
 import { toast } from "react-toastify";
 import { deleteEvent, userOnEvent } from "../../services/main.services";
 import { ImBin } from "react-icons/im";
-import { BiInfoCircle } from "react-icons/bi";
 import { HiPencil } from "react-icons/hi";
 import { IoMdExit } from "react-icons/io";
+import noEvents from "./assets/noEvents.jpg";
 
 interface ExploreListOptions {
   label: string;
@@ -99,43 +99,46 @@ const ExploreList: React.FC<ExploreListProps> = ({
           });
       }
     } else {
-      if (userId) 
-      userOnEvent(eventId, userId)
-        .then((response) => {
-          const result = response.data.data;
-          if (result) {
-            setFilteredList((prevList) =>
-              prevList.filter((event) => event.id !== eventId)
-            );
-            if (!toast.isActive("deleteSuccessMessage")) {
-              toast.success(
-                `Se ha borrado correctamente el evento ${eventName}.`,
+      if (
+        userId &&
+        confirm(`Estás segur@ que quieres salirte del el evento "${eventName}"`)
+      )
+        userOnEvent(eventId, userId)
+          .then((response) => {
+            const result = response.data.data;
+            if (!result) {
+              setFilteredList((prevList) =>
+                prevList.filter((event) => event.id !== eventId)
+              );
+              if (!toast.isActive("deleteSuccessMessage")) {
+                toast.success(
+                  `Se ha abandonado correctamente el evento ${eventName}.`,
+                  {
+                    toastId: "deleteSuccessMessage",
+                    theme: theme,
+                  }
+                );
+              }
+            } else {
+              if (!toast.isActive("deleteWarningMessage")) {
+                toast.info(`No se ha encontrado el evento ${eventName}.`, {
+                  toastId: "deleteWarningMessage",
+                  theme: theme,
+                });
+              }
+            }
+          })
+          .catch(() => {
+            if (!toast.isActive("deleteErrorMessage")) {
+              toast.error(
+                `Ha ocurrido un error al intentar borrar el evento ${eventName}.`,
                 {
-                  toastId: "deleteSuccessMessage",
+                  toastId: "deleteErrorMessage",
                   theme: theme,
                 }
               );
             }
-          } else {
-            if (!toast.isActive("deleteWarningMessage")) {
-              toast.info(`No se ha encontrado el evento ${eventName}.`, {
-                toastId: "deleteWarningMessage",
-                theme: theme,
-              });
-            }
-          }
-        })
-        .catch(() => {
-          if (!toast.isActive("deleteErrorMessage")) {
-            toast.error(
-              `Ha ocurrido un error al intentar borrar el evento ${eventName}.`,
-              {
-                toastId: "deleteErrorMessage",
-                theme: theme,
-              }
-            );
-          }
-        });
+          });
       console.log("Me boi");
     }
   };
@@ -177,55 +180,71 @@ const ExploreList: React.FC<ExploreListProps> = ({
           </button>
         )}
       </div>
-      <div className={mode === "view" ? "event-grid" : "event-edit-view"}>
-        {filteredList.map((event) => (
-          <div className="event-row" key={event.id}>
-            <EventCard
-              className="event-card"
-              id={event.id}
-              category={!selectedButton ? event.category : undefined}
-              title={event.title}
-              likes={event.likes}
-              startDate={event.startDate}
-              endDate={event.endDate && event.endDate}
-              startTime={event.startTime}
-              endTime={event.endTime}
-              location={event.location}
-              messages={event.messages}
-              maxCapacity={event.maxCapacity}
-              tags={event.tags}
-              users={event.users}
-            />
-            {mode === "edit" && (
-              <div className={`event-button-panel ${theme}-button-panel`}>
-                {owner && event.owner.id === owner.id ? (
-                  <>
-                    <button
-                      onClick={() =>
-                        handleRemove(
-                          event.id,
-                          "delete",
-                          currentUserId,
-                          event.title
-                        )
-                      }
-                    >
-                      <ImBin />
-                    </button>
+      {filteredList.length !== 0 ? (
+        <div className={mode === "view" ? "event-grid" : "event-edit-view"}>
+          {filteredList.map((event) => (
+            <div className="event-row" key={event.id}>
+              <EventCard
+                className="event-card"
+                id={event.id}
+                category={!selectedButton ? event.category : undefined}
+                title={event.title}
+                likes={event.likes}
+                startDate={event.startDate}
+                endDate={event.endDate && event.endDate}
+                startTime={event.startTime}
+                endTime={event.endTime}
+                location={event.location}
+                messages={event.messages}
+                maxCapacity={event.maxCapacity}
+                tags={event.tags}
+                users={event.users}
+              />
+              {mode === "edit" && (
+                <div className={`event-button-panel ${theme}-button-panel`}>
+                  {owner && event.owner.id === owner.id ? (
+                    <>
+                      <button
+                        onClick={() =>
+                          handleRemove(
+                            event.id,
+                            "delete",
+                            currentUserId,
+                            event.title
+                          )
+                        }
+                      >
+                        <ImBin />
+                      </button>
+                      <button>
+                        <HiPencil />
+                      </button>{" "}
+                    </>
+                  ) : (
                     <button>
-                      <HiPencil />
-                    </button>{" "}
-                  </>
-                ) : (
-                  <button>
-                    <IoMdExit />
-                  </button>
-                )}
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
+                      <IoMdExit
+                        onClick={() =>
+                          handleRemove(
+                            event.id,
+                            "leave",
+                            currentUserId,
+                            event.title
+                          )
+                        }
+                      />
+                    </button>
+                  )}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className={`eventless ${theme}-theme-mssg`} style={{ flex: 4 }}>
+          <h2>No te has unido o has creado ningún evento todavía</h2>
+          <img src={noEvents} alt="No Events?" />
+        </div>
+      )}
     </div>
   );
 };

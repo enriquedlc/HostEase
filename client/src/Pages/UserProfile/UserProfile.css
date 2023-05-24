@@ -1,0 +1,126 @@
+.light-user-profile {
+  color: var(--secondary-dark-color);
+}
+
+.dark-user-profile {
+  color: var(--font-color);
+}
+
+.user-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  margin-top: 30px;
+}
+
+.user-profile-head svg {
+  font-size: 90px;
+}
+
+.user-profile-head {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-size: 22px;
+  position: relative;
+}
+
+.followers {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+.follow-user-button {
+  outline: none;
+  border: none;
+  background-color: var(--secondary-color);
+  color: var(--font-color);
+  border-radius: 5px;
+  padding: 5px 15px;
+  font-size: 18px;
+  margin: 10px 0px;
+  transition: background-color 0.1s ease-in;
+  font-family: "Varela Round";
+  position: absolute;
+  bottom: -50px;
+}
+
+.follow-user-button:hover {
+  background-color: var(--secondary-dark-color);
+  transition: background-color 0.1s ease-in;
+  cursor: pointer;
+}
+
+.profile-body-content {
+  align-items: center;
+  margin-top: 50px;
+  display: flex;
+  justify-items: center;
+  height: 70%;
+  padding-right: 10px;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.event-column,
+.user-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  height: 85%;
+  margin: 0 40px;
+  flex: 1;
+}
+
+.event-column::-webkit-scrollbar-thumb,
+.user-column::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 2px;
+}
+
+.event-column::-webkit-scrollbar-thumb:hover,
+.user-column::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.event-column::-webkit-scrollbar-track,
+.user-column::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.no-events-yet {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.no-events-image {
+  border-radius: 10px;
+  margin-bottom: 50px;
+  width: 300px;
+}
+
+@media screen and (max-width: 1040px) {
+  .profile-body-content {
+    flex-direction: column;
+  }
+
+  .event-column,
+  .user-column {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: 1045px) {
+  .profile-body-content {
+  }
+}

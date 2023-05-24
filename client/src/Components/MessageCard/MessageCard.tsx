@@ -4,21 +4,28 @@ import { MdVerified } from "react-icons/md";
 import { ShortUser, Theme } from "../../Types/Types";
 import { formatDate, formatHour } from "../../services/Utils/main.utils";
 import { CgProfile } from "react-icons/cg";
+import { useNavigate } from "react-router-dom";
 
 const MessageCard = ({
+  userId,
   nickname,
   isOwner,
   message,
   time,
   theme,
+  sender
 }: {
+  userId?: number;
   nickname: string;
   isOwner: boolean;
   message: string;
   time: Date;
   theme: Theme;
+  sender: boolean;
 }) => {
   const [showTooltip, setShowTooltip] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleMouseEnter = () => {
     setShowTooltip(true);
@@ -29,20 +36,16 @@ const MessageCard = ({
   };
 
   return (
-    <div className={`msg-container ${theme}-msg-container`}>
-      <div className="msg-user">
-        {nickname}{" "}
+    <div className={`msg-container ${theme}-msg-container ${sender ? 'sender' : ''}`}>
+      <div className="msg-user" onClick={() => userId && navigate(`/profile/${userId}`)}>
+        {nickname}
         {isOwner && (
           <MdVerified
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           />
         )}
-        {isOwner && showTooltip && (
-          <span className="msg-tooltip">
-            Esta persona es el administrador del evento
-          </span>
-        )}
+        {sender ? ' ( You )' : ''}
       </div>
       <div className="msg-text">{message}</div>
       <div className="msg-timestamp">

@@ -26,6 +26,7 @@ import {
 } from "../../services/main.services";
 import "./EventProfile.css";
 import { RiSendPlaneFill } from "react-icons/ri";
+import { renderUsers } from "../../services/Utils/main.utils";
 
 const EventProfile = () => {
   const userContext = useOutletContext<UserContextValue>();
@@ -165,17 +166,6 @@ const EventProfile = () => {
     }
   };
 
-  const renderUsers = (number?: number) => {
-    if (number) {
-      if (number > 1000000) {
-        return (number / 1000000).toFixed(1) + " M";
-      } else if (number > 1000) {
-        return (number / 1000).toFixed(0) + " K";
-      }
-      return number.toString();
-    }
-  };
-
   return (
     <>
       {loading ? (
@@ -270,6 +260,8 @@ const EventProfile = () => {
                     {messages.map(({ id, message, publishedAt, user }) => {
                       return (
                         <MessageCard
+                          userId={user.userId}
+                          sender={userContext.user?.id === user.userId}
                           theme={userContext.theme}
                           key={id}
                           nickname={user.userName}
