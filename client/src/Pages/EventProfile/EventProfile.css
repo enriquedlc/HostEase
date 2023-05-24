@@ -5,19 +5,6 @@
   overflow: auto;
 }
 
-.light-event-profile-loading, .dark-event-profile-loading {
-    height: 100%;
-    width: 100%;
-    z-index: 1;
-}
-
-.light-event-profile-loading {
-    background-color: var(--primary-color);
-}
-
-.dark-event-profile-loading {
-    background-color: var(--primary-dark-color);
-}
 
 .event-profile-banner {
   position: relative;
@@ -26,11 +13,11 @@
 }
 
 .light-event-profile .event-profile-banner {
-    background-color: var(--primary-color);
+  background-color: var(--primary-color);
 }
 
 .dark-event-profile .event-profile-banner {
-    background-color: var(--primary-dark-color);
+  background-color: var(--primary-dark-color);
 }
 
 .banner-title {
@@ -178,11 +165,16 @@
 }
 
 .event-profile-general-info {
+    align-items: center;
   border-radius: 20px;
-  width: 40%;
-  padding: 20px;
+  width: 50%;
+  padding: 20px 10px;
   display: flex;
   flex-direction: column;
+}
+
+.event-profile-general-info svg {
+    margin-right: 10px;
 }
 
 .light-event-profile .event-profile-general-info {
@@ -276,31 +268,33 @@ button.disabled-join:hover {
 }
 
 .dark-event-profile .event-submit-message textarea {
-    border-bottom: 1px solid var(--primary-color);
+  border-bottom: 1px solid var(--primary-color);
+  color: var(--font-color);
 }
 
 .light-event-profile .event-submit-message textarea {
-    border-bottom: 1px solid var(--primary-dark-color);
+  border-bottom: 1px solid var(--primary-dark-color);
 }
 
 .profile-message-block {
-    overflow-y: scroll;
-    padding-right: 3px;
+  overflow-y: scroll;
+  padding-right: 3px;
 }
 
-.event-submit-message textarea::-webkit-scrollbar, .profile-message-block::-webkit-scrollbar {
+.event-submit-message textarea::-webkit-scrollbar,
+.profile-message-block::-webkit-scrollbar {
   height: 5px;
   width: 4px;
 }
 
 .light-event-profile .profile-message-block::-webkit-scrollbar-thumb {
-    background-color: var(--ternary-color);
-    border-radius: 2px;
+  background-color: var(--ternary-color);
+  border-radius: 2px;
 }
 
 .dark-event-profile .profile-message-block::-webkit-scrollbar-thumb {
-    background-color: var(--primary-dark-color);
-    border-radius: 2px;
+  background-color: var(--primary-dark-color);
+  border-radius: 2px;
 }
 
 .event-submit-message textarea::-webkit-scrollbar-thumb {
@@ -308,11 +302,13 @@ button.disabled-join:hover {
   border-radius: 2px;
 }
 
-.event-submit-message textarea::-webkit-scrollbar-thumb:hover, .profile-message-block::-webkit-scrollbar-thumb:hover {
+.event-submit-message textarea::-webkit-scrollbar-thumb:hover,
+.profile-message-block::-webkit-scrollbar-thumb:hover {
   background-color: rgba(0, 0, 0, 0.6);
 }
 
-.event-submit-message textarea::-webkit-scrollbar-track, .profile-message-block::-webkit-scrollbar-track {
+.event-submit-message textarea::-webkit-scrollbar-track,
+.profile-message-block::-webkit-scrollbar-track {
   background-color: transparent;
 }
 
@@ -330,7 +326,7 @@ button.disabled-join:hover {
 }
 
 .event-submit-message button svg {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
 .event-submit-message button:hover {

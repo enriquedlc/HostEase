@@ -58,30 +58,20 @@ const EventProfile = () => {
           setJoined(info.joined);
           setEvent(info.event);
           setLike(info.liked);
-        } else {
-          // Manejar el caso de error o datos no encontrados
+          setLoading(false);
+        }
+      });
+      fetchMessages(eventId).then((response) => {
+        if (response.data.data) {
+          setMessages(response.data.data);
+          scrollToBottom();
+          setLoadingMsgs(false);
         }
       });
     };
 
-    const retrieveMessages = (eventId: number) => {
-      const interval = setInterval(() => {
-        fetchMessages(eventId).then((response) => {
-          if (response.data.data) {
-            setMessages(response.data.data);
-            scrollToBottom();
-          }
-        });
-      }, 5000);
-
-      return () => {
-        clearInterval(interval);
-      };
-    };
-
     if (id && userContext.user) {
       retrieveDataFromEvent(parseInt(id), userContext.user.id);
-      retrieveMessages(parseInt(id));
     }
   }, []);
 
@@ -189,9 +179,7 @@ const EventProfile = () => {
   return (
     <>
       {loading ? (
-        <div className={`${userContext.theme}-event-profile-container`}>
           <Loading theme={userContext.theme} />
-        </div>
       ) : (
         <div className="event-profile-container">
           <div className={`event-profile-banner ${userContext.theme}-banner`}>
