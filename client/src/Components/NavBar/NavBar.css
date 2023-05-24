@@ -37,11 +37,10 @@
     position: relative;
 }
 
-.navbar-button-panel div {
+.navbar-button-panel div:not(.general-section-bottom div svg) {
     display: flex;
     align-items: center;
 }
-
 
 .navbar-button-panel div, div.navbar-add-event {
     padding: 15px;
@@ -80,4 +79,15 @@ div.active-dark {
     right: 0%;
     position: absolute;
     display: flex;
+}
+
+
+@media screen and (max-width: 870px) {
+    .navbar-button-panel span.bannish {
+        display: none;
+    }
+
+    .navbar-button-panel {
+        justify-items: center;
+    }
 }

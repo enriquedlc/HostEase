@@ -3,7 +3,7 @@ import "./ExploreList.css";
 import { HostEaseEvent, Theme, User } from "../../Types/Types";
 import EventCard from "../EventCard/EventCard";
 import { toast } from "react-toastify";
-import { deleteEvent } from "../../services/main.services";
+import { deleteEvent, userOnEvent } from "../../services/main.services";
 import { ImBin } from "react-icons/im";
 import { BiInfoCircle } from "react-icons/bi";
 import { HiPencil } from "react-icons/hi";
@@ -99,7 +99,8 @@ const ExploreList: React.FC<ExploreListProps> = ({
           });
       }
     } else {
-      /* removeUserFromEvent(eventId, userId)
+      if (userId) 
+      userOnEvent(eventId, userId)
         .then((response) => {
           const result = response.data.data;
           if (result) {
@@ -135,8 +136,6 @@ const ExploreList: React.FC<ExploreListProps> = ({
             );
           }
         });
-
-    */
       console.log("Me boi");
     }
   };
