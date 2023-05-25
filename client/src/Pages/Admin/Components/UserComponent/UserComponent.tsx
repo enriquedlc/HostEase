@@ -1,13 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { MdGroup } from 'react-icons/md';
 
 import { User } from '../../../../Types/Types';
 
-import './UserComponent.css';
-import Card from '../Card/Card';
-import EventTable from '../Tables/EventTable';
-import UserTable from '../Tables/UserTable';
 import { fetchAllUsers } from '../../../../services/main.services';
+import Card from '../Card/Card';
+import UserTable from '../Tables/UserTable';
+import './UserComponent.css';
 
 const UserCardData =
 {
@@ -42,7 +41,7 @@ const UserComponent = (props: UserComponentProps) => {
             setUsers((await fetchAllUsers()).data.data)
         }
         getAllUsers();
-    }, [])
+    }, [users])
 
     return (
         <div className="main-dashboard">

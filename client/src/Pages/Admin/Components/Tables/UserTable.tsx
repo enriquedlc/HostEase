@@ -8,6 +8,7 @@ import { GridColDef } from "@mui/x-data-grid";
 import { ImBin } from "react-icons/im";
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import UserModal from '../../../../Components/Modals/UserModal/UserModal';
 
@@ -16,9 +17,9 @@ import './Table.css';
 const theme = createTheme({});
 
 const deletedUserToast = (id: number) => {
-    toast.warn(`User with id ${id} deleted`, {
-        position: "bottom-right",
-        autoClose: 1500,
+    toast.warning(`User with id ${id} deleted`, {
+        position: "top-right",
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -82,7 +83,9 @@ const UserTable = (props: UserTableProps) => {
     const handleDeleteClick = (id: number) => {
         deleteUserById(id).then(() => {
             deletedUserToast(id)
-            navigate('/admin/users')
+            setTimeout(() => {
+            navigate('/admin')
+            }, 3500)
         })
     }
 
@@ -99,6 +102,7 @@ const UserTable = (props: UserTableProps) => {
     };
 
     return (
+
         <div className="table">
             <h3 className="table-title">{title}</h3>
             <Box
@@ -124,7 +128,9 @@ const UserTable = (props: UserTableProps) => {
                     disableRowSelectionOnClick
                 />
             </Box>
+            <ToastContainer />
         </div>
+
     );
 };
 

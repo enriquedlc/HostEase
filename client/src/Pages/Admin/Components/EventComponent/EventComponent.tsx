@@ -8,8 +8,7 @@ import './EventComponent.css';
 import { fetchAllEvents } from '../../../../services/main.services';
 import Card from '../../Components/Card/Card';
 
-const EventCardData =
-{
+const EventCardData = {
     title: "Events",
     color: {
         backGround: "linear-gradient(180deg, #bb67ff 0%, #c484f3 100%)",
@@ -40,7 +39,7 @@ const EventComponent = (props: EventComponentProps) => {
         fetchAllEvents().then((response) => {
             setEvents(response.data.data)
         })
-    }, []);
+    }, [events]);
 
     return (
         <div className="main-dashboard">
