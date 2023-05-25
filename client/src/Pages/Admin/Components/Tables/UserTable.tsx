@@ -1,14 +1,33 @@
 import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
-import { User } from '../../../../Types/Types';
 import axios from "axios";
+import { User } from '../../../../Types/Types';
+
+import { ThemeProvider, createTheme } from '@mui/material';
+import { GridColDef } from "@mui/x-data-grid";
+import { ImBin } from "react-icons/im";
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import UserModal from '../../../../Components/Modals/UserModal/UserModal';
 
 import './Table.css';
 
-import { columns } from "./UserTableDef";
+const theme = createTheme({});
 
-const fetchUserById = (id: number) => {
-    return axios.get(`http://localhost:8080/hostease/users/${id}`)
+const deletedUserToast = (id: number) => {
+    toast.warn(`User with id ${id} deleted`, {
+        position: "bottom-right",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true
+    });
+}
+
+const deleteUserById = (id: number) => {
+    return axios.delete(`http://localhost:8080/hostease/users/${id}`)
 }
 
 interface UserTableProps {
@@ -19,6 +38,65 @@ interface UserTableProps {
 const UserTable = (props: UserTableProps) => {
 
     const { userList, title } = props;
+
+    const navigate = useNavigate()
+
+    const columns: GridColDef[] = [
+        {
+            field: "nickname",
+            headerName: "Nickname",
+            width: 230,
+        },
+        {
+            field: "joinedAt",
+            headerName: "Joined at",
+            width: 180,
+            editable: false,
+            align: "left",
+        },
+        {
+            field: "email",
+            headerName: "Email",
+            type: "number",
+            width: 250,
+            editable: false,
+            align: "left",
+        },
+        {
+            field: "phone",
+            headerName: "Phone",
+            type: "number",
+            width: 180,
+            editable: false,
+            align: "left",
+        },
+        {
+            field: "actions",
+            headerName: "Actions",
+            width: 180,
+            align: "left",
+            renderCell: (params) => (CustomActions(params.row.id))
+        },
+    ]
+
+    const handleDeleteClick = (id: number) => {
+        deleteUserById(id).then(() => {
+            deletedUserToast(id)
+            navigate('/admin/users')
+        })
+    }
+
+    const CustomActions = (id: number) => {
+        return (
+            <ThemeProvider theme={theme}>
+                <UserModal userId={id} />
+                <button
+                    onClick={() => handleDeleteClick(id)}>
+                    <ImBin />
+                </button>
+            </ThemeProvider>
+        );
+    };
 
     return (
         <div className="table">
