@@ -134,6 +134,7 @@ public class EventController {
             eventToDelete.getTags().clear();
             eventToDelete.getUsers().clear();
             eventToDelete.setTags(null);
+            eventToDelete.setLikes(null);
             eventToDelete.setUsers(null);
 
             eventService.deleteById(id);

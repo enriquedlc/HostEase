@@ -64,7 +64,8 @@ public class User {
     @ManyToMany(mappedBy = "followers", fetch = FetchType.LAZY)
     private Set<User> following = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Like> likes = new HashSet<Like>();
 
     @Id

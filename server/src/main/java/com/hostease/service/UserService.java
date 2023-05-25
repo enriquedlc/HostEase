@@ -61,7 +61,7 @@ public class UserService {
         }
     }
 
-    public List<User> findFollowersByUserId(Long id) {
+    public User findFollowersByUserId(Long id) {
         return userRepository.findFollowersById(id);
     }
 

@@ -136,13 +136,13 @@ public class UserController {
         }
     }
 
-    @GetMapping("/users/followers/{id}")
+    @GetMapping("/users/followers/{userId}")
     public ResponseEntity<Map<String, Object>> findFollowersByUserId(@PathVariable("userId") Long userId) {
 
-        List<User> followers = userService.findFollowersByUserId(userId);
+        User user = userService.findFollowersByUserId(userId);
 
-        return new ControllerJsonResponseMap().jsonResponseMapListGenerator(
-                followers,
+        return new ControllerJsonResponseMap().jsonResponseMapObjectGenerator(
+                user,
                 HttpStatusEnum.STATUS_200_OK.getStatus(),
                 "Followers successfully retrieved",
                 "Error retrieving followers");
