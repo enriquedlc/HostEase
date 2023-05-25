@@ -1,3 +1,4 @@
+import { Button } from '@mui/material';
 import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
@@ -7,8 +8,7 @@ import { ThemeProvider, createTheme } from '@mui/material';
 import { GridColDef } from "@mui/x-data-grid";
 import { ImBin } from "react-icons/im";
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import UserModal from '../../../../Components/Modals/UserModal/UserModal';
 
@@ -17,7 +17,7 @@ import './Table.css';
 const theme = createTheme({});
 
 const deletedUserToast = (id: number) => {
-    toast.warning(`User with id ${id} deleted`, {
+    toast.success(`User with id ${id} deleted ❌`, {
         position: "top-right",
         autoClose: 3000,
         hideProgressBar: false,
@@ -46,7 +46,7 @@ const UserTable = (props: UserTableProps) => {
         {
             field: "nickname",
             headerName: "Nickname",
-            width: 230,
+            width: 180,
         },
         {
             field: "joinedAt",
@@ -59,7 +59,7 @@ const UserTable = (props: UserTableProps) => {
             field: "email",
             headerName: "Email",
             type: "number",
-            width: 250,
+            width: 220,
             editable: false,
             align: "left",
         },
@@ -84,20 +84,23 @@ const UserTable = (props: UserTableProps) => {
         deleteUserById(id).then(() => {
             deletedUserToast(id)
             setTimeout(() => {
-            navigate('/admin')
+                navigate('/admin')
             }, 3500)
         })
     }
 
     const CustomActions = (id: number) => {
         return (
-            <ThemeProvider theme={theme}>
-                <UserModal userId={id} />
-                <button
-                    onClick={() => handleDeleteClick(id)}>
-                    <ImBin />
-                </button>
-            </ThemeProvider>
+            <div className='button-container'>
+                <ThemeProvider theme={theme}>
+                    <UserModal userId={id} />
+                    <Button
+                        color="error" variant="contained"
+                        onClick={() => handleDeleteClick(id)}>
+                        <ImBin />
+                    </Button>
+                </ThemeProvider>
+            </div>
         );
     };
 

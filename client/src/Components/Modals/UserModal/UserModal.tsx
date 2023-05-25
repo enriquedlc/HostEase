@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Modal, Typography, Button, CircularProgress } from '@mui/material';
+import { Button, CircularProgress, Modal, Typography } from '@mui/material';
 import { styled } from '@mui/system';
 import axios from 'axios';
+import { useState } from 'react';
 import { User } from '../../../Types/Types';
 
 const ModalContainer = styled('div')(({ theme }) => ({
@@ -16,8 +16,8 @@ const ModalContainer = styled('div')(({ theme }) => ({
     maxHeight: '50vh',
     overflow: 'auto',
     transform: 'translate(35%, 50%)', // Center horizontally and vertically
-  }));
-  
+}));
+
 
 const ModalTitle = styled(Typography)({
     fontSize: '24px',
@@ -96,7 +96,7 @@ const UserModal = (props: UserModalProps) => {
     return (
         <div>
             <Button variant="outlined" onClick={() => fetchUserById(userId)}>
-                Show Details
+                Details
             </Button>
             <Modal open={open} onClose={handleClose}>
                 <ModalContainer>
