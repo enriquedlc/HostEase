@@ -69,6 +69,10 @@ export const likeInteraction = async (userId: number, eventId: number) => {
   );
 };
 
+export const followInteraction = async (followerUserId: number, toFollowUserId: number) => {
+  return axios.post(`${API_URL}/users/follow?followerUserId=${followerUserId}&followedUserId=${toFollowUserId}`)
+}
+
 export const fetchInfoFromEvent = async (eventId: number, userId: number) => {
   return axios.get(`${API_URL}/event/${eventId}?userId=${userId}`);
 };
@@ -88,5 +92,13 @@ export const fetchAllCategories = async () => {
 export const fetchAllTags = async () => {
   return axios.get(`${API_URL}/tags`);
 };
+
+export const fetchUser = async (userId: number) => {
+  return axios.get(`${API_URL}/users/${userId}`);
+}
+
+export const fetchFollowers = async (userId: number) => {
+  return axios.get(`${API_URL}/users/followers/${userId}`)
+}
 
 export const mapLibraries: MapLibraries[] = ["places"];

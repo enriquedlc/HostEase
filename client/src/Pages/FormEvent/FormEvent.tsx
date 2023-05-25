@@ -43,6 +43,7 @@ const FormEvent = () => {
     endDate: currentDate,
     startTime: initialStartHour,
     endTime: initialEndHour,
+    location: null
   });
   const [tagList, setTagList] = useState<Tag[]>([]);
   const [categoryList, setCategoryList] = useState<CategoryOptions[]>([]);
@@ -160,6 +161,7 @@ const FormEvent = () => {
                 type="number"
                 placeholder="Max Capacity"
                 name="maxCapacity"
+                min={5}
                 required
               />
               <CustomDatePicker

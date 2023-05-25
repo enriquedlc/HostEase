@@ -13,6 +13,7 @@ import TagCard from "../TagCard";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../../Context/UserContext";
 import Map from "../Map";
+import { renderUsers } from "../../services/Utils/main.utils";
 
 interface EventCardOptions {
   id: number;
@@ -52,15 +53,6 @@ const EventCard = (props: EventCardOptions) => {
     users,
     className
   } = props;
-
-  const renderUsers = (users: number) => {
-    if (users > 1000000) {
-      return (users / 1000000).toFixed(1) + " M";
-    } else if (users > 1000) {
-      return (users / 1000).toFixed(0) + " K";
-    }
-    return users.toString();
-  };
 
   const slicedTags = tags?.slice(0, 6);
 

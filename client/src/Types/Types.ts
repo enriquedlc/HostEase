@@ -29,7 +29,7 @@ export type MapLibraries =
 
 export interface MapProperties {
   coordinates?: LatLngLiteral | null;
-  className ?: string;
+  className?: string;
   setCoordinates?: HostEaseHandlerFunction;
   handleDbClick?: HostEaseHandlerFunction;
   center?: boolean;
@@ -47,6 +47,17 @@ export interface EventOwner {
   role: "ADMIN" | "USER";
 }
 
+export interface EventCard {
+  id?: number;
+  title?: string;
+  category?: string
+  tagsNumber?: number
+  maxCapacity?: number
+  users?: number
+  likes?: number
+  isOwner?: boolean
+}
+
 export interface User extends ShortUser {
   password: string;
   phone: string;
@@ -55,7 +66,7 @@ export interface User extends ShortUser {
   events?: HostEaseEvent[];
   achievements?: Achievement[];
   messages?: Message[];
-  followers?: number;
+  followers: GeneralMinimalistUserData[];
 }
 
 export interface ShortUser {
@@ -64,11 +75,15 @@ export interface ShortUser {
   email: string;
 }
 
-export interface UserMessageData {
+export interface GeneralMinimalistUserData {
   userId?: number;
   userName: string;
   userEmail?: string;
 }
+
+export interface UserMessageData extends GeneralMinimalistUserData {}
+
+export interface FollowerUserData extends GeneralMinimalistUserData {}
 
 export interface Message {
   id?: number;
