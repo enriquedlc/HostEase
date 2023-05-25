@@ -1,40 +1,40 @@
-import { Button, createTheme, ThemeProvider } from '@mui/material';
 import Box from "@mui/material/Box";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { User } from '../../../../Types/Types';
-import { motion } from 'framer-motion';
-
 import './Table.css';
 
+import { createTheme, ThemeProvider, Button } from '@mui/material';
+import { styled } from '@mui/system';
+import { motion } from 'framer-motion';
+import axios from "axios";
+
+import { ImBin } from "react-icons/im";
+import { BiInfoCircle } from "react-icons/bi";
+
 const theme = createTheme({
-    components: {
-        MuiButton: {
-            styleOverrides: {
-                root: {
-                    background: 'linear-gradient(45deg, #bda2e7 19%, var(--ternary-color) 51%, var(--secondary-color) 95%)',
-                    color: 'white', // Color de texto azul
-                    border: '0px solid transparent', // Bordes transparentes
-                    '&:hover': {
-                        borderColor: 'blue', // Color de borde al pasar el cursor
-                    },
-                },
-            },
+    palette: {
+        primary: {
+            main: '#1e88e5',
         },
     },
 });
 
-const CustomActions = () => {
+const CustomActions = (id: number) => {
     return (
         <ThemeProvider theme={theme}>
-            <motion.div 
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            >
-                <Button variant="contained">details</Button>
-            </motion.div>
+            <button
+                onClick={() => handleDetailClick(id)}>
+                <ImBin />
+            </button>
+            <button
+                onClick={() => handleDetailClick(id)}>
+                <BiInfoCircle />
+            </button>
         </ThemeProvider>
     );
 };
+
+
 
 const columns: GridColDef[] = [
     {
@@ -70,12 +70,17 @@ const columns: GridColDef[] = [
         headerName: "Actions",
         width: 180,
         align: "left",
-        renderCell: CustomActions
+        renderCell: (params) => (CustomActions(params.row.id))
     },
 ]
 
+const fetchUserById = (id: number) => {
+    return axios.get(`http://localhost:8080/hostease/users/${id}`)
+}
+
 const handleDetailClick = (id: number) => {
-    console.log('Se hizo clic en el botón con el ID:', id);
+    fetchUserById(id)
+    console.log(fetchUserById(id))
 };
 
 interface UserTableProps {
