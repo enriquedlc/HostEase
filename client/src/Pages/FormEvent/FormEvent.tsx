@@ -37,6 +37,7 @@ const FormEvent = () => {
 
   const userContext = useOutletContext<UserContextValue>();
   const [event, setEvent] = useState<HostEaseEventForm>({
+    title: '',
     description: "",
     tags: [],
     startDate: currentDate,

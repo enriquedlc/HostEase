@@ -35,7 +35,8 @@
 .profile-user-amount span {
   display: flex;
   align-items: center;
-  font-size: 30px;
+  font-size: 23px;
+  width: 130px;
 }
 
 .event-profile-banner span svg {

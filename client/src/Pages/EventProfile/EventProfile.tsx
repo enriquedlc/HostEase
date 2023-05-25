@@ -190,7 +190,7 @@ const EventProfile = () => {
               </div>
               <div className="profile-user-amount">
                 <span>
-                  {renderUsers(event?.users)} -{" "}
+                  {renderUsers(event?.users)}/
                   {renderUsers(event?.maxCapacity)}
                   <BsPeopleFill />
                 </span>
