@@ -23,6 +23,7 @@ type SingleSelectProps = {
 
 type SelectProps = {
   options: Tag[];
+  isDisabled?: boolean;
 } & (SingleSelectProps | MultipleSelectProps);
 
 export default function Select({
@@ -31,56 +32,66 @@ export default function Select({
   onChange,
   options,
   name,
+  isDisabled,
 }: SelectProps) {
-
   const [isOpen, setIsOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(0);
 
   useEffect(() => {
-    if (isOpen) setHighlightedIndex(0);
+    if (isOpen && !isDisabled) setHighlightedIndex(0);
   }, [isOpen]);
 
   const clearOptions = () => {
-    if (multiple) {
-      onChange([], name);
-    } else {
-      onChange(null, name);
+    if (!isDisabled) {
+      if (multiple) {
+        onChange([], name);
+      } else {
+        onChange(null, name);
+      }
     }
   };
 
   const selectOption = (option: Tag) => {
-    if (multiple) {
-      if (value?.includes(option)) {
-        onChange(
-          value.filter((optn) => optn !== option),
-          name
-        );
+    if (!isDisabled) {
+      if (multiple) {
+        if (value?.includes(option)) {
+          onChange(
+            value.filter((optn) => optn !== option),
+            name
+          );
+        } else {
+          value && onChange([...value, option], name);
+        }
       } else {
-        value && onChange([...value, option], name);
+        if (option !== value) onChange(option, name);
       }
-    } else {
-      if (option !== value) onChange(option, name);
     }
   };
 
   const isOptionSelected = (option: Tag) => {
-    return multiple ? value?.includes(option) : option === value;
+    return !isDisabled && multiple ? value?.includes(option) : option === value;
   };
 
   const handleClick = (event: React.MouseEvent) => {
-    event.stopPropagation();
-    setIsOpen(true);
+    if (!isDisabled) {
+      event.stopPropagation();
+      setIsOpen(true);
+    }
   };
 
   const handleOptionClick = (option: Tag, event: React.MouseEvent) => {
-    event.stopPropagation();
-    selectOption(option);
-    setIsOpen(false);
+    if (!isDisabled) {
+      event.stopPropagation();
+      selectOption(option);
+      setIsOpen(false);
+    }
   };
 
   const handleBadgeClick = (value: Tag, event: React.MouseEvent) => {
-    event.stopPropagation();
-    selectOption(value);
+    if (!isDisabled) {
+      event.stopPropagation();
+      selectOption(value);
+    }
   };
 
   const motionButtonProps = {
@@ -97,12 +108,13 @@ export default function Select({
       onBlur={() => setIsOpen(false)}
       tabIndex={0}
       className={styles.container}
+      style={{ opacity: isDisabled ? 0.7 : 1 }}
     >
       <span className={styles.value}>
         {multiple
           ? value?.map((value) => (
               <TagCard
-                style={{ cursor : 'pointer'}}
+                style={{ cursor: "pointer" }}
                 key={value.id}
                 onClick={(e: any) => handleBadgeClick(value, e)}
                 color={value.color}
@@ -112,7 +124,7 @@ export default function Select({
           : value?.tag}
       </span>
       <motion.button
-      {...motionButtonProps}
+        {...motionButtonProps}
         type="button"
         onClick={(e) => {
           e.stopPropagation();

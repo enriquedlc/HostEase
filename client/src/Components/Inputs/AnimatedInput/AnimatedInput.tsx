@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./AnimatedInput.css";
 import { HostEaseHandlerFunction } from "../../../Types/Types";
 
@@ -7,13 +7,21 @@ const AnimatedInput = (props: {
   className?: string;
   label: string;
   name: string;
-  value?: any;
+  value?: string;
   type?: string;
 }) => {
   const { onChange, label, className, name, type, value } = props;
 
   const [isFocused, setIsFocused] = useState(value ? true : false);
-  const [inputValue, setInputValue] = useState(value || "");
+  const [inputValue, setInputValue] = useState(value ?? '');
+
+  console.log(inputValue);
+
+  useEffect(() => {
+    if (value)
+    setInputValue(value);
+    setIsFocused(true);
+  }, [value])
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);

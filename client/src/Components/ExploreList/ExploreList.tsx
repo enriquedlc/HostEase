@@ -8,6 +8,7 @@ import { ImBin } from "react-icons/im";
 import { HiPencil } from "react-icons/hi";
 import { IoMdExit } from "react-icons/io";
 import noEvents from "./assets/noEvents.jpg";
+import { useNavigate } from "react-router-dom";
 
 interface ExploreListOptions {
   label: string;
@@ -35,6 +36,8 @@ const ExploreList: React.FC<ExploreListProps> = ({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [filteredList, setFilteredList] =
     useState<HostEaseEvent[]>(listToFilter);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const updatedList = selectedButton
@@ -216,7 +219,7 @@ const ExploreList: React.FC<ExploreListProps> = ({
                       >
                         <ImBin />
                       </button>
-                      <button>
+                      <button onClick={() => navigate(`/edit/${event.id}`)}>
                         <HiPencil />
                       </button>{" "}
                     </>

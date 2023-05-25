@@ -8,6 +8,7 @@ interface HostEaseRoutes {
   EventProfile: string;
   Profile: string;
   NewEvent: string;
+  EditEvent: string;
   Admin: string;
 }
 
@@ -21,5 +22,6 @@ export const HostEaseRoutes: HostEaseRoutes = {
   EventProfile: "/event/:id",
   Profile: "/profile/:id",
   NewEvent: "/new",
+  EditEvent: "/edit/:id",
   Admin: "/admin",
 };

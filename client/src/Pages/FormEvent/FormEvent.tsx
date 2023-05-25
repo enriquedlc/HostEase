@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import { toast } from "react-toastify";
 import CustomDatePicker from "../../Components/CustomDatePicker";
@@ -8,6 +8,7 @@ import Map from "../../Components/Map";
 import Selector from "../../Components/Selector";
 import {
   Category,
+  HostEaseEvent,
   HostEaseEventForm,
   HostEaseHandlerFunction,
   Tag,
@@ -17,6 +18,8 @@ import {
   createEvent,
   fetchAllCategories,
   fetchAllTags,
+  fetchInfoFromEvent,
+  updateEvent,
 } from "../../services/main.services";
 import "./FormEvent.css";
 import Select from "react-select";
@@ -27,28 +30,50 @@ interface CategoryOptions {
   label: string;
 }
 
+const currentDate = formatDate(new Date().toISOString());
+const initialStartHour = formatHour(new Date());
+const initialEndHour = formatHour(
+  new Date(new Date().getTime() + 60 * 60 * 1000)
+);
+
+const defaultObject : HostEaseEventForm = {
+  title: "",
+  description: "",
+  tags: [],
+  maxCapacity: 5,
+  startDate: currentDate,
+  endDate: currentDate,
+  startTime: initialStartHour,
+  endTime: initialEndHour,
+  location: null,
+}
+
 const FormEvent = () => {
-  const currentDate = formatDate(new Date().toISOString());
-
-  const initialStartHour = formatHour(new Date());
-  const initialEndHour = formatHour(
-    new Date(new Date().getTime() + 60 * 60 * 1000)
-  );
-
   const userContext = useOutletContext<UserContextValue>();
-  const [event, setEvent] = useState<HostEaseEventForm>({
-    title: '',
-    description: "",
-    tags: [],
-    startDate: currentDate,
-    endDate: currentDate,
-    startTime: initialStartHour,
-    endTime: initialEndHour,
-    location: null
-  });
+
+
+  const [event, setEvent] = useState<HostEaseEventForm>({});
   const [tagList, setTagList] = useState<Tag[]>([]);
   const [categoryList, setCategoryList] = useState<CategoryOptions[]>([]);
   const [currentTab, setCurrentTab] = useState(0);
+
+  const { id } = useParams();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchEvent = async (eventId: number, userId: number) => {
+      fetchInfoFromEvent(eventId, userId).then((response) => {
+        const newEvent: HostEaseEvent = response.data.data.event;
+        if (newEvent) {
+          console.log(newEvent);
+          setEvent(newEvent);
+        }
+      });
+    };
+
+    id ? userContext.user && fetchEvent(parseInt(id), userContext?.user?.id) : setEvent(defaultObject);
+  }, [id]);
 
   useEffect(() => {
     const getListOfCategories = async () => {
@@ -67,6 +92,7 @@ const FormEvent = () => {
       });
     };
     getListOfCategories();
+    id === undefined && setEvent(defaultObject);
   }, []);
 
   useEffect(() => {
@@ -103,27 +129,49 @@ const FormEvent = () => {
         }
       })
     ) {
-      console.log(event);
-      userContext.user &&
-        createEvent(event, userContext.user?.id).then((response) => {
+      if (id && event?.id) {
+        console.log(event);
+        updateEvent(event?.id, event).then((response) => {
           if (response.data.data) {
             if (!toast.isActive("formSuccessMessage")) {
-              toast.success("Se ha creado el evento correctamente.", {
+              toast.success("Se ha actualizado el evento correctamente.", {
                 toastId: "formSuccessMessage",
                 theme: userContext?.theme,
               });
             }
-            return true;
+            navigate(`/events/${userContext.user?.id}`)
           } else {
             if (!toast.isActive("formFatalMessage")) {
-              toast.error("Ha ocurrido un error al crear el evento.", {
+              toast.error("Ha ocurrido un error al actualizar el evento.", {
                 toastId: "formFatalMessage",
                 theme: userContext?.theme,
               });
             }
             return false;
           }
-        });
+        })
+      } else {
+        userContext.user &&
+          createEvent(event, userContext.user?.id).then((response) => {
+            if (response.data.data) {
+              if (!toast.isActive("formSuccessMessage")) {
+                toast.success("Se ha creado el evento correctamente.", {
+                  toastId: "formSuccessMessage",
+                  theme: userContext?.theme,
+                });
+              }
+              navigate(`/events/${userContext.user?.id}`)
+            } else {
+              if (!toast.isActive("formFatalMessage")) {
+                toast.error("Ha ocurrido un error al crear el evento.", {
+                  toastId: "formFatalMessage",
+                  theme: userContext?.theme,
+                });
+              }
+              return false;
+            }
+          });
+      }
     } else {
       if (!toast.isActive("formErrorMessage")) {
         toast.error("Rellene todos los campos del formulario.", {
@@ -214,6 +262,7 @@ const FormEvent = () => {
                     name="tags"
                     options={tagList}
                     value={event?.tags}
+                    isDisabled={id ? true : false}
                   />
                 </div>
               ) : (
@@ -259,6 +308,7 @@ const FormEvent = () => {
                     }}
                     className="category-select"
                     required
+                    isDisabled={id ? true : false}
                   />
                 </>
               ) : (

@@ -115,6 +115,7 @@ export type HostEaseHandlerFunction = (
 ) => void;
 
 export interface HostEaseEventForm {
+  id?: number;
   title?: string;
   description?: string;
   startDate?: string;
@@ -128,7 +129,6 @@ export interface HostEaseEventForm {
 }
 
 export interface HostEaseEvent extends HostEaseEventForm {
-  id: number;
   users: number;
   messages?: number;
   likes: number;

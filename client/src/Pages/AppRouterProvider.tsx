@@ -53,6 +53,7 @@ const AppRouterProvider = () => {
               path={`${HostEaseRoutes.NewEvent}`}
               element={<FormEvent />}
             />
+            <Route path={`${HostEaseRoutes.EditEvent}`} element={<FormEvent />} />
             <Route path={`${HostEaseRoutes.Profile}`} element={<UserProfile />}/>
           </Route>
         )}

@@ -77,9 +77,14 @@ export const fetchInfoFromEvent = async (eventId: number, userId: number) => {
   return axios.get(`${API_URL}/event/${eventId}?userId=${userId}`);
 };
 
+export const updateEvent = async (categoryId: number, newEvent : HostEaseEventForm) => {
+  return axios.put(`${API_URL}/events/${categoryId}`, newEvent);
+}
+
 export const fetchMessages = async (eventId: number) => {
   return axios.get(`${API_URL}/events/${eventId}/messages`);
 };
+
 
 export const fetchAllEvents = async () => {
   return axios.get(`${API_URL}/events`);
