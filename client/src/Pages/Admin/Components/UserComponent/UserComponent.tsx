@@ -1,9 +1,6 @@
-import { useEffect, useState } from 'react';
 import { MdGroup } from 'react-icons/md';
 
-import { User } from '../../../../Types/Types';
 
-import { fetchAllUsers } from '../../../../services/main.services';
 import Card from '../Card/Card';
 import UserTable from '../Tables/UserTable';
 import './UserComponent.css';
@@ -26,26 +23,11 @@ const UserCardData =
     ]
 }
 
-interface UserComponentProps {
-    title: string;
-}
-
-const UserComponent = (props: UserComponentProps) => {
-
-    const { title } = props
-
-    const [users, setUsers] = useState<User[]>([]);
-
-    useEffect(() => {
-        const getAllUsers = async () => {
-            setUsers((await fetchAllUsers()).data.data)
-        }
-        getAllUsers();
-    }, [users])
+const UserComponent = () => {
 
     return (
         <div className="main-dashboard">
-            <h1 className='main-dashboard-title'>{title}</h1>
+            <h1 className='main-dashboard-title'>Users</h1>
             <Card
                 title={UserCardData.title}
                 color={UserCardData.color}
@@ -54,7 +36,7 @@ const UserComponent = (props: UserComponentProps) => {
                 png={UserCardData.png}
                 series={UserCardData.series}
             />
-            <UserTable userList={users} title="Recent Users" />
+            <UserTable />
         </div>
     );
 }

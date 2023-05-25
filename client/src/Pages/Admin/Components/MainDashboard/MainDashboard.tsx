@@ -20,7 +20,7 @@ const MainDashboard = () => {
     <div className="main-dashboard">
       <h1 className="main-dashboard-title">Dashboard</h1>
       <Cards />
-      <EventTable eventList={events} title={"Recent Events"} />
+      <EventTable />
     </div>
   );
 };

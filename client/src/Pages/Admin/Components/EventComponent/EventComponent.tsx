@@ -25,25 +25,11 @@ const EventCardData = {
     ]
 }
 
-interface EventComponentProps {
-    title: string;
-}
-
-const EventComponent = (props: EventComponentProps) => {
-
-    const { title } = props
-
-    const [events, setEvents] = useState<HostEaseEvent[]>([])
-
-    useEffect(() => {
-        fetchAllEvents().then((response) => {
-            setEvents(response.data.data)
-        })
-    }, [events]);
+const EventComponent = () => {
 
     return (
         <div className="main-dashboard">
-            <h1 className='main-dashboard-title'>{title}</h1>
+            <h1 className='main-dashboard-title'>Events</h1>
             <Card
                 title={EventCardData.title}
                 color={EventCardData.color}
@@ -52,7 +38,7 @@ const EventComponent = (props: EventComponentProps) => {
                 png={EventCardData.png}
                 series={EventCardData.series}
             />
-            <EventTable eventList={events} title="Recent Events" />
+            <EventTable />
         </div>
     );
 };

@@ -48,8 +48,8 @@ const AppRouterProvider = () => {
             {userContext?.user?.role === "ADMIN" && (
               <Route element={<AdminPageLayout />}>
                 <Route path={HostEaseRoutes.Admin} element={<MainDashboard />} />
-                <Route path={HostEaseRoutes.AdminEvents} element={<EventComponent title="Events" />} />
-                <Route path={HostEaseRoutes.AdminUsers} element={<UserComponent title="Users" />} />
+                <Route path={HostEaseRoutes.AdminEvents} element={<EventComponent />} />
+                <Route path={HostEaseRoutes.AdminUsers} element={<UserComponent />} />
                 {/* <Route path={HostEaseRoutes.AdminTags} element={<AdminPageLayout />} /> */}
                 {/* <Route path={HostEaseRoutes.AdminCategories} element={<AdminPageLayout />} /> */}
                 {/* <Route path={HostEaseRoutes.AdminComments} element={<AdminPageLayout />} /> */}

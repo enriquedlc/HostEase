@@ -139,7 +139,7 @@ const ExpandedCard: React.FC<ExpandedCardProps> = ({ params, setExpanded }) => {
                 chart.destroy();
             };
         }
-    }, [params.series]);
+    }, []);
 
     return (
         <motion.div

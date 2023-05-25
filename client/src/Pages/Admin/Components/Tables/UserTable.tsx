@@ -2,6 +2,7 @@ import { Button } from '@mui/material';
 import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { User } from '../../../../Types/Types';
 
 import { ThemeProvider, createTheme } from '@mui/material';
@@ -11,7 +12,9 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import UserModal from '../../../../Components/Modals/UserModal/UserModal';
+import ReactLoading from 'react-loading';
 
+import { fetchAllUsers } from "../../../../services/main.services";
 import './Table.css';
 
 const theme = createTheme({});
@@ -31,18 +34,48 @@ const deleteUserById = (id: number) => {
     return axios.delete(`http://localhost:8080/hostease/users/${id}`)
 }
 
-interface UserTableProps {
-    userList: User[]
-    title: string
-}
-
-const UserTable = (props: UserTableProps) => {
-
-    const { userList, title } = props;
-
+const UserTable = () => {
     const navigate = useNavigate()
+    const [users, setUsers] = useState<User[]>([])
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [searchTerm, setSearchTerm] = useState<string>("")
 
-    const columns: GridColDef[] = [
+    const handleDeleteClick = useCallback((id: number) => {
+        deleteUserById(id).then(() => {
+            deletedUserToast(id)
+            setTimeout(() => {
+                navigate('/admin')
+            }, 3500)
+        })
+    }, [navigate]);
+
+    const CustomActions = useCallback((id: number) => {
+        return (
+            <div className='button-container'>
+                <ThemeProvider theme={theme}>
+                    <UserModal userId={id} />
+                    <Button
+                        color="error" variant="contained"
+                        onClick={() => handleDeleteClick(id)}>
+                        <ImBin />
+                    </Button>
+                </ThemeProvider>
+            </div>
+        );
+    }, [handleDeleteClick]);
+
+    useEffect(() => {
+        const getAllUsers = async () => {
+            setIsLoading(true);
+            await new Promise(resolve => setTimeout(resolve, 2200));
+            setUsers((await fetchAllUsers()).data.data);
+            setIsLoading(false);
+        }
+
+        getAllUsers();
+    }, [])
+
+    const columns: GridColDef[] = useMemo(() => [
         {
             field: "nickname",
             headerName: "Nickname",
@@ -78,36 +111,11 @@ const UserTable = (props: UserTableProps) => {
             align: "left",
             renderCell: (params) => (CustomActions(params.row.id))
         },
-    ]
-
-    const handleDeleteClick = (id: number) => {
-        deleteUserById(id).then(() => {
-            deletedUserToast(id)
-            setTimeout(() => {
-                navigate('/admin')
-            }, 3500)
-        })
-    }
-
-    const CustomActions = (id: number) => {
-        return (
-            <div className='button-container'>
-                <ThemeProvider theme={theme}>
-                    <UserModal userId={id} />
-                    <Button
-                        color="error" variant="contained"
-                        onClick={() => handleDeleteClick(id)}>
-                        <ImBin />
-                    </Button>
-                </ThemeProvider>
-            </div>
-        );
-    };
+    ], [CustomActions]);
 
     return (
-
         <div className="table">
-            <h3 className="table-title">{title}</h3>
+            <h3 className="table-title">Users</h3>
             <Box
                 sx={{
                     height: 480,
@@ -117,25 +125,29 @@ const UserTable = (props: UserTableProps) => {
                     boxShadow: "0px 15px 20px 0px #80808029",
                 }}
             >
-                <DataGrid
-                    rows={userList}
-                    columns={columns}
-                    initialState={{
-                        pagination: {
-                            paginationModel: {
-                                pageSize: 5,
+                {isLoading ? (
+                    <div className="loading-container">
+                        <ReactLoading type="bars" color="" height={50} width={50} />
+                    </div>
+                ) : (
+                    <DataGrid
+                        rows={users ? users : []}
+                        columns={columns}
+                        initialState={{
+                            pagination: {
+                                paginationModel: {
+                                    pageSize: 5,
+                                },
                             },
-                        },
-                    }}
-                    pageSizeOptions={[5]}
-                    disableRowSelectionOnClick
-                />
+                        }}
+                        pageSizeOptions={[5]}
+                        disableRowSelectionOnClick
+                    />
+                )}
             </Box>
             <ToastContainer />
         </div>
-
     );
 };
 
-
-export default UserTable
+export default UserTable;

@@ -1,69 +1,70 @@
 import Box from "@mui/material/Box";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { useEffect, useMemo, useState } from "react";
+import ReactLoading from 'react-loading';
 
 import "./Table.css";
 
 import { HostEaseEvent } from "../../../../Types/Types";
+import { fetchAllEvents } from "../../../../services/main.services";
 
-const columns: GridColDef[] = [
-  {
-    field: "title",
-    headerName: "Title",
-    width: 250,
-  },
-  {
-    field: "startDate",
-    headerName: "Start date",
-    width: 180,
-    editable: false,
-    align: "left",
-  },
-  {
-    field: "maxCapacity",
-    headerName: "Capacity",
-    type: "number",
-    width: 180,
-    editable: false,
-    align: "left",
-  },
-  {
-    field: "users",
-    headerName: "Joined users",
-    type: "number",
-    width: 180,
-    editable: false,
-    align: "left",
-  },
-  {
-    field: "actions",
-    headerName: "Actions",
-    width: 180,
-    editable: false,
-    align: "left",
-  },
-];
+const EventTable = () => {
+  const [events, setEvents] = useState<HostEaseEvent[]>([])
+  const [isLoading, setIsLoading] = useState(true);
 
-const createData = (
-  id: number,
-  title: string | undefined,
-  startDate: string | undefined,
-  maxCapacity: number | undefined,
-  users: number
-) => {
-  return { id, title, startDate, maxCapacity, users };
-};
+  useEffect(() => {
+    const getAllEvents = async () => {
+      setIsLoading(true);
+      await new Promise(resolve => setTimeout(resolve, 2200));
+      const response = await fetchAllEvents();
+      setEvents(response.data.data);
+      setIsLoading(false);
+    }
+  
+    getAllEvents();
+  }, []);
 
-interface EventTableProps {
-  eventList: HostEaseEvent[] | undefined;
-  title: string;
-}
-
-const EventTable = (props: EventTableProps) => {
-  const { eventList, title } = props;
+  const columns: GridColDef[] = useMemo(() => [
+    {
+      field: "title",
+      headerName: "Title",
+      width: 250,
+    },
+    {
+      field: "startDate",
+      headerName: "Start date",
+      width: 180,
+      editable: false,
+      align: "left",
+    },
+    {
+      field: "maxCapacity",
+      headerName: "Capacity",
+      type: "number",
+      width: 180,
+      editable: false,
+      align: "left",
+    },
+    {
+      field: "users",
+      headerName: "Joined users",
+      type: "number",
+      width: 180,
+      editable: false,
+      align: "left",
+    },
+    {
+      field: "actions",
+      headerName: "Actions",
+      width: 180,
+      editable: false,
+      align: "left",
+    },
+  ], []);
 
   return (
     <div className="table">
-      <h3 className="table-title">{title}</h3>
+      <h3 className="table-title">Events</h3>
       <Box
         sx={{
           height: 520,
@@ -73,22 +74,29 @@ const EventTable = (props: EventTableProps) => {
           boxShadow: "0px 15px 20px 0px #80808029",
         }}
       >
-        <DataGrid
-          rows={eventList ? eventList : []}
-          columns={columns}
-          initialState={{
-            pagination: {
-              paginationModel: {
-                pageSize: 5,
+        {isLoading ? (
+          <div className="loading-container">
+            <ReactLoading type="bars" color="#bda2e1" height={50} width={50} />
+          </div>
+        ) : (
+          <DataGrid
+            rows={events ? events : []}
+            columns={columns}
+            initialState={{
+              pagination: {
+                paginationModel: {
+                  pageSize: 5,
+                },
               },
-            },
-          }}
-          pageSizeOptions={[5]}
-          disableRowSelectionOnClick
-        />
+            }}
+            pageSizeOptions={[5]}
+            disableRowSelectionOnClick
+          />
+        )}
       </Box>
     </div>
   );
+  
 };
 
 export default EventTable;
