@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { MdOutlineEditCalendar } from 'react-icons/md';
 import { HostEaseEvent } from '../../../../Types/Types';
-import '../../Components/MainDashboard/MainDashboard.css';
+// import '../../Components/MainDashboard/MainDashboard.css';
 import EventTable from '../../Components/Table/EventTable';
 import './EventComponent.css';
 

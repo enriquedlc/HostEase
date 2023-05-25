@@ -65,7 +65,7 @@ const EventTable = (props: EventTableProps) => {
 
   console.log('PENE EVENTABLE', eventList);
 
-  const rows = eventList?.map((event : HostEaseEvent) => {
+  const rows = eventList?.map((event: HostEaseEvent) => {
     return createData(
       event.id,
       event.title,

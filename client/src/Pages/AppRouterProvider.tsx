@@ -2,12 +2,12 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { useContext } from "react";
 import UserContext from "../Context/UserContext";
+import AdminPageLayout from "../Layout/AdminPageLayout/AdminPageLayout";
 import AuthPageLayout from "../Layout/AuthPageLayout";
 import MainSiteLayout from "../Layout/MainSiteLayout";
 import { HostEaseRoutes } from "../Types/AppRoutes/HostEaseRoutes";
+import EventComponent from "./Admin/Components/EventComponent/EventComponent";
 import MainDashboard from "./Admin/Components/MainDashboard/MainDashboard";
-import RightSide from "./Admin/Components/RightSide/RightSide";
-import Sidebar from "./Admin/Components/Sidebar/Sidebar";
 import LogInto from "./Error/LogInto";
 import NotFound from "./Error/NotFound";
 import Explore from "./Explore/Explore";
@@ -17,8 +17,6 @@ import Login from "./Login";
 import MainPage from "./MainPage";
 import MyEvents from "./MyEvents";
 import SignUp from "./SignUp";
-import AdminPageLayout from "../Layout/AdminPageLayout/AdminPageLayout";
-import EventComponent from "./Admin/Components/EventComponent/EventComponent";
 
 /**
  *

@@ -52,11 +52,24 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
             {expandedCard ? (
                 <ExpandedCard params={props} setExpanded={handleCollapse} />
             ) : (
-                <CompactedCard params={props} setExpanded={handleExpand} />
+                <CompactedCardContainer params={props} setExpanded={handleExpand} />
             )}
         </AnimatePresence>
     );
 };
+
+const CompactedCardContainer: React.FC<CompactedCardProps> = ({ params, setExpanded }) => {
+    const isSingleCard = params.series.length === 1; // Verificar si hay solo una tarjeta
+
+    return (
+        <div className={`compacted-card-container ${isSingleCard ? 'single-card' : ''}`}>
+            {params.series.map((param, index) => (
+                <CompactedCard key={index} params={params} setExpanded={setExpanded} />
+            ))}
+        </div>
+    );
+};
+
 
 const CompactedCard: React.FC<CompactedCardProps> = ({ params, setExpanded }) => {
     const Icon = params.png;
