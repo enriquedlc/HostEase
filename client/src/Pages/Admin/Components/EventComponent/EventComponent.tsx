@@ -1,44 +1,51 @@
+import { useEffect, useState } from 'react';
 import { MdOutlineEditCalendar } from 'react-icons/md';
 import { HostEaseEvent } from '../../../../Types/Types';
 import '../../Components/MainDashboard/MainDashboard.css';
 import EventTable from '../../Components/Table/EventTable';
 import './EventComponent.css';
 
+import { fetchAllEvents } from '../../../../services/main.services';
 import Card from '../../Components/Card/Card';
 
+const EventCardData =
+{
+    title: "Events",
+    color: {
+        backGround: "linear-gradient(180deg, #bb67ff 0%, #c484f3 100%)",
+        boxShadow: "0px 10px 20px 0px #e0c6f5",
+    },
+    barValue: 70,
+    value: "10.000",
+    png: MdOutlineEditCalendar,
+    series: [
+        {
+            name: "Users",
+            data: [31, 40, 28, 51, 42, 109, 100]
+        }
+    ]
+}
+
 interface EventComponentProps {
-    eventList: HostEaseEvent[] | undefined;
     title: string;
 }
 
-const EventCardData = 
-    {
-        title: "Events",
-        color: {
-            backGround: "linear-gradient(180deg, #bb67ff 0%, #c484f3 100%)",
-            boxShadow: "0px 10px 20px 0px #e0c6f5",
-        },
-        barValue: 70,
-        value: "10.000",
-        png: MdOutlineEditCalendar,
-        series: [
-            {
-                name: "Users",
-                data: [31, 40, 28, 51, 42, 109, 100]
-            }
-        ]
-    }
-
-
 const EventComponent = (props: EventComponentProps) => {
-    const { title, eventList } = props;
 
-    console.log(eventList, 'events');
+    const { title } = props
+
+    const [events, setEvents] = useState<HostEaseEvent[]>([])
+
+    useEffect(() => {
+        fetchAllEvents().then((response) => {
+            setEvents(response.data.data)
+        })
+    }, []);
 
     return (
         <div className="main-dashboard">
             <h1 className='main-dashboard-title'>{title}</h1>
-            <Card 
+            <Card
                 title={EventCardData.title}
                 color={EventCardData.color}
                 barValue={EventCardData.barValue}
@@ -46,7 +53,7 @@ const EventComponent = (props: EventComponentProps) => {
                 png={EventCardData.png}
                 series={EventCardData.series}
             />
-            <EventTable eventList={eventList} title="Recent Events" />
+            <EventTable eventList={events} title="Recent Events" />
         </div>
     );
 };

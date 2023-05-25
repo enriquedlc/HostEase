@@ -18,6 +18,7 @@ import MainPage from "./MainPage";
 import MyEvents from "./MyEvents";
 import SignUp from "./SignUp";
 import AdminPageLayout from "../Layout/AdminPageLayout/AdminPageLayout";
+import EventComponent from "./Admin/Components/EventComponent/EventComponent";
 
 /**
  *
@@ -51,6 +52,7 @@ const AppRouterProvider = () => {
                   path={HostEaseRoutes.Admin}
                   element={<MainDashboard />}
                 />
+                <Route path={HostEaseRoutes.AdminEvents} element={<EventComponent title="Events" />} />
                 {/* <Route path={HostEaseRoutes.AdminUsers} element={<AdminPageLayout />} /> */}
                 {/* <Route path={HostEaseRoutes.AdminTags} element={<AdminPageLayout />} /> */}
                 {/* <Route path={HostEaseRoutes.AdminCategories} element={<AdminPageLayout />} /> */}
