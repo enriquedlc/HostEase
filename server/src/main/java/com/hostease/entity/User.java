@@ -62,6 +62,7 @@ public class User {
 
     @JsonSerialize(using = CustomUserListSerializer.class)
     @ManyToMany(mappedBy = "followers", fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<User> following = new HashSet<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
