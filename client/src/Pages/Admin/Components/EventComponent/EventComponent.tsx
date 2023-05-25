@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { MdOutlineEditCalendar } from 'react-icons/md';
 import { HostEaseEvent } from '../../../../Types/Types';
 // import '../../Components/MainDashboard/MainDashboard.css';
-import EventTable from '../../Components/Table/EventTable';
+import EventTable from '../Tables/EventTable';
 import './EventComponent.css';
 
 import { fetchAllEvents } from '../../../../services/main.services';
@@ -20,7 +20,7 @@ const EventCardData =
     png: MdOutlineEditCalendar,
     series: [
         {
-            name: "Users",
+            name: "Events",
             data: [31, 40, 28, 51, 42, 109, 100]
         }
     ]

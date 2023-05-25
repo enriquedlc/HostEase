@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 
-import "./EventTable.css";
+import "./Table.css";
 
 import { HostEaseEvent } from "../../../../Types/Types";
 
@@ -58,22 +58,8 @@ interface EventTableProps {
   title: string;
 }
 
-// en vez del import de events, se puede hacer un fetch a la base de datos
-
 const EventTable = (props: EventTableProps) => {
   const { eventList, title } = props;
-
-  console.log('PENE EVENTABLE', eventList);
-
-  const rows = eventList?.map((event: HostEaseEvent) => {
-    return createData(
-      event.id,
-      event.title,
-      event.startTime,
-      event.maxCapacity,
-      event.users
-    );
-  });
 
   return (
     <div className="table">

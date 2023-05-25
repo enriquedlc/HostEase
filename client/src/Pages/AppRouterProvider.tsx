@@ -8,6 +8,7 @@ import MainSiteLayout from "../Layout/MainSiteLayout";
 import { HostEaseRoutes } from "../Types/AppRoutes/HostEaseRoutes";
 import EventComponent from "./Admin/Components/EventComponent/EventComponent";
 import MainDashboard from "./Admin/Components/MainDashboard/MainDashboard";
+import UserComponent from "./Admin/Components/UserComponent/UserComponent";
 import LogInto from "./Error/LogInto";
 import NotFound from "./Error/NotFound";
 import Explore from "./Explore/Explore";
@@ -46,12 +47,9 @@ const AppRouterProvider = () => {
           <>
             {userContext?.user?.role === "ADMIN" && (
               <Route element={<AdminPageLayout />}>
-                <Route
-                  path={HostEaseRoutes.Admin}
-                  element={<MainDashboard />}
-                />
+                <Route path={HostEaseRoutes.Admin} element={<MainDashboard />} />
                 <Route path={HostEaseRoutes.AdminEvents} element={<EventComponent title="Events" />} />
-                {/* <Route path={HostEaseRoutes.AdminUsers} element={<AdminPageLayout />} /> */}
+                <Route path={HostEaseRoutes.AdminUsers} element={<UserComponent title="Users" />} />
                 {/* <Route path={HostEaseRoutes.AdminTags} element={<AdminPageLayout />} /> */}
                 {/* <Route path={HostEaseRoutes.AdminCategories} element={<AdminPageLayout />} /> */}
                 {/* <Route path={HostEaseRoutes.AdminComments} element={<AdminPageLayout />} /> */}

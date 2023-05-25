@@ -4,7 +4,7 @@ import "./MainDashboard.css";
 import { useEffect, useState } from "react";
 import { HostEaseEvent } from "../../../../Types/Types";
 import { fetchAllEvents } from "../../../../services/main.services";
-import EventTable from "../Table/EventTable";
+import EventTable from "../Tables/EventTable";
 
 const MainDashboard = () => {
 

@@ -5,7 +5,6 @@ import Updates from '../Updates/Updates';
 
 import './RightSide.css';
 
-
 const RightSide = ({ users }: { users: User[] }) => {
     const location = useLocation();
 
