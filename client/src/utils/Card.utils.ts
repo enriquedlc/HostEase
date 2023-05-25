@@ -1,11 +1,11 @@
 import { User } from "../Types/Types";
 
 // this function is to set the x axis chart
-export function getLastSevenMonths(): string[] {
+export function getLastMonths(): string[] {
     const currentDate = new Date();
     const categories: string[] = [];
 
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < 8; i++) {
         const month = currentDate.getMonth() - i;
         const year = currentDate.getFullYear();
         const date = new Date(year, month, 1).toISOString();
@@ -18,7 +18,7 @@ export function getLastSevenMonths(): string[] {
 // this function is to set the y axis chart
 export function getUsersByMonth(users: User[]): number[] {
     const currentDate = new Date();
-    const months: number[] = Array(12).fill(0); // Inicializar el array con ceros para cada mes
+    const months: number[] = Array(8).fill(0); // Inicializar el array con ceros para cada mes
 
     users.forEach((user) => {
         const joinedDate = new Date(user.joinedAt);

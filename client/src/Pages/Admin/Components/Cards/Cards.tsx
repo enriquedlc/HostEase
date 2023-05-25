@@ -24,7 +24,9 @@ const Cards: React.FC = () => {
         }
         getAllUsers();
         getAllEvents();
-    }, [users, events, comments])
+        console.log('users arr', users)
+        console.log('usersbymonth', getUsersByMonth(users))
+    }, [])
 
     const CardsData = [
         {
