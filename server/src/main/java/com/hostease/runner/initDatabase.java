@@ -71,23 +71,23 @@ public class InitDatabase implements CommandLineRunner {
                 // USERS
                 User user1 = new User("nickNameUser1", "user1email@gmail.com",
                                 "$2a$10$GNLnjxfAGA/0E7idq.2OruVeGWCOIVPVh4y943isTzIHHplKeVOM.", "687779560",
-                                0L, LocalDateTime.now());
+                                0L, LocalDateTime.of(2023, 4, 15, 0, 0, 0));
 
                 User user2 = new User("nickNameUser2", "user2email@gmail.com",
                                 "$2a$10$GNLnjxfAGA/0E7idq.2OruVeGWCOIVPVh4y943isTzIHHplKeVOM.", "687779560",
-                                100L, LocalDateTime.now());
+                                100L, LocalDateTime.of(2023, 4, 15, 0, 0, 0));
 
                 User user3 = new User("nickNameUser3", "user3email@gmail.com",
                                 "$2a$10$GNLnjxfAGA/0E7idq.2OruVeGWCOIVPVh4y943isTzIHHplKeVOM.", "687779560",
-                                100L, LocalDateTime.now());
+                                100L, LocalDateTime.of(2023, 3, 15, 0, 0, 0));
 
                 User user4 = new User("nickNameUser4", "user4email@gmail.com",
                                 "$2a$10$GNLnjxfAGA/0E7idq.2OruVeGWCOIVPVh4y943isTzIHHplKeVOM.", "687779560",
-                                100L, LocalDateTime.now());
+                                100L, LocalDateTime.of(2023, 3, 15, 0, 0, 0));
 
                 User user5 = new User("nickNameUser5", "user5email@gmail.com",
                                 "$2a$10$GNLnjxfAGA/0E7idq.2OruVeGWCOIVPVh4y943isTzIHHplKeVOM.", "687779560",
-                                100L, LocalDateTime.now());
+                                100L, LocalDateTime.of(2023, 1, 15, 0, 0, 0));
 
                 // CREATE ADMIN USER
                 User admin1 = new User("nickNameAdmin1", "admin1@gmail.com",
