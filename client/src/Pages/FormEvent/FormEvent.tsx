@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
+import Select from "react-select";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import { toast } from "react-toastify";
 import CustomDatePicker from "../../Components/CustomDatePicker";
@@ -19,7 +20,6 @@ import {
   fetchAllTags,
 } from "../../services/main.services";
 import "./FormEvent.css";
-import Select from "react-select";
 
 interface CategoryOptions {
   value: number;

@@ -8,11 +8,11 @@ import { User } from '../../../../Types/Types';
 import { ThemeProvider, createTheme } from '@mui/material';
 import { GridColDef } from "@mui/x-data-grid";
 import { ImBin } from "react-icons/im";
+import ReactLoading from 'react-loading';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import UserModal from '../../../../Components/Modals/UserModal/UserModal';
-import ReactLoading from 'react-loading';
 
 import { fetchAllUsers } from "../../../../services/main.services";
 import './Table.css';
@@ -71,7 +71,6 @@ const UserTable = () => {
             setUsers((await fetchAllUsers()).data.data);
             setIsLoading(false);
         }
-
         getAllUsers();
     }, [])
 

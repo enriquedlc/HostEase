@@ -5,8 +5,7 @@ import Card from '../Card/Card';
 import UserTable from '../Tables/UserTable';
 import './UserComponent.css';
 
-const UserCardData =
-{
+const UserCardData = {
     title: "Users",
     color: {
         backGround: "linear-gradient(180deg, #bb67ff 0%, #c484f3 100%)",

@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import { getLastMonths } from '../../../../utils/Card.utils'; 
+import { getLastMonths } from '../../../../utils/Card.utils';
 import ApexCharts, { ApexOptions } from 'apexcharts';
 
 import { FaTimes } from 'react-icons/fa';

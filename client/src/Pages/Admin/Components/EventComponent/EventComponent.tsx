@@ -1,11 +1,8 @@
-import { useEffect, useState } from 'react';
 import { MdOutlineEditCalendar } from 'react-icons/md';
-import { HostEaseEvent } from '../../../../Types/Types';
 // import '../../Components/MainDashboard/MainDashboard.css';
 import EventTable from '../Tables/EventTable';
 import './EventComponent.css';
 
-import { fetchAllEvents } from '../../../../services/main.services';
 import Card from '../../Components/Card/Card';
 
 const EventCardData = {

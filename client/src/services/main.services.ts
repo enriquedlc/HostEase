@@ -1,4 +1,4 @@
-import axios, { AxiosAdapter, AxiosResponse } from "axios";
+import axios from "axios";
 import bcrypt from "bcryptjs";
 import { HostEaseEventForm, LoginRequest, MapLibraries, UserSubmit } from "../Types/Types";
 
@@ -42,7 +42,7 @@ export const removeUserFromEvent = async (eventId: number) => {
   return axios.delete(`${API_URL}/user?eventId=${eventId}`)
 }
 
-export const fetchAllUsers = async () => { 
+export const fetchAllUsers = async () => {
   return axios.get(`${API_URL}/users`)
 };
 

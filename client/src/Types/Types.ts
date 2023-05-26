@@ -37,11 +37,11 @@ export interface MapProperties {
 }
 
 export interface EventOwner {
-	id: number;
-	nickname: string;
-	email: string;
-	phone: string;
-	followers: number;
+  id: number;
+  nickname: string;
+  email: string;
+  phone: string;
+  followers: number;
 }
 
 export interface User {
@@ -88,7 +88,7 @@ export interface Tag {
   color: string;
 }
 
-export type HostEaseHandlerFunction = (date: File | string | LatLngLiteral | Date | Category | Tag[] | number | null, name: string ) => void
+export type HostEaseHandlerFunction = (date: File | string | LatLngLiteral | Date | Category | Tag[] | number | null, name: string) => void
 
 export interface HostEaseEventForm {
   [key: string]: any;
