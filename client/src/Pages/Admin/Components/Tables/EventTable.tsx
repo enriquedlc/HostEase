@@ -132,6 +132,7 @@ const EventTable = () => {
           />
         )}
       </Box>
+      <ToastContainer />
     </div>
   );
 

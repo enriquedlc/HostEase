@@ -18,6 +18,7 @@ import Login from "./Login";
 import MainPage from "./MainPage";
 import MyEvents from "./MyEvents";
 import SignUp from "./SignUp";
+import TagComponent from "./Admin/Components/TagComponent/TagComponent";
 
 /**
  *
@@ -50,7 +51,7 @@ const AppRouterProvider = () => {
                 <Route path={HostEaseRoutes.Admin} element={<MainDashboard />} />
                 <Route path={HostEaseRoutes.AdminEvents} element={<EventComponent />} />
                 <Route path={HostEaseRoutes.AdminUsers} element={<UserComponent />} />
-                {/* <Route path={HostEaseRoutes.AdminTags} element={<AdminPageLayout />} /> */}
+                <Route path={HostEaseRoutes.AdminTags} element={<TagComponent />} />
                 {/* <Route path={HostEaseRoutes.AdminCategories} element={<AdminPageLayout />} /> */}
                 {/* <Route path={HostEaseRoutes.AdminComments} element={<AdminPageLayout />} /> */}
               </Route>
