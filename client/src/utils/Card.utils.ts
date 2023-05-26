@@ -1,4 +1,4 @@
-import { HostEaseEvent, User } from "../Types/Types";
+import { HostEaseEvent, Message, User } from "../Types/Types";
 
 // this function is to set the x axis chart
 export function getLastMonths(): string[] {
@@ -55,4 +55,20 @@ export function getEventsByMonth(events: HostEaseEvent[]): number[] {
 
     return months;
 }
+
+export function getCommentsByMonth(messages: Message[]): number[] {
+    const months = Array(7).fill(0);
+  
+    messages.forEach((message) => {
+      const publishedDate = new Date(message.publishedAt);
+      const monthIndex = publishedDate.getMonth();
+  
+      if (monthIndex >= 0 && monthIndex < 7) {
+        months[monthIndex] += 1;
+      }
+    });
+  
+    return months;
+  }
+  
 

@@ -58,4 +58,8 @@ export const fetchAllTags = async () => {
   return axios.get(`${API_URL}/tags`);
 };
 
+export const fetchAllMessages = async () => {
+  return axios.get(`${API_URL}/messages`);
+};
+
 export const mapLibraries: MapLibraries[] = ["places"];

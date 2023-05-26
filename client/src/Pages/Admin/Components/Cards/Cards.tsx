@@ -4,8 +4,8 @@ import { MdOutlineGroup } from 'react-icons/md'
 import Card from '../Card/Card'
 
 import { HostEaseEvent, Message, User } from '../../../../Types/Types'
-import { fetchAllEvents, fetchAllUsers } from '../../../../services/main.services'
-import { getEventsByMonth, getUsersByMonth } from '../../../../utils/Card.utils'
+import { fetchAllEvents, fetchAllMessages, fetchAllUsers } from '../../../../services/main.services'
+import { getCommentsByMonth, getEventsByMonth, getUsersByMonth } from '../../../../utils/Card.utils'
 import './Cards.css'
 
 
@@ -22,11 +22,15 @@ const Cards: React.FC = () => {
         const getAllEvents = async () => {
             setEvents((await fetchAllEvents()).data.data)
         }
+        const getAllMessages = async () => {
+            setComments((await fetchAllMessages()).data.data)
+        }
         getAllUsers();
         getAllEvents();
+        getAllMessages();
     }, [])
     
-    console.log(getEventsByMonth(events))
+    // console.log(getallme(events))
     const CardsData = [
         {
             title: "Users",
@@ -68,12 +72,12 @@ const Cards: React.FC = () => {
                 boxShadow: "0px 10px 20px 0px #F9D59B",
             },
             barValue: 70,
-            value: "10.000",
+            value: comments.length.toString(),
             png: MdOutlineGroup,
             series: [
                 {
                     name: "Comments",
-                    data: [31, 40, 28, 51, 42, 109, 100]
+                    data: getCommentsByMonth(comments)
                 }
             ]
         }
