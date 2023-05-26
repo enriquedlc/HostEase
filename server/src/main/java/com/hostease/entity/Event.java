@@ -238,6 +238,10 @@ public class Event {
         this.likes = likes;
     }
 
+    public void setMessages(Set<Message> messages) {
+        this.messages = messages;
+    }
+
     @Override
     public String toString() {
         return "Event [id=" + id + ", owner=" + owner + ", title=" + title + "]";
