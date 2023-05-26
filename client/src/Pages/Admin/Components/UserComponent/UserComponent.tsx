@@ -9,8 +9,6 @@ import { fetchAllUsers } from '../../../../services/main.services';
 import { useEffect, useState } from 'react';
 import { getUsersByMonth } from '../../../../utils/Card.utils';
 
-
-
 const UserComponent = () => {
 
     const [users, setUsers] = useState<User[]>([])

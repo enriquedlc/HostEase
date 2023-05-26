@@ -12,9 +12,11 @@ const Updates: React.FC<UpdatesProps> = (props: UpdatesProps) => {
 
     const { users } = props;
 
+    const reversedUsers = [...users].reverse();
+
     return (
         <div className="updates">
-            {users.map(({ nickname, joinedAt, id }) => {
+            {reversedUsers.map(({ nickname, joinedAt, id }) => {
                 return (
                     <div className="update" key={id}>
                         <img className='photo' src={genericProfileImg} alt="photo" />

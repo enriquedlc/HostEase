@@ -6,8 +6,8 @@ import Card from '../Card/Card'
 import { HostEaseEvent, Message, User } from '../../../../Types/Types'
 import { fetchAllEvents, fetchAllMessages, fetchAllUsers } from '../../../../services/main.services'
 import { getCommentsByMonth, getEventsByMonth, getUsersByMonth } from '../../../../utils/Card.utils'
-import './Cards.css'
 
+import './Cards.css'
 
 const Cards: React.FC = () => {
 
@@ -29,8 +29,7 @@ const Cards: React.FC = () => {
         getAllEvents();
         getAllMessages();
     }, [])
-    
-    // console.log(getallme(events))
+
     const CardsData = [
         {
             title: "Users",

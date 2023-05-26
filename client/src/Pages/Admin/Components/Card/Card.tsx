@@ -70,7 +70,6 @@ const CompactedCardContainer: React.FC<CompactedCardProps> = ({ params, setExpan
     );
 };
 
-
 const CompactedCard: React.FC<CompactedCardProps> = ({ params, setExpanded }) => {
     const Icon = params.png;
 

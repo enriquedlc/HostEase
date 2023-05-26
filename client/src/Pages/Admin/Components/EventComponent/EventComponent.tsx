@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import { MdOutlineEditCalendar } from 'react-icons/md';
 import EventTable from '../Tables/EventTable';
 import './EventComponent.css';
@@ -17,7 +17,7 @@ const EventComponent = () => {
             setEvents((await fetchAllEvents()).data.data)
         }
         getAllEvents();
-    }, [])    
+    }, [])
 
     const EventCardData = {
         title: "Events",
@@ -51,6 +51,5 @@ const EventComponent = () => {
         </div>
     );
 };
-
 
 export default EventComponent
