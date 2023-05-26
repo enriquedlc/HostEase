@@ -84,7 +84,7 @@ const UserModal = (props: UserModalProps) => {
                     <Typography>Nickname: {user.nickname}</Typography>
                     <Typography>Email: {user.email}</Typography>
                     <Typography>Phone: {user.phone}</Typography>
-                    <Typography>Joined at: {user.joinedAt}</Typography>
+                    <Typography>Joined at: {user.joinedAt.substring(0, 10)}</Typography>
                     <Typography>Role: {user.role}</Typography>
                 </ModalContent>
             );

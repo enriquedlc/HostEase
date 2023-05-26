@@ -114,7 +114,7 @@ const EventTable = () => {
       >
         {isLoading ? (
           <div className="loading-container">
-            <ReactLoading type="bars" color="#bda2e1" height={50} width={50} />
+            <ReactLoading type="bars" color="#FC929D" height={50} width={50} />
           </div>
         ) : (
           <DataGrid

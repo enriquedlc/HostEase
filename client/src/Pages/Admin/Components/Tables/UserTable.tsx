@@ -111,7 +111,7 @@ const UserTable = () => {
             >
                 {isLoading ? (
                     <div className="loading-container">
-                        <ReactLoading type="bars" color="" height={50} width={50} />
+                        <ReactLoading type="bars" color="#c484f3" height={50} width={50} />
                     </div>
                 ) : (
                     <DataGrid
