@@ -1,19 +1,42 @@
 import Box from "@mui/material/Box";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { useEffect, useMemo, useState } from "react";
+
+import axios from "axios";
+
+import { useCallback, useEffect, useMemo, useState } from "react";
 import ReactLoading from 'react-loading';
+import { useNavigate } from 'react-router-dom';
 
-// import { SearchBar } from '../../Components/SearchBar/SearchBar.jsx'
-import "./Table.css";
+import { HostEaseEvent } from '../../../../Types/Types';
+import { fetchAllEvents, fetchAllUsers } from "../../../../services/main.services";
+import { deleteToast } from '../../../../utils/AdminToast';
 
-import { HostEaseEvent } from "../../../../Types/Types";
-import { fetchAllEvents } from "../../../../services/main.services";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import CustomUserActions from '../CustomActions/CustomUserActions';
+import './Table.css';
 import SearchBar from "../SearchBar/SearchBar";
+import CustomEventActions from "../CustomActions/CustomEventsActions";
+
+const deleteEventById = (id: number) => {
+  return axios.delete(`http://localhost:8080/hostease/event/${id}`)
+}
 
 const EventTable = () => {
+  const navigate = useNavigate()
   const [events, setEvents] = useState<HostEaseEvent[]>([])
-  const [filteredEvents, setFilteredEvents] = useState<HostEaseEvent[]>([]); // [1
+  const [filteredEvents, setFilteredEvents] = useState<HostEaseEvent[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  const handleDeleteClick = useCallback((id: number) => {
+    deleteEventById(id).then(() => {
+      deleteToast("Event", id)
+      setTimeout(() => {
+        navigate('/admin')
+      }, 2000)
+    })
+  }, [navigate]);
 
   useEffect(() => {
     const getAllEvents = async () => {
@@ -23,7 +46,6 @@ const EventTable = () => {
       setEvents(response.data.data);
       setIsLoading(false);
     }
-
     getAllEvents();
   }, []);
 
@@ -62,6 +84,9 @@ const EventTable = () => {
       width: 180,
       editable: false,
       align: "left",
+      renderCell: (params) => (
+        <CustomEventActions eventId={params.row.id} onDelete={handleDeleteClick} />
+      )
     },
   ], []);
 
@@ -76,11 +101,11 @@ const EventTable = () => {
 
   return (
     <div className="table">
-      <h3 className="table-title">Events</h3>
+      <h3 className="table-title">Recent events</h3>
       <SearchBar onSearch={handleSearch} />
       <Box
         sx={{
-          height: 520,
+          height: 380,
           width: "100%",
           background: "white",
           maxHeight: "70%",

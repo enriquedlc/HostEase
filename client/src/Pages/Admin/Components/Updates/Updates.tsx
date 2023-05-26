@@ -1,34 +1,20 @@
+import genericProfileImg from './user.png';
+
 import { User } from '../../../../Types/Types';
 
 import './Updates.css';
 
-import genericProfileImg from './user.png';
+interface UpdatesProps {
+    users: User[]
+}
 
-export const UpdatesData = [
-    {
-        name: "Andrew Thomas",
-        comment: "has ordered Apple smart watch 2500mh battery.",
-        time: "25 seconds ago",
-    },
-    {
-        name: "Andrew Thomas",
-        comment: "has ordered Apple smart watch 2500mh battery.",
-        time: "25 seconds ago",
-    },
-    {
-        name: "Andrew Thomas",
-        comment: "has ordered Apple smart watch 2500mh battery.",
-        time: "25 seconds ago",
-    }
-]
+const Updates: React.FC<UpdatesProps> = (props: UpdatesProps) => {
 
-
-const Updates = ({ users }: { users: User[] }) => {
-    const lastThreeUsers = users.slice(-3); // Obtener los últimos tres elementos
+    const { users } = props;
 
     return (
         <div className="updates">
-            {lastThreeUsers.map(({ nickname, joinedAt, id }) => {
+            {users.map(({ nickname, joinedAt, id }) => {
                 return (
                     <div className="update" key={id}>
                         <img className='photo' src={genericProfileImg} alt="photo" />
@@ -41,7 +27,8 @@ const Updates = ({ users }: { users: User[] }) => {
                         </div>
                     </div>
                 )
-            })}
+            })
+            }
         </div>
     )
 }

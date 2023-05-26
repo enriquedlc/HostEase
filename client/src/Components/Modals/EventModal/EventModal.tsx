@@ -2,7 +2,7 @@ import { Button, CircularProgress, Modal, Typography } from '@mui/material';
 import { styled } from '@mui/system';
 import axios from 'axios';
 import { useState } from 'react';
-import { User } from '../../../Types/Types';
+import { HostEaseEvent } from '../../../Types/Types';
 
 const ModalContainer = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -12,10 +12,10 @@ const ModalContainer = styled('div')(({ theme }) => ({
     padding: '3rem',
     backgroundColor: '#fff',
     borderRadius: '4px',
-    width: '60vw',
-    maxHeight: '50vh',
+    width: '50vw',
+    maxHeight: '60vh',
     overflow: 'auto',
-    transform: 'translate(35%, 50%)', // Center horizontally and vertically
+    transform: 'translate(50%, 50%)', // Center horizontally and vertically
 }));
 
 
@@ -39,27 +39,27 @@ const LoadingContainer = styled('div')({
     height: '100px',
 });
 
-type UserModalProps = {
-    userId: number;
+type EventModalProps = {
+    eventId: number;
 }
 
-const UserModal = (props: UserModalProps) => {
-    const { userId } = props;
-    const [user, setUser] = useState<User | undefined>();
+const EventModal = (props: EventModalProps) => {
+    const { eventId } = props;
+    const [event, setEvent] = useState<HostEaseEvent | undefined>();
     const [open, setOpen] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
 
-    const fetchUserById = (id: number) => {
+    const fetchEventById = (id: number) => {
         setLoading(true);
 
-        axios.get(`http://localhost:8080/hostease/users/${id}`)
+        axios.get(`http://localhost:8080/hostease/singleEvent/${id}`)
             .then((response) => {
-                setUser(response.data.data);
+                setEvent(response.data.data);
                 setLoading(false);
                 setOpen(true);
             })
             .catch((error) => {
-                console.error('Error fetching user:', error);
+                console.error('Error fetching event:', error);
                 setLoading(false);
             });
     };
@@ -77,15 +77,16 @@ const UserModal = (props: UserModalProps) => {
             );
         }
 
-        if (user) {
+        if (event) {
             return (
                 <ModalContent>
-                    <Typography>ID: {user.id}</Typography>
-                    <Typography>Nickname: {user.nickname}</Typography>
-                    <Typography>Email: {user.email}</Typography>
-                    <Typography>Phone: {user.phone}</Typography>
-                    <Typography>Joined at: {user.joinedAt}</Typography>
-                    <Typography>Role: {user.role}</Typography>
+                    <Typography><b>ID</b>: {event.id}</Typography>
+                    <Typography><b>Title</b>: {event.title}</Typography>
+                    <Typography><b>Category</b>: {event?.category?.categoryName}</Typography>
+                    <Typography><b>Start time</b>: {event.startTime}</Typography>
+                    <Typography><b>Likes</b>: {event.likes}</Typography>
+                    <Typography><b>Comments</b>: {event.messages}</Typography>
+                    <Typography><b>Owner</b>: {event.owner.nickname}</Typography>
                 </ModalContent>
             );
         } else {
@@ -95,14 +96,14 @@ const UserModal = (props: UserModalProps) => {
 
     return (
         <div>
-            <Button variant="outlined" onClick={() => fetchUserById(userId)}>
+            <Button variant="outlined" onClick={() => fetchEventById(eventId)}>
                 Details
             </Button>
             <Modal open={open} onClose={handleClose}>
                 <ModalContainer>
                     <ModalTitle>User Details</ModalTitle>
                     {renderModalContent()}
-                    <Button color="error" variant="contained" onClick={handleClose}>
+                    <Button className='close-button' color="error" variant="contained" onClick={handleClose}>
                         Close
                     </Button>
                 </ModalContainer>
@@ -111,4 +112,4 @@ const UserModal = (props: UserModalProps) => {
     );
 };
 
-export default UserModal;
+export default EventModal;

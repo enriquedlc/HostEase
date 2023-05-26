@@ -1,20 +1,9 @@
 import Cards from "../Cards/Cards";
-import "./MainDashboard.css";
-
-import { useEffect, useState } from "react";
-import { HostEaseEvent } from "../../../../Types/Types";
-import { fetchAllEvents } from "../../../../services/main.services";
 import EventTable from "../Tables/EventTable";
 
+import "./MainDashboard.css";
+
 const MainDashboard = () => {
-
-  const [events, setEvents] = useState<HostEaseEvent[]>([])
-
-  useEffect(() => {
-    fetchAllEvents().then((response) => {
-      setEvents(response.data.data)
-    })
-  }, []);
 
   return (
     <div className="main-dashboard">

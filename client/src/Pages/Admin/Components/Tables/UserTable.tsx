@@ -14,8 +14,9 @@ import { deleteToast } from '../../../../utils/AdminToast';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import CustomActions from '../CustomActions/CustomActions';
+import CustomUserActions from '../CustomActions/CustomUserActions';
 import './Table.css';
+import SearchBar from "../SearchBar/SearchBar";
 
 const deleteUserById = (id: number) => {
     return axios.delete(`http://localhost:8080/hostease/users/${id}`)
@@ -81,17 +82,27 @@ const UserTable = () => {
             width: 180,
             align: "left",
             renderCell: (params) => (
-                <CustomActions id={params.row.id} onDelete={handleDeleteClick} />
+                <CustomUserActions id={params.row.id} onDelete={handleDeleteClick} />
             ),
         },
     ], [handleDeleteClick]);
 
+    const handleSearch = (value: string) => {
+        if (users) {
+            const filteredUsers = users.filter((user) =>
+                user?.nickname?.toLowerCase().includes(value.toLowerCase())
+            )
+            setFilteredUsers(filteredUsers);
+        }
+    }
+
     return (
         <div className="table">
             <h3 className="table-title">Users</h3>
+            <SearchBar onSearch={handleSearch} />
             <Box
                 sx={{
-                    height: 480,
+                    height: 380,
                     width: "100%",
                     background: "white",
                     maxHeight: "70%",
@@ -104,7 +115,7 @@ const UserTable = () => {
                     </div>
                 ) : (
                     <DataGrid
-                        rows={users ? users : []}
+                        rows={filteredUsers.length > 0 ? filteredUsers : users}
                         columns={columns}
                         initialState={{
                             pagination: {

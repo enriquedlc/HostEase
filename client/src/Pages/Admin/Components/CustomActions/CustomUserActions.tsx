@@ -1,16 +1,15 @@
 import { Button, ThemeProvider, createTheme } from "@mui/material";
-import { useCallback } from "react";
-import UserModal from "../../../../Components/Modals/UserModal/UserModal";
 import { ImBin } from "react-icons/im";
+import UserModal from "../../../../Components/Modals/UserModal/UserModal";
 
 const theme = createTheme({});
 
-interface CustomActionsProps {
+interface CustomActionsUserProps {
     id: number
     onDelete: (id: number) => void;
 }
 
-const CustomActions: React.FC<CustomActionsProps> = ({ id, onDelete }) => {
+const CustomUserActions: React.FC<CustomActionsUserProps> = ({ id, onDelete }) => {
     return (
         <div className='button-container'>
             <ThemeProvider theme={theme}>
@@ -27,4 +26,4 @@ const CustomActions: React.FC<CustomActionsProps> = ({ id, onDelete }) => {
     );
 };
 
-export default CustomActions;
+export default CustomUserActions;

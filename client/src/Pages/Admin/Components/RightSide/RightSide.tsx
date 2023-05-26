@@ -7,26 +7,19 @@ import './RightSide.css';
 
 const RightSide = ({ users }: { users: User[] }) => {
     const location = useLocation();
-
     const isOnAdminRoute = location.pathname === '/admin';
+    const displayedUsers = isOnAdminRoute ? users.slice(-3) : users.slice(-7);
 
     return (
         <div className="right-side">
-            {isOnAdminRoute ? (
-                <>
-                    <div>
-                        <h3>Updates</h3>
-                        <Updates users={users} />
-                    </div>
-                    <div className='custom-content-chart'>
-                        <h3>Custom content</h3>
-                        <CustomContent />
-                    </div>
-                </>
-            ) : (
-                <div>
-                    <h3>Updates</h3>
-                    <Updates users={users} />
+            <div>
+                <h3>Updates</h3>
+                <Updates users={displayedUsers} />
+            </div>
+            {isOnAdminRoute && (
+                <div className="custom-content-chart">
+                    <h3>Custom content</h3>
+                    <CustomContent />
                 </div>
             )}
         </div>
@@ -34,4 +27,3 @@ const RightSide = ({ users }: { users: User[] }) => {
 };
 
 export default RightSide;
-
