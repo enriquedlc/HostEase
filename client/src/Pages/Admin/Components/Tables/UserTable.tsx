@@ -1,34 +1,21 @@
-import { Button } from '@mui/material';
 import Box from "@mui/material/Box";
-import { DataGrid } from "@mui/x-data-grid";
-import axios from "axios";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { User } from '../../../../Types/Types';
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 
-import { ThemeProvider, createTheme } from '@mui/material';
-import { GridColDef } from "@mui/x-data-grid";
-import { ImBin } from "react-icons/im";
+import axios from "axios";
+
+import { useCallback, useEffect, useMemo, useState } from "react";
 import ReactLoading from 'react-loading';
 import { useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import UserModal from '../../../../Components/Modals/UserModal/UserModal';
 
+import { User } from '../../../../Types/Types';
 import { fetchAllUsers } from "../../../../services/main.services";
+import { deleteToast } from '../../../../utils/AdminToast';
+
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import CustomActions from '../CustomActions/CustomActions';
 import './Table.css';
-
-const theme = createTheme({});
-
-const deletedUserToast = (id: number) => {
-    toast.success(`User with id ${id} deleted ❌`, {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true
-    });
-}
 
 const deleteUserById = (id: number) => {
     return axios.delete(`http://localhost:8080/hostease/users/${id}`)
@@ -37,32 +24,17 @@ const deleteUserById = (id: number) => {
 const UserTable = () => {
     const navigate = useNavigate()
     const [users, setUsers] = useState<User[]>([])
+    const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [searchTerm, setSearchTerm] = useState<string>("")
 
     const handleDeleteClick = useCallback((id: number) => {
         deleteUserById(id).then(() => {
-            deletedUserToast(id)
+            deleteToast("User", id)
             setTimeout(() => {
                 navigate('/admin')
-            }, 3500)
+            }, 2000)
         })
     }, [navigate]);
-
-    const CustomActions = useCallback((id: number) => {
-        return (
-            <div className='button-container'>
-                <ThemeProvider theme={theme}>
-                    <UserModal userId={id} />
-                    <Button
-                        color="error" variant="contained"
-                        onClick={() => handleDeleteClick(id)}>
-                        <ImBin />
-                    </Button>
-                </ThemeProvider>
-            </div>
-        );
-    }, [handleDeleteClick]);
 
     useEffect(() => {
         const getAllUsers = async () => {
@@ -108,9 +80,11 @@ const UserTable = () => {
             headerName: "Actions",
             width: 180,
             align: "left",
-            renderCell: (params) => (CustomActions(params.row.id))
+            renderCell: (params) => (
+                <CustomActions id={params.row.id} onDelete={handleDeleteClick} />
+            ),
         },
-    ], [CustomActions]);
+    ], [handleDeleteClick]);
 
     return (
         <div className="table">
