@@ -1,4 +1,4 @@
-import { User } from "../Types/Types";
+import { HostEaseEvent, User } from "../Types/Types";
 
 // this function is to set the x axis chart
 export function getLastMonths(): string[] {
@@ -18,7 +18,7 @@ export function getLastMonths(): string[] {
 // this function is to set the y axis chart
 export function getUsersByMonth(users: User[]): number[] {
     const currentDate = new Date();
-    const months: number[] = Array(8).fill(0); // Inicializar el array con ceros para cada mes
+    const months: number[] = Array(8).fill(0);
 
     users.forEach((user) => {
         const joinedDate = new Date(user.joinedAt);
@@ -28,10 +28,31 @@ export function getUsersByMonth(users: User[]): number[] {
             const diffMonths = currentDate.getMonth() - joinedMonth;
 
             if (diffMonths < 12) {
-                months[diffMonths] += 1; // Incrementar el contador para el mes correspondiente
+                months[diffMonths] += 1;
             }
         }
     });
 
     return months;
 }
+
+export function getEventsByMonth(events: HostEaseEvent[]): number[] {
+    const currentDate = new Date();
+    const months: number[] = Array(8).fill(0);
+
+    events.forEach((event) => {
+        const startDate = new Date(event.startDate);
+        const startMonth = startDate.getMonth();
+
+        if (startDate.getFullYear() === currentDate.getFullYear()) {
+            const diffMonths = currentDate.getMonth() - startMonth;
+
+            if (diffMonths >= 0 && diffMonths < 7) {
+                months[diffMonths] += 1;
+            }
+        }
+    });
+
+    return months;
+}
+

@@ -5,7 +5,7 @@ import Card from '../Card/Card'
 
 import { HostEaseEvent, Message, User } from '../../../../Types/Types'
 import { fetchAllEvents, fetchAllUsers } from '../../../../services/main.services'
-import { getUsersByMonth } from '../../../../utils/Card.utils'
+import { getEventsByMonth, getUsersByMonth } from '../../../../utils/Card.utils'
 import './Cards.css'
 
 
@@ -24,10 +24,9 @@ const Cards: React.FC = () => {
         }
         getAllUsers();
         getAllEvents();
-        console.log('users arr', users)
-        console.log('usersbymonth', getUsersByMonth(users))
     }, [])
-
+    
+    console.log(getEventsByMonth(events))
     const CardsData = [
         {
             title: "Users",
@@ -36,7 +35,7 @@ const Cards: React.FC = () => {
                 boxShadow: "0px 10px 20px 0px #e0c6f5",
             },
             barValue: 70,
-            value: "10.000",
+            value: users.length.toString(),
             png: MdOutlineGroup,
             series: [
                 {
@@ -52,12 +51,12 @@ const Cards: React.FC = () => {
                 boxShadow: "0px 10px 20px 0px #FDC0C7",
             },
             barValue: 70,
-            value: "10.000",
+            value: events.length.toString(),
             png: MdOutlineGroup,
             series: [
                 {
                     name: "Events",
-                    data: [31, 40, 28, 51, 42, 109, 100]
+                    data: getEventsByMonth(events)
                 }
             ]
         },

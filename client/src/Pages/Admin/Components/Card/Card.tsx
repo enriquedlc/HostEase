@@ -89,7 +89,7 @@ const CompactedCard: React.FC<CompactedCardProps> = ({ params, setExpanded }) =>
             <div className="detail">
                 <Icon />
                 <span className='detail-number'>{params.value}</span>
-                <span>time</span>
+                <span>Last month</span>
             </div>
         </div>
     );
