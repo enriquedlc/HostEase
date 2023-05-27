@@ -15,7 +15,6 @@ import "./SingUp.css";
 import { toast } from "react-toastify";
 
 const SignUp = () => {
-
   const userContext = useOutletContext<UserContextValue | null>();
 
   const [userSignUp, setUserSignUp] = useState<UserSignUpData>({
@@ -139,16 +138,28 @@ const SignUp = () => {
       userSignUp.password.trim() !== "" &&
       userSignUp.confirmPass.trim() !== ""
     ) {
-      try {
-        const signedUp = await userContext?.signUp(userSignUp);
-        if (signedUp) {
-          navigate('/dashboard')
+      if (userSignUp.password.trim() === userSignUp.confirmPass.trim()) {
+        try {
+          const signedUp = await userContext?.signUp(userSignUp);
+          if (signedUp) {
+            navigate("/dashboard");
+          }
+        } catch (error: any) {
+          console.log("ERROR");
         }
-      } catch (error: any) {
-        console.log("ERROR");
+      } else {
+        if (!toast.isActive("signErrorMessage")) {
+          toast.error(
+            "Ambas contraseñas deben ser iguales.",
+            {
+              toastId: "signErrorMessage",
+              theme: userContext?.theme,
+            }
+          );
+        }
       }
     } else {
-      if (!toast.isActive("loginErrorMessage")) {
+      if (!toast.isActive("signErrorMessage")) {
         toast.error(
           "Necesitas rellenar todos los campos para poder registrarte.",
           {
