@@ -7,7 +7,7 @@ import './UserComponent.css';
 import { User } from '../../../../Types/Types';
 import { fetchAllUsers } from '../../../../services/main.services';
 import { useEffect, useState } from 'react';
-import { getUsersByMonth } from '../../../../utils/Card.utils';
+import { calculateChartBarValue, getUsersByMonth } from '../../../../utils/Card.utils';
 
 const UserComponent = () => {
 
@@ -26,7 +26,7 @@ const UserComponent = () => {
             backGround: "linear-gradient(180deg, #bb67ff 0%, #c484f3 100%)",
             boxShadow: "0px 10px 20px 0px #e0c6f5",
         },
-        barValue: 70,
+        barValue: calculateChartBarValue(getUsersByMonth(users)),
         value: users.length.toString(),
         png: MdGroup,
         series: [

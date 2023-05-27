@@ -58,17 +58,34 @@ export function getEventsByMonth(events: HostEaseEvent[]): number[] {
 
 export function getCommentsByMonth(messages: Message[]): number[] {
     const months = Array(7).fill(0);
-  
+
     messages.forEach((message) => {
-      const publishedDate = new Date(message.publishedAt);
-      const monthIndex = publishedDate.getMonth();
-  
-      if (monthIndex >= 0 && monthIndex < 7) {
-        months[monthIndex] += 1;
-      }
+        const publishedDate = new Date(message.publishedAt);
+        const monthIndex = publishedDate.getMonth();
+
+        if (monthIndex >= 0 && monthIndex < 7) {
+            months[monthIndex] += 1;
+        }
     });
-  
+
     return months;
-  }
-  
+}
+
+export function calculateChartBarValue(array: number[]): number {
+    if (array.length < 2) {
+        throw new Error('El array debe tener al menos dos elementos.');
+    }
+
+    const position0 = array[0];
+    const position1 = array[1];
+
+    if (position1 === 0) {
+        return 0;
+    }
+
+    const percentage = (position0 / position1) * 100;
+
+    return parseFloat(percentage.toFixed(2));
+}
+
 

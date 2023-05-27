@@ -3,7 +3,7 @@ import { MdOutlineEditCalendar } from 'react-icons/md';
 import EventTable from '../Tables/EventTable';
 import './EventComponent.css';
 
-import { getEventsByMonth } from '../../../../utils/Card.utils';
+import { calculateChartBarValue, getEventsByMonth } from '../../../../utils/Card.utils';
 import Card from '../../Components/Card/Card';
 import { fetchAllEvents } from '../../../../services/main.services';
 import { HostEaseEvent } from '../../../../Types/Types';
@@ -25,8 +25,8 @@ const EventComponent = () => {
             backGround: "linear-gradient(180deg, #FF919D 0%, #FC929D 100%)",
             boxShadow: "0px 10px 20px 0px #FDC0C7",
         },
-        barValue: 70,
-        value: "10.000",
+        barValue: calculateChartBarValue(getEventsByMonth(events)),
+        value: events.length.toString(),
         png: MdOutlineEditCalendar,
         series: [
             {
@@ -35,6 +35,8 @@ const EventComponent = () => {
             }
         ]
     }
+
+    console.log(getEventsByMonth(events))
 
     return (
         <div className="main-dashboard">
