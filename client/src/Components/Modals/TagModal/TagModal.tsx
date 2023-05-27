@@ -3,6 +3,7 @@ import { styled } from '@mui/system';
 import axios from 'axios';
 import { useState } from 'react';
 import { Tag } from '../../../Types/Types';
+import { MdInfo } from 'react-icons/md';
 
 const ModalContainer = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -92,12 +93,12 @@ const TagModal = (props: TagModalProps) => {
 
     return (
         <div>
-            <Button variant="outlined" onClick={() => fetchTagById(tagId)}>
-                Details
+            <Button variant="contained" onClick={() => fetchTagById(tagId)}>
+                <MdInfo />
             </Button>
             <Modal open={open} onClose={handleClose}>
                 <ModalContainer>
-                    <ModalTitle>User Details</ModalTitle>
+                    <ModalTitle>Tag Details</ModalTitle>
                     {renderModalContent()}
                     <Button className='close-button' color="error" variant="contained" onClick={handleClose}>
                         Close

@@ -37,7 +37,7 @@ const TagTable = () => {
                 navigate('/admin')
             }, 2000)
         })
-    }, [navigate]);
+    }, [navigate, tags]);
 
     useEffect(() => {
         const getAllTags = async () => {
@@ -94,7 +94,7 @@ const TagTable = () => {
         {
             field: "actions",
             headerName: "Actions",
-            width: 300,
+            width: 250,
             editable: false,
             align: "left",
             renderCell: (params) => (

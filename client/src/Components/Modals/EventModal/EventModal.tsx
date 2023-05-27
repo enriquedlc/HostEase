@@ -3,6 +3,7 @@ import { styled } from '@mui/system';
 import axios from 'axios';
 import { useState } from 'react';
 import { HostEaseEvent } from '../../../Types/Types';
+import { MdInfo } from 'react-icons/md';
 
 const ModalContainer = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -96,12 +97,12 @@ const EventModal = (props: EventModalProps) => {
 
     return (
         <div>
-            <Button variant="outlined" onClick={() => fetchEventById(eventId)}>
-                Details
+            <Button variant="contained" onClick={() => fetchEventById(eventId)}>
+                <MdInfo />
             </Button>
             <Modal open={open} onClose={handleClose}>
                 <ModalContainer>
-                    <ModalTitle>User Details</ModalTitle>
+                    <ModalTitle>Event Details</ModalTitle>
                     {renderModalContent()}
                     <Button className='close-button' color="error" variant="contained" onClick={handleClose}>
                         Close

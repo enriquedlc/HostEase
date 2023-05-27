@@ -36,7 +36,9 @@ const EventTable = () => {
         navigate('/admin')
       }, 2000)
     })
-  }, [navigate]);
+  }, [navigate, events]);
+
+  console.log(events)
 
   useEffect(() => {
     const getAllEvents = async () => {

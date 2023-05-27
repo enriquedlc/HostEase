@@ -3,6 +3,7 @@ import { styled } from '@mui/system';
 import axios from 'axios';
 import { useState } from 'react';
 import { User } from '../../../Types/Types';
+import { MdInfo } from 'react-icons/md';
 
 const ModalContainer = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -95,8 +96,8 @@ const UserModal = (props: UserModalProps) => {
 
     return (
         <div>
-            <Button variant="outlined" onClick={() => fetchUserById(userId)}>
-                Details
+            <Button variant="contained" onClick={() => fetchUserById(userId)}>
+                <MdInfo/>
             </Button>
             <Modal open={open} onClose={handleClose}>
                 <ModalContainer>

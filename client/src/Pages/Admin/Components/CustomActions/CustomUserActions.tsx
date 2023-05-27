@@ -14,13 +14,6 @@ const CustomUserActions: React.FC<CustomActionsUserProps> = ({ id, onDelete }) =
         <div className='button-container'>
             <ThemeProvider theme={theme}>
                 <UserModal userId={id} />
-                <Button
-                    color="error"
-                    variant="contained"
-                    onClick={() => onDelete(id)}
-                >
-                    <ImBin />
-                </Button>
             </ThemeProvider>
         </div>
     );
