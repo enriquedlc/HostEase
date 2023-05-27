@@ -1,23 +1,37 @@
 import { Form, Formik } from "formik";
 import { AnimatePresence, motion } from "framer-motion";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { HostEaseRoutes } from "../../../../../Types/AppRoutes/HostEaseRoutes";
 import { ITag } from "../../../../../Types/Types";
-import { addTag } from "../../../../../services/main.services";
+import { addTag, fetchTagById, updateTagById } from "../../../../../services/main.services";
 
+import { buttonAnimation, fieldAnimation } from "../../../../../Animations/animations";
 import "./TagForm.css";
 
-const tagToCreate: ITag = {
-    tag: "",
-    color: "",
-};
+// const tagToCreate: ITag = {
+//     tag: "",
+//     color: "",
+// };
 
 const TagCreate: React.FC = () => {
 
-    const [tag, setTag] = React.useState<ITag>(tagToCreate);
+    const [tag, setTag] = useState<ITag>({} as ITag);
     const navigate = useNavigate()
+
+    const { id } = useParams();
+
+    useEffect(() => {
+
+        const fetchTag = async () => {
+            const tag = await fetchTagById(parseInt(id));
+            setTag(tag.data.data);
+        };
+        if (id) {
+            fetchTag();
+        }
+    }, [id])
 
     const createTag = async () => {
         if (tag && !tag.tag || !tag.color || tag.tag === "" || tag.color === "") {
@@ -33,28 +47,11 @@ const TagCreate: React.FC = () => {
         }
     };
 
-    console.log(tag)
-
     const handleChangeText = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTag({
             ...tag,
             [e.target.name]: e.target.value,
         })
-    };
-
-
-    const fieldAnimation = {
-        initial: { opacity: 0, y: -20 },
-        animate: { opacity: 1, y: 0 },
-        exit: { opacity: 0, y: -20 },
-    };
-
-    const buttonAnimation = {
-        initial: { opacity: 0, scale: 0.8 },
-        animate: { opacity: 1, scale: 1 },
-        exit: { opacity: 0, scale: 0.8 },
-        whileHover: { scale: 1.1 },
-        whileTap: { scale: 0.9 },
     };
 
     return (
@@ -70,7 +67,7 @@ const TagCreate: React.FC = () => {
                     {({ handleSubmit }) => (
                         <Form className="form" onSubmit={handleSubmit}>
                             <motion.h3 {...fieldAnimation} className="form-title">
-                                Create tag
+                                Create Tag
                             </motion.h3>
                             <motion.div {...fieldAnimation} className="form-field">
                                 <label htmlFor="tag">Tag:</label>

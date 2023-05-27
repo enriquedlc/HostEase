@@ -66,4 +66,12 @@ export const addTag = async (tag: ITag) => {
   return axios.post(`${API_URL}/tags`, tag);
 }
 
+export const updateTagById = async (tag: ITag, tagId: number) => {
+  return axios.put(`${API_URL}/tags/${tagId}`, tag);
+}
+
+export const fetchTagById = async (tagId: number) => {
+  return axios.get(`${API_URL}/tags/${tagId}`);
+}
+
 export const mapLibraries: MapLibraries[] = ["places"];
