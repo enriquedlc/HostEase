@@ -1,6 +1,6 @@
 import axios from "axios";
 import bcrypt from "bcryptjs";
-import { HostEaseEventForm, LoginRequest, MapLibraries, UserSubmit } from "../Types/Types";
+import { HostEaseEventForm, LoginRequest, MapLibraries, Tag, UserSubmit } from "../Types/Types";
 
 const API_URL = "http://localhost:8080/hostease";
 const SALTROUNDS = 10;

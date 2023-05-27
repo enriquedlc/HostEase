@@ -1,11 +1,12 @@
-import '../MainDashboard/MainDashboard.css';
-
 import TagTable from '../Tables/TagTable';
+
+import './TagComponent.css'
+
 
 const TagComponent = () => {
 
     return (
-        <div className="main-dashboard">
+        <div className="main-dashboard-tag">
             <TagTable />
         </div>
     );

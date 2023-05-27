@@ -8,7 +8,7 @@ import './RightSide.css';
 const RightSide = ({ users }: { users: User[] }) => {
     const location = useLocation();
     const isOnAdminRoute = location.pathname === '/admin';
-    const displayedUsers = isOnAdminRoute ? users.slice(-3) : users.slice(-7);
+    const displayedUsers = isOnAdminRoute ? users.slice(-3) : users.slice(-4);
 
     return (
         <div className="right-side">
