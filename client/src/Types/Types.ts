@@ -88,6 +88,11 @@ export interface Tag {
   color: string;
 }
 
+export interface ITag {
+  tag: string;
+  color: string;
+}
+
 export type HostEaseHandlerFunction = (date: File | string | LatLngLiteral | Date | Category | Tag[] | number | null, name: string) => void
 
 export interface HostEaseEventForm {

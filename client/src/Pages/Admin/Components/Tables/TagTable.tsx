@@ -131,7 +131,7 @@ const TagTable = () => {
             </Link>
             <Box
                 sx={{
-                    height: 380,
+                    height: 340,
                     width: "100%",
                     background: "white",
                     maxHeight: "70%",

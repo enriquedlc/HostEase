@@ -20,6 +20,7 @@ import MyEvents from "./MyEvents";
 import SignUp from "./SignUp";
 import TagComponent from "./Admin/Components/TagComponent/TagComponent";
 import TagFrom from "./Admin/Components/Forms/TagForm/TagFrom";
+import TagCreate from "./Admin/Components/Forms/TagForm/TagCreate";
 
 /**
  *

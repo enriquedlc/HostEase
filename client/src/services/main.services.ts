@@ -1,6 +1,6 @@
 import axios from "axios";
 import bcrypt from "bcryptjs";
-import { HostEaseEventForm, LoginRequest, MapLibraries, Tag, UserSubmit } from "../Types/Types";
+import { HostEaseEventForm, ITag, LoginRequest, MapLibraries, Tag, UserSubmit } from "../Types/Types";
 
 const API_URL = "http://localhost:8080/hostease";
 const SALTROUNDS = 10;
@@ -61,5 +61,9 @@ export const fetchAllTags = async () => {
 export const fetchAllMessages = async () => {
   return axios.get(`${API_URL}/messages`);
 };
+
+export const addTag = async (tag: ITag) => {
+  return axios.post(`${API_URL}/tags`, tag);
+}
 
 export const mapLibraries: MapLibraries[] = ["places"];
