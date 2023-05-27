@@ -5,20 +5,22 @@ import axios from "axios";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import ReactLoading from 'react-loading';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-import { HostEaseEvent, Tag } from '../../../../Types/Types';
-import { fetchAllEvents, fetchAllTags, fetchAllUsers } from "../../../../services/main.services";
+import { Tag } from '../../../../Types/Types';
+import { fetchAllTags } from "../../../../services/main.services";
 import { deleteToast } from '../../../../utils/AdminToast';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import CustomUserActions from '../CustomActions/CustomUserActions';
-import './Table.css';
+import CustomTagActions from "../CustomActions/CustomTagActions";
 import SearchBar from "../SearchBar/SearchBar";
-import CustomEventActions from "../CustomActions/CustomEventsActions";
-import CustomTagActions from "../CustomTagActions/CustomTagActions";
+import { HostEaseRoutes } from "../../../../Types/AppRoutes/HostEaseRoutes";
+import { Button } from "@mui/material";
+import { MdNewLabel } from "react-icons/md";
+
+import './Table.css';
 
 const deleteTagById = (id: number) => {
     return axios.delete(`http://localhost:8080/hostease/tags/${id}`)
@@ -98,7 +100,9 @@ const TagTable = () => {
             editable: false,
             align: "left",
             renderCell: (params) => (
-                <CustomTagActions tagId={params.row.id} onDelete={handleDeleteClick} />
+                <CustomTagActions
+                    tagId={params.row.id}
+                    onDelete={handleDeleteClick} />
             )
         },
     ], []);
@@ -116,6 +120,15 @@ const TagTable = () => {
         <div className="table">
             <h3 className="table-title">Tags</h3>
             <SearchBar onSearch={handleSearch} />
+            <Link to={`${HostEaseRoutes.AdminTags}/create`}>
+                <Button
+                    color="secondary"
+                    variant="contained"
+                    size="large"
+                    style={{ marginLeft: "10px", padding: ".5rem", marginBottom: "1rem" }}>
+                    <MdNewLabel />
+                </Button>
+            </Link>
             <Box
                 sx={{
                     height: 380,

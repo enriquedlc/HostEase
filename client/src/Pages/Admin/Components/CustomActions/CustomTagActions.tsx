@@ -1,9 +1,9 @@
 import { Button, ThemeProvider, createTheme } from "@mui/material";
 import { ImBin } from "react-icons/im";
-import EventModal from "../../../../Components/Modals/EventModal/EventModal";
 import { MdEdit } from "react-icons/md";
+import { Link } from "react-router-dom";
 import TagModal from "../../../../Components/Modals/TagModal/TagModal";
-
+import { HostEaseRoutes } from "../../../../Types/AppRoutes/HostEaseRoutes";
 
 const theme = createTheme({});
 
@@ -24,13 +24,16 @@ const CustomTagActions: React.FC<CustomActionsTagProps> = ({ tagId, onDelete }) 
                 >
                     <ImBin />
                 </Button>
-                <Button
-                    color="secondary"
-                    variant="contained"
-                    onClick={() => onDelete(tagId)}
+                <Link
+                    to={`${HostEaseRoutes.AdminTags}/update/${tagId}`}
                 >
-                    <MdEdit />
-                </Button>
+                    <Button
+                        color="secondary"
+                        variant="contained"
+                    >
+                        <MdEdit />
+                    </Button>
+                </Link>
             </ThemeProvider>
         </div>
     );
