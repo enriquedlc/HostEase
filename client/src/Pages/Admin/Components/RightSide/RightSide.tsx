@@ -18,7 +18,7 @@ const RightSide = ({ users }: { users: User[] }) => {
             </div>
             {isOnAdminRoute && (
                 <div className="custom-content-chart">
-                    <h3>Custom content</h3>
+                    <h3>Connected Users</h3>
                     <CustomContent />
                 </div>
             )}

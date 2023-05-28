@@ -1,14 +1,12 @@
-
 import { motion } from 'framer-motion'
+import { useState } from 'react'
 import { MdLogout, MdMenu, MdOutlineCategory, MdOutlineComment, MdOutlineEditCalendar, MdOutlineGroup, MdOutlineHouse, MdTag } from 'react-icons/md'
+import { Link } from 'react-router-dom'
 
+import { HostEaseRoutes } from '../../../../Types/AppRoutes/HostEaseRoutes'
 import HostEaseLogo from '../../../../assets/HostEase.png'
 
-import { useState } from 'react'
-import './Sidebar.css'
-import { Link } from 'react-router-dom'
-import { HostEaseRoutes } from '../../../../Types/AppRoutes/HostEaseRoutes'
-import { User } from '../../../../Types/Types'
+import './AdminNavbar.css'
 
 type SidebarOptions = {
     icon: any
@@ -58,7 +56,7 @@ const sidebarVariants = {
     }
 }
 
-const Sidebar = () => {
+const AdminNavbar: React.FC = () => {
 
     const [selected, setSelected] = useState<number>(0)
     const [showMenu, setShowMenu] = useState<boolean>(false)
@@ -95,7 +93,7 @@ const Sidebar = () => {
                     {SidebarData.map((item, index) => {
                         return (
                             <Link
-                                to={getRoutePath(item.title)} 
+                                to={getRoutePath(item.title)}
                                 className={selected === index ? "menu-item active" : "menu-item"}
                                 onClick={() => setSelected(index)}
                                 key={index}
@@ -115,4 +113,4 @@ const Sidebar = () => {
     )
 }
 
-export default Sidebar
+export default AdminNavbar

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import RightSide from '../../Pages/Admin/Components/RightSide/RightSide';
-import Sidebar from '../../Pages/Admin/Components/Sidebar/Sidebar';
+import AdminNavbar from '../../Pages/Admin/Components/Sidebar/AdminNavbar';
 import { User } from '../../Types/Types';
 import { fetchAllUsers } from '../../services/main.services';
 
@@ -20,7 +20,7 @@ const AdminPageLayout = () => {
   return (
     <section className='dashboard-section'>
       <div className='dashboard-div-glass'>
-        <Sidebar />
+        <AdminNavbar />
         <Outlet />
         <RightSide users={users} />
       </div>
