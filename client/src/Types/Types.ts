@@ -172,10 +172,10 @@ export interface UserData {
 }
 
 export interface MessageData {
-  id: number;
-  message: string;
-  publishedAt: string;
-  user: UserData;
+  id?: number;
+  message?: string;
+  publishedAt?: string;
+  user?: UserData;
 }
 
 export interface Messages {

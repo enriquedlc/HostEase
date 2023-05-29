@@ -12,9 +12,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { HostEaseRoutes } from "../../../../Types/AppRoutes/HostEaseRoutes";
-import SearchBar from "../SearchBar/SearchBar";
 
-import { Messages } from "../../../../Types/Types";
+import { MessageData, Messages } from "../../../../Types/Types";
 import CustomCommentActions from "../CustomActions/CustomCommentActions";
 
 import './Table.css';
@@ -41,39 +40,47 @@ const CommentTable = () => {
             setIsLoading(true);
             await new Promise(resolve => setTimeout(resolve, 2200));
             const response = await fetchAllMessages();
-            setComments(response.data.data);
+            const messages = response.data.data.map((item: MessageData) => ({
+                id: item.id,
+                message: item.message,
+                publishedAt: item.publishedAt,
+                user: item.user,
+            }));
+            setComments(messages);
+            setFilteredComments(messages); // Set the filteredComments to the messages initially
             setIsLoading(false);
         }
         getAllComments();
     }, []);
 
+
     const columns: GridColDef[] = useMemo(() => [
         {
             field: "message",
             headerName: "Message body",
-            width: 250,
+            width: 380,
         },
         {
             field: "user",
             headerName: "Author",
-            width: 180,
+            width: 200,
             editable: false,
             align: "left",
             renderCell: (params) => (
-                params.row.user.userName
+                params.row.user?.userName
             )
         },
         {
             field: 'publishedAt',
             headerName: 'Published at',
-            width: 180,
+            width: 220,
             editable: false,
             align: 'left',
         },
         {
             field: "actions",
             headerName: "Actions",
-            width: 250,
+            width: 180,
             editable: false,
             align: "left",
             renderCell: (params) => (
@@ -84,25 +91,29 @@ const CommentTable = () => {
         },
     ], []);
 
-    // TODO: FIX THIS
-    const handleSearch = (value: string) => {
-        if (comments && comments.length > 0) {
-            const filteredComments = comments.filter((messages) =>
-                messages.data?.some((message) =>
-                    message.message.toLowerCase().includes(value.toLowerCase())
-                )
-            );
-            setFilteredComments(filteredComments);
-        }
-    };
+    // // TODO: FIX THIS
+    // const handleSearch = (value: string) => {
+    //     if (comments && comments.length > 0) {
+    //         const filteredComments = comments.filter((message) =>
+    //             message.data?.filter((messageData) =>
+    //                 messageData?.message?.toLowerCase().includes(value.toLowerCase())
+    //             ).trim()
+    //         );
+    //         setFilteredComments(filteredComments);
+    //     } else {
+    //         setFilteredComments([]);
+    //     }
+    // };
+
+    // console.log('tal', filteredComments)
 
     return (
         <div className="table">
             <h3 className="table-title">Comments</h3>
-            <SearchBar onSearch={handleSearch} />
+            {/* <SearchBar onSearch={handleSearch} /> */}
             <Box
                 sx={{
-                    height: 280,
+                    height: 380,
                     width: "100%",
                     background: "white",
                     maxHeight: "70%",

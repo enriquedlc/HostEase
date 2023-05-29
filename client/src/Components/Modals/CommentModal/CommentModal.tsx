@@ -76,8 +76,8 @@ const CommentModal = (props: CommentModalProps) => {
                 <ModalContent>
                     <Typography><b>Comment</b>: {comment?.data.map(comment => (comment?.message))}</Typography>
                     <Typography><b>Published at</b>: {comment?.data.map(comment => (comment?.publishedAt))}</Typography>
-                    <Typography><b>Author</b>: {comment?.data.map(comment => (comment?.user.userName))}</Typography>
-                    <Typography><b></b> {comment?.data.map(comment => (comment?.user.userEmail))}</Typography>
+                    <Typography><b>Author</b>: {comment?.data.map(comment => (comment?.user?.userName))}</Typography>
+                    <Typography><b></b> {comment?.data.map(comment => (comment?.user?.userEmail))}</Typography>
                 </ModalContent>
             );
         } else {

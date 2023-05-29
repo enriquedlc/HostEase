@@ -6,9 +6,10 @@ import { MdMessage } from 'react-icons/md'
 import { fetchAllMessages } from '../../../../services/main.services'
 import { calculateChartBarValue, getCommentsByMonth } from '../../../../utils/Card.utils'
 
-import './CommentComponent.css'
 import Card from '../Card/Card'
 import CommentTable from '../Tables/CommentTable'
+
+import './CommentComponent.css'
 
 const CommentComponent = () => {
 

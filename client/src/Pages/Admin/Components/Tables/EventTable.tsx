@@ -8,17 +8,17 @@ import ReactLoading from 'react-loading';
 import { useNavigate } from 'react-router-dom';
 
 import { HostEaseEvent } from '../../../../Types/Types';
-import { fetchAllEvents, fetchAllUsers } from "../../../../services/main.services";
+import { fetchAllEvents } from "../../../../services/main.services";
 import { deleteToast } from '../../../../utils/AdminToast';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import CustomUserActions from '../CustomActions/CustomUserActions';
-import './Table.css';
-import SearchBar from "../SearchBar/SearchBar";
-import CustomEventActions from "../CustomActions/CustomEventsActions";
 import { HostEaseRoutes } from "../../../../Types/AppRoutes/HostEaseRoutes";
+import CustomEventActions from "../CustomActions/CustomEventsActions";
+import SearchBar from "../SearchBar/SearchBar";
+
+import './Table.css';
 
 const deleteEventById = (id: number) => {
   return axios.delete(`http://localhost:8080/hostease/event/${id}`)
