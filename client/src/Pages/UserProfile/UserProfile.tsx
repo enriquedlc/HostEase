@@ -6,7 +6,7 @@ import {
   fetchUserEvents,
   followInteraction,
 } from "../../services/main.services";
-import { useOutletContext, useParams } from "react-router-dom";
+import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import {
   FollowerUserData,
   GeneralMinimalistUserData,
@@ -34,6 +34,7 @@ const UserProfile = () => {
   const [isFollowed, setIsFollowed] = useState<boolean>(false);
   const [followers, setFollowers] = useState<GeneralMinimalistUserData[]>([]);
   const [followersCount, setFollowersCount] = useState<number>(0);
+  const navigate = useNavigate();
 
   const handleFollow = () => {
     setIsFollowed((prevFoll) => !prevFoll);
@@ -49,6 +50,11 @@ const UserProfile = () => {
       );
     }
   };
+
+  const handleLogout = () => {
+    userContext?.logOut()
+    navigate('/')
+  }
 
   useEffect(() => {
     const getUserProfile = (userId: number) => {
@@ -96,9 +102,13 @@ const UserProfile = () => {
             </span>
           </h5>
           <span className="followers">{followersCount} Followers</span>
-          {userProfile?.id !== userContext?.user?.id && (
+          {userProfile?.id !== userContext?.user?.id ? (
             <button className="follow-user-button" onClick={handleFollow}>
               {isFollowed && followersCount !== 0 ? "Unfollow" : "Follow"}
+            </button>
+          ) : (
+            <button className="follow-user-button" onClick={handleLogout}>
+              Logout
             </button>
           )}
         </div>
@@ -111,12 +121,12 @@ const UserProfile = () => {
                   alt="Tom looking for events"
                   className="no-events-image"
                 />
+                <h1>Events: </h1>
                 <h2>Esto está muy vacío.</h2>
                 <h3>
                   {userContext?.user?.id === (id && parseInt(id))
-                    ? "Vaya, no tienes ningun evento por aquí... Prueba a unirte a uno nuevo desde la pestaña de \'Explore\'"
+                    ? "Vaya, no tienes ningun evento por aquí... Prueba a unirte a uno nuevo desde la pestaña de 'Explore'"
                     : "Parece que este usuario no ha creado ni se ha unido a ningún evento"}
-                  
                 </h3>
               </div>
             </div>
@@ -161,6 +171,7 @@ const UserProfile = () => {
                   alt="Tom looking for events"
                   className="no-events-image"
                 />
+                <h1>Followers: </h1>
                 <h2>Jope, pobrecillo.</h2>
                 <h3>
                   {userContext?.user?.id === (id && parseInt(id))

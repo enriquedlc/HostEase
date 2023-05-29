@@ -31,7 +31,7 @@ const ProfileEventCard = (props: ProfileCardProps) => {
         className="check-event-button"
         onClick={() => navigate(`/event/${id}`)}
       >
-        Check Out !
+        Check it Out !
       </button>
       <div className="profile-card-body">
         <div>

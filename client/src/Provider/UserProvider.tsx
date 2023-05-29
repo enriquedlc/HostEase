@@ -7,12 +7,14 @@ import { logInUser, signUpUser } from "../services/main.services";
 import { useLoadScript } from "@react-google-maps/api";
 import { AxiosError } from "axios";
 import { mapLibraries } from "../services/main.services";
+import { useNavigate } from "react-router-dom";
 
 const UserProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState<Theme>("light");
 
   const [user, setUser] = useState<User | null>(null);
- 
+
+
   const logIn = async (loginParams: LoginRequest) => {
     try {
       const response = await logInUser(loginParams);
