@@ -125,4 +125,12 @@ export const addCategory = async (category: Category) => {
   return axios.post(`${API_URL}/categories`, category);
 }
 
+export const deleteMessageById = async (messageId: number) => {
+  return axios.delete(`${API_URL}/message/${messageId}`);
+}
+
+export const fetchMessageById = async (messageId: number) => {
+  return axios.get(`${API_URL}/message/${messageId}`);
+}
+
 export const mapLibraries: MapLibraries[] = ["places"];

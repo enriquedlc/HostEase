@@ -162,3 +162,22 @@ export interface UserSubmit {
 export interface UserSignUpData extends UserSubmit {
   confirmPass: string;
 }
+
+// for handling incoming server data (messages, users)
+
+export interface UserData {
+  userId: number;
+  userName: string;
+  userEmail: string;
+}
+
+export interface MessageData {
+  id: number;
+  message: string;
+  publishedAt: string;
+  user: UserData;
+}
+
+export interface Messages {
+  data: MessageData[];
+}

@@ -1,0 +1,11 @@
+.main-dashboard {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-top: 0.8rem;
+}
+
+.main-dashboard-title {
+    padding-bottom: .7rem;
+    padding-top: 2.1rem;
+}

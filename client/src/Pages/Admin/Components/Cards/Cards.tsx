@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { MdOutlineGroup } from 'react-icons/md'
+import { MdComment, MdEvent, MdMessage, MdOutlineGroup } from 'react-icons/md'
 import Card from '../Card/Card'
 
 import { HostEaseEvent, Message, User } from '../../../../Types/Types'
@@ -59,7 +59,7 @@ const Cards: React.FC = () => {
             },
             barValue: calculateChartBarValue(getEventsByMonth(events)),
             value: events.length.toString(),
-            png: MdOutlineGroup,
+            png: MdEvent,
             series: [
                 {
                     name: "Events",
@@ -76,7 +76,7 @@ const Cards: React.FC = () => {
             },
             barValue: calculateChartBarValue(getCommentsByMonth(comments)),
             value: comments.length.toString(),
-            png: MdOutlineGroup,
+            png: MdMessage,
             series: [
                 {
                     name: "Comments",

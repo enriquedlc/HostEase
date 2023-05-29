@@ -2,8 +2,8 @@ import { Button, CircularProgress, Modal, Typography } from '@mui/material';
 import { styled } from '@mui/system';
 import { useState } from 'react';
 import { MdInfo } from 'react-icons/md';
-import { Tag } from '../../../Types/Types';
-import { fetchTagById } from '../../../services/main.services';
+import { Messages } from '../../../Types/Types';
+import { fetchMessageById } from '../../../services/main.services';
 
 const ModalContainer = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -40,20 +40,20 @@ const LoadingContainer = styled('div')({
     height: '100px',
 });
 
-type TagModalProps = {
-    tagId: number;
+type CommentModalProps = {
+    commentId: number;
 }
 
-const TagModal = (props: TagModalProps) => {
-    const { tagId } = props;
-    const [tag, setTag] = useState<Tag | undefined>();
+const CommentModal = (props: CommentModalProps) => {
+    const { commentId } = props;
+    const [comment, setComment] = useState<Messages | undefined>();
     const [open, setOpen] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
 
-    const getTagById = async (id: number) => {
+    const getCommentById = async (id: number) => {
         setLoading(true);
         setOpen(true);
-        setTag((await fetchTagById(id)).data.data);
+        setComment((await fetchMessageById(id)).data.data);
         setLoading(false);
     };
 
@@ -70,12 +70,14 @@ const TagModal = (props: TagModalProps) => {
             );
         }
 
-        if (tag) {
+        //TODO: FIX THIS
+        if (comment?.data) {
             return (
                 <ModalContent>
-                    <Typography><b>ID</b>: {tag.id}</Typography>
-                    <Typography><b>Title</b>: {tag.tag}</Typography>
-                    <Typography><b>Color</b>: {tag?.color}</Typography>
+                    <Typography><b>Comment</b>: {comment?.data.map(comment => (comment?.message))}</Typography>
+                    <Typography><b>Published at</b>: {comment?.data.map(comment => (comment?.publishedAt))}</Typography>
+                    <Typography><b>Author</b>: {comment?.data.map(comment => (comment?.user.userName))}</Typography>
+                    <Typography><b></b> {comment?.data.map(comment => (comment?.user.userEmail))}</Typography>
                 </ModalContent>
             );
         } else {
@@ -85,12 +87,12 @@ const TagModal = (props: TagModalProps) => {
 
     return (
         <div>
-            <Button variant="contained" onClick={() => getTagById(tagId)}>
+            <Button variant="contained" onClick={() => getCommentById(commentId)}>
                 <MdInfo />
             </Button>
             <Modal open={open} onClose={handleClose}>
                 <ModalContainer>
-                    <ModalTitle>Tag Details</ModalTitle>
+                    <ModalTitle>Comment Details</ModalTitle>
                     {renderModalContent()}
                     <Button className='close-button' color="error" variant="contained" onClick={handleClose}>
                         Close
@@ -101,4 +103,4 @@ const TagModal = (props: TagModalProps) => {
     );
 };
 
-export default TagModal;
+export default CommentModal;

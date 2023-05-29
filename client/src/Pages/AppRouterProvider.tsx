@@ -24,6 +24,7 @@ import MainPage from "./MainPage";
 import MyEvents from "./MyEvents";
 import SignUp from "./SignUp";
 import UserProfile from "./UserProfile/UserProfile";
+import CommentComponent from "./Admin/Components/CommentsComponent/CommentComponent";
 
 /**
  *
@@ -74,7 +75,7 @@ const AppRouterProvider = () => {
                 <Route path={HostEaseRoutes.AdminCategories} element={<CategoryComponent />} />
                 <Route path={`${HostEaseRoutes.AdminCategories}/create`} element={<CategoryForm />} />
                 <Route path={`${HostEaseRoutes.AdminCategories}/update/:id`} element={<CategoryForm />} />
-                {/* <Route path={HostEaseRoutes.AdminComments} element={<AdminPageLayout />} /> */}
+                <Route path={HostEaseRoutes.AdminComments} element={<CommentComponent />} />
               </Route>
             )}
             <Route element={<MainSiteLayout context={userContext} />}>
