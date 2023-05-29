@@ -120,25 +120,25 @@ public class InitDatabase implements CommandLineRunner {
                 // MESSAGES
                 // Message message1 = new Message("Message body example 1", new Date(), event1,
                 // user1);
-                Message message2 = new Message("Message body example 2", "19/05/2023 23:51:30");
-                Message message3 = new Message("Message body example 3", "10/05/2023 23:51:30");
-                Message message4 = new Message("Message body example 4", "11/04/2023 23:51:30", event2, user3);
-                Message message5 = new Message("Message body example 5", "23/03/2023 23:51:30", event3, user4);
-                Message message6 = new Message("Message body example 7", "03/03/2023 23:51:30", event4, user4);
+                Message message2 = new Message("Message body example 2", "2023/05/19 23:51:30");
+                Message message3 = new Message("Message body example 3", "2023/05/10 23:51:30");
+                Message message4 = new Message("Message body example 4", "2023/04/11 23:51:30", event2, user3);
+                Message message5 = new Message("Message body example 5", "2023/03/23 23:51:30", event3, user4);
+                Message message6 = new Message("Message body example 7", "2023/03/03 23:51:30", event4, user4);
 
                 // LIKES
-                Like like3 = new Like(event1, user3, true, "19/05/2023 23:51:30");
+                Like like3 = new Like(event1, user3, true, "2023/05/19 23:51:30");
 
-                Like like4 = new Like(event2, user1, true, "08/05/2023 23:51:30");
-                Like like5 = new Like(event2, user2, true, "15/05/2023 23:51:30");
+                Like like4 = new Like(event2, user1, true, "2023/05/08 23:51:30");
+                Like like5 = new Like(event2, user2, true, "2023/05/15 23:51:30");
 
-                Like like6 = new Like(event3, user1, true, "12/05/2023 23:51:30");
-                Like like7 = new Like(event3, user2, true, "13/04/2023 23:51:30");
-                Like like8 = new Like(event3, user3, true, "23/04/2023 23:51:30");
-                Like like9 = new Like(event3, user4, true, "26/03/2023 23:51:30");
+                Like like6 = new Like(event3, user1, true, "2023/05/12 23:51:30");
+                Like like7 = new Like(event3, user2, true, "2023/04/13 23:51:30");
+                Like like8 = new Like(event3, user3, true, "2023/04/23 23:51:30");
+                Like like9 = new Like(event3, user4, true, "2023/03/26 23:51:30");
 
-                Like like10 = new Like(event4, user1, true, "02/03/2023 23:51:30");
-                Like like11 = new Like(event4, user2, true, "30/03/2023 23:51:30");
+                Like like10 = new Like(event4, user1, true, "2023/03/02 23:51:30");
+                Like like11 = new Like(event4, user2, true, "2023/03/30 23:51:30");
 
                 // SAVE USERS
                 userRepository.save(user1);

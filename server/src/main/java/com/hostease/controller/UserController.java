@@ -61,8 +61,6 @@ public class UserController {
     @PostMapping("/user/login")
     public ResponseEntity<?> findById(@RequestBody Map<String, String> LoginRequest) {
 
-        System.out.println("polla");
-
         String email = LoginRequest.get("email");
         String password = LoginRequest.get("password");
 
@@ -95,8 +93,6 @@ public class UserController {
 
     @PostMapping("/user/sign")
     public ResponseEntity<?> save(@RequestBody User user) {
-
-        System.out.println("polla");
 
         if (userService.findByEmail(user.getEmail()) != null) {
 
