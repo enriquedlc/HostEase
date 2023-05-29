@@ -1,9 +1,8 @@
 import TagTable from '../Tables/TagTable';
 
-import './TagComponent.css'
+import './TagComponent.css';
 
-
-const TagComponent = () => {
+const TagComponent: React.FC = () => {
 
     return (
         <div className="main-dashboard-tag">

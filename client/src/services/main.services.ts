@@ -113,4 +113,8 @@ export const fetchTagById = async (tagId: number) => {
   return axios.get(`${API_URL}/tags/${tagId}`);
 }
 
+export const deleteCategoryById = async (categoryId: number) => {
+  return axios.delete(`${API_URL}/categories/${categoryId}`);
+}
+
 export const mapLibraries: MapLibraries[] = ["places"];

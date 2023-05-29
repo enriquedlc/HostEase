@@ -22,6 +22,7 @@ import MainPage from "./MainPage";
 import MyEvents from "./MyEvents";
 import SignUp from "./SignUp";
 import UserProfile from "./UserProfile/UserProfile";
+import CategoryComponent from "./Admin/Components/CategoryComponent/CategoryComponent";
 
 /**
  *
@@ -69,7 +70,7 @@ const AppRouterProvider = () => {
                 <Route path={HostEaseRoutes.AdminTags} element={<TagComponent />} />
                 <Route path={`${HostEaseRoutes.AdminTags}/create`} element={<TagFrom />} />
                 <Route path={`${HostEaseRoutes.AdminTags}/update/:id`} element={<TagFrom />} />
-                {/* <Route path={HostEaseRoutes.AdminCategories} element={<AdminPageLayout />} /> */}
+                <Route path={HostEaseRoutes.AdminCategories} element={<CategoryComponent />} />
                 {/* <Route path={HostEaseRoutes.AdminComments} element={<AdminPageLayout />} /> */}
               </Route>
             )}

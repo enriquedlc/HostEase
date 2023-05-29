@@ -1,9 +1,9 @@
-.main-dashboard-tag {
-margin-top: 16rem;
+.main-dashboard-category {
+    margin-top: 16rem;
 }
 
 @media screen and (max-width: 768px) {
-    .main-dashboard-tag {
+    .main-dashboard-category {
         display: flex;
         flex-direction: column;
         align-items: center;

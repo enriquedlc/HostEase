@@ -18,6 +18,7 @@ import CustomUserActions from '../CustomActions/CustomUserActions';
 import './Table.css';
 import SearchBar from "../SearchBar/SearchBar";
 import CustomEventActions from "../CustomActions/CustomEventsActions";
+import { HostEaseRoutes } from "../../../../Types/AppRoutes/HostEaseRoutes";
 
 const deleteEventById = (id: number) => {
   return axios.delete(`http://localhost:8080/hostease/event/${id}`)
@@ -33,7 +34,7 @@ const EventTable = () => {
     deleteEventById(id).then(() => {
       deleteToast("Event", id)
       setTimeout(() => {
-        navigate('/admin')
+        navigate(HostEaseRoutes.Admin)
       }, 2000)
     })
   }, [navigate, events]);

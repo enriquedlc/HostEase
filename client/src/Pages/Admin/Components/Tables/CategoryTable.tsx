@@ -1,55 +1,49 @@
 import Box from "@mui/material/Box";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 
-import axios from "axios";
-
 import { useCallback, useEffect, useMemo, useState } from "react";
 import ReactLoading from 'react-loading';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { Tag } from '../../../../Types/Types';
-import { fetchAllTags } from "../../../../services/main.services";
+import { Category } from '../../../../Types/Types';
+import { deleteCategoryById, fetchAllCategories } from "../../../../services/main.services";
 import { deleteToast } from '../../../../utils/AdminToast';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import CustomTagActions from "../CustomActions/CustomTagActions";
-import SearchBar from "../SearchBar/SearchBar";
-import { HostEaseRoutes } from "../../../../Types/AppRoutes/HostEaseRoutes";
 import { Button } from "@mui/material";
 import { MdNewLabel } from "react-icons/md";
+import { HostEaseRoutes } from "../../../../Types/AppRoutes/HostEaseRoutes";
+import CustomTagActions from "../CustomActions/CustomTagActions";
+import SearchBar from "../SearchBar/SearchBar";
 
 import './Table.css';
 
-const deleteTagById = (id: number) => {
-    return axios.delete(`http://localhost:8080/hostease/tags/${id}`)
-}
-
-const TagTable = () => {
+const CategoryTable = () => {
     const navigate = useNavigate()
-    const [tags, setTags] = useState<Tag[]>([])
-    const [filteredTags, setFilteredTags] = useState<Tag[]>([]);
+    const [categories, setCategories] = useState<Category[]>([])
+    const [filteredCategories, setFilteredCategories] = useState<Category[]>([]);
     const [isLoading, setIsLoading] = useState(true);
 
     const handleDeleteClick = useCallback((id: number) => {
-        deleteTagById(id).then(() => {
-            deleteToast("Tag", id)
+        deleteCategoryById(id).then(() => {
+            deleteToast("Category", id)
             setTimeout(() => {
                 navigate(HostEaseRoutes.Admin)
             }, 2000)
         })
-    }, [navigate, tags]);
+    }, [navigate, categories]);
 
     useEffect(() => {
-        const getAllTags = async () => {
+        const getAllCategories = async () => {
             setIsLoading(true);
             await new Promise(resolve => setTimeout(resolve, 2200));
-            const response = await fetchAllTags();
-            setTags(response.data.data);
+            const response = await fetchAllCategories();
+            setCategories(response.data.data);
             setIsLoading(false);
         }
-        getAllTags();
+        getAllCategories();
     }, []);
 
     const columns: GridColDef[] = useMemo(() => [
@@ -59,39 +53,11 @@ const TagTable = () => {
             width: 250,
         },
         {
-            field: "tag",
-            headerName: "Tag name",
+            field: "categoryName",
+            headerName: "Category name",
             width: 180,
             editable: false,
             align: "left",
-        },
-        {
-            field: 'color',
-            headerName: 'Color',
-            width: 180,
-            editable: false,
-            align: 'left',
-            renderCell: (params) => {
-                const color = params.value;
-                const colorStyle = {
-                    backgroundColor: color,
-                    width: '30px',
-                    height: '30px',
-                    marginRight: '8px',
-                    display: 'inline-block',
-                    verticalAlign: 'middle',
-                };
-                const textStyle = {
-                    display: 'inline-block',
-                    verticalAlign: 'middle',
-                };
-                return (
-                    <Box>
-                        <Box sx={colorStyle} />
-                        <Box sx={textStyle}>{color}</Box>
-                    </Box>
-                );
-            },
         },
         {
             field: "actions",
@@ -108,19 +74,19 @@ const TagTable = () => {
     ], []);
 
     const handleSearch = (value: string) => {
-        if (tags) {
-            const filteredTags = tags.filter((tag) =>
-                tag?.tag?.toLowerCase().includes(value.toLowerCase())
+        if (categories) {
+            const filteredCategories = categories.filter((category) =>
+                category?.categoryName?.toLowerCase().includes(value.toLowerCase())
             )
-            setFilteredTags(filteredTags);
+            setFilteredCategories(filteredCategories);
         }
     }
 
     return (
         <div className="table">
-            <h3 className="table-title">Tags</h3>
+            <h3 className="table-title">Categories</h3>
             <SearchBar onSearch={handleSearch} />
-            <Link to={`${HostEaseRoutes.AdminTags}/create`}>
+            <Link to={`${HostEaseRoutes.AdminCategories}/create`}>
                 <Button
                     color="secondary"
                     variant="contained"
@@ -131,7 +97,7 @@ const TagTable = () => {
             </Link>
             <Box
                 sx={{
-                    height: 280,
+                    height: 300,
                     width: "100%",
                     background: "white",
                     maxHeight: "70%",
@@ -144,7 +110,7 @@ const TagTable = () => {
                     </div>
                 ) : (
                     <DataGrid
-                        rows={filteredTags.length > 0 ? filteredTags : tags}
+                        rows={filteredCategories.length > 0 ? filteredCategories : categories}
                         columns={columns}
                         initialState={{
                             pagination: {
@@ -164,4 +130,4 @@ const TagTable = () => {
 
 };
 
-export default TagTable;
+export default CategoryTable;

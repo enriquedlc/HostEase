@@ -18,6 +18,7 @@ import CustomUserActions from '../CustomActions/CustomUserActions';
 import SearchBar from "../SearchBar/SearchBar";
 
 import './Table.css';
+import { HostEaseRoutes } from "../../../../Types/AppRoutes/HostEaseRoutes";
 
 const deleteUserById = (id: number) => {
     return axios.delete(`http://localhost:8080/hostease/users/${id}`)
@@ -33,7 +34,7 @@ const UserTable = () => {
         deleteUserById(id).then(() => {
             deleteToast("User", id)
             setTimeout(() => {
-                navigate('/admin')
+                navigate(HostEaseRoutes.Admin)
             }, 2000)
         })
     }, [navigate]);
