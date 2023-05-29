@@ -30,7 +30,7 @@ import com.hostease.serializer.CustomCountMessageSerializer;
 import com.hostease.serializer.CustomCountUserSerializer;
 import com.hostease.serializer.CustomEventOwnerSerializer;
 import com.hostease.serializer.CustomTagSerializer;
- 
+
 @Entity
 @Table(name = "event_table")
 @JsonDeserialize(using = CustomEventDeserializer.class)
@@ -41,7 +41,7 @@ public class Event {
             CascadeType.PERSIST,
             CascadeType.MERGE
     })
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    // @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Tag> tags = new HashSet<>();
 
     @JsonSerialize(using = CustomCountUserSerializer.class)

@@ -38,6 +38,19 @@ public class MessageController {
     @Autowired
     MessageService messageService;
 
+    @GetMapping("/messages")
+    public ResponseEntity<Map<String, Object>> findAll() {
+
+        List<Message> messages = messageService.findAll();
+
+        return new ControllerJsonResponseMap().jsonResponseMapListGenerator(
+                messages,
+                HttpStatusEnum.STATUS_200_OK.getStatus(),
+                "Messages successfully retrieved",
+                "Error retrieving messages");
+
+    }
+
     @GetMapping("/events/{eventId}/messages")
     public ResponseEntity<Map<String, Object>> findByEventId(@PathVariable("eventId") Long id) {
 

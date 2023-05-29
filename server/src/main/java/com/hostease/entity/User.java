@@ -36,7 +36,7 @@ public class User {
             CascadeType.MERGE
     })
     @JoinTable(name = "users_on_event_table", joinColumns = @JoinColumn(name = "fk_event_id"), inverseJoinColumns = @JoinColumn(name = "fk_user_id"))
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    // @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Event> events = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {
