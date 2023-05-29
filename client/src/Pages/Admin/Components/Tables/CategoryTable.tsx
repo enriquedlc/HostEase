@@ -13,7 +13,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { Button } from "@mui/material";
-import { MdNewLabel } from "react-icons/md";
+import { MdAdd, MdHdrPlus, MdNewLabel, MdPlusOne } from "react-icons/md";
 import { HostEaseRoutes } from "../../../../Types/AppRoutes/HostEaseRoutes";
 import SearchBar from "../SearchBar/SearchBar";
 
@@ -92,7 +92,7 @@ const CategoryTable = () => {
                     variant="contained"
                     size="large"
                     style={{ marginLeft: "10px", padding: ".5rem", marginBottom: "1rem" }}>
-                    <MdNewLabel />
+                    <MdAdd />
                 </Button>
             </Link>
             <Box
