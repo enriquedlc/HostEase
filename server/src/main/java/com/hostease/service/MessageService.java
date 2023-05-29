@@ -26,4 +26,12 @@ public class MessageService {
         return messageRepository.findByEventId(id);
     }
 
+    public void deleteById(Long id) {
+        messageRepository.deleteById(id);
+    }
+
+    public Message findById(Long id) {
+        return messageRepository.findById(id).get();
+    }
+
 }
