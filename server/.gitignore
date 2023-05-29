@@ -42,3 +42,6 @@ application.properties
 
 # .class files
 bin
+
+# history
+.history/
