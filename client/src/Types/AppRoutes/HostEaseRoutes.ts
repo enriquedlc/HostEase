@@ -24,7 +24,7 @@ export const HostEaseRoutes: HostEaseRoutes = {
   MyEvents: "/events/:id",
   Profile: "/profile/:id",
   NewEvent: "/new",
-  Admin: "/admin",
+  Admin: "/admin/dashboard",
   AdminEvents: "/admin/events",
   AdminUsers: "/admin/users",
   AdminTags: "/admin/tags",

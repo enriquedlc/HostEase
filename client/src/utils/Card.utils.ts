@@ -41,13 +41,13 @@ export function getEventsByMonth(events: HostEaseEvent[]): number[] {
     const months: number[] = Array(8).fill(0);
 
     events.forEach((event) => {
-        const startDate = new Date(event.startDate);
-        const startMonth = startDate.getMonth();
+        const startDate = event.startDate;
+        const startMonth = startDate?.substring(3, 5);
 
-        if (startDate.getFullYear() === currentDate.getFullYear()) {
-            const diffMonths = currentDate.getMonth() - startMonth;
+        if (startDate?.substring(6, 10) === currentDate.getFullYear().toString()) {
+            const diffMonths =  parseInt(currentDate.getMonth().toString()) -  parseInt(startMonth!);
 
-            if (diffMonths >= 0 && diffMonths < 7) {
+            if (diffMonths < 12) {
                 months[diffMonths] += 1;
             }
         }
@@ -57,14 +57,19 @@ export function getEventsByMonth(events: HostEaseEvent[]): number[] {
 }
 
 export function getCommentsByMonth(messages: Message[]): number[] {
-    const months = Array(7).fill(0);
+    const currentDate = new Date();
+    const months = Array(8).fill(0);
 
     messages.forEach((message) => {
         const publishedDate = new Date(message.publishedAt);
-        const monthIndex = publishedDate.getMonth();
+        const publishedMonth = publishedDate.getMonth();
 
-        if (monthIndex >= 0 && monthIndex < 7) {
-            months[monthIndex] += 1;
+        if (publishedDate.getFullYear() === currentDate.getFullYear()) {
+            const diffMonths = currentDate.getMonth() - publishedMonth;
+
+            if (diffMonths < 12) {
+                months[diffMonths] += 1;
+            }
         }
     });
 
@@ -85,7 +90,7 @@ export function calculateChartBarValue(array: number[]): number {
 
     const percentage = (position0 / position1) * 100;
 
-    return parseFloat(percentage.toFixed(2));
+    return parseFloat(percentage.toFixed(1));
 }
 
 

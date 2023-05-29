@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import RightSide from '../../Pages/Admin/Components/RightSide/RightSide';
-import AdminNavbar from '../../Pages/Admin/Components/Sidebar/AdminNavbar';
+import AdminNavbar from '../../Pages/Admin/Components/AdminNavbar/AdminNavbar';
 import { User } from '../../Types/Types';
 import { fetchAllUsers } from '../../services/main.services';
 

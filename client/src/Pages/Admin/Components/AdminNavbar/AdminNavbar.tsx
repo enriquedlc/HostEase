@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { MdLogout, MdMenu } from 'react-icons/md'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 import HostEaseLogo from '../../../../assets/HostEase.png'
 
@@ -19,8 +19,9 @@ const sidebarVariants = {
 
 const AdminNavbar: React.FC = () => {
 
-    const [selected, setSelected] = useState<number>(0)
     const [showMenu, setShowMenu] = useState<boolean>(false)
+
+    const { pathname } = useLocation()
 
     const getRoutePath = (title: string): string => AdminNavbarOptions.find(item => item.title === title)?.route ?? '';
 
@@ -55,8 +56,7 @@ const AdminNavbar: React.FC = () => {
                         return (
                             <Link
                                 to={getRoutePath(item.title)}
-                                className={selected === index ? "menu-item active" : "menu-item"}
-                                onClick={() => setSelected(index)}
+                                className={pathname.startsWith(item.route!) ? "menu-item active" : "menu-item"}
                                 key={index}
                             >
                                 <item.icon />
