@@ -6,7 +6,9 @@ import AdminPageLayout from "../Layout/AdminPageLayout/AdminPageLayout";
 import AuthPageLayout from "../Layout/AuthPageLayout";
 import MainSiteLayout from "../Layout/MainSiteLayout";
 import { HostEaseRoutes } from "../Types/AppRoutes/HostEaseRoutes";
+import CategoryComponent from "./Admin/Components/CategoryComponent/CategoryComponent";
 import EventComponent from "./Admin/Components/EventComponent/EventComponent";
+import CategoryForm from "./Admin/Components/Forms/CategoryForm/CategoryForm";
 import TagFrom from "./Admin/Components/Forms/TagForm/TagFrom";
 import MainDashboard from "./Admin/Components/MainDashboard/MainDashboard";
 import TagComponent from "./Admin/Components/TagComponent/TagComponent";
@@ -22,7 +24,6 @@ import MainPage from "./MainPage";
 import MyEvents from "./MyEvents";
 import SignUp from "./SignUp";
 import UserProfile from "./UserProfile/UserProfile";
-import CategoryComponent from "./Admin/Components/CategoryComponent/CategoryComponent";
 
 /**
  *
@@ -50,18 +51,18 @@ const AppRouterProvider = () => {
         </Route>
         {userContext?.user && (
           <>
-          <Route element={<MainSiteLayout context={userContext} />}>
-            <Route path={HostEaseRoutes.MainPage} element={<MainPage />} />
-            <Route path={HostEaseRoutes.Explore} element={<Explore />} />
-            <Route path={HostEaseRoutes.MyEvents} element={<MyEvents />} />
-            <Route path={HostEaseRoutes.EventProfile} element={<EventProfile />} />
-            <Route
-              path={`${HostEaseRoutes.NewEvent}`}
-              element={<FormEvent />}
-            />
-            <Route path={`${HostEaseRoutes.EditEvent}`} element={<FormEvent />} />
-            <Route path={`${HostEaseRoutes.Profile}`} element={<UserProfile />}/>
-          </Route>
+            <Route element={<MainSiteLayout context={userContext} />}>
+              <Route path={HostEaseRoutes.MainPage} element={<MainPage />} />
+              <Route path={HostEaseRoutes.Explore} element={<Explore />} />
+              <Route path={HostEaseRoutes.MyEvents} element={<MyEvents />} />
+              <Route path={HostEaseRoutes.EventProfile} element={<EventProfile />} />
+              <Route
+                path={`${HostEaseRoutes.NewEvent}`}
+                element={<FormEvent />}
+              />
+              <Route path={`${HostEaseRoutes.EditEvent}`} element={<FormEvent />} />
+              <Route path={`${HostEaseRoutes.Profile}`} element={<UserProfile />} />
+            </Route>
             {userContext?.user?.role === "ADMIN" && (
               <Route element={<AdminPageLayout />}>
                 <Route path={HostEaseRoutes.Admin} element={<MainDashboard />} />
@@ -71,6 +72,8 @@ const AppRouterProvider = () => {
                 <Route path={`${HostEaseRoutes.AdminTags}/create`} element={<TagFrom />} />
                 <Route path={`${HostEaseRoutes.AdminTags}/update/:id`} element={<TagFrom />} />
                 <Route path={HostEaseRoutes.AdminCategories} element={<CategoryComponent />} />
+                <Route path={`${HostEaseRoutes.AdminCategories}/create`} element={<CategoryForm />} />
+                <Route path={`${HostEaseRoutes.AdminCategories}/update/:id`} element={<CategoryForm />} />
                 {/* <Route path={HostEaseRoutes.AdminComments} element={<AdminPageLayout />} /> */}
               </Route>
             )}

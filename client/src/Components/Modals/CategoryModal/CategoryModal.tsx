@@ -2,8 +2,8 @@ import { Button, CircularProgress, Modal, Typography } from '@mui/material';
 import { styled } from '@mui/system';
 import { useState } from 'react';
 import { MdInfo } from 'react-icons/md';
-import { Tag } from '../../../Types/Types';
-import { fetchTagById } from '../../../services/main.services';
+import { Category } from '../../../Types/Types';
+import { fetchCategoryById } from '../../../services/main.services';
 
 const ModalContainer = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -40,20 +40,20 @@ const LoadingContainer = styled('div')({
     height: '100px',
 });
 
-type TagModalProps = {
-    tagId: number;
+type CategoryModalProps = {
+    categoryId: number;
 }
 
-const TagModal = (props: TagModalProps) => {
-    const { tagId } = props;
-    const [tag, setTag] = useState<Tag | undefined>();
+const CategoryModal = (props: CategoryModalProps) => {
+    const { categoryId } = props;
+    const [category, setCategory] = useState<Category | undefined>();
     const [open, setOpen] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
 
-    const getTagById = async (id: number) => {
+    const getCategoryById = async (id: number) => {
         setLoading(true);
         setOpen(true);
-        setTag((await fetchTagById(id)).data.data);
+        setCategory((await fetchCategoryById(id)).data.data);
         setLoading(false);
     };
 
@@ -70,12 +70,11 @@ const TagModal = (props: TagModalProps) => {
             );
         }
 
-        if (tag) {
+        if (category) {
             return (
                 <ModalContent>
-                    <Typography><b>ID</b>: {tag.id}</Typography>
-                    <Typography><b>Title</b>: {tag.tag}</Typography>
-                    <Typography><b>Color</b>: {tag?.color}</Typography>
+                    <Typography><b>ID</b>: {category.id}</Typography>
+                    <Typography><b>Category name</b>: {category.categoryName}</Typography>
                 </ModalContent>
             );
         } else {
@@ -85,12 +84,12 @@ const TagModal = (props: TagModalProps) => {
 
     return (
         <div>
-            <Button variant="contained" onClick={() => getTagById(tagId)}>
+            <Button variant="contained" onClick={() => getCategoryById(categoryId)}>
                 <MdInfo />
             </Button>
             <Modal open={open} onClose={handleClose}>
                 <ModalContainer>
-                    <ModalTitle>Tag Details</ModalTitle>
+                    <ModalTitle>Category Details</ModalTitle>
                     {renderModalContent()}
                     <Button className='close-button' color="error" variant="contained" onClick={handleClose}>
                         Close
@@ -101,4 +100,4 @@ const TagModal = (props: TagModalProps) => {
     );
 };
 
-export default TagModal;
+export default CategoryModal;

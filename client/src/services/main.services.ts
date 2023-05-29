@@ -1,6 +1,6 @@
 import axios from "axios";
 import bcrypt from "bcryptjs";
-import { HostEaseEventForm, ITag, LoginRequest, MapLibraries, Tag, UserSubmit } from "../Types/Types";
+import { Category, HostEaseEventForm, ITag, LoginRequest, MapLibraries, UserSubmit } from "../Types/Types";
 
 const API_URL = "http://localhost:8080/hostease";
 const SALTROUNDS = 10;
@@ -115,6 +115,14 @@ export const fetchTagById = async (tagId: number) => {
 
 export const deleteCategoryById = async (categoryId: number) => {
   return axios.delete(`${API_URL}/categories/${categoryId}`);
+}
+
+export const fetchCategoryById = async (categoryId: number) => {
+  return axios.get(`${API_URL}/categories/${categoryId}`);
+}
+
+export const addCategory = async (category: Category) => {
+  return axios.post(`${API_URL}/categories`, category);
 }
 
 export const mapLibraries: MapLibraries[] = ["places"];

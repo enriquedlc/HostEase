@@ -8,7 +8,7 @@ import { HostEaseRoutes } from "../../../../../Types/AppRoutes/HostEaseRoutes";
 import { ITag } from "../../../../../Types/Types";
 import { fetchTagById, updateTagById } from "../../../../../services/main.services";
 
-import "./TagForm.css";
+import "../Form.css";
 
 const initialTagState = {
 	tag: "",
@@ -28,7 +28,7 @@ const TagUpdate: React.FC = () => {
 				position: "top-right",
 			});
 		} else {
-			await updateTagById(tag, parseInt(id));
+			await updateTagById(tag, parseInt(id!));
 			toast.success("Tag updated successfully");
 			setTimeout(() => {
 				navigate(HostEaseRoutes.AdminTags);
@@ -38,7 +38,7 @@ const TagUpdate: React.FC = () => {
 
 	useEffect(() => {
 		const fetchTag = async () => {
-			const tag = await fetchTagById(parseInt(id));
+			const tag = await fetchTagById(parseInt(id!));
 			setTag(tag.data.data);
 		};
 		if (id) {

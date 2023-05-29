@@ -14,11 +14,11 @@ import { deleteToast } from '../../../../utils/AdminToast';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import CustomTagActions from "../CustomActions/CustomTagActions";
-import SearchBar from "../SearchBar/SearchBar";
-import { HostEaseRoutes } from "../../../../Types/AppRoutes/HostEaseRoutes";
 import { Button } from "@mui/material";
 import { MdNewLabel } from "react-icons/md";
+import { HostEaseRoutes } from "../../../../Types/AppRoutes/HostEaseRoutes";
+import CustomTagActions from "../CustomActions/CustomTagActions";
+import SearchBar from "../SearchBar/SearchBar";
 
 import './Table.css';
 

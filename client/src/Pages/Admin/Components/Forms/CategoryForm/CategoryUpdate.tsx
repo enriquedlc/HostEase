@@ -1,51 +1,50 @@
 import { Form, Formik } from "formik";
 import { AnimatePresence, motion } from "framer-motion";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { HostEaseRoutes } from "../../../../../Types/AppRoutes/HostEaseRoutes";
-import { ITag } from "../../../../../Types/Types";
-import { addTag, fetchTagById, updateTagById } from "../../../../../services/main.services";
+import { Category } from "../../../../../Types/Types";
+import { addCategory, fetchCategoryById } from "../../../../../services/main.services";
 
 import { buttonAnimation, fieldAnimation } from "../../../../../Animations/animations";
 
 import "../Form.css";
 
-const TagCreate: React.FC = () => {
+const CategoryCreate: React.FC = () => {
 
-    const [tag, setTag] = useState<ITag>({} as ITag);
+    const [category, setCategory] = useState<Category>({} as Category);
     const navigate = useNavigate()
 
     const { id } = useParams();
 
     useEffect(() => {
-
-        const fetchTag = async () => {
-            const tag = await fetchTagById(parseInt(id!));
-            setTag(tag.data.data);
+        const fetchCategory = async () => {
+            const category = await fetchCategoryById(parseInt(id!));
+            setCategory(category.data.data);
         };
         if (id) {
-            fetchTag();
+            fetchCategory();
         }
     }, [id])
 
-    const createTag = async () => {
-        if (tag && !tag.tag || !tag.color || tag.tag === "" || tag.color === "") {
+    const createCategory = async () => {
+        if (category && !category.categoryName || category.categoryName === "") {
             toast.error("Please fill all the fields.", {
                 position: "top-right",
             });
         } else {
-            await addTag(tag);
-            toast.success("Tag created successfully");
+            await addCategory(category);
+            toast.success("Category created successfully");
             setTimeout(() => {
-                navigate(HostEaseRoutes.AdminTags);
+                navigate(HostEaseRoutes.AdminCategories);
             }, 2000);
         }
     };
 
     const handleChangeText = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setTag({
-            ...tag,
+        setCategory({
+            ...category,
             [e.target.name]: e.target.value,
         })
     };
@@ -55,23 +54,18 @@ const TagCreate: React.FC = () => {
             <AnimatePresence>
                 <ToastContainer />
                 <Formik
-                    onSubmit={createTag}
+                    onSubmit={createCategory}
                     initialValues={{
-                        tag: "",
-                        color: "",
+                        categoryName: "",
                     }}>
                     {({ handleSubmit }) => (
                         <Form className="form" onSubmit={handleSubmit}>
                             <motion.h3 {...fieldAnimation} className="form-title">
-                                Create Tag
+                                Update Category
                             </motion.h3>
                             <motion.div {...fieldAnimation} className="form-field">
-                                <label htmlFor="tag">Tag:</label>
-                                <input onChange={handleChangeText} className="field" id="tag" name="tag" type="text" />
-                            </motion.div>
-                            <motion.div {...fieldAnimation} className="form-field">
-                                <label htmlFor="color">Color:</label>
-                                <input onChange={handleChangeText} className="field" id="color" name="color" type="text" />
+                                <label htmlFor="category-name">Category name:</label>
+                                <input value={id ? category.categoryName : ""} onChange={handleChangeText} className="field" id="category-name" name="categoryName" type="text" />
                             </motion.div>
                             <motion.button
                                 {...buttonAnimation}
@@ -88,4 +82,4 @@ const TagCreate: React.FC = () => {
     );
 };
 
-export default TagCreate;
+export default CategoryCreate;

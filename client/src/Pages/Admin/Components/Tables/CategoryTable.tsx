@@ -15,9 +15,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Button } from "@mui/material";
 import { MdNewLabel } from "react-icons/md";
 import { HostEaseRoutes } from "../../../../Types/AppRoutes/HostEaseRoutes";
-import CustomTagActions from "../CustomActions/CustomTagActions";
 import SearchBar from "../SearchBar/SearchBar";
 
+import CustomCategoryActions from "../CustomActions/CustomCategoryActions";
 import './Table.css';
 
 const CategoryTable = () => {
@@ -55,19 +55,19 @@ const CategoryTable = () => {
         {
             field: "categoryName",
             headerName: "Category name",
-            width: 180,
+            width: 300,
             editable: false,
             align: "left",
         },
         {
             field: "actions",
             headerName: "Actions",
-            width: 250,
+            width: 270,
             editable: false,
             align: "left",
             renderCell: (params) => (
-                <CustomTagActions
-                    tagId={params.row.id}
+                <CustomCategoryActions
+                    categoryId={params.row.id}
                     onDelete={handleDeleteClick} />
             )
         },
