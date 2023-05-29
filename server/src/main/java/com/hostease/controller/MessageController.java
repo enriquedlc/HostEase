@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -91,5 +92,32 @@ public class MessageController {
                 "Error creating message");
 
     }
+
+    @DeleteMapping("/message/{messageId}")
+    public ResponseEntity<Map<String, Object>> deleteMessage(@PathVariable("messageId") Long id) {
+
+        messageService.deleteById(id);
+
+        return new ControllerJsonResponseMap().jsonResponseMapObjectGenerator(
+                null,
+                HttpStatusEnum.STATUS_200_OK.getStatus(),
+                "Message successfully deleted",
+                "Error deleting message");
+
+    }
+
+    @GetMapping("/message/{messageId}")
+    public ResponseEntity<Map<String, Object>> findById(@PathVariable("messageId") Long id) {
+
+        Message message = messageService.findById(id);
+
+        return new ControllerJsonResponseMap().jsonResponseMapObjectGenerator(
+                message,
+                HttpStatusEnum.STATUS_200_OK.getStatus(),
+                "Message successfully retrieved",
+                "Error retrieving message");
+
+    }
+
 
 }
