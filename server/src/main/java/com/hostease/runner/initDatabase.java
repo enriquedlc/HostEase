@@ -91,23 +91,23 @@ public class InitDatabase implements CommandLineRunner {
 
                 // CREATE ADMIN USER
                 User admin1 = new User("nickNameAdmin1", "admin1@gmail.com",
-                "$2a$10$GNLnjxfAGA/0E7idq.2OruVeGWCOIVPVh4y943isTzIHHplKeVOM.",
-                "698546054", 0L, LocalDateTime.now(), "ADMIN");
+                                "$2a$10$GNLnjxfAGA/0E7idq.2OruVeGWCOIVPVh4y943isTzIHHplKeVOM.",
+                                "698546054", 0L, LocalDateTime.now(), "ADMIN");
 
                 // EVENTS
-                Event event1 = new Event(user1, "Event 1", "Description 1", "2020-01-01", "2020-01-01", "12:00",
+                Event event1 = new Event(user1, "Event 1", "Description 1", "2023/05/05", "2023/05/21", "12:00",
                                 "13:00",
                                 new Location(50.3785D, 14.9706D),
                                 10L, category1);
-                Event event2 = new Event(user1, "Event 2", "Description 2", "2020-01-01", "2020-01-01", "12:00",
+                Event event2 = new Event(user1, "Event 2", "Description 2", "2023/04/05", "2023/05/06", "12:00",
                                 "13:00",
                                 new Location(50.3785D, 14.9706D),
                                 10L, category2);
-                Event event3 = new Event(user1, "Event 3", "Description 3", "2020-01-01", "2020-01-01", "12:00",
+                Event event3 = new Event(user1, "Event 3", "Description 3", "2023/02/05", "2023/05/30", "12:00",
                                 "13:00",
                                 new Location(50.3785D, 14.9706D),
                                 10L, category3);
-                Event event4 = new Event(user1, "Event 4", "Description 4", "2020-01-01", "2020-01-01", "12:00",
+                Event event4 = new Event(user1, "Event 4", "Description 4", "2023/12/05", "2023/05/19", "12:00",
                                 "13:00",
                                 new Location(50.3785D, 14.9706D),
                                 10L, category4);
@@ -120,9 +120,9 @@ public class InitDatabase implements CommandLineRunner {
                 // MESSAGES
                 // Message message1 = new Message("Message body example 1", new Date(), event1,
                 // user1);
-                Message message2 = new Message("Message body example 2", "2023-04-19 23:51:30");
-                Message message3 = new Message("Message body example 3", "2023-04-19 23:51:30");
-                Message message4 = new Message("Message body example 4", "2023-04-19 23:51:30", event2, user3);
+                Message message2 = new Message("Message body example 2", "2023-05-19 23:51:30");
+                Message message3 = new Message("Message body example 3", "2023-05-19 23:51:30");
+                Message message4 = new Message("Message body example 4", "2023-03-19 23:51:30", event2, user3);
                 Message message5 = new Message("Message body example 5", "2023-04-19 23:51:30", event3, user4);
                 Message message6 = new Message("Message body example 7", "2023-04-19 23:51:30", event4, user4);
 
