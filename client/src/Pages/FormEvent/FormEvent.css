@@ -3,7 +3,7 @@
   display: flex;
   color: var(--primary-color);
   flex-direction: column;
-  height: 80%;
+  height: 100%;
   width: 80%;
   padding: 50px;
   position: relative;

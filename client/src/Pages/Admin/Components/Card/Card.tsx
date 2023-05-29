@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 
+import ApexCharts, { ApexOptions } from 'apexcharts';
 import { AnimatePresence, motion } from 'framer-motion';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-// import { ApexChart } from 'react-apexcharts';
-import ApexCharts, { ApexOptions } from 'apexcharts';
+import { getLastMonths } from '../../../../utils/Card.utils';
 
 import { FaTimes } from 'react-icons/fa';
 
@@ -52,9 +52,21 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
             {expandedCard ? (
                 <ExpandedCard params={props} setExpanded={handleCollapse} />
             ) : (
-                <CompactedCard params={props} setExpanded={handleExpand} />
+                <CompactedCardContainer params={props} setExpanded={handleExpand} />
             )}
         </AnimatePresence>
+    );
+};
+
+const CompactedCardContainer: React.FC<CompactedCardProps> = ({ params, setExpanded }) => {
+    const isSingleCard = params.series.length === 1; // Verificar si hay solo una tarjeta
+
+    return (
+        <div className={`compacted-card-container ${isSingleCard ? 'single-card' : ''}`}>
+            {params.series.map((param, index) => (
+                <CompactedCard key={index} params={params} setExpanded={setExpanded} />
+            ))}
+        </div>
     );
 };
 
@@ -76,7 +88,7 @@ const CompactedCard: React.FC<CompactedCardProps> = ({ params, setExpanded }) =>
             <div className="detail">
                 <Icon />
                 <span className='detail-number'>{params.value}</span>
-                <span>time</span>
+                <span>Last month</span>
             </div>
         </div>
     );
@@ -115,15 +127,7 @@ const ExpandedCard: React.FC<ExpandedCardProps> = ({ params, setExpanded }) => {
                 },
                 xaxis: {
                     type: "datetime",
-                    categories: [
-                        "2018-09-19T00:00:00.000Z",
-                        "2018-09-19T01:30:00.000Z",
-                        "2018-09-19T02:30:00.000Z",
-                        "2018-09-19T03:30:00.000Z",
-                        "2018-09-19T04:30:00.000Z",
-                        "2018-09-19T05:30:00.000Z",
-                        "2018-09-19T06:30:00.000Z",
-                    ],
+                    categories: getLastMonths(),
                 },
             };
 
@@ -134,7 +138,7 @@ const ExpandedCard: React.FC<ExpandedCardProps> = ({ params, setExpanded }) => {
                 chart.destroy();
             };
         }
-    }, [params.series]);
+    }, []);
 
     return (
         <motion.div

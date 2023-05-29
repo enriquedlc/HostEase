@@ -7,7 +7,7 @@ const AnimatedInput = (props: {
   className?: string;
   label: string;
   name: string;
-  value?: string;
+  value?: any;
   type?: string;
 }) => {
   const { onChange, label, className, name, type, value } = props;

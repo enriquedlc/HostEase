@@ -1,43 +1,12 @@
-
 import { motion } from 'framer-motion'
-import { MdLogout, MdMenu, MdOutlineCategory, MdOutlineComment, MdOutlineEditCalendar, MdOutlineGroup, MdOutlineHouse, MdTag } from 'react-icons/md'
+import { useState } from 'react'
+import { MdLogout, MdMenu } from 'react-icons/md'
+import { Link, useLocation } from 'react-router-dom'
 
 import HostEaseLogo from '../../../../assets/HostEase.png'
 
-import { useState } from 'react'
-import './Sidebar.css'
-
-type SidebarOptions = {
-    icon: any
-    title: string
-}
-
-const SidebarData: SidebarOptions[] = [
-    {
-        icon: MdOutlineHouse,
-        title: "Dashboard"
-    },
-    {
-        icon: MdOutlineEditCalendar,
-        title: "Events"
-    },
-    {
-        icon: MdOutlineGroup,
-        title: "Users"
-    },
-    {
-        icon: MdTag,
-        title: "Tags"
-    },
-    {
-        icon: MdOutlineCategory,
-        title: "Categories"
-    },
-    {
-        icon: MdOutlineComment,
-        title: "Comments"
-    }
-]
+import './AdminNavbar.css'
+import { AdminNavbarOptions } from './AdminNavbarOptions'
 
 const sidebarVariants = {
     true: {
@@ -48,10 +17,13 @@ const sidebarVariants = {
     }
 }
 
-const Sidebar = () => {
+const AdminNavbar: React.FC = () => {
 
-    const [selected, setSelected] = useState<number>(0)
     const [showMenu, setShowMenu] = useState<boolean>(false)
+
+    const { pathname } = useLocation()
+
+    const getRoutePath = (title: string): string => AdminNavbarOptions.find(item => item.title === title)?.route ?? '';
 
     const handleShowMenu = () => {
         setShowMenu(!showMenu)
@@ -80,17 +52,19 @@ const Sidebar = () => {
                 </div>
                 {/* menu */}
                 <div className="menu">
-                    {SidebarData.map((item, index) => {
+                    {AdminNavbarOptions.map((item, index) => {
                         return (
-                            <div className={selected === index ? "menu-item active" : "menu-item"}
-                                onClick={() => setSelected(index)}
-                                key={index}>
+                            <Link
+                                to={getRoutePath(item.title)}
+                                className={pathname.startsWith(item.route!) ? "menu-item active" : "menu-item"}
+                                key={index}
+                            >
                                 <item.icon />
                                 <span>{item.title}</span>
-                            </div>
-                        )
-                    })
-                    }
+                            </Link>
+                        );
+                    })}
+
                     <div className="menu-item">
                         <MdLogout />
                     </div>
@@ -100,4 +74,4 @@ const Sidebar = () => {
     )
 }
 
-export default Sidebar
+export default AdminNavbar

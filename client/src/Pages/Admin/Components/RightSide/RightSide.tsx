@@ -1,20 +1,29 @@
-import React from 'react'
-import './RightSide.css'
-import Updates from '../Updates/Updates';
+import { useLocation } from 'react-router-dom';
+import { User } from '../../../../Types/Types';
 import CustomContent from '../CustomContent/CustomContent';
-const RightSide = () => {
+import Updates from '../Updates/Updates';
+
+import './RightSide.css';
+
+const RightSide = ({ users }: { users: User[] }) => {
+    const location = useLocation();
+    const isOnAdminRoute = location.pathname === '/admin';
+    const displayedUsers = isOnAdminRoute ? users.slice(-3) : users.slice(-4);
+
     return (
         <div className="right-side">
             <div>
                 <h3>Updates</h3>
-                <Updates />
+                <Updates users={displayedUsers} />
             </div>
-            <div>
-                <h3>Custom content</h3>
-                <CustomContent />
-            </div>
+            {isOnAdminRoute && (
+                <div className="custom-content-chart">
+                    <h3>Connected Users</h3>
+                    <CustomContent />
+                </div>
+            )}
         </div>
-    )
-}
+    );
+};
 
 export default RightSide;

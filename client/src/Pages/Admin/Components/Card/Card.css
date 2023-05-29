@@ -126,3 +126,24 @@
     }
 
 }
+
+/* compacted card container */
+
+.compacted-card-container {
+    display: grid;
+    grid-template-columns: repeat(1, 2fr);
+    gap: 1rem;
+}
+
+.compacted-card-container .single-card {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+}
+
+
+@media (max-width: 768px) {
+    .compacted-card-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+}

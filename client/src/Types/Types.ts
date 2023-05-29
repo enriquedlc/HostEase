@@ -6,7 +6,7 @@ export interface UserContextValue {
   theme: Theme;
   setTheme: React.Dispatch<React.SetStateAction<Theme>>;
   signUp: (arg0: UserSignUpData) => Promise<boolean>;
-  logIn: (arg0: LoginRequest) => Promise<boolean>;
+  logIn: (arg0: LoginRequest) => Promise<string | null>;
   logOut: () => void;
   getUserEvents: () => void;
   isLoaded: boolean;
@@ -67,6 +67,7 @@ export interface User extends ShortUser {
   achievements?: Achievement[];
   messages?: Message[];
   followers: GeneralMinimalistUserData[];
+  role: "ADMIN" | "USER";
 }
 
 export interface ShortUser {
@@ -81,9 +82,9 @@ export interface GeneralMinimalistUserData {
   userEmail?: string;
 }
 
-export interface UserMessageData extends GeneralMinimalistUserData {}
+export interface UserMessageData extends GeneralMinimalistUserData { }
 
-export interface FollowerUserData extends GeneralMinimalistUserData {}
+export interface FollowerUserData extends GeneralMinimalistUserData { }
 
 export interface Message {
   id?: number;
@@ -105,6 +106,11 @@ export interface Category {
 
 export interface Tag {
   id: number;
+  tag: string;
+  color: string;
+}
+
+export interface ITag {
   tag: string;
   color: string;
 }

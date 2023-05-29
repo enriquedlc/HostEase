@@ -1,11 +1,6 @@
-import axios, { AxiosAdapter, AxiosResponse } from "axios";
+import axios from "axios";
 import bcrypt from "bcryptjs";
-import {
-  HostEaseEventForm,
-  LoginRequest,
-  MapLibraries,
-  UserSubmit,
-} from "../Types/Types";
+import { HostEaseEventForm, ITag, LoginRequest, MapLibraries, Tag, UserSubmit } from "../Types/Types";
 
 const API_URL = "http://localhost:8080/hostease";
 const SALTROUNDS = 10;
@@ -31,15 +26,9 @@ export const signUpUser = async (userData: UserSubmit) => {
   return axios.post(`${API_URL}/user/sign`, userData);
 };
 
-export const createEvent = async (
-  eventData: HostEaseEventForm,
-  ownerId: number
-) => {
-  return axios.post(
-    `${API_URL}/event/${eventData.category?.id}?owner=${ownerId}`,
-    eventData
-  );
-};
+export const createEvent = async (eventData: HostEaseEventForm, ownerId: number) => {
+  return axios.post(`${API_URL}/event/${eventData.category?.id}?owner=${ownerId}`, eventData);
+}
 
 export const fetchUserEvents = async (userId: number) => {
   return axios.get(`${API_URL}/user/${userId}/events`);
@@ -77,7 +66,7 @@ export const fetchInfoFromEvent = async (eventId: number, userId: number) => {
   return axios.get(`${API_URL}/event/${eventId}?userId=${userId}`);
 };
 
-export const updateEvent = async (categoryId: number, newEvent : HostEaseEventForm) => {
+export const updateEvent = async (categoryId: number, newEvent: HostEaseEventForm) => {
   return axios.put(`${API_URL}/events/${categoryId}`, newEvent);
 }
 
@@ -85,6 +74,9 @@ export const fetchMessages = async (eventId: number) => {
   return axios.get(`${API_URL}/events/${eventId}/messages`);
 };
 
+export const fetchAllUsers = async () => {
+  return axios.get(`${API_URL}/users`)
+};
 
 export const fetchAllEvents = async () => {
   return axios.get(`${API_URL}/events`);
@@ -104,6 +96,21 @@ export const fetchUser = async (userId: number) => {
 
 export const fetchFollowers = async (userId: number) => {
   return axios.get(`${API_URL}/users/followers/${userId}`)
+}
+export const fetchAllMessages = async () => {
+  return axios.get(`${API_URL}/messages`);
+};
+
+export const addTag = async (tag: ITag) => {
+  return axios.post(`${API_URL}/tags`, tag);
+}
+
+export const updateTagById = async (tag: ITag, tagId: number) => {
+  return axios.put(`${API_URL}/tags/${tagId}`, tag);
+}
+
+export const fetchTagById = async (tagId: number) => {
+  return axios.get(`${API_URL}/tags/${tagId}`);
 }
 
 export const mapLibraries: MapLibraries[] = ["places"];

@@ -1,48 +1,51 @@
-import './Updates.css';
-
 import genericProfileImg from './user.png';
 
-export const UpdatesData = [
-    {
-        img: genericProfileImg,
-        name: "Andrew Thomas",
-        comment: "has ordered Apple smart watch 2500mh battery.",
-        time: "25 seconds ago",
-    },
-    {
-        img: genericProfileImg,
-        name: "Andrew Thomas",
-        comment: "has ordered Apple smart watch 2500mh battery.",
-        time: "25 seconds ago",
-    },
-    {
-        img: genericProfileImg,
-        name: "Andrew Thomas",
-        comment: "has ordered Apple smart watch 2500mh battery.",
-        time: "25 seconds ago",
+import { User } from '../../../../Types/Types';
+
+import './Updates.css';
+
+interface UpdatesProps {
+    users: User[]
+}
+
+const Updates: React.FC<UpdatesProps> = (props: UpdatesProps) => {
+
+    const { users } = props;
+
+    const reversedUsers = [...users].reverse();
+
+    function formatTimestamp(timestamp: string) {
+        const date = new Date(timestamp);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+
+        const formattedTimestamp = `${year}-${month}-${day} at ${hours}:${minutes}`;
+        return formattedTimestamp;
     }
-]
 
-
-const Updates = () => {
     return (
         <div className="updates">
-            {UpdatesData.map((update, index) => {
+            {reversedUsers.map(({ nickname, joinedAt, id }) => {
                 return (
-                    <div className="update" key={index}>
-                        <img className='photo' src={update.img} alt="photo" />
+                    <div className="update" key={id}>
+                        <img className='photo' src={genericProfileImg} alt="photo" />
                         <div className="comment">
                             <div style={{ marginBottom: '0.5rem' }}>
-                                <span>{update.name}</span>
-                                <span>{` ${update.comment}`}</span>
+                                <span>{nickname}</span>
+                                <span>{` has joined.`}</span>
                             </div>
-                            <span>{update.time}</span>
+                            <span>{formatTimestamp(joinedAt)}</span>
                         </div>
                     </div>
                 )
-            })}
+            })
+            }
         </div>
     )
 }
+
 
 export default Updates
