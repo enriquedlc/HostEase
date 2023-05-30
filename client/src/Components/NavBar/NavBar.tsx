@@ -64,7 +64,7 @@ const NavBar = (prop: { context: UserContextValue | null }) => {
       {!pathname.includes(HostEaseRoutes.NewEvent) && (
         <div className={`navbar-add-event ${""}`}>
           <MdAssignmentAdd />
-          <Link to={`${HostEaseRoutes.NewEvent}`}>New Event</Link>
+          <Link className="bannish" to={`${HostEaseRoutes.NewEvent}`}>New Event</Link>
         </div>
       )}
     </nav>

@@ -42,15 +42,15 @@ const ExploreList: React.FC<ExploreListProps> = ({
   useEffect(() => {
     const updatedList = selectedButton
       ? listToFilter.filter((event) => {
-          if (selectedButton !== "owned") {
-            return (
-              event.category?.categoryName.toLowerCase() ===
-              selectedButton.toLowerCase()
-            );
-          } else if (owner) {
-            return event.owner.id === owner?.id;
-          }
-        })
+        if (selectedButton !== "owned") {
+          return (
+            event.category?.categoryName.toLowerCase() ===
+            selectedButton.toLowerCase()
+          );
+        } else if (owner) {
+          return event.owner.id === owner?.id;
+        }
+      })
       : listToFilter;
 
     setFilteredList(updatedList);
@@ -149,9 +149,8 @@ const ExploreList: React.FC<ExploreListProps> = ({
   return (
     <div className={`explorer-container ${theme}-scroll`}>
       <div
-        className={`options-panel ${
-          isMenuOpen ? "visible" : ""
-        } ${theme}-panel`}
+        className={`options-panel ${isMenuOpen ? "visible" : ""
+          } ${theme}-panel`}
       >
         {filterOptions.map((element, index) => (
           <button
@@ -208,6 +207,7 @@ const ExploreList: React.FC<ExploreListProps> = ({
                   {owner && event.owner.id === owner.id ? (
                     <>
                       <button
+                        className="action-button"
                         onClick={() =>
                           handleRemove(
                             event.id,
@@ -217,10 +217,10 @@ const ExploreList: React.FC<ExploreListProps> = ({
                           )
                         }
                       >
-                        <ImBin />
+                        <ImBin className="action-svg" />
                       </button>
-                      <button onClick={() => navigate(`/edit/${event.id}`)}>
-                        <HiPencil />
+                      <button className="action-button" onClick={() => navigate(`/edit/${event.id}`)}>
+                        <HiPencil className="action-svg" />
                       </button>{" "}
                     </>
                   ) : (

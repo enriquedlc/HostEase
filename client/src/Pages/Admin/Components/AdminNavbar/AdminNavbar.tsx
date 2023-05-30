@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import { MdLogout, MdMenu } from 'react-icons/md'
+import { MdLogout, MdMenu, MdOutlineLegendToggle } from 'react-icons/md'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import HostEaseLogo from '../../../../assets/HostEase.png'
@@ -74,9 +74,9 @@ const AdminNavbar = (prop: { userContext: UserContextValue | null }) => {
                             </Link>
                         );
                     })}
-
                     <div className="menu-item">
                         <MdLogout onClick={handleLogout} />
+                        <span>Logout</span>
                     </div>
                 </div>
             </motion.div>

@@ -87,7 +87,7 @@ div.active-dark {
 
 
 @media screen and (max-width: 870px) {
-    .navbar-button-panel span.bannish {
+    .navbar-button-panel span.bannish, a.bannish {
         display: none;
     }
 
