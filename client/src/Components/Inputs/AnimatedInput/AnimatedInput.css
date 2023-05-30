@@ -1,0 +1,37 @@
+.input-container {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.input-label {
+  position: absolute;
+  top: 15px;
+  left: 10px;
+  transition: top 0.3s ease, font-size 0.3s ease;
+  font-size: 14px;
+  color: var(--primary-color);
+  pointer-events: none;
+  font-weight: bold;
+}
+
+.custom-input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-bottom: 2px solid var(--primary-color);
+  background-color: var(--transparent);
+  color: var(--primary-color);
+  outline: none;
+}
+
+.custom-input::-webkit-inner-spin-button,
+.custom-input::-webkit-outer-spin-button,
+.custom-input::-moz-number-spinners {
+  -webkit-appearance: none !important;
+  -moz-appearance: textfield;
+}
+
+.input-container.focused .input-label {
+  top: -10px;
+  font-size: 12px;
+}

@@ -1,0 +1,71 @@
+.table {
+    margin-top: 1.8rem !important;
+}
+
+.table td,
+th {
+    border: none !important;
+}
+
+.table:first-child {
+    border-radius: 1rem !important;
+}
+
+.table-title {
+    margin-bottom: .8rem;
+}
+
+/* to set it to the right mui table component */
+.MuiDataGrid-columnHeaderTitleContainer {
+    flex-direction: row !important;
+}
+
+.MuiDataGrid-columnHeaderTitleContainer .MuiDataGrid-columnHeaderTitle {
+    font-weight: bold !important;
+}
+
+.MuiDataGrid-cell .MuiDataGrid-cell--textLeft .MuiDataGrid-withBorderColor {
+    border: none !important;
+}
+
+.MuiBox-root {
+    border-radius: 5px !important;
+    outline: none !important;
+}
+
+@media screen and (max-width: 1200px) {
+
+    .table {
+        width: 170%;
+        margin-top: 6.2rem !important;
+    }
+
+}
+
+@media screen and (max-width: 1070px) {
+
+    .table {
+        margin-top: 5rem !important;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+
+    .table {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 22rem;
+        margin-bottom: 2rem !important;
+    }
+
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}

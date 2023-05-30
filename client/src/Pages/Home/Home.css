@@ -1,0 +1,242 @@
+/* "General Styles" for the Home Page */
+
+section.home-section {
+	height: 100%;
+}
+
+a.dark-theme-font:visited,
+.dark-theme-font {
+	color: var(--font-color);
+}
+
+/* End of the "General Styles" for the Home Page */
+/* Styles for the "TopBar" */
+
+nav.home-top-bar {
+	align-items: center;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding: 30px;
+	height: 15%;
+}
+
+nav.light-top-bar {
+	background-color: var(--primary-color);
+}
+
+nav.dark-top-bar {
+	background-color: var(--primary-dark-color);
+}
+
+nav.dark-top-bar div.top-bar-button-panel a:not(:first-of-type) {
+	color: var(--font-color);
+}
+
+div.top-bar-company {
+	align-items: center;
+	font-weight: bold;
+	font-size: 20px;
+	display: flex;
+}
+
+div.top-bar-company > img.hostease-logo {
+	margin-right: 20px;
+}
+
+div.top-bar-button-panel {
+	display: flex;
+	flex-direction: row;
+}
+
+div.top-bar-button-panel a {
+	color: var(--first-auxiliar-color);
+	font-weight: bold;
+	display: inline-block;
+	margin-left: 50px;
+	margin-right: 50px;
+	text-decoration: none;
+	position: relative;
+}
+
+div.top-bar-button-panel a::after {
+	content: '';
+	position: absolute;
+	width: 100%;
+	transform: scaleX(0);
+	height: 1px;
+	bottom: -10px;
+	left: 0;
+	background-color: var(--ternary-color);
+	transform-origin: bottom right;
+	transition: transform 0.25s ease-out;
+}
+
+div.top-bar-button-panel a:visited {
+	color: inherit;
+}
+
+div.top-bar-button-panel a.featured {
+	color: var(--secondary-color);
+}
+
+div.top-bar-button-panel a:hover,
+div.top-bar-button-panel a:hover:visited,
+nav.dark-top-bar div.top-bar-button-panel a:hover,
+nav.dark-top-bar div.top-bar-button-panel a:hover:visited {
+	cursor: pointer;
+	color: var(--ternary-color);
+}
+
+div.top-bar-button-panel a:hover::after {
+	transform: scaleX(1);
+	transform-origin: bottom left;
+}
+
+/* End of the styles of the "TopBar" */
+/* Styles for the "Home Body" */
+
+div.home-body {
+	align-content: center;
+	display: flex;
+	flex-wrap: wrap;
+	height: 85%;
+	padding: 0px 100px;
+	padding-top: 30px;
+}
+
+div.dark-home-body {
+	background-color: var(--primary-dark-color);
+}
+
+div.light-home-body {
+	background-color: var(--primary-color);
+}
+
+/* // HOME-PRESENTATION //*/
+
+.home-presentation-section {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	height: 50%;
+}
+
+.home-presentation {
+	align-items: center;
+	display: flex;
+	margin: 30px 0px;
+	position: relative;
+	width: 40%;
+}
+
+.dark-presentation {
+	background-color: var(--secondary-dark-color);
+}
+
+.light-presentation {
+	background-color: var(--primary-color-variant);
+}
+
+.home-presentation-title {
+	font-size: var(--title-font-family);
+	left: -35px;
+	margin-top: 30px;
+	position: absolute;
+}
+
+.home-presentation-title h2 {
+	font-size: 2rem;
+}
+
+.home-presentation-title h1 {
+	font-size: 2.5rem;
+}
+
+.dark-presentation-title {
+	color: var(--font-color);
+}
+
+.light-presentation-title {
+	color: var(--auxiliar-color);
+}
+
+.home-carousel {
+	display: flex;
+	align-content: center;
+	flex-wrap: wrap;
+	height: 100%;
+	width: 35%;
+}
+
+@media screen and (max-width: 1465px) {
+	.home-presentation-section {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		height: 100%;
+		width: 100%;
+	}
+
+	.home-presentation {
+		align-items: center;
+		display: flex;
+		margin: 50px 0px;
+		padding: 40px;
+		height: 100%;
+		width: 100%;
+	}
+
+	.home-presentation-title {
+		font-size: var(--title-font-family);
+		position: relative;
+		left: 0;
+		margin: 0;
+	}
+
+	.home-carousel {
+		position: absolute;
+		height: 50%;
+		right: 10%;
+	}
+}
+
+@media screen and (max-width: 800px) {
+	div.top-bar-button-panel {
+		display: none;
+	}
+	.home-carousel {
+		display: none;
+	}
+}
+
+/* // HOME-DESCRIPTION //*/
+/* End of the styles of the "Home Body" */
+
+/* media < 800px */
+
+@media screen and (max-width: 800px) {
+	div.top-bar-button-panel {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		/* padding-top: 5%; */
+	}
+
+	div.top-bar-button-panel > a {
+		font-weight: bold;
+		font-size: 0.7rem;
+		margin-left: 3%;
+		margin-right: 3%;
+		width: 6rem;
+	}
+
+	nav.home-top-bar {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	div.top-bar-company {
+		margin-bottom: 10%;
+	}
+}
