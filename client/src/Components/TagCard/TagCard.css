@@ -1,0 +1,42 @@
+.tag-body {
+    display: flex;
+    border-radius: 0px 7px 7px 0px;
+    background-color: var(--primary-color);
+    position: relative;
+    height: 20px;
+    width: fit-content;
+    margin: 2.5px;
+    justify-content: center;
+}
+
+.tag-text {
+    color: var(primary-dark-color);
+    display: flex;
+    align-items: center;
+    font-size: 0.8rem;
+}
+
+.tag-color {
+    border-radius: 7px 0px 0px 7px;
+    width: 10px;
+    height: 100%;
+    position: absolute;
+    left: -10px;
+    top: 0;
+}
+
+@media screen and (max-width: 768px) {
+    /* .tag-body {
+        height: 15px;
+        margin: 2px;
+    } */
+
+    .tag-text {
+        font-size: 0.6rem;
+    }
+
+    /* .tag-color {
+        width: 8px;
+        left: -8px;
+    } */
+}

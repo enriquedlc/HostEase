@@ -1,0 +1,44 @@
+:root {
+	--title-font-family: 'Varela Round', sans-serif;
+
+	--primary-color: #e1d4f6;
+	--primary-color-variant: #cbb8e9;
+	--secondary-color: rgb(109, 29, 214);
+	--ternary-color: #646cff;
+	--font-color: #DFD8F0;
+
+	--primary-dark-color: #272c36;
+	--secondary-dark-color: #1b1d23;
+
+	--admin-color: #fada5e;
+	--admin-gradient-color: #f9c638;
+
+	--member-color: #4ce332;
+	--member-gradient-color: #2e8f1f;
+
+	--auxiliar-color: #000;
+
+	--error-color: #F00056
+
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body,
+#root {
+	font-family: 'Varela Round', sans-serif;
+	height: 100vh;
+	width: 100vw;
+}
+
+a {
+	color: var(--first-auxiliar-color);
+	font-weight: bold;
+	display: inline-block;
+	text-decoration: none;
+	position: relative;
+}

@@ -1,0 +1,140 @@
+.container {
+    position: relative;
+    width: 20em;
+    min-height: 1.5em;
+    border: 0.05em solid #777;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 1em 1.7rem;
+    border-radius: 0.25em;
+    outline: none;
+    width: 100%;
+}
+
+.container:focus {
+    border-color: hsl(200, 100%, 50%);
+}
+
+
+.value {
+    color: var(--primary-dark-color);
+    flex-grow: 1;
+    display: flex;
+    gap: 1em;
+    flex-wrap: wrap;
+}
+
+.close-btn {
+    background: none;
+    color: #777;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 0;
+    padding-left: 1em;
+    font-size: 1.25em;
+}
+
+.clear-btn {
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 1.2px;
+    padding: 2px;
+}
+
+.clear-btn:focus,
+.clear-btn:hover {
+    color: #333;
+}
+
+.divider {
+    background-color: #777;
+    align-self: stretch;
+    width: 0.05em;
+}
+
+.caret {
+    translate: 0 25%;
+    border: 0.25em solid transparent;
+    border-top-color: var(--primary-color);
+}
+
+.options {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: none;
+    max-height: 15em;
+    overflow-y: auto;
+    border: 0.05em solid #777;
+    border-radius: 0.25em;
+    width: 100%;
+    left: 0;
+    top: calc(100% + 0.25em);
+    background-color: gray;
+    z-index: 100;
+}
+
+.options.show {
+    display: block;
+}
+
+.option {
+    background-color: var(--secondary-color);
+    color: var(--font-color);
+    padding: 0.25em 0.5em;
+    cursor: pointer;
+}
+
+.option.selected {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+.option.highlighted {
+    background-color: var(--ternary-color);
+}
+
+.option-badge {
+    display: flex;
+    align-items: center;
+    border: 0.05em solid #777;
+    border-radius: 0.25em;
+    padding: 0.15em 0.25em 0.15em 1.25em;
+    gap: 0.25em;
+    cursor: pointer;
+    text-align: right;
+    background: none;
+    position: relative;
+    outline: none;
+}
+
+.option-badge:hover,
+.option-badge:focus {
+    border-color: hsl(0, 100%, 50%);
+}
+
+.remove-btn {
+    margin-bottom: 5%;
+}
+
+.option-badge:hover>.remove-btn,
+.option-badge:focus>.remove-btn {
+    color: hsl(0, 100%, 50%);
+}
+
+.option-badge>.remove-btn {
+    font-size: 1.25em;
+    color: #777;
+}
+
+.tag-color {
+    border-radius: 0.23em 0em 0em 0.23em;
+    padding: 0.35em;
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+}
