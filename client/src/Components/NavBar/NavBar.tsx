@@ -18,9 +18,8 @@ const NavBar = (prop: { context: UserContextValue | null }) => {
     <nav className={`navbar-body navbar-${context?.theme}`}>
       <div className="navbar-button-panel ">
         <div
-          className={`${pathname === HostEaseRoutes.MainPage && "active"}-${
-            context?.theme
-          }`}
+          className={`${pathname === HostEaseRoutes.MainPage && "active"}-${context?.theme
+            }`}
         >
           <Link to={`${HostEaseRoutes.MainPage}`}>
             <RiHomeLine />
@@ -28,9 +27,8 @@ const NavBar = (prop: { context: UserContextValue | null }) => {
           </Link>
         </div>
         <div
-          className={`${pathname === HostEaseRoutes.Explore && "active"}-${
-            context?.theme
-          }`}
+          className={`${pathname === HostEaseRoutes.Explore && "active"}-${context?.theme
+            }`}
         >
           <Link to={`${HostEaseRoutes.Explore}`}>
             <TbInputSearch />
@@ -38,9 +36,8 @@ const NavBar = (prop: { context: UserContextValue | null }) => {
           </Link>
         </div>
         <div
-          className={`${pathname.includes("/events/") && "active"}-${
-            context?.theme
-          }`}
+          className={`${pathname.includes("/events/") && "active"}-${context?.theme
+            }`}
         >
           <Link to={`/events/${context?.user?.id}`}>
             <HiUserGroup />
@@ -48,9 +45,8 @@ const NavBar = (prop: { context: UserContextValue | null }) => {
           </Link>
         </div>
         <div
-          className={`${pathname.includes(`/profile/${context?.user?.id}`) && "active"}-${
-            context?.theme
-          }`}
+          className={`${pathname.includes(`/profile/${context?.user?.id}`) && "active"}-${context?.theme
+            }`}
         >
           <Link to={`/profile/${context?.user?.id}`}>
             <RiProfileFill />
@@ -62,10 +58,12 @@ const NavBar = (prop: { context: UserContextValue | null }) => {
         </div>
       </div>
       {!pathname.includes(HostEaseRoutes.NewEvent) && (
-        <div className={`navbar-add-event ${""}`}>
-          <MdAssignmentAdd />
-          <Link className="bannish" to={`${HostEaseRoutes.NewEvent}`}>New Event</Link>
-        </div>
+        <Link to={`${HostEaseRoutes.NewEvent}`}>
+          <div className={`navbar-add-event ${""}`}>
+            <MdAssignmentAdd />
+            <span className="bannish">New Event</span>
+          </div>
+        </Link>
       )}
     </nav>
   );

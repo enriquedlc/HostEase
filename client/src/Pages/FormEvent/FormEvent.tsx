@@ -240,6 +240,7 @@ const FormEvent = () => {
             <div className="create-form-page-column">
               {userContext?.isLoaded && (
                 <Map
+                className="map-mobile"
                   center
                   mode="form"
                   coordinates={event?.location}
