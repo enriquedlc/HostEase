@@ -48,12 +48,11 @@ const CommentTable = () => {
                 user: item.user,
             }));
             setComments(messages);
-            setFilteredComments(messages); // Set the filteredComments to the messages initially
+            setFilteredComments(messages);
             setIsLoading(false);
         }
         getAllComments();
     }, []);
-
 
     const columns: GridColDef[] = useMemo(() => [
         {

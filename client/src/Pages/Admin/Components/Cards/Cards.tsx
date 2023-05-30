@@ -30,10 +30,6 @@ const Cards: React.FC = () => {
         getAllMessages();
     }, [])
 
-    console.log(calculateChartBarValue(getEventsByMonth(events)))
-    console.log(getEventsByMonth(events))
-
-
     const CardsData = [
         {
             title: "Users",
