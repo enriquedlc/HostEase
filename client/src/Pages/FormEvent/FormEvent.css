@@ -335,3 +335,34 @@
     width: 100%;
   }
 }
+
+@media screen and (max-width: 1200px) {
+
+
+  .map-mobile {
+    width: 100%;
+    height: 90%; /* Ajusta la altura según tus necesidades */
+  }
+
+}
+
+@media screen and (max-width: 1000px) {
+
+  div.create-form-page-column {
+    /* display: grid; */
+    height: 120%;
+  }
+
+  .create-form-body {
+    height: 130%;
+  }
+
+  .map-mobile {
+    display: grid;
+    width: 90%;
+    height: 300px; /* Ajusta la altura según tus necesidades */
+    margin-left: 15px;
+  }
+
+}
+
