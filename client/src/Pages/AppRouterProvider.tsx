@@ -65,7 +65,7 @@ const AppRouterProvider = () => {
               <Route path={`${HostEaseRoutes.Profile}`} element={<UserProfile />} />
             </Route>
             {userContext?.user?.role === "ADMIN" && (
-              <Route element={<AdminPageLayout />}>
+              <Route element={<AdminPageLayout context={userContext} />}>
                 <Route path={HostEaseRoutes.Admin} element={<MainDashboard />} />
                 <Route path={HostEaseRoutes.AdminEvents} element={<EventComponent />} />
                 <Route path={HostEaseRoutes.AdminUsers} element={<UserComponent />} />

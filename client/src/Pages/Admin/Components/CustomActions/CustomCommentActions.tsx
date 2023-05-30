@@ -13,7 +13,7 @@ const CustomCommentActions: React.FC<CustomActionsCommentProps> = ({ commentId, 
     return (
         <div className='button-container'>
             <ThemeProvider theme={theme}>
-                <CommentModal commentId={commentId} />
+                {/* <CommentModal commentId={commentId} /> */}
                 <Button
                     color="error"
                     variant="contained"

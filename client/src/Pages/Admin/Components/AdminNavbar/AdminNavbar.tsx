@@ -1,12 +1,14 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { MdLogout, MdMenu } from 'react-icons/md'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import HostEaseLogo from '../../../../assets/HostEase.png'
 
-import './AdminNavbar.css'
 import { AdminNavbarOptions } from './AdminNavbarOptions'
+
+import { UserContextValue } from '../../../../Types/Types'
+import './AdminNavbar.css'
 
 const sidebarVariants = {
     true: {
@@ -17,16 +19,24 @@ const sidebarVariants = {
     }
 }
 
-const AdminNavbar: React.FC = () => {
+const AdminNavbar = (prop: { userContext: UserContextValue | null }) => {
+
+    const { userContext } = prop
 
     const [showMenu, setShowMenu] = useState<boolean>(false)
 
     const { pathname } = useLocation()
+    const navigate = useNavigate()
 
     const getRoutePath = (title: string): string => AdminNavbarOptions.find(item => item.title === title)?.route ?? '';
 
     const handleShowMenu = () => {
         setShowMenu(!showMenu)
+    }
+
+    const handleLogout = () => {
+        userContext?.logOut()
+        navigate('/')
     }
 
     return (
@@ -66,7 +76,7 @@ const AdminNavbar: React.FC = () => {
                     })}
 
                     <div className="menu-item">
-                        <MdLogout />
+                        <MdLogout onClick={handleLogout} />
                     </div>
                 </div>
             </motion.div>

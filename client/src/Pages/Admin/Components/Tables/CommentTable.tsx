@@ -17,6 +17,7 @@ import { MessageData, Messages } from "../../../../Types/Types";
 import CustomCommentActions from "../CustomActions/CustomCommentActions";
 
 import './Table.css';
+import SearchBar from "../SearchBar/SearchBar";
 
 const CommentTable = () => {
     const navigate = useNavigate()
@@ -91,26 +92,9 @@ const CommentTable = () => {
         },
     ], []);
 
-    // // TODO: FIX THIS
-    // const handleSearch = (value: string) => {
-    //     if (comments && comments.length > 0) {
-    //         const filteredComments = comments.filter((message) =>
-    //             message.data?.filter((messageData) =>
-    //                 messageData?.message?.toLowerCase().includes(value.toLowerCase())
-    //             ).trim()
-    //         );
-    //         setFilteredComments(filteredComments);
-    //     } else {
-    //         setFilteredComments([]);
-    //     }
-    // };
-
-    // console.log('tal', filteredComments)
-
     return (
         <div className="table">
             <h3 className="table-title">Comments</h3>
-            {/* <SearchBar onSearch={handleSearch} /> */}
             <Box
                 sx={{
                     height: 380,
