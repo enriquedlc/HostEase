@@ -121,7 +121,6 @@ const UserProfile = () => {
                   alt="Tom looking for events"
                   className="no-events-image"
                 />
-                <h1>Events: </h1>
                 <h2>Esto está muy vacío.</h2>
                 <h3>
                   {userContext?.user?.id === (id && parseInt(id))
@@ -171,7 +170,6 @@ const UserProfile = () => {
                   alt="Tom looking for events"
                   className="no-events-image"
                 />
-                <h1>Followers: </h1>
                 <h2>Jope, pobrecillo.</h2>
                 <h3>
                   {userContext?.user?.id === (id && parseInt(id))

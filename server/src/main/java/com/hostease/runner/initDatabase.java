@@ -56,17 +56,17 @@ public class InitDatabase implements CommandLineRunner {
                 System.out.println("initializing Database...");
 
                 // CATEGORIES
-                Category category1 = new Category("Category 1");
-                Category category2 = new Category("Category 2");
-                Category category3 = new Category("Category 3");
-                Category category4 = new Category("Category 4");
-                Category category5 = new Category("Category 5");
+                Category category1 = new Category("Tecnológico");
+                Category category2 = new Category("Social");
+                Category category3 = new Category("Videojuegos");
+                Category category4 = new Category("Belleza");
+                Category category5 = new Category("League of Legends");
 
                 // TAGS
-                Tag tag1 = new Tag("Tag 1", "red");
-                Tag tag2 = new Tag("Tag 2", "blue");
-                Tag tag3 = new Tag("Tag 3", "green");
-                Tag tag4 = new Tag("Tag 4", "yellow");
+                Tag tag1 = new Tag("Juego", "red");
+                Tag tag2 = new Tag("Habilidad", "blue");
+                Tag tag3 = new Tag("Amigos", "green");
+                Tag tag4 = new Tag("Socializar", "yellow");
 
                 // USERS
                 User user1 = new User("nickNameUser1", "user1email@gmail.com",
@@ -95,19 +95,19 @@ public class InitDatabase implements CommandLineRunner {
                                 "698546054", 0L, LocalDateTime.now(), "ADMIN");
 
                 // EVENTS
-                Event event1 = new Event(user1, "Event 1", "Description 1", "13/05/2023", "15/05/2023", "12:00",
-                                "13:00",
+                Event event1 = new Event(user1, "JS Day", "Description 1", "25/05/2023", "28/05/2023", "15:00",
+                                "19:00",
                                 new Location(50.3785D, 14.9706D),
                                 10L, category1);
-                Event event2 = new Event(user1, "Event 2", "Description 2", "24/04/2023", "25/04/2023", "12:00",
+                Event event2 = new Event(user1, "Quedada La Laguna", "Description 2", "24/04/2023", "25/04/2023", "12:00",
                                 "13:00",
                                 new Location(50.3785D, 14.9706D),
                                 10L, category2);
-                Event event3 = new Event(user1, "Event 3", "Description 3", "08/02/2023", "08/02/2023", "12:00",
+                Event event3 = new Event(user1, "Lan Party casa paco", "Description 3", "08/02/2023", "08/02/2023", "12:00",
                                 "13:00",
                                 new Location(50.3785D, 14.9706D),
                                 10L, category3);
-                Event event4 = new Event(user1, "Event 4", "Description 4", "20/01/2023", "22/01/2023", "12:00",
+                Event event4 = new Event(user1, "Meetup de Zara", "Description 4", "20/01/2023", "22/01/2023", "12:00",
                                 "13:00",
                                 new Location(50.3785D, 14.9706D),
                                 10L, category4);

@@ -16,7 +16,7 @@ import Map from "../Map";
 import { renderUsers } from "../../services/Utils/main.utils";
 
 interface EventCardOptions {
-  id: number;
+  id?: number;
   title?: string;
   category?: Category;
   likes?: number;

@@ -209,7 +209,7 @@ const ExploreList: React.FC<ExploreListProps> = ({
                       <button
                         className="action-button"
                         onClick={() =>
-                          handleRemove(
+                          event.id && handleRemove(
                             event.id,
                             "delete",
                             currentUserId,
@@ -227,7 +227,7 @@ const ExploreList: React.FC<ExploreListProps> = ({
                     <button>
                       <IoMdExit
                         onClick={() =>
-                          handleRemove(
+                          event.id && handleRemove(
                             event.id,
                             "leave",
                             currentUserId,
@@ -244,7 +244,7 @@ const ExploreList: React.FC<ExploreListProps> = ({
         </div>
       ) : (
         <div className={`eventless ${theme}-theme-mssg`} style={{ flex: 4 }}>
-          <h2>No te has unido o has creado ningún evento todavía</h2>
+          <h2>No hay ningún evento por aquí</h2>
           <img src={noEvents} alt="No Events?" />
         </div>
       )}
