@@ -1,42 +1,71 @@
-import React, { useContext } from "react";
-import { Theme, ThemeContextValue } from "../../Types/Types";
+import { useContext } from "react";
+import { UserContextValue } from "../../Types/Types";
 
 import { Link } from "react-router-dom";
 
 import HostEaseLogo from "../../assets/HostEase.png";
 
-import "./Home.css";
-import { ThemeContext } from "../../Components/ThemeProvider";
 import CustomCarrousel from "../../Components/CustomCarrousel/CustomCarrousel";
 import ThemeSwitcher from "../../Components/ThemeSwitcher";
+import { UserContext } from "../../Context/UserContext";
+import { HostEaseRoutes } from "../../Types/AppRoutes/HostEaseRoutes";
+import "./Home.css";
 
-const Home = () => {
-  const themeContext = useContext<ThemeContextValue | null>(ThemeContext);
+const Home = (props : { context : UserContextValue | null }) => {
+  const userContext = useContext<UserContextValue | null>(UserContext);
 
   return (
     <section className="home-section">
-      <nav className={`home-top-bar ${themeContext?.theme}-top-bar`}>
+      <nav className={`home-top-bar ${userContext?.theme}-top-bar`}>
         <div className={`top-bar-company`}>
           <img src={HostEaseLogo} className={`hostease-logo`} />
-          <div className={`${themeContext?.theme}-theme-font`}>HostEase</div>
+          <div className={`${userContext?.theme}-theme-font`}>HostEase</div>
         </div>
         <div className={`top-bar-button-panel`}>
-          <Link to="/" className="featured">
+          <Link to={userContext?.user ? HostEaseRoutes.NewEvent : HostEaseRoutes.Login} className="featured">
             Create an event
           </Link>
-          <Link to="/" className={`${themeContext?.theme}-theme-font`}>
-            Log In
-          </Link>
-          <Link to="/" className={`${themeContext?.theme}-theme-font`}>
-            Sign In
-          </Link>
-          <ThemeSwitcher />
+          {userContext?.user ? (
+            <>
+              <Link
+                to={HostEaseRoutes.MainPage}
+                className={`${userContext?.theme}-theme-font`}
+              >
+                Go to Home
+              </Link>
+              <a
+                className={`${userContext?.theme}-theme-font`}
+                onClick={userContext.logOut}
+              >
+                Log Out
+              </a>
+            </>
+          ) : (
+            <>
+              <Link
+                to={HostEaseRoutes.Login}
+                className={`${userContext?.theme}-theme-font`}
+              >
+                Log In
+              </Link>
+              <Link
+                to={HostEaseRoutes.Sign}
+                className={`${userContext?.theme}-theme-font`}
+              >
+                Sign In
+              </Link>{" "}
+            </>
+          )}
         </div>
       </nav>
-      <div className={`home-body ${themeContext?.theme}-home-body`}>
+      <div className={`home-body ${userContext?.theme}-home-body`}>
         <div className="home-presentation-section">
-          <div className={`home-presentation ${themeContext?.theme}-presentation`}>
-            <div className={`home-presentation-title ${themeContext?.theme}-presentation-title`}>
+          <div
+            className={`home-presentation ${userContext?.theme}-presentation`}
+          >
+            <div
+              className={`home-presentation-title ${userContext?.theme}-presentation-title`}
+            >
               <h2>Follow</h2>
               <h1>your passion!</h1>
             </div>

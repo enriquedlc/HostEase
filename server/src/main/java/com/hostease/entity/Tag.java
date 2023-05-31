@@ -3,7 +3,6 @@ package com.hostease.entity;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,19 +14,15 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tag_table")
 public class Tag {
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    })
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "event_tag_table", joinColumns = @JoinColumn(name = "fk_event_id"), inverseJoinColumns = @JoinColumn(name = "fk_tag_id"))
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Event> events = new HashSet<>();
 
     @Id
@@ -37,12 +32,21 @@ public class Tag {
     @Column(name = "tag", nullable = false, length = 50)
     private String tag;
 
+    @Column(name = "color", nullable = false, length = 50)
+    private String color;
+
     public Tag() {
     }
 
-    public Tag(Long id, String tag) {
+    public Tag(Long id, String tag, String color) {
         this.id = id;
         this.tag = tag;
+        this.color = color;
+    }
+
+    public Tag(String tag, String color) {
+        this.tag = tag;
+        this.color = color;
     }
 
     public Long getId() {
@@ -59,6 +63,14 @@ public class Tag {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 
     public Set<Event> getEvents() {

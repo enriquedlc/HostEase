@@ -82,6 +82,14 @@ public class Achievement {
         this.photo = photo;
     }
 
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
     @Override
     public String toString() {
         return "Achievement [id=" + id + ", achievement=" + achievement + ", xpPoints=" + xpPoints + ", photo=" + photo

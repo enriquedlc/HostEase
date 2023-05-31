@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -19,44 +20,61 @@ import javax.persistence.Table;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.hostease.deserializer.CustomEventDeserializer;
+import com.hostease.models.Location;
+import com.hostease.serializer.CustomCategorySerializer;
+import com.hostease.serializer.CustomCountLikeSerializer;
+import com.hostease.serializer.CustomCountMessageSerializer;
+import com.hostease.serializer.CustomCountUserSerializer;
+import com.hostease.serializer.CustomEventOwnerSerializer;
+import com.hostease.serializer.CustomTagSerializer;
 
 @Entity
 @Table(name = "event_table")
+@JsonDeserialize(using = CustomEventDeserializer.class)
 public class Event {
 
-    @JsonIgnore
+    @JsonSerialize(using = CustomTagSerializer.class)
     @ManyToMany(mappedBy = "events", fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
     })
+    // @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Tag> tags = new HashSet<>();
 
+    @JsonSerialize(using = CustomCountUserSerializer.class)
     @ManyToMany(mappedBy = "events", fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
     })
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<User> users = new HashSet<>();
 
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
-
+    @JsonSerialize(using = CustomCategorySerializer.class)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "categoryId", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Category category;
 
+    @JsonSerialize(using = CustomCountMessageSerializer.class)
     @OneToMany(mappedBy = "event", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Message> messages = new HashSet<>();
+
+    @JsonSerialize(using = CustomCountLikeSerializer.class)
+    @OneToMany(mappedBy = "event", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Like> likes = new HashSet<Like>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @JsonSerialize(using = CustomEventOwnerSerializer.class)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "ownerId", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private User owner;
 
     @Column(name = "title", nullable = false, length = 45)
     private String title;
@@ -76,58 +94,44 @@ public class Event {
     @Column(name = "endTime", nullable = false)
     private String endTime;
 
-    @Column(name = "locationLat", nullable = false)
-    private Double locationLat;
-
-    @Column(name = "locationLng", nullable = false)
-    private Double locationLng;
+    @Embedded
+    @Column(name = "location")
+    private Location location;
 
     @Column(name = "maxCapacity", nullable = false)
     private Long maxCapacity;
 
-    @Column(name = "photo", nullable = false)
-    private Double photo;
-
     public Event() {
     }
 
-    public Event(Long id, String title, String description, String startDate, String endDate, String startTime,
-            String endTime, Double locationLat, Double locationLng, Long maxCapacity, Double photo) {
-        this.id = id;
+    public Event(User owner, String title, String description, String startDate, String endDate, String startTime,
+            String endTime, Location location, Long maxCapacity, Category category) {
+        this.owner = owner;
         this.title = title;
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.locationLat = locationLat;
-        this.locationLng = locationLng;
+        this.location = location;
         this.maxCapacity = maxCapacity;
-        this.photo = photo;
-    }
-
-    public Event(Long id, String title, String description, String startDate, String endDate, String startTime,
-            String endTime, Double locationLat, Double locationLng, Long maxCapacity, Double photo, Category category) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.locationLat = locationLat;
-        this.locationLng = locationLng;
-        this.maxCapacity = maxCapacity;
-        this.photo = photo;
         this.category = category;
     }
-
+    
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 
     public String getTitle() {
@@ -178,20 +182,12 @@ public class Event {
         this.endTime = endTime;
     }
 
-    public Double getLocationLat() {
-        return locationLat;
+    public Location getLocation() {
+        return location;
     }
 
-    public void setLocationLat(Double locationLat) {
-        this.locationLat = locationLat;
-    }
-
-    public Double getLocationLng() {
-        return locationLng;
-    }
-
-    public void setLocationLng(Double locationLng) {
-        this.locationLng = locationLng;
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
     public Long getMaxCapacity() {
@@ -200,14 +196,6 @@ public class Event {
 
     public void setMaxCapacity(Long maxCapacity) {
         this.maxCapacity = maxCapacity;
-    }
-
-    public Double getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(Double photo) {
-        this.photo = photo;
     }
 
     public Set<Tag> getTags() {
@@ -230,15 +218,32 @@ public class Event {
         return messages;
     }
 
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+    
     public void setMessages(HashSet<Message> hashSet) {
         this.messages = hashSet;
     }
 
+    public Set<Like> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(Set<Like> likes) {
+        this.likes = likes;
+    }
+
+    public void setMessages(Set<Message> messages) {
+        this.messages = messages;
+    }
+
     @Override
     public String toString() {
-        return "Event [id=" + id + ", title=" + title + ", description=" + description + ", startDate=" + startDate
-                + ", endDate=" + endDate + ", startTime=" + startTime + ", endTime=" + endTime + ", locationLat="
-                + locationLat + ", locationLng=" + locationLng + ", maxCapacity=" + maxCapacity + ", photo=" + photo
-                + "]";
+        return "Event [id=" + id + ", owner=" + owner + ", title=" + title + "]";
     }
 }
