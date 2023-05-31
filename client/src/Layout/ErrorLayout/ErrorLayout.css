@@ -1,0 +1,26 @@
+.-dark-error-background-color {
+    background-color: var(--primary-dark-color);
+}
+
+.light-error-background-color {
+    background-color: var(--primary-color);
+}
+
+.error-background {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.error-background > svg {
+    font-size: 8rem;
+    color: var(--error-color);
+}
+
+.error-message {
+    margin-left: 20px;
+    font-size: 5rem;
+}

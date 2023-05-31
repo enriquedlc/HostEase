@@ -25,6 +25,7 @@ import MyEvents from "./MyEvents";
 import SignUp from "./SignUp";
 import UserProfile from "./UserProfile/UserProfile";
 import CommentComponent from "./Admin/Components/CommentsComponent/CommentComponent";
+import ErrorLayout from "../Layout/ErrorLayout/ErrorLayout";
 
 /**
  *
@@ -56,26 +57,65 @@ const AppRouterProvider = () => {
               <Route path={HostEaseRoutes.MainPage} element={<MainPage />} />
               <Route path={HostEaseRoutes.Explore} element={<Explore />} />
               <Route path={HostEaseRoutes.MyEvents} element={<MyEvents />} />
-              <Route path={HostEaseRoutes.EventProfile} element={<EventProfile />} />
+              <Route
+                path={HostEaseRoutes.EventProfile}
+                element={<EventProfile />}
+              />
               <Route
                 path={`${HostEaseRoutes.NewEvent}`}
                 element={<FormEvent />}
               />
-              <Route path={`${HostEaseRoutes.EditEvent}`} element={<FormEvent />} />
-              <Route path={`${HostEaseRoutes.Profile}`} element={<UserProfile />} />
+              <Route
+                path={`${HostEaseRoutes.EditEvent}`}
+                element={<FormEvent />}
+              />
+              <Route
+                path={`${HostEaseRoutes.Profile}`}
+                element={<UserProfile />}
+              />
             </Route>
             {userContext?.user?.role === "ADMIN" && (
               <Route element={<AdminPageLayout context={userContext} />}>
-                <Route path={HostEaseRoutes.Admin} element={<MainDashboard />} />
-                <Route path={HostEaseRoutes.AdminEvents} element={<EventComponent />} />
-                <Route path={HostEaseRoutes.AdminUsers} element={<UserComponent />} />
-                <Route path={HostEaseRoutes.AdminTags} element={<TagComponent />} />
-                <Route path={`${HostEaseRoutes.AdminTags}/create`} element={<TagFrom />} />
-                <Route path={`${HostEaseRoutes.AdminTags}/update/:id`} element={<TagFrom />} />
-                <Route path={HostEaseRoutes.AdminCategories} element={<CategoryComponent />} />
-                <Route path={`${HostEaseRoutes.AdminCategories}/create`} element={<CategoryForm />} />
-                <Route path={`${HostEaseRoutes.AdminCategories}/update/:id`} element={<CategoryForm />} />
-                <Route path={HostEaseRoutes.AdminComments} element={<CommentComponent />} />
+                <Route
+                  path={HostEaseRoutes.Admin}
+                  element={<MainDashboard />}
+                />
+                <Route
+                  path={HostEaseRoutes.AdminEvents}
+                  element={<EventComponent />}
+                />
+                <Route
+                  path={HostEaseRoutes.AdminUsers}
+                  element={<UserComponent />}
+                />
+                <Route
+                  path={HostEaseRoutes.AdminTags}
+                  element={<TagComponent />}
+                />
+                <Route
+                  path={`${HostEaseRoutes.AdminTags}/create`}
+                  element={<TagFrom />}
+                />
+                <Route
+                  path={`${HostEaseRoutes.AdminTags}/update/:id`}
+                  element={<TagFrom />}
+                />
+                <Route
+                  path={HostEaseRoutes.AdminCategories}
+                  element={<CategoryComponent />}
+                />
+                <Route
+                  path={`${HostEaseRoutes.AdminCategories}/create`}
+                  element={<CategoryForm />}
+                />
+                <Route
+                  path={`${HostEaseRoutes.AdminCategories}/update/:id`}
+                  element={<CategoryForm />}
+                />
+                <Route
+                  path={HostEaseRoutes.AdminComments}
+                  element={<CommentComponent />}
+                />
               </Route>
             )}
             <Route element={<MainSiteLayout context={userContext} />}>
@@ -89,11 +129,12 @@ const AppRouterProvider = () => {
             </Route>
           </>
         )}
-        {/* Hay que convertir este trozo en un componente que detecte los enlaces */}
-        <Route
-          path="*"
-          element={userContext?.user ? <NotFound /> : <LogInto />}
-        />
+        <Route element={<ErrorLayout theme={userContext?.theme} />}>
+          <Route
+            path="*"
+            element={userContext?.user ? <NotFound /> : <LogInto />}
+          />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

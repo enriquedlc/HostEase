@@ -29,8 +29,10 @@ const Login = () => {
     if (userData.email.trim() !== "" && userData.password !== "") {
       try {
         const link = await userContext?.logIn(userData);
-        navigate(`${link && link}`);
-      } catch (error) {}
+        link && navigate(`${link}`);
+      } catch (error) {
+
+      }
     }
   };
 
